@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-18.04 ]
+        php-versions: [ '7.2', '7.3', '7.4' ]
+
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: make install && make test
+
+  documentation:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: mixerapi.com
+          username: ${{ secrets.MIXERAPI_COM_USER}}
+          key: ${{ secrets.MIXERAPI_COM_PRIVATE_KEY}}
+          script: ${{ secrets.MIXERAPI_COM_DEPLOY_CMD}}
