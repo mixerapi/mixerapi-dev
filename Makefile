@@ -17,5 +17,6 @@ mkdocs-run:
 mkdocs-build:
 	docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build
 mkdocs-build:
+	docker pull systematical/mixerapidocs:latest
 	git pull
 	docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build
