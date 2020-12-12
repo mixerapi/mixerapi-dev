@@ -19,8 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: make install && make test
+      - name: Install
+        run: make install
+
+      - name: Install
+        run: make test
 
   documentation:
     name: Documentation
