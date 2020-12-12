@@ -11,10 +11,10 @@
 !!! warning ""
     This is an alpha stage plugin.
 
-A simple Collection View for displaying configurable pagination meta data in JSON or XML collection responses. Read 
+A simple Collection View for displaying configurable pagination meta data in JSON or XML collection responses. Read
 more at [MixerAPI.com](https://mixerapi.com).
 
-## Installation 
+## Installation
 
 !!! info ""
     You can skip this step if MixerAPI is installed.
@@ -45,19 +45,19 @@ public function initialize(): void
 {
     parent::initialize();
     $this->loadComponent('RequestHandler');
-    // other logic... 
+    // other logic...
 }
 ```
 
 ## Usage
 
-That's it, you're done. Perform `application/xml` or `application/json` requests as normal. You may also request by 
-`.xml` or `.json` extensions (assuming you've enabled them in your `config/routes.php`). This plugin will only modify 
-collections (e.g. controller::index action) requests, not item (e.g. controller::view action) requests. 
+That's it, you're done. Perform `application/xml` or `application/json` requests as normal. You may also request by
+`.xml` or `.json` extensions (assuming you've enabled them in your `config/routes.php`). This plugin will only modify
+collections (e.g. controller::index action) requests, not item (e.g. controller::view action) requests.
 
 <details><summary>JSON sample</summary>
   <p>
-  
+
 ```json
 {
     "collection": {
@@ -99,7 +99,7 @@ collections (e.g. controller::index action) requests, not item (e.g. controller:
 
 <details><summary>XML sample</summary>
   <p>
-  
+
 ```xml
 <response>
   <collection>
@@ -137,9 +137,9 @@ collections (e.g. controller::index action) requests, not item (e.g. controller:
 
 ## Configuration
 
-This is optional. You can alter the names of the response keys, simply create a config/collection_view.php file. Using 
-the example below we can change the `collection` key to `pagination`, `data` to `items`, and alter some key names within 
-our new pagination object. Just keep the mapped items `{{names}}` as-is. 
+This is optional. You can alter the names of the response keys, simply create a config/collection_view.php file. Using
+the example below we can change the `collection` key to `pagination`, `data` to `items`, and alter some key names within
+our new pagination object. Just keep the mapped items `{{names}}` as-is.
 
 ```php
 # config/collection_view.php
@@ -170,3 +170,5 @@ vendor/bin/phpunit
 ```console
 composer check
 ```
+
+testing...
