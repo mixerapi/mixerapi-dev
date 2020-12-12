@@ -36,7 +36,7 @@ jobs:
         run: make test
 
       - name: Test + Code Quality (7.4 only)
-        if: ${{ matrix.php-versions }} == '7.4'
+        if: ${{ matrix.php-versions }} = '7.4'
         run: make check
 
   documentation:
