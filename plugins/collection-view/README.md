@@ -170,5 +170,3 @@ vendor/bin/phpunit
 ```console
 composer check
 ```
-
-testing...

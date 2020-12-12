@@ -12,3 +12,10 @@ check:
 	for dir in plugins/*; do \
 		bash -c "echo CHECK: $$dir && cd $$dir && composer check"; \
 	done
+mkdocs-run:
+	docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest
+mkdocs-build:
+	docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build
+mkdocs-build:
+	git pull
+	docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build

@@ -1,7 +1,7 @@
-# MKDOCS                 #
-##########################
-site/*
-docs_/
+# MixerApi specific files #
+############################
+/tests/test_app/App/Controller/DepartmentsController.php
+/coverage-reports/
 
 # CakePHP specific files #
 ##########################
@@ -46,3 +46,4 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+/composer.lock

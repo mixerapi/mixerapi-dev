@@ -1,0 +1,25 @@
+{#
+/**
+ * Index method
+ */
+#}
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     */
+    public function index()
+    {
+        $this->request->allowMethod('get');
+{% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+{% if belongsTo %}
+        $this->paginate = [
+            'contain' => [{{ Bake.stringifyList(belongsTo, {'indent': false})|raw }}],
+        ];
+{% endif %}
+        ${{ pluralName }} = $this->paginate($this->{{ currentModelName }});
+
+        $this->set(compact('{{ pluralName }}'));
+        $this->viewBuilder()->setOption('serialize', '{{ pluralName }}');
+    }

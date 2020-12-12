@@ -14,12 +14,29 @@ This is the development repository for MixerAPI. If you are looking to install M
 
 Clone the project and install composer dependencies for mixerapi-dev and all MixerAPI plugins.
 
+## Development
+
+Changes are automatically pushed to the plugin repositories via [Subtree Split](https://www.subtreesplit.com/).
+
+## Documentation
+
+See the official documentation at [MixerAPI.com](https://mixerapi.com).
+
+Documentation was built using [MkDocs](https://squidfunk.github.io/mkdocs-material/). It is designed to pull in the
+README.md files from all MixerAPI plugins. Additional documentation can be added in the `docs/` directory and mapped
+to the navigation in `mkdocs.yml`.
+
+You can run documentation locally with (browse to http://localhost:8000/):
+
 ```console
-git clone git@github.com:mixerapi/mixerapi-dev.git
-make install
+make mkdocs-run
 ```
 
-Next install [splitsh/lite](https://github.com/splitsh/lite#installation)
+To build:
+
+```console
+make mkdocs-build
+```
 
 ## Unit Tests
 

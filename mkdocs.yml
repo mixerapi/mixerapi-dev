@@ -1,0 +1,72 @@
+site_name: MixerAPI
+docs_dir: docs
+plugins:
+- simple:
+    include_files:
+    - .svg
+- search
+- exclude:
+    glob:
+    - plugins/bake/vendor/*
+    - plugins/collection-view/vendor/*
+    - plugins/core/vendor/*
+    - plugins/exception-render/vendor/*
+    - plugins/hal-view/vendor/*
+    - plugins/json-ld-view/vendor/*
+    - plugins/mixerapi/vendor/*
+    - plugins/rest/vendor/*
+site_description: MixerAPI streamlines development of RESTful APIs for your CakePHP
+  project.
+repo_url: https://github.com/mixerapi/mixerapi
+edit_uri: ''
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: red
+    accent: red
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+  - navigation.expand
+  favicon: images/favicon.png
+  logo: assets/logo.png
+nav:
+- Install: /install
+- Workflow: /workflow
+- Baking Controllers: /plugins/bake
+- Exception Rendering: /plugins/exception-render
+- OpenAPI (Swagger): /cakephp-swagger-bake
+- Response Formats:
+  - JSON / XML: /plugins/collection-view
+  - HAL+JSON: /plugins/hal-view
+  - JSON-LD: /plugins/json-ld-view
+- RESTful Routes: /plugins/rest
+- Search: /friends-of-cake-search
+markdown_extensions:
+- attr_list
+- admonition
+- meta
+- pymdownx.details
+- pymdownx.highlight:
+    extend_pygments_lang:
+    - name: php
+      lang: php
+      options:
+        startinline: true
+    - name: pycon3
+      lang: pycon
+      options:
+        python3: true
+    linenums_style: pymdownx-inline
+- pymdownx.superfences:
+    preserve_tabs: true
+extra:
+  social:
+  - icon: fontawesome/brands/slack
+    link: https://cakesf.slack.com/
+  - icon: fontawesome/brands/twitter
+    link: https://twitter.com/mixerapi
+  - icon: fontawesome/brands/github
+    link: https://github.com/mixerapi
