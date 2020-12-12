@@ -25,18 +25,21 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl
 
-      - name: PHP Version
+      - name: Matrix PHP Version
+        run: echo ${{ matrix.php-versions }}
+
+      - name: Installed PHP Version
         run: php -v
 
       - name: Install
         run: make install
 
-      - name: Test
-        if: ${{ matrix.php-versions }} != '7.4'
+      - if: ${{ matrix.php-versions }} != '7.4'
+        name: Test Project
         run: make test
 
-      - name: Test + Code Quality (7.4 only)
-        if: ${{ matrix.php-versions }} == '7.4'
+      - if: ${{ matrix.php-versions }} == '7.4'
+        name: Test + Code Quality (7.4 only)
         run: make check
 
   documentation:
