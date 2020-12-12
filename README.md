@@ -14,9 +14,30 @@ This is the development repository for MixerAPI. If you are looking to install M
 
 Clone the project and install composer dependencies for mixerapi-dev and all MixerAPI plugins.
 
+```console
+git clone git@github.com:mixerapi/mixerapi-dev.git
+make install
+```
+
 ## Development
 
 Changes are automatically pushed to the plugin repositories via [Subtree Split](https://www.subtreesplit.com/).
+
+### Unit Tests
+
+Runs unit tests for each plugin.
+
+```console
+make test
+```
+
+### Code Standards + Unit Tests
+
+Runs static code analysis and unit tests.
+
+```console
+make check
+```
 
 ## Documentation
 
@@ -36,20 +57,4 @@ To build:
 
 ```console
 make mkdocs-build
-```
-
-## Unit Tests
-
-Runs unit tests for each plugin.
-
-```console
-make test
-```
-
-## Code Standards + Unit Tests
-
-Runs static code analysis and unit tests.
-
-```console
-make check
 ```
