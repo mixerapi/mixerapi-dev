@@ -4,6 +4,11 @@ install:
 	for dir in plugins/*; do \
 		bash -c "echo INSTALL: $$dir && cd $$dir && composer install"; \
 	done
+update:
+	composer update
+	for dir in plugins/*; do \
+		bash -c "echo INSTALL: $$dir && cd $$dir && composer update"; \
+	done
 test:
 	for dir in plugins/*; do \
 		bash -c "echo TESTING: $$dir && cd $$dir && composer test"; \
