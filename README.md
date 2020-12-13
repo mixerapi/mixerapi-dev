@@ -7,11 +7,23 @@
   </a>
 </p>
 
-[![Build](https://github.com/mixerapi/mixerapi=dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
-[![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
-[![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+<p align="center">
+    <a href="LICENSE.txt" target="_blank">
+        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
+    </a>
+    <a href="https://travis-ci.org/mixerapi/mixerapi" target="_blank">
+        <img alt="Build Status" src="https://github.com/mixerapi/mixerapi=dev/workflows/Build/badge.svg?branch=master">
+    </a>
+    <a href="https://coveralls.io/github/mixerapi/mixerapi?branch=master" target="_blank">
+        <img alt="Coverage Status" src="https://coveralls.io/repos/github/mixerapi/mixerapi/badge.svg?branch=master">
+    </a>
+    <a href="https://book.cakephp.org/4/en/index.html">
+        <img alt="CakePHP >= 4" src="https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp">
+    </a>
+    <a href="https://php.net/" target="_blank">
+        <img alt="PHP >= 7.2" src="https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php">
+    </a>
+</p>
 
 This is the development repository for MixerAPI. If you are looking to install MixerAPI please visit
 [mixerapi.com](https://mixerapi.com/) or go to [MixerApi/MixerApi](https://github.com/mixerapi/mixerapi).
