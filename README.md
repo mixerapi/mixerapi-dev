@@ -14,9 +14,6 @@
     <a href="https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild" target="_blank">
         <img alt="Build Status" src="https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master">
     </a>
-    <a href="https://coveralls.io/github/mixerapi/mixerapi?branch=master" target="_blank">
-        <img alt="Coverage Status" src="https://coveralls.io/repos/github/mixerapi/mixerapi/badge.svg?branch=master">
-    </a>
     <a href="https://book.cakephp.org/4/en/index.html">
         <img alt="CakePHP >= 4" src="https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp">
     </a>
