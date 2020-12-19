@@ -7,7 +7,7 @@ install:
 update:
 	composer update
 	for dir in plugins/*; do \
-		bash -c "echo INSTALL: $$dir && cd $$dir && composer update"; \
+		bash -c "echo INSTALL: $$dir && cd $$dir && composer update -W"; \
 	done
 test:
 	for dir in plugins/*; do \
@@ -19,8 +19,6 @@ check:
 	done
 mkdocs-run:
 	docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest
-mkdocs-build:
-	docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build
 mkdocs-build:
 	docker pull systematical/mixerapidocs:latest
 	git pull
