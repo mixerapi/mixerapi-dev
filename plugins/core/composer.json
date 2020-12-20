@@ -1,7 +1,7 @@
 {
     "name": "mixerapi/core",
     "description": "MixerAPI Core libraries",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "keywords": ["mixerapi"],
     "require": {

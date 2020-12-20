@@ -1,7 +1,7 @@
 {
     "name": "mixerapi/hal-view",
     "description": "A Hypertext Application Language (HAL+JSON) view for CakePHP.",
-    "type": "library",
+    "type": "cakephp-plugin",
     "license": "MIT",
     "keywords": ["cakephp"],
     "require": {
