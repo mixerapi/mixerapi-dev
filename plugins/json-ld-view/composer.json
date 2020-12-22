@@ -1,7 +1,7 @@
 {
     "name": "mixerapi/json-ld-view",
     "description": "A JSON-LD view for CakePHP",
-    "type": "project",
+    "type": "cakephp-plugin",
     "license": "MIT",
     "keywords": ["cakephp", "json-ld", "jsonld", "cakephp json-ld", "cakephp jsonld"],
     "require": {

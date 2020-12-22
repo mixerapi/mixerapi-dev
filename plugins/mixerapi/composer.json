@@ -1,16 +1,16 @@
 {
     "name": "mixerapi/mixerapi",
     "description": "Streamline development of API-first applications in CakePHP",
-    "type": "project",
     "license": "MIT",
     "keywords": ["cakephp"],
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "4.2.0-RC1",
+        "cakephp/cakephp": "~4.0",
         "cnizzardini/cakephp-swagger-bake": "^1.0",
         "friendsofcake/search": "^6.0",
         "mixerapi/bake": "^0.2",
         "mixerapi/collection-view": "^0.2",
+        "mixerapi/core": "^0.2",
         "mixerapi/exception-render": "^0.2",
         "mixerapi/hal-view": "^0.2",
         "mixerapi/json-ld-view": "^0.2",
@@ -55,5 +55,7 @@
             "name": "MixerApi",
             "role": "Organization"
         }
-    ]
+    ],
+    "prefer-stable": true,
+    "minimum_stability": "dev"
 }

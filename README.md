@@ -25,6 +25,9 @@
 This is the development repository for MixerAPI. If you are looking to install MixerAPI please visit
 [mixerapi.com](https://mixerapi.com/) or go to [MixerApi/MixerApi](https://github.com/mixerapi/mixerapi).
 
+Changes to this repository are automatically pushed to the plugin repositories via
+[Subtree Split](https://www.subtreesplit.com/).
+
 ## Install
 
 Clone the project and install composer dependencies for mixerapi-dev and all MixerAPI plugins.
@@ -36,7 +39,34 @@ make install
 
 ## Development
 
-Changes are automatically pushed to the plugin repositories via [Subtree Split](https://www.subtreesplit.com/).
+You can require mixerapi/mixerapi-dev in other projects for local development by modifying your composer.json. First,
+remove mixerapi/mixerapi:
+
+```console
+composer remove mixerapi/mixerapi
+```
+
+Next, reference mixerapi/mixerapi-dev using a path repository. The `url` can be relative or absolute:
+
+```json
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../mixerapi-dev",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
+```
+
+Then just require mixerapi/mixerapi-dev:
+
+```console
+composer require mixerapi/mixerapi-dev @dev
+```
+
+No code changes should be necessary though you may need to run `composer dump-autoload`.
 
 ### Unit Tests
 

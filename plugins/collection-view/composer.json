@@ -1,7 +1,7 @@
 {
     "name": "mixerapi/collection-view",
     "description": "A simple Collection View for displaying pagination meta data in JSON or XML collection responses",
-    "type": "library",
+    "type": "cakephp-plugin",
     "license": "MIT",
     "keywords": ["cakephp"],
     "require": {
