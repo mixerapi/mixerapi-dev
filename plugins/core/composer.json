@@ -24,7 +24,7 @@
     "autoload-dev": {
         "psr-4": {
             "MixerApi\\Core\\Test\\": "tests/",
-            "TestApp\\": "tests/test_app/src"
+            "MixerApi\\Core\\Test\\App\\": "tests/test_app/src"
         }
     },
     "scripts": {
