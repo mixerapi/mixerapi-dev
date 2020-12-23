@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TestApp\Controller;
+namespace MixerApi\CollectionView\Test\App\Controller;
 
 use Cake\Controller\Controller;
 
