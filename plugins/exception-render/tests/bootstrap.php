@@ -93,13 +93,6 @@ Configure::write('App', [
 ]);
 
 Configure::write('debug', true);
-Configure::write('Error', [
-    'errorLevel' => E_ALL,
-    'exceptionRenderer' => MixerApi\ExceptionRender\MixerApiExceptionRenderer::class,
-    'skipLog' => [],
-    'log' => true,
-    'trace' => true,
-]);
 
 Cache::setConfig([
     '_cake_core_' => [

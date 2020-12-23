@@ -22,7 +22,7 @@
     "autoload-dev": {
         "psr-4": {
             "MixerApi\\ExceptionRender\\Test\\": "tests/",
-            "TestApp\\": "tests/test_app/src/"
+            "MixerApi\\ExceptionRender\\Test\\App\\": "tests/test_app/src/"
         }
     },
     "scripts": {
