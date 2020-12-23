@@ -20,7 +20,6 @@ class Application extends BaseApplication
     {
         $this->addPlugin('Bake');
         $this->addPlugin('MixerApi/Bake');
-
     }
 
     public function console(CommandCollection $commands): CommandCollection
