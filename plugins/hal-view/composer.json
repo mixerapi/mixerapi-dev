@@ -25,7 +25,7 @@
     "autoload-dev": {
         "psr-4": {
             "MixerApi\\HalView\\Test\\": "tests/",
-            "TestApp\\": "tests/test_app/src/"
+            "MixerApi\\HalView\\Test\\App\\": "tests/test_app/src/"
         }
     },
     "scripts": {
