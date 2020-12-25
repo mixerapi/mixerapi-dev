@@ -32,15 +32,15 @@ jobs:
         run: php -v
 
       - name: Install
-        run: make install
+        run: composer install
 
       - if: ${{ matrix.php-versions }} != '7.4'
         name: Test Project
-        run: make test
+        run: composer test
 
-      - if: ${{ matrix.php-versions }} == '7.4'
-        name: Test + Code Quality (7.4 only)
-        run: make check
+      #- if: ${{ matrix.php-versions }} == '7.4'
+      #  name: Test + Code Quality (7.4 only)
+      #  run: make check
 
   documentation:
     name: Documentation
