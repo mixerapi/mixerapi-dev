@@ -46,7 +46,7 @@ jobs:
           cp config/app_local.example.php config/app_local.php
           composer test
 
-      - name: Upload coverage results to Coveralls
+      - name: Upload coverage results to Coveralls (7.4 only)
         if: contains('${{ matrix.php-versions }}', '7.4')
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,7 +59,9 @@ jobs:
     name: Documentation
     runs-on: ubuntu-latest
     steps:
-      - if: github.ref == 'refs/heads/master'
+      - name: Branch
+        run: echo github.ref
+      - if: contains(github.ref, 'master')
         name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
