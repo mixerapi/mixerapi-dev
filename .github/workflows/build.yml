@@ -51,7 +51,7 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
+          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=build/logs/clover.xml
           composer global require php-coveralls/php-coveralls
           php-coveralls --coverage_clover=build/logs/clover.xml -v
 
@@ -59,9 +59,7 @@ jobs:
     name: Documentation
     runs-on: ubuntu-latest
     steps:
-      - name: Branch
-        run: echo github.ref
-      - if: contains(github.ref, 'master')
+      - if: github.ref == 'refs/heads/master'
         name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
