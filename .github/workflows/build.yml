@@ -38,7 +38,7 @@ jobs:
           composer validate
 
       - name: Install
-        run: composer install --prefer-dist --no-interaction
+        run: composer install --prefer-dist --no-interaction --no-progress --no-suggest
 
       - name: Test Project
         run: |
@@ -51,9 +51,9 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=build/logs/clover.xml
+          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           composer global require php-coveralls/php-coveralls
-          php-coveralls --coverage_clover=build/logs/clover.xml -v
+          php-coveralls --coverage_clover=clover.xml -v
 
   documentation:
     name: Documentation
