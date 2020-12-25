@@ -37,7 +37,12 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     public function render(): ResponseInterface
     {
         $exception = $this->error;
-        $code = $this->_code($exception);
+        try {
+            $code = $exception->getCode();
+        } catch (\Exception $e) {
+            $code = $this->getHttpCode($exception);
+        }
+
         $method = $this->_method($exception);
         $template = $this->_template($exception, $method, $code);
         $this->clearOutput();
