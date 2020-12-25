@@ -32,7 +32,6 @@ jobs:
           php -v
 
       - name: Composer Check
-        if: ${{ matrix.php-versions }} == '7.4'
         run: |
           composer check
           composer validate
@@ -46,12 +45,11 @@ jobs:
           restore-keys: |
             ${{ matrix.php-versions }}-php-
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      - if: steps.composer-cache.outputs.cache-hit != 'true'
+        name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Code Quality
-        if: ${{ matrix.php-versions }} == '7.4'
         run: composer analyze
 
       - name: Installed PHP Version
@@ -60,8 +58,8 @@ jobs:
       - name: Install
         run: composer install --prefer-dist --no-interaction
 
-      - name: Upload coverage results to Coveralls
-        if: ${{ matrix.php-versions }} == '7.4'
+      - if: ${{ matrix.php-versions }} == '7.4'
+        name: Upload coverage results to Coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
