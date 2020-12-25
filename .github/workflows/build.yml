@@ -33,7 +33,6 @@ jobs:
           php -v
 
       - name: Composer Check
-        if: ${{ matrix.php-versions }} == '7.4'
         run: |
           composer check
           composer validate
@@ -47,8 +46,8 @@ jobs:
           cp config/app_local.example.php config/app_local.php
           composer test
 
-      - name: Upload coverage results to Coveralls
-        if: ${{ matrix.php-versions }} == '7.4'
+      - if: ${{ matrix.php-versions }} == '7.4'
+        name: Upload coverage results to Coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
