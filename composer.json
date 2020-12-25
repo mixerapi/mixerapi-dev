@@ -19,7 +19,6 @@
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "ext-mysql": "*",
         "cakephp/bake": "^2.0.3",
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.1",
@@ -86,6 +85,7 @@
         "phpcbf": "phpcbf --colors -p plugins/",
         "phpstan": "phpstan analyse plugins/*/src",
         "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml",
+        "coverage": "phpunit --coverage-html coverage-reports/",
         "mkdocs-run": "docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest",
         "mkdocs-build": [
            "docker pull systematical/mixerapidocs:latest",
