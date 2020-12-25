@@ -46,7 +46,7 @@ jobs:
           cp config/app_local.example.php config/app_local.php
           composer test
 
-      - if: ${{ matrix.php-versions }} == '7.4'
+      - if: ${{ matrix.php-versions == '7.4' }}
         name: Upload coverage results to Coveralls (7.4 only)
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
