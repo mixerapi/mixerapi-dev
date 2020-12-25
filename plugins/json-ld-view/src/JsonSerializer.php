@@ -68,7 +68,7 @@ class JsonSerializer
 
         $jsonLd = $this->recursion($serialize);
         $this->config = Configure::read('JsonLdView');
-        if ($this->config['isHydra']) {
+        if (isset($this->config['isHydra']) && $this->config['isHydra']) {
             $this->hydra = 'hydra:';
         }
 
