@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-20.04 ]
-        php-versions: [ '7.3', '7.4','8.0' ]
+        php-versions: [ '7.3', '7.4', '8.0' ]
 
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
@@ -24,13 +24,18 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl
+          extensions: mbstring, intl, sqlite3, json, xml, simplexml
 
-      - name: PHP Version
-        run: php -v
+      - name: Matrix PHP Version
+        run: |
+          echo ${{ matrix.php-versions }}
+          php -v
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Composer Check
+        if: ${{ matrix.php-versions }} == '7.4'
+        run: |
+          composer check
+          composer validate
 
       - name: Cache Composer packages
         id: composer-cache
@@ -40,20 +45,23 @@ jobs:
           key: ${{ matrix.php-versions }}-php-${{ hashFiles('**/composer.lock') }}-v2
           restore-keys: |
             ${{ matrix.php-versions }}-php-
+
       - name: Install dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Code Quality
         if: ${{ matrix.php-versions }} == '7.4'
-        run: composer check
+        run: composer analyze
 
-      - name: PHP Unit
-        if: ${{ matrix.php-versions }} != '7.4'
-        run: vendor/bin/phpunit
+      - name: Installed PHP Version
+        run: php -v
+
+      - name: Install
+        run: composer install --prefer-dist --no-interaction
 
       - name: Upload coverage results to Coveralls
-        if: ${{ matrix.php-versions }} != '7.4'
+        if: ${{ matrix.php-versions }} == '7.4'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
