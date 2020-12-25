@@ -36,7 +36,9 @@ jobs:
 
       - if: ${{ matrix.php-versions }} != '7.4'
         name: Test Project
-        run: composer test
+        run: |
+          cp config/.env.example config/.env
+          composer test
 
       #- if: ${{ matrix.php-versions }} == '7.4'
       #  name: Test + Code Quality (7.4 only)
