@@ -23,7 +23,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl, sqlite3, json, xml, simplexml
+          extensions: mbstring, intl, sqlite3, json, xml, simplexml, mysqli
           tools: composer:v2
           coverage: xdebug
 
