@@ -5,6 +5,7 @@ namespace MixerApi\CollectionView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
 use MixerApi\CollectionView\Configuration;
@@ -32,7 +33,35 @@ class SerializerTest extends TestCase
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
 
-        $request = (new ServerRequest())->withEnv('HTTP_ACCEPT', 'application/json');
+        $request = (new ServerRequest([
+            'url' => '/',
+            'params' => [
+                'plugin' => null,
+                'controller' => 'Actor',
+                'action' => 'index',
+            ],
+        ]))->withEnv('HTTP_ACCEPT', 'application/json');
+
+        $request = $request->withAttribute('paging', [
+            'Actor' => [
+                'page' => 1,
+                'current' => 1,
+                'count' => 60,
+                'prevPage' => false,
+                'nextPage' => true,
+                'pageCount' => 1,
+                'sort' => null,
+                'direction' => null,
+                'limit' => null,
+                'start' => 1,
+                'end' => 3,
+            ],
+        ]);
+        Router::reload();
+        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
+        Router::connect('/:controller/:action/*');
+        Router::connect('/:plugin/:controller/:action/*');
+        Router::setRequest($request);
 
         $paginator = new PaginatorHelper(
             new JsonCollectionView($request, new Response()),
@@ -56,7 +85,35 @@ class SerializerTest extends TestCase
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
 
-        $request = (new ServerRequest())->withEnv('HTTP_ACCEPT', 'application/json');
+        $request = (new ServerRequest([
+            'url' => '/',
+            'params' => [
+                'plugin' => null,
+                'controller' => 'Actor',
+                'action' => 'index',
+            ],
+        ]))->withEnv('HTTP_ACCEPT', 'application/xml');
+
+        $request = $request->withAttribute('paging', [
+            'Actor' => [
+                'page' => 1,
+                'current' => 1,
+                'count' => 60,
+                'prevPage' => false,
+                'nextPage' => true,
+                'pageCount' => 1,
+                'sort' => null,
+                'direction' => null,
+                'limit' => null,
+                'start' => 1,
+                'end' => 3,
+            ],
+        ]);
+        Router::reload();
+        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
+        Router::connect('/:controller/:action/*');
+        Router::connect('/:plugin/:controller/:action/*');
+        Router::setRequest($request);
 
         $paginator = new PaginatorHelper(
             new JsonCollectionView($request, new Response()),
