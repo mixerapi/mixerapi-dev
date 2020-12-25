@@ -125,6 +125,7 @@ class CreateRoutesCommand extends Command
      *
      * @param \Cake\Console\Arguments $args Arguments
      * @return string
+     * @throws \RuntimeException
      */
     private function whichConfig(Arguments $args): string
     {
@@ -133,7 +134,12 @@ class CreateRoutesCommand extends Command
         }
         if ($args->getOption('plugin')) {
             $plugins = Configure::read('App.paths.plugins');
+
             return $configDir = reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
+        }
+
+        if (!defined('CONFIG')) {
+            throw new \RunTimeException('Unable to locate config path');
         }
 
         return CONFIG;
