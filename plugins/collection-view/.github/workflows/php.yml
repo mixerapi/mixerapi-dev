@@ -47,7 +47,7 @@ jobs:
 
       - if: steps.composer-cache.outputs.cache-hit != 'true'
         name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer update --prefer-dist --no-progress
 
       - name: Code Quality
         run: composer analyze
