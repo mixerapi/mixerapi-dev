@@ -12,19 +12,29 @@ use MixerApi\Rest\Lib\Route\RouteWriter;
 class RouteWriterTest extends TestCase
 {
     private const ROUTE_BASE = 'routes_base.php';
+
     private const ROUTE_FILE = 'routes_test.php';
 
+    private const REST_PLUGIN = ROOT . DS . 'plugins' . DS . 'rest' . DS;
+
+    private const MY_PLUGIN = ROOT . DS . 'plugins' . DS . 'rest' . DS . 'tests' . DS . 'plugins' . DS . 'MyPlugin' . DS;
+
+    /**
+     * @var string path to plugin config directory
+     */
     private $pluginConfig;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->pluginConfig = TEST . 'plugins' . DS . 'MyPlugin' . DS . 'config' . DS;
+        $this->pluginConfig = self::MY_PLUGIN . 'config' . DS;
 
-        touch(CONFIG . self::ROUTE_FILE);
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config' . DS;
+
+        touch($config . self::ROUTE_FILE);
         touch($this->pluginConfig . self::ROUTE_FILE);
 
-        copy(CONFIG . self::ROUTE_BASE, CONFIG . self::ROUTE_FILE);
+        copy($config . self::ROUTE_BASE, $config . self::ROUTE_FILE);
         copy($this->pluginConfig . self::ROUTE_BASE, $this->pluginConfig . self::ROUTE_FILE);
     }
 
@@ -33,15 +43,17 @@ class RouteWriterTest extends TestCase
         $resourceScanner = new ResourceScanner('MixerApi\Rest\Test\App\Controller');
         $resources = $resourceScanner->getControllerDecorators();
 
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config'  . DS;
+
         $routeWriter = new RouteWriter(
             $resources,
             'MixerApi\Rest\Test\App\Controller',
-            CONFIG,
+            $config,
             '/'
         );
 
         $this->assertEquals($resources, $routeWriter->getResources());
-        $this->assertEquals(CONFIG, $routeWriter->getConfigDir());
+        $this->assertEquals($config, $routeWriter->getConfigDir());
         $this->assertEquals('/', $routeWriter->getPrefix());
     }
 
@@ -65,9 +77,11 @@ class RouteWriterTest extends TestCase
 
         $resources = (new ResourceScanner($namespace))->getControllerDecorators();
 
-        (new RouteWriter($resources, $namespace, CONFIG, '/'))->merge(self::ROUTE_FILE);
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config' . DS;
 
-        $contents = file_get_contents(CONFIG . self::ROUTE_FILE);
+        (new RouteWriter($resources, $namespace, $config, '/'))->merge(self::ROUTE_FILE);
+
+        $contents = file_get_contents($config . self::ROUTE_FILE);
 
         $this->assertTextContains("\$builder->resources('Actors')", $contents);
         $this->assertTextContains("\$builder->resources('Films')", $contents);
@@ -115,9 +129,11 @@ class RouteWriterTest extends TestCase
 
         $resources = (new ResourceScanner($namespace))->getControllerDecorators();
 
-        (new RouteWriter($resources, $namespace, CONFIG, '/nope'))->merge(self::ROUTE_FILE);
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config' . DS;
 
-        $contents = file_get_contents(CONFIG . self::ROUTE_FILE);
+        (new RouteWriter($resources, $namespace, $config, '/nope'))->merge(self::ROUTE_FILE);
+
+        $contents = file_get_contents($config . self::ROUTE_FILE);
 
         echo $contents; die;
     }
@@ -132,9 +148,11 @@ class RouteWriterTest extends TestCase
 
         $resources = (new ResourceScanner($namespace))->getControllerDecorators();
 
-        (new RouteWriter($resources, $namespace, CONFIG, '/', 'Nope'))->merge(self::ROUTE_FILE);
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config' . DS;
 
-        $contents = file_get_contents(CONFIG . self::ROUTE_FILE);
+        (new RouteWriter($resources, $namespace, $config, '/', 'Nope'))->merge(self::ROUTE_FILE);
+
+        $contents = file_get_contents($config . self::ROUTE_FILE);
 
         echo $contents; die;
     }

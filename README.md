@@ -34,7 +34,7 @@ Clone the project and install composer dependencies for mixerapi-dev and all Mix
 
 ```console
 git clone git@github.com:mixerapi/mixerapi-dev.git
-make install
+composer install
 ```
 
 ## Development
@@ -73,7 +73,7 @@ No code changes should be necessary though you may need to run `composer dump-au
 Runs unit tests for each plugin.
 
 ```console
-make test
+composer test
 ```
 
 ### Code Standards + Unit Tests
@@ -81,7 +81,7 @@ make test
 Runs static code analysis and unit tests.
 
 ```console
-make check
+composer analyze
 ```
 
 ## Documentation
@@ -92,14 +92,16 @@ Documentation was built using [MkDocs](https://squidfunk.github.io/mkdocs-materi
 README.md files from all MixerAPI plugins. Additional documentation can be added in the `docs/` directory and mapped
 to the navigation in `mkdocs.yml`.
 
-You can run documentation locally with (browse to http://localhost:8000/):
+You can run documentation locally:
 
 ```console
-make mkdocs-run
+composer mkdocs-run
 ```
+
+_Browse to http://localhost:8000/_
 
 To build:
 
 ```console
-make mkdocs-build
+composer mkdocs-build
 ```

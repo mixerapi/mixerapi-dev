@@ -42,9 +42,12 @@ class CreateRoutesCommand extends Command
                 'help' => 'Route prefix (e.g. /api)',
             ]);
 
-        if (defined('TEST_APP')) {
+        if (defined('IS_TEST')) {
             $parser->addOption('routesFile', [
                 'help' => 'Specifies a name for the routes file, for testing only',
+            ]);
+            $parser->addOption('configPath', [
+                'help' => 'Specifies config path directory, for testing only',
             ]);
         }
 
@@ -67,15 +70,13 @@ class CreateRoutesCommand extends Command
 
         if ($args->getOption('plugin')) {
             $namespace = $args->getOption('namespace') ?? $args->getOption('plugin');
-            $plugins = Configure::read('App.paths.plugins');
             $prefix = $args->getOption('prefix') ?? '/' . Inflector::dasherize($args->getOption('plugin'));
-            $configDir = reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
         } else {
             $namespace = Configure::read('App.namespace');
             $prefix = '/';
-            $configDir = CONFIG;
         }
 
+        $configDir = $this->whichConfig($args);
         $namespace = $args->getOption('namespace') ?? $namespace . '\Controller';
         $prefix = $args->getOption('prefix') ?? $prefix;
 
@@ -117,5 +118,30 @@ class CreateRoutesCommand extends Command
         }
 
         (new RouteTable($io, $args, $routeDecorators))->output();
+    }
+
+    /**
+     * Returns directory path to config
+     *
+     * @param \Cake\Console\Arguments $args Arguments
+     * @return string
+     * @throws \RuntimeException
+     */
+    private function whichConfig(Arguments $args): string
+    {
+        if ($args->getOption('configPath')) {
+            return $args->getOption('configPath');
+        }
+        if ($args->getOption('plugin')) {
+            $plugins = Configure::read('App.paths.plugins');
+
+            return $configDir = reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
+        }
+
+        if (!defined('CONFIG')) {
+            throw new \RunTimeException('Unable to locate config path');
+        }
+
+        return CONFIG;
     }
 }

@@ -18,26 +18,35 @@ class CreateRoutesCommandTest extends TestCase
     ];
 
     private const ROUTE_FILE = 'routes_test.php';
+
     private const ROUTE_BASE = 'routes_base.php';
+
+    private const REST_PLUGIN = ROOT . DS . 'plugins' . DS . 'rest' . DS;
+
+    private const MY_PLUGIN = ROOT . DS . 'plugins' . DS . 'rest' . DS . 'tests' . DS . 'plugins' . DS . 'MyPlugin' . DS;
 
     public function setUp() : void
     {
         parent::setUp();
         $this->setAppNamespace('MixerApi\Rest\Test\App');
         $this->useCommandRunner();
-        $pluginConfig = TEST . 'plugins' . DS . 'MyPlugin' . DS . 'config' . DS;
+        $pluginConfig = self::MY_PLUGIN . 'config' . DS;
 
-        touch(CONFIG . self::ROUTE_FILE);
+        $config = self::REST_PLUGIN . 'tests' . DS . 'test_app' . DS . 'config' . DS;
+
+        touch($config . self::ROUTE_FILE);
         touch($pluginConfig . self::ROUTE_FILE);
 
-        copy(CONFIG . self::ROUTE_BASE, CONFIG . self::ROUTE_FILE);
+        copy($config . self::ROUTE_BASE, $config . self::ROUTE_FILE);
         copy($pluginConfig . self::ROUTE_BASE, $pluginConfig . self::ROUTE_FILE);
     }
 
     public function testSuccess()
     {
         $file = self::ROUTE_FILE;
-        $this->exec("mixerapi:rest route create --routesFile $file", ['Y']);
+        $configPath = self::REST_PLUGIN . DS . 'tests' . DS . 'test_app' . DS . 'config' . DS;
+
+        $this->exec("mixerapi:rest route create --configPath $configPath --routesFile $file", ['Y']);
         $this->assertOutputContains('Routes were written');
         $this->assertExitSuccess();
     }
@@ -47,7 +56,11 @@ class CreateRoutesCommandTest extends TestCase
         $file = self::ROUTE_FILE;
         $ns = 'MixerApi\Rest\Test\MyPlugin\Controller';
         $plugin = 'MyPlugin';
-        $this->exec("mixerapi:rest route create --namespace $ns --routesFile $file --plugin $plugin", ['Y']);
+        $configPath = self::MY_PLUGIN . DS . 'config' . DS;
+        $this->exec(
+            "mixerapi:rest route create --namespace $ns --configPath $configPath  --routesFile $file --plugin $plugin",
+            ['Y']
+        );
         $this->assertOutputContains('Routes were written');
         $this->assertExitSuccess();
     }

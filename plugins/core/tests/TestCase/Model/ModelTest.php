@@ -25,7 +25,7 @@ class ModelTest extends TestCase
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),
-            new \TestApp\Model\Table\ActorsTable()
+            new \MixerApi\Core\Test\App\Model\Table\ActorsTable()
         ))->create();
 
         $this->assertInstanceOf(Model::class, $model);
@@ -40,7 +40,7 @@ class ModelTest extends TestCase
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),
-            new \TestApp\Model\Table\ActorsTable()
+            new \MixerApi\Core\Test\App\Model\Table\ActorsTable()
         ))->create();
 
         $this->assertTrue($model->getProperty('id')->isPrimaryKey());

@@ -147,8 +147,8 @@ return [
     'CollectionView' => [
         'pagination' => '{{collection}}', // array that holds pagination data
         'pagination.url' => '{{url}}', // url of current page
-        'pagination.pageCount' => '{{count}}', // items on the page
-        'pagination.totalCount' => '{{total}}', // total database records
+        'pagination.count' => '{{count}}', // items on the page
+        'pagination.total' => '{{total}}', // total database records
         'pagination.pages' => '{{pages}}', // total pages
         'pagination.next' => '{{next}}', // next page url
         'pagination.prev' => '{{prev}}', // previous page url

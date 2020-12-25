@@ -12,8 +12,8 @@
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
-        <testsuite name="app">
-            <directory>tests/TestCase/</directory>
+        <testsuite name="mixerapi">
+            <directory>plugins/*/tests</directory>
         </testsuite>
         <!-- Add plugin test suites here. -->
     </testsuites>

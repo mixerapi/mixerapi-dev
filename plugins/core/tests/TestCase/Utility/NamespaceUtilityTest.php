@@ -9,17 +9,17 @@ class NamespaceUtilityTest extends TestCase
 {
     public function testFindClasses()
     {
-        $this->assertNotEmpty(NamespaceUtility::findClasses('TestApp'));
+        $this->assertNotEmpty(NamespaceUtility::findClasses('MixerApi\Core\Test\App'));
     }
 
     public function testFindClass()
     {
-        $this->assertNotEmpty(NamespaceUtility::findClass('TestApp\Model\Entity', 'Actor'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity', 'Actor'));
     }
 
     public function testFindClassWithException()
     {
         $this->expectException(\RuntimeException::class);
-        $this->assertNotEmpty(NamespaceUtility::findClass('TestApp\Model\Entity', 'Nope'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity', 'Nope'));
     }
 }

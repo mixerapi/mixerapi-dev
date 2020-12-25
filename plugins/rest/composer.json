@@ -6,7 +6,7 @@
     "keywords": ["cakephp rest","cakephp4 rest","cakephp rest bake","cakephp api bake"],
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "~4.0",
+        "cakephp/cakephp": "^4.0",
         "nikic/php-parser": "^4.8",
         "thecodingmachine/class-explorer": "^1.1"
     },

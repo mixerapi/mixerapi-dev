@@ -13,7 +13,7 @@ class SchemaMapperTest extends TestCase
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),
-            new \TestApp\Model\Table\FilmsTable()
+            new \MixerApi\JsonLdView\Test\App\Model\Table\FilmsTable()
         ))->create();
 
         $schemaUrl = SchemaMapper::findSchemaFromModelProperty($model->getProperty('id'));

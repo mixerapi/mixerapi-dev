@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TestApp\Model\Table;
+namespace MixerApi\Core\Test\App\Model\Table;
 
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
