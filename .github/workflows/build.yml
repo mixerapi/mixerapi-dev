@@ -38,6 +38,7 @@ jobs:
         name: Test Project
         run: |
           cp config/.env.example config/.env
+          cp config/app_local.example.php config/app_local.php
           composer test
 
       #- if: ${{ matrix.php-versions }} == '7.4'

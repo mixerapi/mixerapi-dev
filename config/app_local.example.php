@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Local configuration file to provide any overrides to your app.php configuration.
  * Copy and save this file as app_local.php and make changes as required.
@@ -25,7 +26,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => env('SECURITY_SALT', '603ec2cb4cc9c06d5e7b783d240e0503ffa0c0429ddc54fd3b58efcd2e473615'),
     ],
 
     /*
@@ -44,10 +45,10 @@ return [
              */
             //'port' => 'non_standard_port_number',
 
-            'username' => 'my_app',
-            'password' => 'secret',
+            //'username' => 'my_app',
+            //'password' => 'secret',
 
-            'database' => 'my_app',
+            //'database' => 'my_app',
             /*
              * If not using the default 'public' schema with the PostgreSQL driver
              * set it here.
