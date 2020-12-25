@@ -85,7 +85,13 @@
         "phpcs": "phpcs --colors -p  plugins/",
         "phpcbf": "phpcbf --colors -p plugins/",
         "phpstan": "phpstan analyse plugins/*/src",
-        "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml"
+        "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml",
+        "mkdocs-run": "docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest",
+        "mkdocs-build": [
+           "docker pull systematical/mixerapidocs:latest",
+           "git pull",
+           "docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build"
+        ]
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
