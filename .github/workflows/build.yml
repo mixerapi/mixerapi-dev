@@ -33,9 +33,7 @@ jobs:
           php -v
 
       - name: Composer Check
-        run: |
-          composer check
-          composer validate
+        run: composer validate
 
       - name: Install
         run: composer install --prefer-dist --no-interaction --no-progress
