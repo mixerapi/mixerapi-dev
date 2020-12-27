@@ -34,27 +34,11 @@ jobs:
       - name: Composer Validate
         run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ matrix.php-versions }}-php-${{ hashFiles('**/composer.lock') }}-v2
-          restore-keys: |
-            ${{ matrix.php-versions }}-php-
-
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        name: Install dependencies
+      - name: Install dependencies
         run: composer update --prefer-dist --no-progress
 
       - name: Code Quality
         run: composer analyze
-
-      - name: Installed PHP Version
-        run: php -v
-
-      - name: Install
-        run: composer install --prefer-dist --no-interaction
 
       - if: ${{ matrix.php-versions == '7.4' }}
         name: Upload coverage results to Coveralls
