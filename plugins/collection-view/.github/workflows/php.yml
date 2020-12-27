@@ -31,10 +31,8 @@ jobs:
           echo ${{ matrix.php-versions }}
           php -v
 
-      - name: Composer Check
-        run: |
-          composer check
-          composer validate
+      - name: Composer Validate
+        run: composer validate
 
       - name: Cache Composer packages
         id: composer-cache
