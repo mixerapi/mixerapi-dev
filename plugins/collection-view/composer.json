@@ -13,10 +13,10 @@
         "ext-json": "*",
         "ext-xml": "*",
         "ext-simplexml": "*",
-        "phpunit/phpunit": "~8.5.0",
         "cakephp/cakephp-codesniffer": "^4.2",
-        "phpstan/phpstan": "^0.12.32",
-        "phpmd/phpmd": "^2.8"
+        "phpmd/phpmd": "^2.9",
+        "phpstan/phpstan": "^0.12.64",
+        "phpunit/phpunit": "~8.5.0"
     },
     "autoload": {
         "psr-4": {
@@ -33,8 +33,7 @@
         "analyze": [
             "@test",
             "@phpcs",
-            "@phpstan",
-            "@phpmd"
+            "@phpstan"
         ],
         "phpcs": "vendor/bin/phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
         "phpbf": "vendor/bin/phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
