@@ -7,4 +7,6 @@
     <exclude-pattern>plugins/*/coverage-reports/</exclude-pattern>
     <exclude-pattern>plugins/*/tests/</exclude-pattern>
     <exclude-pattern>plugins/*/webroot/</exclude-pattern>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>src/*</exclude-pattern>
 </ruleset>
