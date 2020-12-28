@@ -56,6 +56,7 @@ define('CORE_TESTS', CORE_PATH . 'tests' . DS);
 define('CORE_TEST_CASES', CORE_TESTS . 'TestCase');
 define('APP', ROOT . 'App' . DS);
 define('TEST_APP', TEST . 'test_app' . DS);
+define('CONFIG', TEST_APP . 'config' . DS);
 
 // phpcs:disable
 @mkdir(LOGS);
@@ -78,7 +79,7 @@ Configure::write('App', [
     'encoding' => 'UTF-8',
     'base' => false,
     'baseUrl' => false,
-    'dir' => APP_DIR,
+    'dir' => TEST_APP,
     'webroot' => 'webroot',
     'fullBaseUrl' => 'http://localhost',
     'imageBaseUrl' => 'img/',

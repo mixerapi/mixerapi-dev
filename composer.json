@@ -80,8 +80,8 @@
             "@phpstan"
         ],
         "test": "phpunit --colors=always",
-        "phpcs": "phpcs --colors -p  plugins/",
-        "phpcbf": "phpcbf --colors -p plugins/",
+        "phpcs":  "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
+        "phpcbf": "phpcbf --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
         "phpstan": "phpstan analyse plugins/*/src",
         "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml",
         "coverage": "phpunit --coverage-html coverage-reports/",
