@@ -79,9 +79,7 @@
             "@phpcs",
             "@phpstan"
         ],
-        "test": [
-            "phpunit --colors=always"
-        ],
+        "test": "phpunit --colors=always",
         "phpcs": "phpcs --colors -p  plugins/",
         "phpcbf": "phpcbf --colors -p plugins/",
         "phpstan": "phpstan analyse plugins/*/src",
