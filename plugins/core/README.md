@@ -15,10 +15,3 @@ Core library for easily sharing commonly used classes and utilities across Mixer
 ```bash
 composer require mixerapi/core
 ```
-
-## Code Standards
-
-```bash
-vendor/bin/phpunit
-composer check
-```

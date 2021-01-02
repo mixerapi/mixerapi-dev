@@ -148,15 +148,3 @@ If for instance you have a custom exception that is thrown, such as `InventoryEx
 
 Providing an Exception name, in conjunction with the status code already provided by CakePHP, enables API clients
 to tailor their exception handling.
-
-## Unit Tests
-
-```bash
-vendor/bin/phpunit
-```
-
-## Code Standards
-
-```bash
-composer check
-```

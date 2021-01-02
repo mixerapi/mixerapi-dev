@@ -170,15 +170,3 @@ class DepartmentsController extends AppController
 ```
 </p>
 </details>
-
-## Unit Tests
-
-```console
-vendor/bin/phpunit
-```
-
-## Code Standards
-
-```console
-composer check
-```

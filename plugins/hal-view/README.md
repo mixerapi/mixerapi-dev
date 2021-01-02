@@ -254,13 +254,3 @@ use Cake\Http\ServerRequest;
 use Cake\View\Helper\PaginatorHelper;
 $json = (new JsonSerializer($data, new ServerRequest(), new PaginatorHelper()))->asJson();
 ```
-
-## Unit Tests
-
-```console
-# unit test only
-vendor/bin/phpunit
-
-# standards checking
-composer check
-```

@@ -158,15 +158,3 @@ return [
     ]
 ];
 ```
-
-## Unit Tests
-
-```console
-vendor/bin/phpunit
-```
-
-## Code Standards
-
-```console
-composer check
-```
