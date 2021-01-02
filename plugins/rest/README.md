@@ -118,15 +118,3 @@ bin/cake mixerapi:rest route list --plugin MyPlugin
 #limit to main application:
 bin/cake mixerapi:rest route list --plugin App
 ```
-
-## Unit Tests
-
-```console
-vendor/bin/phpunit
-```
-
-## Code Standards
-
-```console
-composer check
-```
