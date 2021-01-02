@@ -2,8 +2,8 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/cakephp-rest.svg?style=flat-square)](https://packagist.org/packages/mixerapi/cakephp-rest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
-[![Build Status](https://travis-ci.org/mixerapi/rest.svg?branch=master)](https://travis-ci.org/mixerapi/rest)
-[![Coverage Status](https://coveralls.io/repos/github/mixerapi/rest/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/rest?branch=master)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
@@ -16,9 +16,9 @@ This plugin gets your API project up and going quickly by creating routes for yo
 - Build your `routes.php` file from a single command, or
 - Automatically expose RESTful CRUD routes with a handy AutoRouter.
 
-This plugin assumes you have already created models and controllers. For help with the latter check out 
-[MixerApi/Bake](https://github.com/mixerapi/bake). Check the official 
-[RESTful routing](https://book.cakephp.org/4/en/development/routing.html#restful-routing) documentation 
+This plugin assumes you have already created models and controllers. For help with the latter check out
+[MixerApi/Bake](https://github.com/mixerapi/bake). Check the official
+[RESTful routing](https://book.cakephp.org/4/en/development/routing.html#restful-routing) documentation
 for handling advanced routing scenarios not covered by this plugin.
 
 Read more at [MixerAPI.com](https://mixerapi.com).
@@ -46,8 +46,8 @@ public function bootstrap(): void
 
 ## AutoRouter
 
-Creating routes is already pretty easy, but AutoRouter makes building CRUD routes effortless. This is great 
-if you are just getting started with building APIs in CakePHP. 
+Creating routes is already pretty easy, but AutoRouter makes building CRUD routes effortless. This is great
+if you are just getting started with building APIs in CakePHP.
 
 In your `routes.php` simply add `\MixerApi\Rest\Lib\AutoRouter`:
 
@@ -60,7 +60,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 });
 ```
 
-This will add routes for CRUD controller actions (index, add, edit, view, and delete). If your controller does not have 
+This will add routes for CRUD controller actions (index, add, edit, view, and delete). If your controller does not have
 any CRUD methods, then the route will be skipped. AutoRouting works for plugins too:
 
 ```php
@@ -70,8 +70,8 @@ any CRUD methods, then the route will be skipped. AutoRouting works for plugins 
 
 ## Create Routes
 
-While AutoRouter makes life easy, it must scan your controllers to build RESTful resources. This has a slight 
-performance penalty. No worry, you can use `mixerapi:rest route create` to code your routes for you. This will write 
+While AutoRouter makes life easy, it must scan your controllers to build RESTful resources. This has a slight
+performance penalty. No worry, you can use `mixerapi:rest route create` to code your routes for you. This will write
 routes directly to your routes.php file.
 
 ```console
@@ -79,7 +79,7 @@ routes directly to your routes.php file.
 bin/cake mixerapi:rest route create
 ```
 
-Use `--prefix` to specify a prefix: 
+Use `--prefix` to specify a prefix:
 
 ```console
 bin/cake mixerapi:rest route create --prefix /api
@@ -95,10 +95,10 @@ bin/cake mixerapi:rest route create --plugin MyPlugin
 To perform a dry-run use the `--display` option:
 
 ```console
-bin/cake mixerapi:rest route create --display 
+bin/cake mixerapi:rest route create --display
 ```
 
-For non-CRUD routes, sub-resources, and advanced routing please reference the CakePHP 
+For non-CRUD routes, sub-resources, and advanced routing please reference the CakePHP
 [RESTful routing](https://book.cakephp.org/4/en/development/routing.html#restful-routing) documentation
 
 #### List Routes

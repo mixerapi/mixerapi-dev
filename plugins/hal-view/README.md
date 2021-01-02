@@ -1,8 +1,8 @@
 # MixerApi HAL View
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/hal-view.svg?style=flat-square)](https://packagist.org/packages/mixerapi/hal-view)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
-[![Build](https://github.com/mixerapi/hal-view/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/hal-view/actions)
-[![Coverage Status](https://coveralls.io/repos/github/mixerapi/hal-view/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/hal-view?branch=master)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
@@ -10,8 +10,8 @@
 !!! warning ""
     This is an alpha stage plugin.
 
-A Hypertext Application Language ([HAL+JSON](http://stateless.co/hal_specification.html)) View for CakePHP. This plugin 
-supports links, pagination, and embedded resources. Once setup any request with `application/hal+json` will be 
+A Hypertext Application Language ([HAL+JSON](http://stateless.co/hal_specification.html)) View for CakePHP. This plugin
+supports links, pagination, and embedded resources. Once setup any request with `application/hal+json` will be
 rendered by this plugin.
 
 ## Table of Contents
@@ -52,19 +52,19 @@ public function initialize(): void
 {
     parent::initialize();
     $this->loadComponent('RequestHandler');
-    // other logic... 
+    // other logic...
 }
 ```
 
 ## Usage
 
-For `_link.self.href` support you will need to implement `MixerApi\HalView\HalResourceInterface` on entities that you 
-want to expose as HAL resources. This informs the plugin that the Entity should be treated as a HAL resource and 
+For `_link.self.href` support you will need to implement `MixerApi\HalView\HalResourceInterface` on entities that you
+want to expose as HAL resources. This informs the plugin that the Entity should be treated as a HAL resource and
 provides the mapper with a `_link.self.href` URL.
 
 <details><summary>Example</summary>
   <p>
-  
+
 ```php
 <?php
 declare(strict_types=1);
@@ -153,7 +153,7 @@ public function view($id = null)
 </p>
 </details>
 
-If your Entity does not implement the interface it will still be returned as HAL resource when serialized, but minus 
+If your Entity does not implement the interface it will still be returned as HAL resource when serialized, but minus
 the `_links` property. Collection requests will work without this interface as well, example:
 
 ```php
@@ -226,7 +226,7 @@ public function index()
 </p>
 </details>
 
-If the Actor and Film entities were implementing `MixerApi\HalView\HalResourceInterface` then the example above would 
+If the Actor and Film entities were implementing `MixerApi\HalView\HalResourceInterface` then the example above would
 include the `_links` property for each serialized entity.
 
 Try it out for yourself:

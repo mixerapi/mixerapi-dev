@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/json-ld-view.svg?style=flat-square)](https://packagist.org/packages/mixerapi/json-ld-view)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
-[![Build](https://github.com/mixerapi/json-ld-view/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/json-ld-view/actions)
+[![Build](https://github.com/mixerapi/json-ld-view/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/mixerapi/json-ld-view/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/json-ld-view?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
@@ -13,7 +13,7 @@
 
 A [JSON-LD](https://json-ld.org/) View for CakePHP. Read more at [MixerAPI.com](https://mixerapi.com).
 
-## Installation 
+## Installation
 
 !!! info ""
     You can skip this step if MixerAPI is installed.
@@ -36,18 +36,18 @@ public function bootstrap(): void
 
 ## Setup
 
-Setup for this plugin is very easy. Just load the RequestHandler component and create a route for contexts and 
-vocab. Then create a `config/jsonld_config.php` config file (recommended) and implement JsonLdDataInterface on your 
+Setup for this plugin is very easy. Just load the RequestHandler component and create a route for contexts and
+vocab. Then create a `config/jsonld_config.php` config file (recommended) and implement JsonLdDataInterface on your
 entities.
 
 #### Config (recommended)
 
-Create a [config/jsonld_config](assets/jsonld_config.php). If you skip this step then the defaults listed in the 
+Create a [config/jsonld_config](assets/jsonld_config.php). If you skip this step then the defaults listed in the
 sample config will be used.
 
 #### RequestHandler
 
-Your controllers must be using the `RequestHandler` component. This is typically loaded in your `AppController`. In 
+Your controllers must be using the `RequestHandler` component. This is typically loaded in your `AppController`. In
 most cases this is already loaded.
 
 ```php
@@ -56,14 +56,14 @@ public function initialize(): void
 {
     parent::initialize();
     $this->loadComponent('RequestHandler');
-    // other logic... 
+    // other logic...
 }
 ```
 
 #### Routes
 
-The contexts route displays your JSON-LD schema for an entity, while the vocab route will display all entities and 
-additional metadata. 
+The contexts route displays your JSON-LD schema for an entity, while the vocab route will display all entities and
+additional metadata.
 
 ```php
 # config/routes.php
@@ -78,12 +78,12 @@ $routes->scope('/', function (RouteBuilder $builder) {
 });
 ```
 
-You should now be able see entities JSON-LD schema by browsing to `/contexts/{entity-name}`. For further customization 
+You should now be able see entities JSON-LD schema by browsing to `/contexts/{entity-name}`. For further customization
 you can copy the JsonLdController into your own project.
 
 #### Route Extension (optional)
 
-If you would like to request JSON-LD by extension (e.g. `/index.jsonld`) you'll need to set the extension in your 
+If you would like to request JSON-LD by extension (e.g. `/index.jsonld`) you'll need to set the extension in your
 `config/routes.php`, example:
 
 ```php
@@ -96,21 +96,21 @@ $routes->scope('/', function (RouteBuilder $builder) {
 
 ## Usage
 
-Once setup is complete request types of `application/ld+json` will automatically be rendered as JSON-LD. 
+Once setup is complete request types of `application/ld+json` will automatically be rendered as JSON-LD.
 
 ### Entity Schema
 
-This plugin will map basic types (int, string, decimal etc.) to their corresponding schema.org values. For instance, 
-`int` is mapped to `https://schema.org/Number`. You can improve the mappings by defining proper Validations on your 
-Table class. For instance, fields with the `email` rule will be mapped to `https://schema.org/email`. For a full list 
+This plugin will map basic types (int, string, decimal etc.) to their corresponding schema.org values. For instance,
+`int` is mapped to `https://schema.org/Number`. You can improve the mappings by defining proper Validations on your
+Table class. For instance, fields with the `email` rule will be mapped to `https://schema.org/email`. For a full list
 of default mappings refer to `MixerApi\JsonLdView\SchemaMapper`.
 
-You can further customize the schema mapping by implementing `MixerApi\JsonLdView\JsonLdDataInterface` on your 
+You can further customize the schema mapping by implementing `MixerApi\JsonLdView\JsonLdDataInterface` on your
 applications Entities.
 
 <details><summary>See the doc block comments in the example for additional insight:</summary>
   <p>
-  
+
 ```php
 # App/Model/Entity/Film.php
 class Film extends Entity implements JsonLdDataInterface
@@ -118,9 +118,9 @@ class Film extends Entity implements JsonLdDataInterface
     // ...other code
 
     /**
-     * This is the context URL that you defined in your routes during Setup. This is used to browse the schema 
+     * This is the context URL that you defined in your routes during Setup. This is used to browse the schema
      * definitions and appears as `@context` when displaying collection or item results
-     * 
+     *
      * @return string
      */
     public function getJsonLdContext(): string
@@ -130,7 +130,7 @@ class Film extends Entity implements JsonLdDataInterface
 
     /**
      * This is the Entities schema description and appears as `@type` when displaying collection or item results
-     * 
+     *
      * @return string
      */
     public function getJsonLdType(): string
@@ -140,7 +140,7 @@ class Film extends Entity implements JsonLdDataInterface
 
     /**
      * This is the Entities URL and appears as `@id` when displaying collection or item results
-     * 
+     *
      * @param EntityInterface $entity
      * @return string
      */
@@ -150,9 +150,9 @@ class Film extends Entity implements JsonLdDataInterface
     }
 
     /**
-     * You can define custom schemas here. These definitions take precedence and will appear when browsing to the 
+     * You can define custom schemas here. These definitions take precedence and will appear when browsing to the
      * entities context URL. You can simply return an empty array if you don't care to define a schema.
-     * 
+     *
      * @return \MixerApi\JsonLdView\JsonLdSchema[]
      */
     public function getJsonLdSchemas(): array
@@ -172,11 +172,11 @@ class Film extends Entity implements JsonLdDataInterface
 
 ### Collections
 
-We get the `@id` and `@context` properties because these Entities implement `JsonLdDataInterface`. This interface is 
-of course optional and data will return without it minus the aforementioned properties. Pagination data is added in 
+We get the `@id` and `@context` properties because these Entities implement `JsonLdDataInterface`. This interface is
+of course optional and data will return without it minus the aforementioned properties. Pagination data is added in
 the `view` property per the Hydra [PartialCollectionView](https://www.w3.org/community/hydra/wiki/Pagination)
  specification.
- 
+
 ```php
 #src/Controller/FilmsController.php
 public function index()
@@ -188,7 +188,7 @@ public function index()
     $this->set(compact('films'));
     $this->viewBuilder()->setOption('serialize', 'films');
 }
-``` 
+```
 
 <details><summary>Example:</summary>
   <p>
@@ -258,8 +258,8 @@ Output:
 
 ### Contexts
 
-Browsing to the contexts route will display information about that entity. To fine tune to the data you will need to 
-implement JsonLdDataInterface. Using the Film entity as an example, the context looks like this when browsing to 
+Browsing to the contexts route will display information about that entity. To fine tune to the data you will need to
+implement JsonLdDataInterface. Using the Film entity as an example, the context looks like this when browsing to
 `/contexts/Film`:
 
 ```json
@@ -285,7 +285,7 @@ implement JsonLdDataInterface. Using the Film entity as an example, the context 
 
 #### Vocab
 
-Any entities implementing the JsonLdDataInterface will appear when browsing to the route you created for vocab 
+Any entities implementing the JsonLdDataInterface will appear when browsing to the route you created for vocab
 (e.g. /vocab):
 
 <details><summary>Sample:</summary>
@@ -329,7 +329,7 @@ Any entities implementing the JsonLdDataInterface will appear when browsing to t
                 }
             ]
         }
-        // ...and other items 
+        // ...and other items
     ]
 }
 ```
