@@ -2,13 +2,13 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/exception-render.svg?style=flat-square)](https://packagist.org/packages/mixerapi/exception-render)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
-[![Build Status](https://travis-ci.org/mixerapi/exception-render.svg?branch=master)](https://travis-ci.org/mixerapi/exception-render)
-[![Coverage Status](https://coveralls.io/repos/github/mixerapi/exception-render/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/exception-render?branch=master)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
 
-!!! warning "" 
+!!! warning ""
     This is an alpha stage plugin.
 
 This plugin handles rendering entity validation errors and other exceptions for your API.
@@ -18,10 +18,10 @@ This plugin handles rendering entity validation errors and other exceptions for 
 
 Read more at [MixerAPI.com](https://mixerapi.com).
 
-## Installation 
+## Installation
 
-!!! tip "" 
-    You can skip this step if you have MixerApi installed. 
+!!! tip ""
+    You can skip this step if you have MixerApi installed.
 
 ```console
 composer require mixerapi/exception-render
@@ -55,9 +55,9 @@ In your `config/app.php` file change the default `exceptionRenderer`:
 
 ## Usage
 
-Define your Validations as normal in your Table classes and `MixerApiExceptionRenderer` handles the rest by attaching 
-a listener to the [afterMarshall](https://book.cakephp.org/4/en/orm/table-objects.html#aftermarshal) event which fires 
-when request data is merged into entities during patchEntity() or newEntity() calls. If a validation fails then a 
+Define your Validations as normal in your Table classes and `MixerApiExceptionRenderer` handles the rest by attaching
+a listener to the [afterMarshall](https://book.cakephp.org/4/en/orm/table-objects.html#aftermarshal) event which fires
+when request data is merged into entities during patchEntity() or newEntity() calls. If a validation fails then a
 `ValidationException` is thrown and rendered with an HTTP 422 status code.
 
 Example controller action:
@@ -123,8 +123,8 @@ try {
 
 ### Exceptions
 
-For non-validation based exceptions, even your projects own custom exceptions, the output is similar to CakePHP native 
-output with the addition of an exception attribute. For example, a `MethodNotAllowedException` would result in: 
+For non-validation based exceptions, even your projects own custom exceptions, the output is similar to CakePHP native
+output with the addition of an exception attribute. For example, a `MethodNotAllowedException` would result in:
 
 ```json
 {
@@ -135,7 +135,7 @@ output with the addition of an exception attribute. For example, a `MethodNotAll
 }
 ```
 
-If for instance you have a custom exception that is thrown, such as `InventoryExceededException`, you would see: 
+If for instance you have a custom exception that is thrown, such as `InventoryExceededException`, you would see:
 
 ```json
 {
@@ -146,7 +146,7 @@ If for instance you have a custom exception that is thrown, such as `InventoryEx
 }
 ```
 
-Providing an Exception name, in conjunction with the status code already provided by CakePHP, enables API clients 
+Providing an Exception name, in conjunction with the status code already provided by CakePHP, enables API clients
 to tailor their exception handling.
 
 ## Unit Tests

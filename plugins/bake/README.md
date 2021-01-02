@@ -1,17 +1,17 @@
 # MixerAPI Bake
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/bake.svg?style=flat-square)](https://packagist.org/packages/mixerapi/bake)
-[![Build](https://github.com/mixerapi/bake/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/bake)
-[![Coverage Status](https://coveralls.io/repos/github/mixerapi/bake/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/bake?branch=master)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-%3E%3D%204.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
 
-Bake RESTful CakePHP controllers in seconds with this API focused bake template. Read more at 
+Bake RESTful CakePHP controllers in seconds with this API focused bake template. Read more at
 [MixerAPI.com](https://mixerapi.com).
 
-## Installation 
+## Installation
 
 !!! note ""
     You can skip this step if MixerAPI is installed.
@@ -37,7 +37,7 @@ public function bootstrap(): void
 Add `--theme MixerApi/Bake` to your bake commands.
 
 Bake all your controllers:
- 
+
 ```console
 bin/cake bake controller all --theme MixerApi/Bake
 ```
@@ -48,7 +48,7 @@ Bake a single controller:
 bin/cake bake controller {ControllerName} --theme MixerApi/Bake
 ```
 
-Bake everything (theme only impacts controllers): 
+Bake everything (theme only impacts controllers):
 
 ```console
 bin/cake bake all --everything --theme MixerApi/Bake
@@ -56,7 +56,7 @@ bin/cake bake all --everything --theme MixerApi/Bake
 
 <details><summary>View sample controller</summary>
   <p>
-  
+
 ```php
 /**
  * Departments Controller
@@ -166,7 +166,7 @@ class DepartmentsController extends AppController
         throw new \Exception("Record not deleted");
     }
 }
-    
+
 ```
 </p>
 </details>
