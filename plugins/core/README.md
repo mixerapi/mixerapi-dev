@@ -15,3 +15,27 @@ Core library for easily sharing commonly used classes and utilities across Mixer
 ```bash
 composer require mixerapi/core
 ```
+
+## Event Listener Loader
+
+The Event Listener Loader will automatically load all listeners which implement `Cake\Event\EventListenerInterface`
+within a given namespace. Example:
+
+```php
+# src/Application.php
+use Cake\Http\BaseApplication;
+use MixerApi\Core\Event\EventListenerLoader;
+
+class Application extends BaseApplication
+{
+    public function bootstrap(): void
+    {
+        // ...other code
+        (new EventListenerLoader())->load();
+        // other code...
+    }
+}
+```
+
+The default behavior loads all listeners in `App\Event`. You can pass a different namespace argument
+as `load($namespace)` if your listeners are located elsewhere.
