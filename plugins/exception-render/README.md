@@ -148,3 +148,54 @@ If for instance you have a custom exception that is thrown, such as `InventoryEx
 
 Providing an Exception name, in conjunction with the status code already provided by CakePHP, enables API clients
 to tailor their exception handling.
+
+### Changing Error Messages
+
+ExceptionRender dispatches a `MixerApi.ExceptionRender.beforeRender` event that you can listen for to alter `viewVars`
+and `serialize` variables. Both are accessible via the `MixerApi\ExceptionRender\ErrorDecorator`.
+
+Example:
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace App\Event;
+
+use Cake\Event\EventListenerInterface;
+use MixerApi\ExceptionRender\ErrorDecorator;
+use MixerApi\ExceptionRender\MixerApiExceptionRenderer;
+
+class ExceptionRender implements EventListenerInterface
+{
+    public function implementedEvents(): array
+    {
+        return [
+            'MixerApi.ExceptionRender.beforeRender' => 'beforeRender'
+        ];
+    }
+
+    /**
+     * @param \Cake\Event\Event $event
+     */
+    public function beforeRender(\Cake\Event\Event $event)
+    {
+        $decorator = $event->getSubject();
+        $data = $event->getData();
+
+        if (!$decorator instanceof ErrorDecorator || !$data['exception'] instanceof MixerApiExceptionRenderer) {
+            return;
+        }
+
+        if (!$data['exception']->getError() instanceof \Authentication\Authenticator\UnauthenticatedException) {
+            return;
+        }
+
+        $viewVars = $decorator->getViewVars();
+        $viewVars['message'] = 'A custom unauthenticated message';
+        $decorator->setViewVars($viewVars);
+    }
+}
+```
+
+Read more about [Events](https://book.cakephp.org/4/en/core-libraries/events.html) in the official CakePHP documentation.
