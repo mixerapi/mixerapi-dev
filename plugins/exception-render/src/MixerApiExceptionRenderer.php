@@ -7,8 +7,11 @@ use Cake\Core\Configure;
 use Cake\Core\Exception\Exception as CakeException;
 use Cake\Error\Debugger;
 use Cake\Error\ExceptionRenderer;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
+use Throwable;
 
 /**
  * Exception Renderer.
@@ -100,6 +103,18 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             $serialize[] = 'file';
             $serialize[] = 'line';
         }
+
+        $decorator = new ErrorDecorator($viewVars, $serialize);
+        EventManager::instance()->dispatch(
+            new Event(
+                'MixerApi.ExceptionRender.beforeRender',
+                $decorator,
+                ['exception' => $this]
+            )
+        );
+        $viewVars = $decorator->getViewVars();
+        $serialize = $decorator->getSerialize();
+
         $this->controller->set($viewVars);
         $this->controller->viewBuilder()->setOption('serialize', $serialize);
 
@@ -109,5 +124,13 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         $this->controller->setResponse($response);
 
         return $this->_outputMessage($template);
+    }
+
+    /**
+     * @return \Throwable
+     */
+    public function getError(): Throwable
+    {
+        return $this->error;
     }
 }
