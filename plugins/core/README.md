@@ -12,7 +12,7 @@ Core library for easily sharing commonly used classes and utilities across Mixer
 
 ## Installation
 
-```bash
+```console
 composer require mixerapi/core
 ```
 
