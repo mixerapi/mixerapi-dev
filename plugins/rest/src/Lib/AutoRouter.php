@@ -40,19 +40,23 @@ class AutoRouter
         $resources = (new ResourceScanner($this->namespace))->getControllerDecorators();
 
         foreach ($resources as $resource) {
-            if (!$resource->hasCrud()) {
+            $routeNames = $resource->findCrudRoutes();
+            if (empty($routeNames)) {
                 continue;
             }
-            $paths = $resource->getPaths($this->namespace);
 
+            $paths = $resource->getPaths($this->namespace);
             if (empty($paths)) {
-                $this->builder->resources($resource->getResourceName());
+                $this->builder->resources($resource->getResourceName(), [
+                    'only' => $routeNames,
+                ]);
                 continue;
             }
 
             $this->builder->resources($resource->getResourceName(), [
                 'path' => $resource->getPathTemplate($this->namespace),
                 'prefix' => end($paths),
+                'only' => $routeNames,
             ]);
         }
     }
