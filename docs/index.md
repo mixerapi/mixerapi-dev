@@ -32,7 +32,7 @@ configuration files.
 
 <!-- MixerAPI can be setup using an app skeleton that contains a docker-compose setup. -->
 You can also install via composer into your existing (or new) project. Read the installation guide to get started and
-getting started page afterwards.
+workflow page afterwards.
 
 !!! note ""
 <!--

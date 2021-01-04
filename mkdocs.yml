@@ -7,14 +7,23 @@ plugins:
 - search
 - exclude:
     glob:
-    - plugins/bake/vendor/*
-    - plugins/collection-view/vendor/*
-    - plugins/core/vendor/*
-    - plugins/exception-render/vendor/*
-    - plugins/hal-view/vendor/*
-    - plugins/json-ld-view/vendor/*
-    - plugins/mixerapi/vendor/*
-    - plugins/rest/vendor/*
+    - vendor/*
+    - tmp/*
+    - plugins/bake/webroot/*
+    - plugins/bake/tests/*
+    - plugins/collection-view/webroot/*
+    - plugins/collection-view/tests/*
+    - plugins/core/*
+    - plugins/exception-render/webroot/*
+    - plugins/exception-render/tests/*
+    - plugins/hal-view/webroot/*
+    - plugins/hal-view/tests/*
+    - plugins/json-ld-view/webroot/*
+    - plugins/json-ld-view/tests/*
+    - plugins/mixerapi/webroot/*
+    - plugins/mixerapi/tests/*
+    - plugins/rest/webroot/*
+    - plugins/rest/tests/*
 site_description: MixerAPI streamlines development of RESTful APIs for your CakePHP
   project.
 repo_url: https://github.com/mixerapi/mixerapi
@@ -36,6 +45,7 @@ nav:
 - Install: /install
 - Workflow: /workflow
 - Baking Controllers: /plugins/bake
+- Event Listeners: /event-listeners
 - Exception Rendering: /plugins/exception-render
 - OpenAPI (Swagger): /cakephp-swagger-bake
 - Response Formats:
