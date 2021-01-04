@@ -46,6 +46,10 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             $code = $this->getHttpCode($exception);
         }
 
+        if ($code < 400) {
+            $code = 500;
+        }
+
         $method = $this->_method($exception);
         $template = $this->_template($exception, $method, $code);
         $this->clearOutput();

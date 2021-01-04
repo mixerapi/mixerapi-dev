@@ -44,8 +44,8 @@ class EntityValidationListener
         }
 
         throw new ValidationException(
-            sprintf('Error saving resource `%s`', $name),
-            $entity
+            $entity,
+            sprintf('Error saving resource `%s`', $name)
         );
     }
 }
