@@ -180,10 +180,10 @@ class ExceptionRender implements EventListenerInterface
      */
     public function beforeRender(\Cake\Event\Event $event)
     {
-        $decorator = $event->getSubject();
+        $errorDecorator = $event->getSubject();
         $data = $event->getData();
 
-        if (!$decorator instanceof ErrorDecorator || !$data['exception'] instanceof MixerApiExceptionRenderer) {
+        if (!$errorDecorator instanceof ErrorDecorator || !$data['exception'] instanceof MixerApiExceptionRenderer) {
             return;
         }
 
@@ -191,9 +191,9 @@ class ExceptionRender implements EventListenerInterface
             return;
         }
 
-        $viewVars = $decorator->getViewVars();
+        $viewVars = $errorDecorator->getViewVars();
         $viewVars['message'] = 'A custom unauthenticated message';
-        $decorator->setViewVars($viewVars);
+        $errorDecorator->setViewVars($viewVars);
     }
 }
 ```
