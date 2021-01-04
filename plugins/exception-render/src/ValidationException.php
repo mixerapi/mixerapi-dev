@@ -14,15 +14,15 @@ class ValidationException extends Exception
     protected $_defaultCode = 422;
 
     /**
-     * @var \Cake\Datasource\EntityInterface
+     * @var \Cake\Datasource\EntityInterface|null
      */
     private $entity;
 
     /**
-     * @param string|null $message a custom message, otherwise `Error saving resource` is used
      * @param \Cake\Datasource\EntityInterface $entity EntityInterface
+     * @param string|null $message a custom message, otherwise `Error saving resource` is used
      */
-    public function __construct(?string $message = null, EntityInterface $entity)
+    public function __construct(?EntityInterface $entity = null, ?string $message = null)
     {
         $this->entity = $entity;
 
@@ -35,6 +35,10 @@ class ValidationException extends Exception
     public function getErrors(): array
     {
         $return = [];
+
+        if ($this->entity === null) {
+            return $return;
+        }
 
         foreach ($this->entity->getErrors() as $propertyName => $propertyErrors) {
             $property = ['propertyPath' => $propertyName];
