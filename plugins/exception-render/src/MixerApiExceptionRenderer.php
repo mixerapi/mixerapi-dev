@@ -104,16 +104,16 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             $serialize[] = 'line';
         }
 
-        $decorator = new ErrorDecorator($viewVars, $serialize);
+        $errorDecorator = new ErrorDecorator($viewVars, $serialize);
         EventManager::instance()->dispatch(
             new Event(
                 'MixerApi.ExceptionRender.beforeRender',
-                $decorator,
+                $errorDecorator,
                 ['exception' => $this]
             )
         );
-        $viewVars = $decorator->getViewVars();
-        $serialize = $decorator->getSerialize();
+        $viewVars = $errorDecorator->getViewVars();
+        $serialize = $errorDecorator->getSerialize();
 
         $this->controller->set($viewVars);
         $this->controller->viewBuilder()->setOption('serialize', $serialize);
