@@ -16,7 +16,7 @@ Core library for easily sharing commonly used classes and utilities across Mixer
 composer require mixerapi/core
 ```
 
-## Event Listener Loader
+### Event Listener Loader
 
 The Event Listener Loader will automatically load all listeners which implement `Cake\Event\EventListenerInterface`
 within a given namespace. Example:
@@ -39,3 +39,14 @@ class Application extends BaseApplication
 
 The default behavior loads all listeners in `App\Event`. You can pass a different namespace argument
 as `load($namespace)` if your listeners are located elsewhere.
+
+### Namespace Utility
+
+Returns one or more classes in a given namespace.
+
+```php
+use MixerApi\Core\Utility\NamespaceUtility;
+
+$controllers = NamespaceUtility::findClasses('\App\Controller');
+$controller = NamespaceUtility::findClasses('\App\Controller', 'ActorsController');
+```
