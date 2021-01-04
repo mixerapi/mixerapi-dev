@@ -2,6 +2,7 @@
 ##########################
 /mixerapi_dev_test
 /src/
+/coverage-reports/
 
 # MKDOCS                 #
 ##########################
