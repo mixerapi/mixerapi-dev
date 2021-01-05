@@ -1,7 +1,7 @@
 # MIXERAPI               #
 ##########################
 /mixerapi_dev_test
-/src/
+/src/Controller/*
 /coverage-reports/
 
 # MKDOCS                 #
