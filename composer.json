@@ -18,11 +18,12 @@
         "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
-        "ext-sqlite3": "*",
         "ext-mysqli": "*",
+        "ext-sqlite3": "*",
         "cakephp/bake": "^2.0.3",
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.1",
+        "dereuromark/cakephp-ide-helper": "^1.10",
         "josegonzalez/dotenv": "^3.2",
         "phpmd/phpmd": "^2.9",
         "phpstan/phpstan": "^0.12.64",
