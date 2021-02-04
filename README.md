@@ -87,6 +87,9 @@ Runs static code analysis and unit tests.
 composer analyze
 ```
 
+Git pre-commit hooks run these analyzers via [grumphp](https://github.com/phpro/grumphp). You can run grumphp
+manually via `vendor/bin/grumphp run`.
+
 ## Documentation
 
 See the official documentation at [MixerAPI.com](https://mixerapi.com).
