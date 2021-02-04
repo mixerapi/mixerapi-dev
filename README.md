@@ -87,8 +87,12 @@ Runs static code analysis and unit tests.
 composer analyze
 ```
 
-Git pre-commit hooks run these analyzers via [grumphp](https://github.com/phpro/grumphp). You can run grumphp
-manually via `vendor/bin/grumphp run`.
+Git pre-commit hooks run these analyzers via [grumphp](https://github.com/phpro/grumphp). To set up:
+
+```console
+vendor/bin/grumphp git:init
+vendor/bin/grumphp run
+```
 
 ## Documentation
 
