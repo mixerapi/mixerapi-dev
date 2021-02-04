@@ -23,6 +23,7 @@
         "cakephp/bake": "^2.0.3",
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.1",
+        "dereuromark/cakephp-ide-helper": "^1.10",
         "josegonzalez/dotenv": "^3.2",
         "phpmd/phpmd": "^2.9",
         "phpro/grumphp": "^1.3",
