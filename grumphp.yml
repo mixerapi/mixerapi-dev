@@ -1,0 +1,21 @@
+grumphp:
+    tasks:
+      
+      phpcs:
+        standard: "vendor/cakephp/cakephp-codesniffer/CakePHP"
+        whitelist_patterns:
+          - /^plugins\/(.*)/
+        ignore_patterns:
+          - "*/tests/*"
+          - "*/assets/*"
+          - "*/config/*"
+
+      phpunit: ~
+
+      phpstan:
+        configuration: phpstan.neon
+        ignore_patterns:
+          - test
+          - bin
+          - config
+          - webroot
