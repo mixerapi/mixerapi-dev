@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace MixerApi\ExceptionRender;
 
 use Cake\Core\Configure;
-use Cake\Core\Exception\Exception as CakeException;
+use Cake\Core\Exception\CakeException;
 use Cake\Error\Debugger;
 use Cake\Error\ExceptionRenderer;
 use Cake\Event\Event;
@@ -40,15 +40,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     public function render(): ResponseInterface
     {
         $exception = $this->error;
-        try {
-            $code = $exception->getCode();
-        } catch (\Exception $e) {
-            $code = $this->getHttpCode($exception);
-        }
-
-        if ($code < 400) {
-            $code = 500;
-        }
+        $code = $this->getHttpCode($exception);
 
         $method = $this->_method($exception);
         $template = $this->_template($exception, $method, $code);
@@ -82,22 +74,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             $viewVars['message'] = $this->error->getMessage();
         }
 
-        $isDebug = Configure::read('debug');
-        if ($isDebug) {
-            $trace = (array)Debugger::formatTrace($exception->getTrace(), [
-                'format' => 'array',
-                'args' => false,
-            ]);
-            $origin = [
-                'file' => $exception->getFile() ?: 'null',
-                'line' => $exception->getLine() ?: 'null',
-            ];
-            // Traces don't include the origin file/line.
-            array_unshift($trace, $origin);
-            $viewVars['trace'] = $trace;
-            $viewVars += $origin;
-        }
-
+        $viewVars = $this->debugViewVars($exception, $viewVars);
         $serialize = array_keys($viewVars);
 
         $errorDecorator = new ErrorDecorator($viewVars, $serialize);
@@ -114,7 +91,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         $this->controller->set($viewVars);
         $this->controller->viewBuilder()->setOption('serialize', $serialize);
 
-        if ($exception instanceof CakeException && $isDebug) {
+        if ($exception instanceof CakeException && Configure::read('debug')) {
             $this->controller->set($exception->getAttributes());
         }
 
@@ -129,5 +106,36 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     public function getError(): Throwable
     {
         return $this->error;
+    }
+
+    /**
+     * Updates the viewVars with debug data if debug is enabled.
+     *
+     * @param \Cake\Core\Exception\CakeException $exception instance of Cake Core Exception
+     * @param array $viewVars the current viewVars array
+     * @return array
+     */
+    private function debugViewVars(CakeException $exception, array $viewVars): array
+    {
+        if (!Configure::read('debug')) {
+            return $viewVars;
+        }
+
+        $trace = (array)Debugger::formatTrace($exception->getTrace(), [
+            'format' => 'array',
+            'args' => false,
+        ]);
+
+        $origin = [
+            'file' => $exception->getFile() ?: 'null',
+            'line' => $exception->getLine() ?: 'null',
+        ];
+
+        // Traces don't include the origin file/line.
+        array_unshift($trace, $origin);
+        $viewVars['trace'] = $trace;
+        $viewVars += $origin;
+
+        return $viewVars;
     }
 }

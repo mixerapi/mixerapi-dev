@@ -40,6 +40,8 @@ class ControllerTest extends TestCase
             'last_name' => '',
         ]);
 
+        $this->assertEquals(422, $this->_response->getStatusCode());
+
         $body = (string)$this->_response->getBody();
         $object = json_decode($body);
         $this->assertEquals('ValidationException', $object->exception);
