@@ -77,17 +77,9 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             'code' => $code,
         ];
 
-        $serialize = [
-            'exception',
-            'message',
-            'url',
-            'code',
-        ];
-
         if ($this->error instanceof ValidationException) {
             $viewVars['violations'] = $this->error->getErrors();
             $viewVars['message'] = $this->error->getMessage();
-            array_push($serialize, 'violations');
         }
 
         $isDebug = Configure::read('debug');
@@ -104,9 +96,9 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             array_unshift($trace, $origin);
             $viewVars['trace'] = $trace;
             $viewVars += $origin;
-            $serialize[] = 'file';
-            $serialize[] = 'line';
         }
+
+        $serialize = array_keys($viewVars);
 
         $errorDecorator = new ErrorDecorator($viewVars, $serialize);
         EventManager::instance()->dispatch(
@@ -125,6 +117,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         if ($exception instanceof CakeException && $isDebug) {
             $this->controller->set($exception->getAttributes());
         }
+
         $this->controller->setResponse($response);
 
         return $this->_outputMessage($template);
