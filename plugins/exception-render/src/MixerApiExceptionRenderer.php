@@ -111,13 +111,13 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     /**
      * Updates the viewVars with debug data if debug is enabled.
      *
-     * @param \Cake\Core\Exception\CakeException $exception instance of Cake Core Exception
+     * @param mixed $exception instance of Cake Core Exception or Error
      * @param array $viewVars the current viewVars array
      * @return array
      */
-    private function debugViewVars(CakeException $exception, array $viewVars): array
+    private function debugViewVars($exception, array $viewVars): array
     {
-        if (!Configure::read('debug')) {
+        if (!Configure::read('debug') || !$exception instanceof CakeException) {
             return $viewVars;
         }
 
