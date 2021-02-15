@@ -30,23 +30,25 @@ configuration files.
 
 ## Install
 
-<!-- MixerAPI can be setup using an app skeleton that contains a docker-compose setup. -->
-You can also install via composer into your existing (or new) project. Read the installation guide to get started and
-workflow page afterwards.
+You can install MixerAPI with composer into a new or existing project or use the application skeleton.
 
-!!! note ""
-<!--
-    Skip the guide and get started with the application skeleton
-    ```console
-    composer create-project -s dev --prefer-dist mixerapi/app
-    ```
-    or composer
--->
-    ```console
-    composer require mixerapi/mixerapi
-    ```
+#### App Skeleton
 
-[Install Guide](/install){: .md-button .md-button--primary }
+The application skeleton is a dockerized template to get your going quickly. Fork and clone
+[mixerapi/app](https://github.com/mixerapi/app) to get started.
+
+[Skeleton Install](https://github.com/mixerapi/app){: .md-button .md-button--primary }
+[Workflow](/workflow){: .md-button }
+
+#### Composer
+
+Simply run composer and follow the steps in the install guide.
+
+```console
+composer require mixerapi/mixerapi
+```
+
+[Composer Install](/install){: .md-button .md-button--primary }
 [Workflow](/workflow){: .md-button }
 
 ## Contributing

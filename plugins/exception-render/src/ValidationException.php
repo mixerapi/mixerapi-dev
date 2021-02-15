@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace MixerApi\ExceptionRender;
 
-use Cake\Core\Exception\Exception;
 use Cake\Datasource\EntityInterface;
+use Cake\Http\Exception\HttpException;
 
-class ValidationException extends Exception
+class ValidationException extends HttpException
 {
     /**
      * @inheritDoc
@@ -24,9 +24,12 @@ class ValidationException extends Exception
      */
     public function __construct(?EntityInterface $entity = null, ?string $message = null)
     {
-        $this->entity = $entity;
+        parent::__construct(
+            $message ?? 'Error saving resource',
+            $this->_defaultCode
+        );
 
-        parent::__construct($message ?? 'Error saving resource', null, null);
+        $this->entity = $entity;
     }
 
     /**

@@ -111,15 +111,46 @@ class ReflectedControllerDecorator
      */
     public function hasCrud(): bool
     {
-        $crud = ['index','view','add','update','delete'];
+        $crud = ['index','view','add','edit','delete'];
+        $result = array_filter($this->getMethods(), function (ReflectionMethod $reflectionMethod) use ($crud) {
+            return in_array($reflectionMethod->getName(), $crud);
+        });
 
-        foreach ($this->getMethods() as $method) {
-            if (in_array($method->getName(), $crud)) {
-                return true;
+        return count($result) > 0;
+    }
+
+    /**
+     * Returns a list of CRUD routes
+     *
+     * @return string[]
+     */
+    public function findCrudRoutes(): array
+    {
+        $return = [];
+
+        $actionRoutes = [
+            'index' => 'index',
+            'view' => 'view',
+            'add' => 'create',
+            'edit' => 'update',
+            'delete' => 'delete',
+        ];
+
+        $result = array_filter(
+            $this->getMethods(),
+            function (ReflectionMethod $reflectionMethod) use ($actionRoutes) {
+                return array_key_exists($reflectionMethod->getName(), $actionRoutes);
+            }
+        );
+
+        $actions = array_column($result, 'name');
+        foreach ($actionRoutes as $action => $route) {
+            if (in_array($action, $actions)) {
+                $return[] = $route;
             }
         }
 
-        return false;
+        return $return;
     }
 
     /**
