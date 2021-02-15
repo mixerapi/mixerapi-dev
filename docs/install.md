@@ -28,7 +28,7 @@ composer require mixerapi/mixerapi
 bin/cake plugin load MixerApi
 ```
 
-Running `plugin load MixerApi` simply adds the plugin to your `Application::boostrap` like so:
+Running `plugin load MixerApi` simply adds the plugin to your `Application::bootstrap()` like so:
 
 ```php
 # src/Application.php
