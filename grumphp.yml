@@ -1,6 +1,6 @@
 grumphp:
     tasks:
-      
+
       phpcs:
         standard: "vendor/cakephp/cakephp-codesniffer/CakePHP"
         whitelist_patterns:
@@ -19,3 +19,4 @@ grumphp:
           - bin
           - config
           - webroot
+          - assets
