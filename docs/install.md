@@ -1,25 +1,5 @@
 # Install
 
-<!-- The easiest way to install MixerAPI is through the app skeleton.
-You may also install via composer into your existing CakePHP project or install the individual plugins as-needed. The
-documentation includes steps for installing plugins separately. For either method you will need
-[composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos), which is dependency manager for PHP.
-
-## App Skeleton
-
-Installing from the application skeleton is great if you are starting your API from scratch. It will install the
-latest version of CakePHP and MixerAPI. The App Skeleton also comes with an optional
-[docker-compose](https://docs.docker.com/compose/) setup.
-
-```console
-composer create-project -s dev --prefer-dist mixerapi/app
-```
-
-## Composer
-
-If you have an existing application or feel comfortable doing things yourself then you can install with composer.
--->
-
 MixerAPI can be installed in your existing CakePHP project using
 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
 
@@ -41,7 +21,13 @@ public function bootstrap(): void
 
 ## Setup
 
-There are just a few steps to perform after installation.
+For new projects the installer:
+
+```console
+bin/cake mixerapi install
+```
+
+For existing projects the steps below are recommended.
 
 ### OpenAPI (Swagger)
 

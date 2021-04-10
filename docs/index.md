@@ -46,11 +46,9 @@ Simply run composer and follow the steps in the install guide.
 
 ```console
 composer require mixerapi/mixerapi
-bin/cake plugin load MixerApi
-bin/cake mixerapi install
 ```
 
-[Composer Install](/install){: .md-button .md-button--primary }
+[Install](/install){: .md-button .md-button--primary }
 [Workflow](/workflow){: .md-button }
 
 ## Contributing
