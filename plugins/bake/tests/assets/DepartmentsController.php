@@ -52,6 +52,7 @@ class DepartmentsController extends AppController
      *
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
     public function add()
@@ -75,6 +76,7 @@ class DepartmentsController extends AppController
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
     public function edit($id = null)

@@ -26,6 +26,9 @@ class BakeTest extends TestCase
      */
     private const CONTROLLER_FILE = 'DepartmentsController.php';
 
+    /**
+     * @var string controller path
+     */
     private const CONTROLLER_PATH = APP . 'Controller' . DS;
 
     public function setUp() : void
@@ -56,6 +59,9 @@ class BakeTest extends TestCase
         $this->assertOutputContains('<success>Wrote</success>');
         $this->assertOutputContains(self::CONTROLLER_FILE);
         $this->assertFileExists(self::CONTROLLER_PATH . self::CONTROLLER_FILE);
-        $this->assertFileEquals($assets . self::CONTROLLER_FILE, self::CONTROLLER_PATH . self::CONTROLLER_FILE);
+        $this->assertFileEquals(
+            $assets . self::CONTROLLER_FILE,
+            self::CONTROLLER_PATH . self::CONTROLLER_FILE
+        );
     }
 }
