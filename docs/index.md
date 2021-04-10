@@ -8,7 +8,7 @@ title: MixerAPI - Streamline RESTful API Development
     This is an alpha stage library
 
 Streamline development of modern RESTful APIs for your teams CakePHP project. Designed around a component-based
-architecture, MixerAPI enables developers to pick and choose the functionality they need for developing REST/HATEOAS APIs.
+architecture, MixerAPI enables developers to pick and choose the functionality they need for developing REST APIs.
 
 !!! note ""
     Check out the live demo and browse the demo source code for examples.
@@ -46,6 +46,8 @@ Simply run composer and follow the steps in the install guide.
 
 ```console
 composer require mixerapi/mixerapi
+bin/cake plugin load MixerApi
+bin/cake mixerapi install
 ```
 
 [Composer Install](/install){: .md-button .md-button--primary }
