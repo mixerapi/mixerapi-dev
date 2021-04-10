@@ -21,7 +21,7 @@ public function bootstrap(): void
 
 ## Setup
 
-For new projects the installer:
+For new projects the installer is the easiest way to get started:
 
 ```console
 bin/cake mixerapi install
