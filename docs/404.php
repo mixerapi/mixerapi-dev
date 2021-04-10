@@ -6,6 +6,7 @@
 $uri = getenv('REQUEST_URI');
 $pieces = explode('/', $uri);
 array_shift($pieces);
+array_shift($pieces);
 
 $dir = reset($pieces);
 $packages = [
@@ -43,5 +44,6 @@ if ($dir == 'cakephp-swagger-bake') {
     header("Location: $url",TRUE,302);
     exit(0);
 }
-
+//$dir = strip_tags($dir);
+//header("X-MixerApi-Dir: $dir");
 header("Location: /404.html",TRUE,302);
