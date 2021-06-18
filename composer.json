@@ -79,7 +79,8 @@
         "analyze": [
             "@test",
             "@phpcs",
-            "@phpstan"
+            "@phpstan",
+            "@phpmd"
         ],
         "test": "phpunit --colors=always",
         "phpcs":  "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
