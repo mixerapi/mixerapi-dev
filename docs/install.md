@@ -1,5 +1,8 @@
 # Install
 
+!!! info ""
+Checkout the application skeleton https://github.com/mixerapi/app
+
 MixerAPI can be installed in your existing CakePHP project using
 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
 
