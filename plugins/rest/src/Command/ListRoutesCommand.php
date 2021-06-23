@@ -17,6 +17,8 @@ use MixerApi\Rest\Lib\Route\RouteScanner;
  */
 class ListRoutesCommand extends Command
 {
+    public const NO_ROUTES_FOUND = 'No routes were found';
+
     /**
      * @param \Cake\Console\ConsoleOptionParser $parser ConsoleOptionParser
      * @return \Cake\Console\ConsoleOptionParser
@@ -26,7 +28,7 @@ class ListRoutesCommand extends Command
         $parser
             ->setDescription('Lists your applications RESTful routes');
 
-        if (defined('TEST_APP')) {
+        if (defined('IS_TEST')) {
             $parser->addOption('reloadRoutes', [
                 'help' => 'Clears runtime routes, for testing only',
             ]);
@@ -62,7 +64,7 @@ class ListRoutesCommand extends Command
 
         if (empty($routes)) {
             $io->out();
-            $io->out('<warning> > No routes were found</warning>');
+            $io->out('<warning> > ' . self::NO_ROUTES_FOUND . '</warning>');
             $io->out('<warning> > Do you have any routes defined in `config/routes.php`?</warning>');
             $io->out();
             $this->abort();
