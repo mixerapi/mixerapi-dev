@@ -2,10 +2,9 @@
 
 namespace MixerApi\Rest\Test\TestCase\Command;
 
-use Cake\Routing\Route\Route;
-use Cake\Routing\Router;
 use Cake\TestSuite\ConsoleIntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use MixerApi\Rest\Command\ListRoutesCommand;
 
 class ListRoutesCommandTest extends TestCase
 {
@@ -22,7 +21,7 @@ class ListRoutesCommandTest extends TestCase
         $this->useCommandRunner();
     }
 
-    public function testExecute()
+    public function test_execute()
     {
         $this->exec('mixerapi:rest route list');
         $this->assertOutputContains('actors:index', 'route name');
@@ -31,7 +30,7 @@ class ListRoutesCommandTest extends TestCase
         $this->assertOutputContains('Actors', 'controller');
     }
 
-    public function testExecutePlugin()
+    public function test_execute_plugin()
     {
         $this->exec('mixerapi:rest route list --plugin App');
         $this->assertOutputContains('actors:index', 'route name');
@@ -40,9 +39,10 @@ class ListRoutesCommandTest extends TestCase
         $this->assertOutputContains('Actors', 'controller');
     }
 
-    public function testExecuteRoutesNotFound()
+    public function test_execute_routes_not_found()
     {
         $this->exec('mixerapi:rest route list --reloadRoutes');
+        $this->assertOutputContains(ListRoutesCommand::NO_ROUTES_FOUND);
         $this->assertExitError();
     }
 }
