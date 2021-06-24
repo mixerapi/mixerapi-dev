@@ -2,12 +2,6 @@
 
 namespace MixerApi\CollectionView\Test\TestCase\View;
 
-use Cake\Controller\Component\PaginatorComponent;
-use Cake\Controller\ComponentRegistry;
-use Cake\Controller\Controller;
-use Cake\Datasource\FactoryLocator;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use MixerApi\CollectionView\Configuration;
@@ -34,38 +28,15 @@ class XmlCollectionViewTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function testCollection()
+    public function test_collection()
     {
-        $request = new ServerRequest([
-            'url' => 'actors',
-            'params' => [
-                'plugin' => null,
-                'controller' => 'Actors',
-                'action' => 'index',
-            ]
-        ]);
-        $request = $request->withEnv('HTTP_ACCEPT', 'application/xml, text/plain, */*');
-        Router::setRequest($request);
-
-        $controller = new Controller($request, new Response(), 'Actors');
-        $controller->modelClass = 'Actors';
-        $registry = new ComponentRegistry($controller);
-
-        $paginator = new PaginatorComponent($registry);
-
-        $actorTable = FactoryLocator::get('Table')->get('Actors');
-        $actors = $paginator->paginate($actorTable, [
-            'contain' => ['Films'],
-            'limit' => 2
-        ]);
-
-        $controller->set([
-            'actors' => $actors,
-        ]);
+        $controller = (new ControllerFactory())->build();
 
         $controller->viewBuilder()
             ->setClassName('MixerApi/CollectionView.XmlCollection')
-            ->setOptions(['serialize' => 'actors']);
+            ->setOptions([
+                'serialize' => 'actors'
+            ]);
         $View = $controller->createView();
         $output = $View->render();
 
@@ -82,5 +53,76 @@ class XmlCollectionViewTest extends TestCase
 
         $actor = $simpleXml->data[0];
         $this->assertInstanceOf(\SimpleXMLElement::class, $actor->films);
+    }
+
+    public function test_collection_serialize_array_items_one()
+    {
+        $controller = (new ControllerFactory())->build();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/CollectionView.XmlCollection')
+            ->setOptions([
+                'serialize' => ['actors']
+            ]);
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $simpleXml = simplexml_load_string($output);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $simpleXml);
+
+        $this->assertEquals(2, (int)$simpleXml->collection->count);
+        $this->assertEquals(20, (int)$simpleXml->collection->total);
+        $this->assertEquals('/actors', $simpleXml->collection->url);
+        $this->assertEquals('/?page=2', $simpleXml->collection->next);
+        $this->assertEquals('/?page=10', $simpleXml->collection->last);
+
+        $actor = $simpleXml->data[0];
+        $this->assertInstanceOf(\SimpleXMLElement::class, $actor->films);
+    }
+
+    public function test_collection_serialize_array_items_two()
+    {
+        $controller = (new ControllerFactory())->build();
+
+        $controller->viewBuilder()
+            ->setVars([
+                'actors' => $controller->viewBuilder()->getVar('actors'),
+                'other_actors' => $controller->viewBuilder()->getVar('actors')
+            ])
+            ->setClassName('MixerApi/CollectionView.XmlCollection')
+            ->setOptions([
+                'serialize' => ['actors', 'other_actors']
+            ]);
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $simpleXml = simplexml_load_string($output);
+
+        $this->assertTrue(isset($simpleXml->actors));
+        $this->assertTrue(isset($simpleXml->other_actors));
+    }
+
+    public function test_collection_serialize_is_empty()
+    {
+        $controller = (new ControllerFactory())->build();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/CollectionView.XmlCollection')
+            ->setOptions([
+                'serialize' => []
+            ]);
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $simpleXml = simplexml_load_string($output);
+
+        $this->assertInstanceOf(\SimpleXMLElement::class, $simpleXml);
+        $this->assertEmpty(get_object_vars($simpleXml));
     }
 }

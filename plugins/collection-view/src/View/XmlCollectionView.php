@@ -7,9 +7,6 @@ use Cake\Core\Configure;
 use Cake\View\SerializedView;
 use MixerApi\CollectionView\Serializer;
 
-/**
- * An XML collection view
- */
 class XmlCollectionView extends SerializedView
 {
     /**

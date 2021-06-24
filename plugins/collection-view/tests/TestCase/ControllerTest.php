@@ -24,7 +24,7 @@ class ControllerTest extends TestCase
         static::setAppNamespace('MixerApi\CollectionView\Test\App');
     }
 
-    public function testJson()
+    public function test_json()
     {
         $this->get('/actors.json');
         $body = (string)$this->_response->getBody();
@@ -35,7 +35,7 @@ class ControllerTest extends TestCase
         $this->assertNotEmpty($object->data);
     }
 
-    public function testXml()
+    public function test_xml()
     {
         $this->get('/actors.xml');
         $body = (string)$this->_response->getBody();

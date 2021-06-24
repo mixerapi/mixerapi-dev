@@ -28,7 +28,7 @@ class SerializerTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function testAsJson()
+    public function test_as_json()
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
@@ -73,6 +73,7 @@ class SerializerTest extends TestCase
 
         $json = $jsonSerializer->asJson(JSON_PRETTY_PRINT);
         $this->assertIsString($json);
+        $this->assertIsArray($jsonSerializer->getData());
 
         $obj = json_decode($json);
         $this->assertIsObject($obj);
@@ -80,7 +81,7 @@ class SerializerTest extends TestCase
         $this->assertCount(1, $obj->data);
     }
 
-    public function testAsXml()
+    public function test_as_xml()
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
