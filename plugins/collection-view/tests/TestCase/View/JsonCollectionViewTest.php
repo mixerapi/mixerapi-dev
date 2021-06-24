@@ -2,12 +2,6 @@
 
 namespace MixerApi\CollectionView\Test\TestCase\View;
 
-use Cake\Controller\Component\PaginatorComponent;
-use Cake\Controller\ComponentRegistry;
-use Cake\Controller\Controller;
-use Cake\Datasource\FactoryLocator;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use MixerApi\CollectionView\Configuration;
@@ -34,40 +28,46 @@ class JsonCollectionViewTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function testCollection()
+    public function test_collection()
     {
-        $request = new ServerRequest([
-            'url' => 'actors',
-            'params' => [
-                'plugin' => null,
-                'controller' => 'Actors',
-                'action' => 'index',
-            ]
-        ]);
-        $request = $request->withEnv('HTTP_ACCEPT', 'application/json, text/plain, */*');
-        Router::setRequest($request);
-
-        $controller = new Controller($request, new Response(), 'Actors');
-        $controller->modelClass = 'Actors';
-        $registry = new ComponentRegistry($controller);
-
-        $paginator = new PaginatorComponent($registry);
-
-        $actorTable = FactoryLocator::get('Table')->get('Actors');
-        $actors = $paginator->paginate($actorTable, [
-            'contain' => ['Films'],
-            'limit' => 2
-        ]);
-
-        $controller->set([
-            'actors' => $actors,
-        ]);
+        $controller = (new ControllerFactory())->build();
 
         $controller->viewBuilder()
             ->setClassName('MixerApi/CollectionView.JsonCollection')
-            ->setOptions(['serialize' => 'actors']);
-        $View = $controller->createView();
-        $output = $View->render();
+            ->setOptions([
+                'serialize' => 'actors'
+            ]);
+        $view = $controller->createView();
+        $output = $view->render();
+
+        $this->assertIsString($output);
+
+        $object = json_decode($output);
+
+        $this->assertIsObject($object);
+
+        $this->assertEquals(2, $object->collection->count);
+        $this->assertEquals(20, $object->collection->total);
+        $this->assertEquals('/actors', $object->collection->url);
+        $this->assertEquals('/?page=2', $object->collection->next);
+        $this->assertEquals('/?page=10', $object->collection->last);
+
+        $actor = $object->data[0];
+        $this->assertIsArray($actor->films);
+    }
+
+    public function test_collection_with_no_json_options()
+    {
+        $controller = (new ControllerFactory())->build();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/CollectionView.JsonCollection')
+            ->setOptions([
+                'serialize' => 'actors',
+                'jsonOptions' => false,
+            ]);
+        $view = $controller->createView();
+        $output = $view->render();
 
         $this->assertIsString($output);
 
