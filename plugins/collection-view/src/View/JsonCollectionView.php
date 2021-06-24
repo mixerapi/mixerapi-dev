@@ -7,11 +7,6 @@ use Cake\Core\Configure;
 use Cake\View\JsonView;
 use MixerApi\CollectionView\Serializer;
 
-/**
- * A JSON collection view
- *
- * @SuppressWarnings(PHPMD)
- */
 class JsonCollectionView extends JsonView
 {
     /**
