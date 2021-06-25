@@ -3,17 +3,11 @@
     "description": "A bake template for RESTful CakePHP controllers",
     "type": "cakephp-plugin",
     "license": "MIT",
-    "keywords": ["cakephp"],
+    "keywords": ["cakephp","cakephp bake","cakephp scaffold"],
     "require": {
         "php": ">=7.2",
         "cakephp/cakephp": "^4.0",
         "cakephp/bake": "^2.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~8.5.0",
-        "cakephp/cakephp-codesniffer": "^4.2",
-        "phpstan/phpstan": "^0.12.32",
-        "phpmd/phpmd": "^2.8"
     },
     "autoload": {
         "psr-4": {
@@ -26,21 +20,8 @@
             "MixerApi\\Bake\\Test\\App\\": "tests/test_app/App/"
         }
     },
-    "scripts": {
-        "check": [
-            "@test",
-            "@cs-check",
-            "@stan",
-            "@md"
-        ],
-        "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
-        "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
-        "stan": "phpstan analyse src/",
-        "test": "phpunit --colors=always",
-        "md": "phpmd src/ ansi phpmd.xml",
-        "coverage": "phpunit --coverage-html coverage-reports/"
-    },
     "support": {
+        "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/bake"
     },
     "authors": [
