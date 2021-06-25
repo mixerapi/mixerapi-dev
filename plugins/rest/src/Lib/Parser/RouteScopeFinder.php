@@ -44,19 +44,12 @@ class RouteScopeFinder extends NodeVisitorAbstract
             return false;
         }
 
-        if (!isset($node->args)) {
+        // @phpstan-ignore-next-line
+        if (!isset($node->args, $node->args[0]->value->value)) {
             return false;
         }
 
-        if (!isset($node->args[0]->value->value)) {
-            return false;
-        }
-
-        if ($node->args[0]->value->value !== $this->routeWriter->getPrefix()) {
-            return false;
-        }
-
-        return true;
+        return $node->args[0]->value->value === $this->routeWriter->getPrefix();
     }
 
     /**
@@ -70,11 +63,7 @@ class RouteScopeFinder extends NodeVisitorAbstract
         }
 
         // @phpstan-ignore-next-line
-        if (!isset($node->expr->args)) {
-            return false;
-        }
-
-        if (!isset($node->expr->args[0]->value->value)) {
+        if (!isset($node->expr->args, $node->expr->args[0]->value->value)) {
             return false;
         }
 
@@ -94,11 +83,7 @@ class RouteScopeFinder extends NodeVisitorAbstract
             }
         );
 
-        if (count($matchingPrefixes) !== 1) {
-            return false;
-        }
-
-        return true;
+        return count($matchingPrefixes) === 1;
     }
 
     /**
