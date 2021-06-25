@@ -59,8 +59,11 @@ class ModelPropertyFactory
      */
     private function isPrimaryKey(array $schemaDebugInfo, string $columnName): bool
     {
+        // ignore coverage since this condition should not be met
         if (!isset($schemaDebugInfo['constraints']['primary']['columns'])) {
+            // @codeCoverageIgnoreStart
             return false;
+            // @codeCoverageIgnoreEnd
         }
 
         return in_array($columnName, $schemaDebugInfo['constraints']['primary']['columns']);
