@@ -48,7 +48,7 @@ class JsonLdViewTest extends TestCase
         Router::connect('/:plugin/:controller/:action/*');
     }
 
-    public function testCollection()
+    public function test_collection()
     {
         $request = new ServerRequest([
             'url' => 'actors',
@@ -103,7 +103,52 @@ class JsonLdViewTest extends TestCase
         $this->assertEquals('/actors', $object->{'@id'});
     }
 
-    public function testItem()
+    public function test_item()
+    {
+        $controller = $this->getControllerForItem();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/JsonLdView.JsonLd')
+            ->setOptions(['serialize' => 'actor']);
+
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $object = json_decode($output);
+
+        $this->assertIsObject($object);
+
+        $this->assertEquals('/actors/1', $object->{'@id'});
+        $this->assertIsArray($object->films);
+    }
+
+    public function test_item_with_no_json_options()
+    {
+        $controller = $this->getControllerForItem();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/JsonLdView.JsonLd')
+            ->setOptions([
+                'serialize' => 'actor',
+                'jsonOptions' => false,
+            ]);
+
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $object = json_decode($output);
+
+        $this->assertIsObject($object);
+
+        $this->assertEquals('/actors/1', $object->{'@id'});
+        $this->assertIsArray($object->films);
+    }
+
+    private function getControllerForItem(): Controller
     {
         $request = new ServerRequest([
             'url' => 'actors/1',
@@ -114,8 +159,7 @@ class JsonLdViewTest extends TestCase
                 1
             ]
         ]);
-
-        $request = $request->withEnv('HTTP_ACCEPT', 'application/ld+json, text/plain, */*');
+        $request = $request->withEnv('HTTP_ACCEPT', 'application/hal+json, text/plain, */*');
         Router::setRequest($request);
         $response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
             ->modify($request, new Response());
@@ -133,20 +177,6 @@ class JsonLdViewTest extends TestCase
             'actor' => $actor,
         ]);
 
-        $controller->viewBuilder()
-            ->setClassName('MixerApi/JsonLdView.JsonLd')
-            ->setOptions(['serialize' => 'actor']);
-
-        $View = $controller->createView();
-        $output = $View->render();
-
-        $this->assertIsString($output);
-
-        $object = json_decode($output);
-
-        $this->assertIsObject($object);
-
-        $this->assertEquals('/actors/1', $object->{'@id'});
-        $this->assertIsArray($object->films);
+        return $controller;
     }
 }
