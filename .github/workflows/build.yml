@@ -56,16 +56,3 @@ jobs:
           export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           composer global require php-coveralls/php-coveralls
           php-coveralls --coverage_clover=clover.xml -v
-
-  documentation:
-    name: Documentation
-    runs-on: ubuntu-latest
-    steps:
-      - if: github.ref == 'refs/heads/master'
-        name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: mixerapi.com
-          username: ${{ secrets.MIXERAPI_COM_USER}}
-          key: ${{ secrets.MIXERAPI_COM_PRIVATE_KEY}}
-          script: ${{ secrets.MIXERAPI_COM_DEPLOY_CMD}}
