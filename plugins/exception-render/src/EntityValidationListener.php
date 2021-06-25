@@ -39,8 +39,11 @@ class EntityValidationListener
 
         try {
             $name = (new ReflectionClass($entity))->getShortName();
+            // skipping since ReflectionException is unlikely to be raised
+            // @codeCoverageIgnoreStart
         } catch (ReflectionException $e) {
             $name = get_class($entity);
+            // @codeCoverageIgnoreEnd
         }
 
         throw new ValidationException(
