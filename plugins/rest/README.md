@@ -8,9 +8,6 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
 
-!!! warning ""
-    This is an alpha stage plugin.
-
 This plugin gets your API project up and going quickly by creating routes for you. It can either:
 
 - Build your `routes.php` file from a single command, or

@@ -8,9 +8,6 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
 
-!!! warning ""
-    This is an alpha stage plugin.
-
 A simple Collection View for displaying configurable pagination meta data in JSON or XML collection responses. Read
 more at [MixerAPI.com](https://mixerapi.com).
 
