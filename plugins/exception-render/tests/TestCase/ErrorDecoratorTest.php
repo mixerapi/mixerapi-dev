@@ -7,7 +7,7 @@ use MixerApi\ExceptionRender\ErrorDecorator;
 
 class ErrorDecoratorTest extends TestCase
 {
-    public function testErrorDecorator()
+    public function test_error_decorator()
     {
         $decorator = new ErrorDecorator([], []);
         $decorator->setViewVars($viewVars = ['1']);
