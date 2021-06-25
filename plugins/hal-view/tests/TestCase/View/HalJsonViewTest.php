@@ -48,10 +48,7 @@ class HalJsonViewTest extends TestCase
         Router::connect('/:plugin/:controller/:action/*');
     }
 
-    /**
-     * Test Hal Response on a collection (/actors/index)
-     */
-    public function testHCollection()
+    public function test_collection(): void
     {
         $request = new ServerRequest([
             'url' => 'actors',
@@ -106,10 +103,52 @@ class HalJsonViewTest extends TestCase
         $this->assertEquals('/actors/1', $actor->_links->self->href);
     }
 
-    /**
-     * Test Hal Response on a item (/actors/view)
-     */
-    public function testItem()
+    public function test_item(): void
+    {
+        $controller = $this->getControllerForItem();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/HalView.HalJson')
+            ->setOptions(['serialize' => 'actor']);
+
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $object = json_decode($output);
+
+        $this->assertIsObject($object);
+
+        $this->assertEquals('/actors/1', $object->_links->self->href);
+        $this->assertIsArray($object->_embedded->films);
+    }
+
+    public function test_item_with_no_json_options(): void
+    {
+        $controller = $this->getControllerForItem();
+
+        $controller->viewBuilder()
+            ->setClassName('MixerApi/HalView.HalJson')
+            ->setOptions([
+                'serialize' => 'actor',
+                'jsonOptions' => false,
+            ]);
+
+        $View = $controller->createView();
+        $output = $View->render();
+
+        $this->assertIsString($output);
+
+        $object = json_decode($output);
+
+        $this->assertIsObject($object);
+
+        $this->assertEquals('/actors/1', $object->_links->self->href);
+        $this->assertIsArray($object->_embedded->films);
+    }
+
+    private function getControllerForItem(): Controller
     {
         $request = new ServerRequest([
             'url' => 'actors/1',
@@ -138,20 +177,6 @@ class HalJsonViewTest extends TestCase
             'actor' => $actor,
         ]);
 
-        $controller->viewBuilder()
-            ->setClassName('MixerApi/HalView.HalJson')
-            ->setOptions(['serialize' => 'actor']);
-
-        $View = $controller->createView();
-        $output = $View->render();
-
-        $this->assertIsString($output);
-
-        $object = json_decode($output);
-
-        $this->assertIsObject($object);
-
-        $this->assertEquals('/actors/1', $object->_links->self->href);
-        $this->assertIsArray($object->_embedded->films);
+        return $controller;
     }
 }
