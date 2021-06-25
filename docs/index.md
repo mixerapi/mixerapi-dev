@@ -4,9 +4,6 @@ title: MixerAPI - Streamline RESTful API Development
 
 # MixerAPI / Streamline API Development
 
-!!! warning ""
-    This is an alpha stage library
-
 Streamline development of modern RESTful APIs for your teams CakePHP project. Designed around a component-based
 architecture, MixerAPI enables developers to pick and choose the functionality they need for developing REST APIs.
 
