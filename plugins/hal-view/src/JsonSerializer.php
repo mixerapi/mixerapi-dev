@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MixerApi\HalView;
 
+use Cake\Collection\CollectionInterface;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
@@ -122,13 +123,13 @@ class JsonSerializer
     /**
      * HAL array for collection requests
      *
-     * @param mixed $hal the data to be converted into a HAL array
+     * @param \Cake\Collection\CollectionInterface $collection the data to be converted into a HAL array
      * @return array
      */
-    private function collection($hal): array
+    private function collection(CollectionInterface $collection): array
     {
         try {
-            $entity = $hal->first();
+            $entity = $collection->first();
             $tableName = Inflector::tableize((new ReflectionClass($entity))->getShortName());
         } catch (ReflectionException $e) {
             $tableName = 'data';
@@ -137,7 +138,7 @@ class JsonSerializer
         $links = [];
 
         $return = [
-            'count' => intval($hal->count()),
+            'count' => $collection->count(),
             'total' => null,
         ];
 
@@ -158,7 +159,7 @@ class JsonSerializer
         }
 
         $return['_links'] = $links;
-        $return['_embedded'] = [$tableName => $hal];
+        $return['_embedded'] = [$tableName => $collection];
 
         return $return;
     }
