@@ -23,7 +23,7 @@ class EntityValidationTest extends TestCase
         static::setAppNamespace('MixerApi\ExceptionRender\Test\App');
     }
 
-    public function testValidation()
+    public function test_validation()
     {
         new EntityValidationListener();
 
@@ -36,7 +36,7 @@ class EntityValidationTest extends TestCase
         $this->assertInstanceOf(Actor::class, $actor);
     }
 
-    public function testValidationException()
+    public function test_validation_exception()
     {
         $this->expectException(ValidationException::class);
 
