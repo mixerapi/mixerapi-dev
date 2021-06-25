@@ -5,6 +5,7 @@ namespace MixerApi\HalView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\ResultSet;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
@@ -85,10 +86,7 @@ class JsonSerializerTest extends TestCase
             ->modify($this->request, new Response());
     }
 
-    /**
-     * Test collection serialization and deserialization
-     */
-    public function testCollection()
+    public function test_collection()
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
@@ -107,10 +105,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    /**
-     * Test item serialization and deserialization
-     */
-    public function testItem()
+    public function test_item()
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->get(1, [
@@ -131,10 +126,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    /**
-     * Test JsonSerializer->getData()
-     */
-    public function testGetData()
+    public function test_get_data()
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
