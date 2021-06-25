@@ -103,18 +103,6 @@ class TableScanner
      */
     protected function shouldSkip(string $table): bool
     {
-        foreach ($this->ignore as $ignore) {
-            if (strpos($ignore, '/') === 0) {
-                if ((bool)preg_match($ignore, $table)) {
-                    return true;
-                }
-            }
-
-            if ($ignore === $table) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array($table, $this->ignore);
     }
 }

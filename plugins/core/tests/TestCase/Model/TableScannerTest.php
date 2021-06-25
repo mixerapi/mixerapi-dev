@@ -31,57 +31,42 @@ class TableScannerTest extends TestCase
     ];
 
     /**
-     * @var \Bake\Utility\TableScanner
-     */
-    protected $tableScanner;
-
-    /**
      * @var \Cake\Database\Connection
      */
     protected $connection;
 
-    /**
-     * setUp method
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
-
         $this->connection = ConnectionManager::get('test');
     }
 
-    /**
-     * tearDown method
-     *
-     * @return void
-     */
     public function tearDown(): void
     {
         parent::tearDown();
-        unset($this->tableScanner);
     }
 
-    /**
-     * @return void
-     */
-    public function testListAll()
+    public function test_list_all(): void
     {
-        $this->tableScanner = new TableScanner($this->connection);
-
-        $result = $this->tableScanner->listAll();
+        $result = (new TableScanner($this->connection))->listAll();
         $this->assertArrayHasKey('actors', $result);
     }
 
-    /**
-     * @return void
-     */
-    public function testListUnskipped()
+    public function test_list_unskipped(): void
     {
-        $this->tableScanner = new TableScanner($this->connection);
-
-        $result = $this->tableScanner->listUnskipped();
+        $result = (new TableScanner($this->connection))->listUnskipped();
         $this->assertArrayHasKey('actors', $result);
+    }
+
+    public function test_list_unskipped_with_skipped(): void
+    {
+        $tableScanner = new TableScanner(
+            $this->connection,
+            ['i18n', 'cake_sessions', 'sessions', '/phinxlog/', 'actors','films','film_actors', 'departments']
+        );
+
+        $result = $tableScanner->listUnskipped();
+
+        $this->assertCount(0, $result);
     }
 }
