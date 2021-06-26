@@ -47,7 +47,7 @@ class JsonLdContextComponent extends Component
     {
         $table = NamespaceUtility::findClass(
             Configure::read('App.namespace') . '\Model\Table\\',
-            Inflector::pluralize($entityName) . 'Table'
+            Inflector::camelize(Inflector::pluralize($entityName)) . 'Table'
         );
 
         $connection = ConnectionManager::get('default');
