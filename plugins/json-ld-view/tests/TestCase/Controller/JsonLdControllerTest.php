@@ -25,7 +25,7 @@ class JsonLdControllerTest extends TestCase
         static::setAppNamespace('MixerApi\JsonLdView\Test\App');
     }
 
-    public function testContexts()
+    public function test_context_singular_camelcase()
     {
         $this->get('/contexts/Actor');
 
@@ -36,7 +36,40 @@ class JsonLdControllerTest extends TestCase
         $this->assertEquals('https://schema.org/givenName', $object->{'@context'}->first_name);
     }
 
-    public function testVocab()
+    public function test_context_plural_camelcase()
+    {
+        $this->get('/contexts/Actors');
+
+        $body = (string)$this->_response->getBody();
+        $object = json_decode($body);
+
+        $this->assertResponseOk();
+        $this->assertEquals('https://schema.org/givenName', $object->{'@context'}->first_name);
+    }
+
+    public function test_context_singular_lowercase()
+    {
+        $this->get('/contexts/actor');
+
+        $body = (string)$this->_response->getBody();
+        $object = json_decode($body);
+
+        $this->assertResponseOk();
+        $this->assertEquals('https://schema.org/givenName', $object->{'@context'}->first_name);
+    }
+
+    public function test_context_plural_lowercase()
+    {
+        $this->get('/contexts/actors');
+
+        $body = (string)$this->_response->getBody();
+        $object = json_decode($body);
+
+        $this->assertResponseOk();
+        $this->assertEquals('https://schema.org/givenName', $object->{'@context'}->first_name);
+    }
+
+    public function test_vocab()
     {
         $this->get('/vocab');
 
