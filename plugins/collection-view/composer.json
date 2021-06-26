@@ -3,22 +3,11 @@
     "description": "A simple Collection View for displaying pagination meta data in JSON or XML collection responses",
     "type": "cakephp-plugin",
     "license": "MIT",
-    "keywords": ["cakephp"],
+    "keywords": ["cakephp","cakephp json","cakephp view"],
     "require": {
         "php": ">=7.2",
         "cakephp/cakephp": "^4.0",
         "adbario/php-dot-notation": "^2.2"
-    },
-    "require-dev": {
-        "ext-json": "*",
-        "ext-xml": "*",
-        "ext-simplexml": "*",
-        "ext-sqlite3": "*",
-        "ext-mysqli": "*",
-        "cakephp/cakephp-codesniffer": "^4.2",
-        "phpmd/phpmd": "^2.9",
-        "phpstan/phpstan": "^0.12.64",
-        "phpunit/phpunit": "~8.5.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,20 +20,8 @@
             "MixerApi\\CollectionView\\Test\\App\\": "tests/test_app/src"
         }
     },
-    "scripts": {
-        "analyze": [
-            "@test",
-            "@phpcs",
-            "@phpstan"
-        ],
-        "test": "phpunit --colors=always",
-        "phpcs": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
-        "phpbf": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/",
-        "phpstan": "phpstan analyse src/",
-        "md": "phpmd src/ ansi phpmd.xml",
-        "coverage": "phpunit --coverage-html coverage-reports/"
-    },
     "support": {
+        "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/collection-view"
     },
     "authors": [
