@@ -117,21 +117,24 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
      */
     private function debugViewVars($exception, array $viewVars): array
     {
-        if (!Configure::read('debug') || !$exception instanceof CakeException) {
+        if (!Configure::read('debug')) {
             return $viewVars;
         }
 
-        $trace = (array)Debugger::formatTrace($exception->getTrace(), [
-            'format' => 'array',
-            'args' => false,
-        ]);
+        $trace = (array)Debugger::formatTrace(
+            $exception->getTrace(),
+            [
+                'format' => 'array',
+                'args' => false,
+            ]
+        );
 
         $origin = [
             'file' => $exception->getFile() ?: 'null',
             'line' => $exception->getLine() ?: 'null',
         ];
 
-        // Traces don't include the origin file/line.
+        // traces don't include the origin file/line.
         array_unshift($trace, $origin);
         $viewVars['trace'] = $trace;
         $viewVars += $origin;
