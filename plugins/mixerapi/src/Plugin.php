@@ -28,9 +28,11 @@ class Plugin extends BasePlugin
         if (PHP_SAPI === 'cli') {
             try {
                 $app->addPlugin('MixerApi/Bake');
+            // @codeCoverageIgnoreStart
             } catch (MissingPluginException $e) {
                 // Do not halt if the plugin is missing
             }
+            // @codeCoverageIgnoreEnd
         }
 
         parent::bootstrap($app);
