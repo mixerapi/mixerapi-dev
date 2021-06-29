@@ -5,6 +5,7 @@ namespace MixerApi;
 
 use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
+use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\PluginApplicationInterface;
 use MixerApi\Command\InstallCommand;
 
@@ -25,7 +26,11 @@ class Plugin extends BasePlugin
         $app->addPlugin('SwaggerBake');
 
         if (PHP_SAPI === 'cli') {
-            $app->addOptionalPlugin('MixerApi/Bake');
+            try {
+                $app->addPlugin('MixerApi/Bake');
+            } catch (MissingPluginException $e) {
+                // Do not halt if the plugin is missing
+            }
         }
 
         parent::bootstrap($app);
