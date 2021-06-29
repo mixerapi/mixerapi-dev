@@ -25,7 +25,7 @@ class Plugin extends BasePlugin
         $app->addPlugin('SwaggerBake');
 
         if (PHP_SAPI === 'cli') {
-            $app->addPlugin('MixerApi/Bake');
+            $app->addOptionalPlugin('MixerApi/Bake');
         }
 
         parent::bootstrap($app);
