@@ -11,6 +11,27 @@ use MixerApi\Core\Response\ResponseModifier;
 class Plugin extends BasePlugin
 {
     /**
+     * Enable middleware
+     *
+     * @var bool
+     */
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
+
+    /**
      * @var string
      */
     private const EXT = 'jsonld';

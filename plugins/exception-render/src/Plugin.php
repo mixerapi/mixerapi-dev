@@ -9,6 +9,27 @@ use Cake\Core\PluginApplicationInterface;
 class Plugin extends BasePlugin
 {
     /**
+     * Enable middleware
+     *
+     * @var bool
+     */
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
+
+    /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
      * @return void
      */
