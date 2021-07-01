@@ -8,9 +8,12 @@ use Cake\Core\ContainerInterface;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
+use Cake\Http\Exception\MethodNotAllowedException;
 
 /**
  * Plugin for Crud
+ *
+ * @experimental
  */
 class Plugin extends BasePlugin
 {
@@ -108,7 +111,13 @@ class Plugin extends BasePlugin
             $action = $controller->getRequest()->getParam('action');
 
             if (is_array($this->allowedMethods) && isset($this->allowedMethods[$action])) {
-                $controller->getRequest()->allowMethod($this->allowedMethods[$action]);
+                try {
+                    $controller->getRequest()->allowMethod($this->allowedMethods[$action]);
+                } catch (MethodNotAllowedException $e) {
+                    throw new MethodNotAllowedException(
+                        'Method Not Allowed. Must be one of: ' . implode($this->allowedMethods[$action])
+                    );
+                }
             }
         });
     }

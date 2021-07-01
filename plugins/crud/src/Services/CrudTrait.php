@@ -6,6 +6,9 @@ namespace MixerApi\Crud\Services;
 use Cake\Controller\Controller;
 use InvalidArgumentException;
 
+/**
+ * @experimental
+ */
 trait CrudTrait
 {
     /**

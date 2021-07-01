@@ -10,6 +10,9 @@ use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\DeleteInterface;
 
+/**
+ * @experimental
+ */
 class Delete implements DeleteInterface
 {
     use CrudTrait;

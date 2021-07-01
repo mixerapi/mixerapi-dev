@@ -7,6 +7,9 @@ use Cake\Controller\Controller;
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Query;
 
+/**
+ * @experimental
+ */
 interface SearchInterface
 {
     /**
