@@ -46,6 +46,7 @@
             "MixerApi\\Bake\\": "plugins/bake/src/",
             "MixerApi\\CollectionView\\": "plugins/collection-view/src/",
             "MixerApi\\Core\\": "plugins/core/src/",
+            "MixerApi\\Crud\\": "plugins/crud/src/",
             "MixerApi\\ExceptionRender\\": "plugins/exception-render/src/",
             "MixerApi\\HalView\\": "plugins/hal-view/src/",
             "MixerApi\\JsonLdView\\": "plugins/json-ld-view/src/",
@@ -62,6 +63,8 @@
             "MixerApi\\CollectionView\\Test\\App\\": "plugins/collection-view/tests/test_app/src/",
             "MixerApi\\Core\\Test\\": "plugins/core/tests/",
             "MixerApi\\Core\\Test\\App\\": "plugins/core/tests/test_app/src/",
+            "MixerApi\\Crud\\Test\\": "plugins/crud/tests/",
+            "MixerApi\\Crud\\Test\\App\\": "plugins/crud/tests/test_app/src/",
             "MixerApi\\ExceptionRender\\Test\\": "plugins/exception-render/tests/",
             "MixerApi\\ExceptionRender\\Test\\App\\": "plugins/exception-render/tests/test_app/src/",
             "MixerApi\\HalView\\Test\\": "plugins/hal-view/tests/",
@@ -83,16 +86,16 @@
             "@phpmd"
         ],
         "test": "phpunit --colors=always",
-        "phpcs":  "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
+        "phpcs": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
         "phpcbf": "phpcbf --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
         "phpstan": "phpstan analyse plugins/*/src",
         "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml",
         "coverage": "phpunit --coverage-html coverage-reports/",
         "mkdocs-run": "docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest",
         "mkdocs-build": [
-           "docker pull systematical/mixerapidocs:latest",
-           "git pull",
-           "docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build"
+            "docker pull systematical/mixerapidocs:latest",
+            "git pull",
+            "docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build"
         ]
     },
     "prefer-stable": true,

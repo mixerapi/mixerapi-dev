@@ -14,6 +14,8 @@ plugins:
     - plugins/collection-view/webroot/*
     - plugins/collection-view/tests/*
     - plugins/core/*
+    - plugins/crud/tests/*
+    - plugins/crud/webroot/*
     - plugins/exception-render/webroot/*
     - plugins/exception-render/tests/*
     - plugins/hal-view/webroot/*
@@ -45,6 +47,7 @@ nav:
 - Install: /install
 - Workflow: /workflow
 - Baking Controllers: /plugins/bake
+- Crud Services: /plugins/crud
 - Event Listeners: /event-listeners
 - Exception Rendering: /plugins/exception-render
 - OpenAPI (Swagger): /cakephp-swagger-bake
