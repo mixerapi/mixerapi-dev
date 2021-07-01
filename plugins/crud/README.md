@@ -28,10 +28,13 @@
 [link-license]: LICENSE.txt
 
 This experimental plugin provides CRUD (Create/Read/Update/Delete) services to your RESTful APIs controller actions
-using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html)
-for CakePHP ^4.2 compatible projects. Serialization and allowed requests `$this-request->allowMethod()` enforcement is
-handled automatically by event listeners. Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search
-and may installed on its own too.
+using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html).
+
+- Perform most crud operations with a single line of code
+- Automatically serializes data into JSON, XML, etc.
+- Automatically enforces allowed requests `$this-request->allowMethod()`
+- Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search and may be installed on its own too.
+- Requires CakePHP ^4.2 compatible projects.
 
 You may also want to look at [CakePHP Crud](https://crud.readthedocs.io/en/latest/installation.html) which doesn't
 rely on experimental code. If you're using this plugin without MixerApi/ExceptionRender or for a non-API projects
