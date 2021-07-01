@@ -235,8 +235,9 @@ The above also works for Update and Delete.
 #### Other Usages
 
 This plugin works best with API projects using MixerApi/ExceptionRender which uses events to set the response in the
-event of an error. That's okay, you can write a custom exception renderer and look for `ResourceWriteException`, then
-alter the `viewVars` output using the `EntityInterface` from `ResourceWriteException::getEntity()`.
+event of an error. If your project isn't using ExceptionRender or you're not an API you can write a custom exception
+renderer and look for `ResourceWriteException`, then alter the `viewVars` output using the `EntityInterface` from
+`ResourceWriteException::getEntity()`.
 
 Read the [CakePHP Custom ExceptionRenderer](https://book.cakephp.org/4/en/development/errors.html#custom-exceptionrenderer)
 documentation for more information.
