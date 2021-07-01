@@ -7,23 +7,6 @@
     "require": {
         "php": ">=7.2",
         "cakephp/cakephp": "~4.0",
-<<<<<<< HEAD
-        "cnizzardini/cakephp-swagger-bake": "^1.0",
-        "friendsofcake/search": "^6.0",
-        "mixerapi/collection-view": "^0.2",
-        "mixerapi/core": "^0.2",
-        "mixerapi/exception-render": "^0.2",
-        "mixerapi/hal-view": "^0.2",
-        "mixerapi/json-ld-view": "^0.2",
-        "mixerapi/rest": "^0.2"
-    },
-    "require-dev": {
-        "mixerapi/bake": "^0.2",
-        "phpunit/phpunit": "~8.5.0",
-        "cakephp/cakephp-codesniffer": "^4.2",
-        "phpstan/phpstan": "^0.12.32",
-        "phpmd/phpmd": "^2.8"
-=======
         "cnizzardini/cakephp-swagger-bake": "~1.0",
         "mixerapi/bake": "~0.2",
         "mixerapi/collection-view": "~0.2",
@@ -32,7 +15,6 @@
         "mixerapi/hal-view": "~0.2",
         "mixerapi/json-ld-view": "~0.2",
         "mixerapi/rest": "~0.2"
->>>>>>> master
     },
     "autoload": {
         "psr-4": {
