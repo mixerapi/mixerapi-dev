@@ -91,5 +91,11 @@ MixerAPI automatically installs the following plugins for your RESTful API proje
 | [MixerApi/HalView](https://github.com/mixerapi/hal-view) | A Hypertext Application Language ([HAL+JSON](http://stateless.co/hal_specification.html)) View for CakePHP |
 | [MixerApi/JsonLdView](https://github.com/mixerapi/json-ld-view) | A [JSON-LD](https://json-ld.org/) View for CakePHP |
 | [MixerApi/Rest](https://github.com/mixerapi/rest) | Gets your API project up and going quickly by creating routes for you |
-| [Search](https://github.com/FriendsOfCake/search) | Search provides a simple interface to create paginate-able filters for your CakePHP application. |
 | [SwaggerBake](https://github.com/cnizzardini/cakephp-swagger-bake) | A delightfully tasty tool for generating Swagger documentation with OpenApi 3.0.0 schema |
+
+## Recommended Plugins
+
+| Plugin | Description |
+| ------------- | ------------- |
+| [MixerApi/Crud](https://github.com/mixerapi/crud) | A service provider for CRUD (Create/Read/Update/Delete) operations. Since this plugin uses the experimental CakePHP dependency injection it must be enabled separately. |
+| [Search](https://github.com/FriendsOfCake/search) | Search provides a simple interface to create paginate-able filters for your CakePHP application. |
