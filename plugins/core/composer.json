@@ -6,18 +6,12 @@
     "keywords": ["mixerapi","cakephp"],
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "^4.0",
+        "cakephp/cakephp": "~4.0",
         "thecodingmachine/class-explorer": "^1.1"
     },
     "autoload": {
         "psr-4": {
             "MixerApi\\Core\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\Core\\Test\\": "tests/",
-            "MixerApi\\Core\\Test\\App\\": "tests/test_app/src"
         }
     },
     "support": {

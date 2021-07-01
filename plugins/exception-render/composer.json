@@ -6,17 +6,11 @@
     "keywords": ["cakephp","cakephp error handling","cakephp exception handling"],
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "^4.0"
+        "cakephp/cakephp": "~4.0"
     },
     "autoload": {
         "psr-4": {
             "MixerApi\\ExceptionRender\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\ExceptionRender\\Test\\": "tests/",
-            "MixerApi\\ExceptionRender\\Test\\App\\": "tests/test_app/src/"
         }
     },
     "support": {
