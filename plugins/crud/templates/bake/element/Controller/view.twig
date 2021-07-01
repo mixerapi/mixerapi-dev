@@ -1,0 +1,21 @@
+{#
+/**
+ * View method
+ */
+#}
+{% set allAssociations = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+{% set allAssociations = allAssociations|merge(Bake.aliasExtractor(modelObj, 'BelongsToMany')) %}
+{% set allAssociations = allAssociations|merge(Bake.aliasExtractor(modelObj, 'HasOne')) %}
+{% set allAssociations = allAssociations|merge(Bake.aliasExtractor(modelObj, 'HasMany')) %}
+    /**
+     * View method
+     *
+     * @param ReadInterface $read
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     */
+    public function view(ReadInterface $read)
+    {
+        $this->set('{{ singularName }}', $read->read($this));
+    }
