@@ -6,6 +6,9 @@ namespace MixerApi\Crud\Interfaces;
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
 
+/**
+ * @experimental
+ */
 interface CreateInterface
 {
     /**

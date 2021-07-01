@@ -11,6 +11,9 @@ use MixerApi\Crud\Deserializer;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\UpdateInterface;
 
+/**
+ * @experimental
+ */
 class Update implements UpdateInterface
 {
     use CrudTrait;
