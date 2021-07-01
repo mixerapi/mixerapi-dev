@@ -14,12 +14,6 @@
             "MixerApi\\Core\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\Core\\Test\\": "tests/",
-            "MixerApi\\Core\\Test\\App\\": "tests/test_app/src"
-        }
-    },
     "support": {
         "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/core"

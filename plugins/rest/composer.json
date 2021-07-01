@@ -6,20 +6,13 @@
     "keywords": ["cakephp rest","cakephp4 rest","cakephp rest bake"],
     "require": {
         "php": ">=7.2",
-        "cakephp/cakephp": "^4.0",
+        "cakephp/cakephp": "~4.0",
         "nikic/php-parser": "^4.8",
         "thecodingmachine/class-explorer": "^1.1"
     },
     "autoload": {
         "psr-4": {
             "MixerApi\\Rest\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\Rest\\Test\\": "tests/",
-            "MixerApi\\Rest\\Test\\App\\": "tests/test_app/App/",
-            "MixerApi\\Rest\\Test\\MyPlugin\\": "tests/plugins/MyPlugin/"
         }
     },
     "support": {

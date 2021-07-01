@@ -13,12 +13,6 @@
             "MixerApi\\ExceptionRender\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\ExceptionRender\\Test\\": "tests/",
-            "MixerApi\\ExceptionRender\\Test\\App\\": "tests/test_app/src/"
-        }
-    },
     "support": {
         "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/exception-render"

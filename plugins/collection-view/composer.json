@@ -14,12 +14,6 @@
             "MixerApi\\CollectionView\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "MixerApi\\CollectionView\\Test\\": "tests/",
-            "MixerApi\\CollectionView\\Test\\App\\": "tests/test_app/src"
-        }
-    },
     "support": {
         "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/collection-view"
