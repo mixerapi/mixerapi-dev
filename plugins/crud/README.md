@@ -1,39 +1,26 @@
 # MixerApi CRUD
 
 ![Stability][ico-stability]
-[![Latest Version][ico-version]][link-version]
-[![Build Status][ico-build]][link-build]
-[![Coverage Status][ico-coverage]][link-coverage]
-[![Mixerapi][ico-mixerapi]][link-mixerapi]
-[![CakePHP][ico-cakephp]][link-cakephp]
-[![PHP][ico-php]][link-php]
-[![License: MIT][ico-license]][link-license]
+
+[![Version](https://img.shields.io/packagist/v/mixerapi/crud.svg?style=flat-square)](https://packagist.org/packages/mixerapi/crud)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
+[![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
 [ico-stability]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
-[ico-version]: https://img.shields.io/packagist/v/mixerapi/crud.svg?style=flat-square
-[ico-build]: https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master
-[ico-coverage]: https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master
-[ico-mixerapi]: https://mixerapi.com/assets/img/mixer-api-red.svg
-[ico-cakephp]: https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp
-[ico-php]: https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php
-[ico-license]: https://img.shields.io/badge/License-MIT-yellow.svg
 
-
-[link-version]: https://packagist.org/packages/mixerapi/crud
-[link-build]: https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild
-[link-coverage]: https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master
-[link-mixerapi]: https://mixerapi.com
-[link-cakephp]: https://book.cakephp.org/4/en/index.html
-[link-php]: https://php.net/
-[link-license]: LICENSE.txt
 
 This experimental plugin provides CRUD (Create/Read/Update/Delete) services to your RESTful APIs controller actions
 using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html).
 
-- Perform most crud operations with a single line of code
+- Perform most crud operations with a single line of code.
 - Automatically serializes data into JSON, XML, etc.
 - Automatically enforces allowed requests `$this-request->allowMethod()`
 - Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search and may be installed on its own too.
+- Uses Interfaces so you can swap out with your own implementation down the line.
 - Requires CakePHP ^4.2 compatible projects.
 
 You may also want to look at [CakePHP Crud](https://crud.readthedocs.io/en/latest/installation.html) which doesn't
@@ -184,29 +171,29 @@ public function bootstrap(): void
 Customize allowed HTTP methods:
 
 ```php
-    $options = [
-        'allowedMethods' => [
-            'add' => ['post'],
-            'edit' => ['patch'],
-            'delete' => ['delete'],
-        ]
-    ];
+$options = [
+    'allowedMethods' => [
+        'add' => ['post'],
+        'edit' => ['patch'],
+        'delete' => ['delete'],
+    ]
+];
 ```
 
 To disable automatic `$request->allowMethod()` entirely:
 
 ```php
-    $options = [
-        'allowedMethods' => []
-    ];
+$options = [
+    'allowedMethods' => []
+];
 ```
 
 Disable automatic serialization:
 
 ```php
-    $options = [
-        'doSerialize' => false, // default is true
-    ];
+$options = [
+    'doSerialize' => false, // default is true
+];
 ```
 
 ## Bake Theme
