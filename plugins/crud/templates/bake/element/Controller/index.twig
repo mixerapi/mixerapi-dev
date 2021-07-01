@@ -1,0 +1,16 @@
+{#
+/**
+ * Index method
+ */
+#}
+    /**
+     * Index method
+     *
+     * @param SearchInterface $search
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     */
+    public function index(SearchInterface $search)
+    {
+        $this->set('{{ pluralName }}', $search->search($this));
+    }
