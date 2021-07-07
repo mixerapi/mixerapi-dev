@@ -16,6 +16,9 @@ use MixerApi\Crud\Services\Read;
 use MixerApi\Crud\Services\Search;
 use MixerApi\Crud\Services\Update;
 
+/**
+ * @experimental
+ */
 class CrudServiceProvider extends ServiceProvider
 {
     /**

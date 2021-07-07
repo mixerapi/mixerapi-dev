@@ -11,6 +11,9 @@ use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\SearchInterface;
 
+/**
+ * @experimental
+ */
 class Search implements SearchInterface
 {
     use CrudTrait;

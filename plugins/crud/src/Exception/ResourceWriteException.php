@@ -7,6 +7,9 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\Exception\HttpException;
 use Throwable;
 
+/**
+ * @experimental
+ */
 class ResourceWriteException extends HttpException
 {
     /**
