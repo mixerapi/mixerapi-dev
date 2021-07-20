@@ -344,7 +344,7 @@ use MixerApi\JsonLdView\JsonSerializer;
 $json = (new JsonSerializer($data))->asJson(JSON_PRETTY_PRINT); // argument is optional
 
 # array
-$hal = (new JsonSerializer($data))->getData();
+$json = (new JsonSerializer($data))->getData();
 
 # json-ld with pagination meta data
 use Cake\Http\ServerRequest;
