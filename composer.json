@@ -91,11 +91,24 @@
         "phpstan": "phpstan analyse plugins/*/src",
         "phpmd": "phpmd plugins --exclude tests,assets,config ansi phpmd.xml",
         "coverage": "phpunit --coverage-html coverage-reports/",
-        "mkdocs-run": "docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest",
+        "mkdocs-run": [
+            "@cakephp-swagger-bake",
+            "docker run --rm -it --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest"
+        ],
         "mkdocs-build": [
             "docker pull systematical/mixerapidocs:latest",
             "git pull",
+            "@cakephp-swagger-bake",
             "docker run --rm --network=host -v ${PWD}:/docs --user $(id -u):$(id -g) systematical/mixerapidocs:latest mkdocs build"
+        ],
+        "cakephp-swagger-bake": [
+            "rm -rf plugins/cakephp-swagger-bake",
+            "git clone https://github.com/cnizzardini/cakephp-swagger-bake plugins/cakephp-swagger-bake",
+            "rm -rf plugins/cakephp-swagger-bake/.github plugins/cakephp-swagger-bake/assets",
+            "rm -rf plugins/cakephp-swagger-bake/src plugins/cakephp-swagger-bake/templates",
+            "rm -rf plugins/cakephp-swagger-bake/tests plugins/cakephp-swagger-bake/webroot",
+            "rm -rf plugins/cakephp-swagger-bake/*.xml plugins/cakephp-swagger-bake/*.json",
+            "rm -rf plugins/cakephp-swagger-bake/*.gitignore plugins/cakephp-swagger-bake/*.neon"
         ]
     },
     "prefer-stable": true,

@@ -5,6 +5,9 @@ namespace MixerApi\Crud\Interfaces;
 
 use Cake\Controller\Controller;
 
+/**
+ * @experimental
+ */
 interface DeleteInterface
 {
     /**

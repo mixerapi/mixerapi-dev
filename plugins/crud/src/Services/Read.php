@@ -9,6 +9,9 @@ use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\ReadInterface;
 
+/**
+ * @experimental
+ */
 class Read implements ReadInterface
 {
     use CrudTrait;

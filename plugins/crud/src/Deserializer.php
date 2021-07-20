@@ -8,6 +8,9 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Utility\Xml;
 
+/**
+ * @experimental
+ */
 class Deserializer
 {
     /**
