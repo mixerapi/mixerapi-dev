@@ -3,6 +3,8 @@
 /mixerapi_dev_test
 /src/Controller/*
 /coverage-reports/
+/plugins/cakephp-swagger-bake
+/plugins/cakephp-swagger-bake/*
 
 # MKDOCS                 #
 ##########################

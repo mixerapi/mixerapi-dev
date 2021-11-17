@@ -50,7 +50,11 @@ nav:
 - Crud Services: /plugins/crud
 - Event Listeners: /event-listeners
 - Exception Rendering: /plugins/exception-render
-- OpenAPI (Swagger): /cakephp-swagger-bake
+- OpenAPI (Swagger):
+  - Documentation: /plugins/cakephp-swagger-bake
+  - Annotations: /plugins/cakephp-swagger-bake/docs/annotations
+  - Events: /plugins/cakephp-swagger-bake/docs/events
+  - Extensions: /plugins/cakephp-swagger-bake/docs/extensions
 - Response Formats:
   - JSON / XML: /plugins/collection-view
   - HAL+JSON: /plugins/hal-view
