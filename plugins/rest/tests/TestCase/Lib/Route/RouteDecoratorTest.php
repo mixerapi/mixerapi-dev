@@ -11,7 +11,7 @@ use MixerApi\Rest\Lib\Route\RouteFactory;
 
 class RouteDecoratorTest extends TestCase
 {
-    public function testConstruct()
+    public function test_construct(): void
     {
         $action = 'index';
 

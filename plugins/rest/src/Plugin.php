@@ -16,6 +16,23 @@ use MixerApi\Rest\Command as Commands;
 class Plugin extends BasePlugin
 {
     /**
+     * Plugin name.
+     *
+     * @var string
+     */
+    protected $name = 'MixerApi/Rest';
+
+    /**
+     * @var bool
+     */
+    protected $routes = false;
+
+    /**
+     * @var bool
+     */
+    protected $middleware = false;
+
+    /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
      * @return void
      */

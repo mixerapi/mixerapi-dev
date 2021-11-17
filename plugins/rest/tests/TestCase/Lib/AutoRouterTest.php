@@ -11,7 +11,7 @@ use ReflectionClass;
 
 class AutoRouterTest extends TestCase
 {
-    public function testBuildResources()
+    public function test_build_resources(): void
     {
         $routes = new RouteBuilder(Router::getRouteCollection(),'/');
         $routes->setRouteClass(DashedRoute::class);

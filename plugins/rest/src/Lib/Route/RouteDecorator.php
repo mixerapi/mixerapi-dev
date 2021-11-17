@@ -15,40 +15,22 @@ use MixerApi\Rest\Lib\Exception\RestfulRouteException;
  */
 class RouteDecorator
 {
-    /**
-     * @var \Cake\Routing\Route\Route
-     */
-    private $route;
+    private Route $route;
+
+    private ?string $name;
+
+    private ?string $plugin;
+
+    private ?string $controller;
+
+    private ?string $action;
 
     /**
-     * @var string|null
+     * @var string[]
      */
-    private $name;
+    private array $methods = [];
 
-    /**
-     * @var string|null
-     */
-    private $plugin;
-
-    /**
-     * @var string|null
-     */
-    private $controller;
-
-    /**
-     * @var string|null
-     */
-    private $action;
-
-    /**
-     * @var array
-     */
-    private $methods = [];
-
-    /**
-     * @var string|null
-     */
-    private $template;
+    private ?string $template;
 
     /**
      * @param \Cake\Routing\Route\Route $route CakePHP Route
@@ -174,7 +156,7 @@ class RouteDecorator
     }
 
     /**
-     * @return array
+     * @return string[] An array of HTTP methods (e.g. PUT, POST, PATCH, GET, DELETE)
      */
     public function getMethods(): array
     {
@@ -182,7 +164,7 @@ class RouteDecorator
     }
 
     /**
-     * @param array $methods HTTP methods (e.g PUT, POST, PATCH, GET, DELETE)
+     * @param string[] $methods HTTP methods (e.g. PUT, POST, PATCH, GET, DELETE)
      * @return $this
      */
     public function setMethods(array $methods)

@@ -9,30 +9,15 @@ use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 class RouteDecoratorFactory
 {
     /**
-     * @var string
-     */
-    private $baseNamespace;
-
-    /**
-     * @var string
-     */
-    private $prefix;
-
-    /**
-     * @var string
-     */
-    private $plugin;
-
-    /**
      * @param string $baseNamespace a base namespace (e.g. App\Controller)
      * @param string $prefix a path prefix (e.g. '/' or 'api')
      * @param string|null $plugin Plugin name
      */
-    public function __construct(string $baseNamespace, string $prefix, ?string $plugin = null)
-    {
-        $this->baseNamespace = $baseNamespace;
-        $this->prefix = $prefix;
-        $this->plugin = $plugin;
+    public function __construct(
+        private string $baseNamespace,
+        private string $prefix,
+        private ?string $plugin = null
+    ) {
     }
 
     /**

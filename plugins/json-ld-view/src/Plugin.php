@@ -11,6 +11,23 @@ use MixerApi\Core\Response\ResponseModifier;
 class Plugin extends BasePlugin
 {
     /**
+     * Plugin name.
+     *
+     * @var string
+     */
+    protected $name = 'MixerApi/JsonLdView';
+
+    /**
+     * @var bool
+     */
+    protected $routes = false;
+
+    /**
+     * @var bool
+     */
+    protected $middleware = false;
+
+    /**
      * @var string
      */
     private const EXT = 'jsonld';

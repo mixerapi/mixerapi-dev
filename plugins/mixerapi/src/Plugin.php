@@ -12,6 +12,23 @@ use MixerApi\Command\InstallCommand;
 class Plugin extends BasePlugin
 {
     /**
+     * Plugin name.
+     *
+     * @var string
+     */
+    protected $name = 'MixerApi';
+
+    /**
+     * @var bool
+     */
+    protected $routes = false;
+
+    /**
+     * @var bool
+     */
+    protected $middleware = false;
+
+    /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
      * @return void
      */

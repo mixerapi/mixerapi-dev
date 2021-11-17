@@ -24,16 +24,10 @@ class RouteScanner
     ];
 
     /**
-     * @var \Cake\Routing\Router
-     */
-    private $router;
-
-    /**
      * @param \Cake\Routing\Router $router CakePHP Router instance
      */
-    public function __construct(Router $router)
+    public function __construct(private Router $router)
     {
-        $this->router = $router;
     }
 
     /**

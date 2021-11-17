@@ -9,14 +9,9 @@ use MixerApi\Rest\Lib\Controller\ControllerUtility;
 class ResourceScanner
 {
     /**
-     * @var string|null $baseNamespace
-     */
-    private $baseNamespace;
-
-    /**
      * @param string|null $baseNamespace a base name space (e.g. App or App\Controller\Sub)
      */
-    public function __construct(?string $baseNamespace = null)
+    public function __construct(private ?string $baseNamespace = null)
     {
         $this->baseNamespace = $baseNamespace ?? Configure::read('App.namespace') . '\Controller';
     }

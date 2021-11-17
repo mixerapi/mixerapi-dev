@@ -48,7 +48,7 @@ class JsonLdViewTest extends TestCase
         Router::connect('/:plugin/:controller/:action/*');
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $request = new ServerRequest([
             'url' => 'actors',
@@ -103,7 +103,7 @@ class JsonLdViewTest extends TestCase
         $this->assertEquals('/actors', $object->{'@id'});
     }
 
-    public function test_item()
+    public function test_item(): void
     {
         $controller = $this->getControllerForItem();
 
@@ -124,7 +124,7 @@ class JsonLdViewTest extends TestCase
         $this->assertIsArray($object->films);
     }
 
-    public function test_item_with_no_json_options()
+    public function test_item_with_no_json_options(): void
     {
         $controller = $this->getControllerForItem();
 

@@ -20,10 +20,7 @@ use ReflectionMethod;
  */
 class ReflectedControllerDecorator
 {
-    /**
-     * @var \ReflectionClass
-     */
-    private $reflectedController;
+    private ReflectionClass $reflectedController;
 
     /**
      * Can be instantiated with a fully qualified namespace or ReflectionClass instance
@@ -33,7 +30,7 @@ class ReflectedControllerDecorator
      * @throws \MixerApi\Rest\Lib\Exception\RunTimeException
      * @throws \MixerApi\Rest\Lib\Exception\InvalidControllerException
      */
-    public function __construct($controller)
+    public function __construct(mixed $controller)
     {
         if (is_string($controller)) {
             try {
@@ -63,7 +60,7 @@ class ReflectedControllerDecorator
      * App\Controller\SubResource\ActorsController, the output would be: ['SubResource']
      *
      * @param string $baseNamespace the base namespace (e.g. App\Controller)
-     * @return array
+     * @return string[]
      */
     public function getPaths(string $baseNamespace): array
     {

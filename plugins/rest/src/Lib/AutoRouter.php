@@ -10,22 +10,13 @@ use MixerApi\Rest\Lib\Route\ResourceScanner;
 class AutoRouter
 {
     /**
-     * @var \Cake\Routing\RouteBuilder
-     */
-    private $builder;
-
-    /**
-     * @var string|null
-     */
-    private $namespace;
-
-    /**
      * @param \Cake\Routing\RouteBuilder $builder RouteBuilder
      * @param string|null $namespace a namespace to build routes for (e.g. App\Controller)
      */
-    public function __construct(RouteBuilder $builder, ?string $namespace = null)
-    {
-        $this->builder = $builder;
+    public function __construct(
+        private RouteBuilder $builder,
+        private ?string $namespace = null
+    ) {
         $this->namespace = $namespace ?? Configure::read('App.namespace') . '\Controller';
     }
 

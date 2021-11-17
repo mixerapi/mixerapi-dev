@@ -55,7 +55,7 @@ class Create implements CreateInterface
         $entity = $table->save($entity);
 
         if (!$entity) {
-            throw new ResourceWriteException($entity, "Unable to save $this->tableName resource.");
+            throw new ResourceWriteException(null, "Unable to save $this->tableName resource.");
         }
 
         return $entity;

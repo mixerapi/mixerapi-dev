@@ -28,7 +28,7 @@ class InstallCommandTest extends TestCase
         @unlink(self::SRC_DIR . 'Controller' . DS . 'WelcomeController.php');
     }
 
-    public function test_interactive_install()
+    public function test_interactive_install(): void
     {
         $this->exec(
             'mixerapi install' .
@@ -40,7 +40,7 @@ class InstallCommandTest extends TestCase
         $this->filesExist();
     }
 
-    public function test_auto_install()
+    public function test_auto_install(): void
     {
         $this->exec(
             'mixerapi install' .
@@ -52,7 +52,7 @@ class InstallCommandTest extends TestCase
         $this->filesExist();
     }
 
-    public function test_abort_interactive_install()
+    public function test_abort_interactive_install(): void
     {
         $this->exec(
             'mixerapi install' .
@@ -64,7 +64,7 @@ class InstallCommandTest extends TestCase
         $this->assertExitError();
     }
 
-    private function filesExist()
+    private function filesExist(): void
     {
         $this->assertFileExists(self::CONFIG_DIR . 'swagger.yml');
         $this->assertFileEquals(
