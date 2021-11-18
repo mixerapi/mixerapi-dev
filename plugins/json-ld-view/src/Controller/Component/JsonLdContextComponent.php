@@ -15,10 +15,7 @@ use MixerApi\JsonLdView\JsonLdEntityContext;
 
 class JsonLdContextComponent extends Component
 {
-    /**
-     * @var array
-     */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry

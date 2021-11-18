@@ -19,7 +19,7 @@ class SerializableAssociation
      *
      * @var array
      */
-    private $associations = [];
+    private array $associations = [];
 
     /**
      * @param \Cake\Datasource\EntityInterface $entity Cake\ORM\Entity or an EntityInterface

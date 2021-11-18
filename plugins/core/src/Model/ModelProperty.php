@@ -10,27 +10,27 @@ class ModelProperty
     /**
      * @var string
      */
-    private $name = '';
+    private string $name = '';
 
     /**
      * @var string
      */
-    private $type = '';
+    private string $type = '';
 
     /**
      * @var string
      */
-    private $default = '';
+    private string $default = '';
 
     /**
      * @var bool
      */
-    private $isPrimaryKey = false;
+    private bool $isPrimaryKey = false;
 
     /**
-     * @var \Cake\Validation\ValidationSet
+     * @var \Cake\Validation\ValidationSet|null
      */
-    private $validationSet;
+    private ?ValidationSet $validationSet;
 
     /**
      * @return string
@@ -109,9 +109,9 @@ class ModelProperty
     }
 
     /**
-     * @return \Cake\Validation\ValidationSet
+     * @return \Cake\Validation\ValidationSet|null
      */
-    public function getValidationSet(): ValidationSet
+    public function getValidationSet(): ?ValidationSet
     {
         return $this->validationSet;
     }

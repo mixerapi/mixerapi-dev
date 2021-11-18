@@ -23,11 +23,12 @@ use PhpParser\PrettyPrinter\Standard;
 class RouteWriter
 {
     /**
-     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[] $resources ReflectedControllerDecorator[]
-     * @param string $baseNamespace a base namespace
+     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[] $resources An array of
+     * ReflectedControllerDecorator instances.
+     * @param string $baseNamespace A base namespace
      * @param string $configDir an absolute directory path to userland CakePHP config
      * @param string $prefix route prefix (e.g `/`)
-     * @param string $plugin route prefix (e.g `/`)
+     * @param string|null $plugin route prefix (e.g `/`)
      */
     public function __construct(
         private array $resources,

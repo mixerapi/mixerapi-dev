@@ -20,25 +20,13 @@ use ReflectionClass;
 
 class JsonLdVocabComponent extends Component
 {
-    /**
-     * @var array
-     */
-    private $data;
+    private ?array $data;
 
-    /**
-     * @var string
-     */
-    private $hydraPrefix = '';
+    private string $hydraPrefix = '';
 
-    /**
-     * @var array
-     */
-    private $config;
+    private ?array $config;
 
-    /**
-     * @var string
-     */
-    private $hydra = '';
+    private string $hydra = '';
 
     /**
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry

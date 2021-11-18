@@ -6,26 +6,17 @@ namespace MixerApi\JsonLdView;
 class JsonLdSchema
 {
     /**
-     * The entity property name
-     *
-     * @var string
+     * @param string $property The entity property name
+     * @param string $schemaUrl A URL that describes the property (e.g. https://schema.org/Person)
+     * @param string|null $description A description of the property
      */
-    private $property;
-
-    /**
-     * A URL that describes the property
-     *
-     * @example https://schema.org/Person
-     * @var string
-     */
-    private $schemaUrl;
-
-    /**
-     * A description of the property
-     *
-     * @var string
-     */
-    private $description = '';
+    public function __construct(
+        private string $property,
+        private string $schemaUrl,
+        private ?string $description = null
+    ) {
+        $this->setSchemaUrl($this->schemaUrl);
+    }
 
     /**
      * @return string
@@ -70,9 +61,9 @@ class JsonLdSchema
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

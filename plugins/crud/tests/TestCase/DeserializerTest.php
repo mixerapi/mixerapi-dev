@@ -9,7 +9,7 @@ use MixerApi\Crud\Deserializer;
 
 class DeserializerTest extends TestCase
 {
-    public function test_xml()
+    public function test_xml(): void
     {
         $request =
             (new ServerRequest([
@@ -19,7 +19,7 @@ class DeserializerTest extends TestCase
         $this->assertIsArray((new Deserializer())->deserialize($request));
     }
 
-    public function test_bad_request_exception()
+    public function test_bad_request_exception(): void
     {
         $this->expectException(BadRequestException::class);
 

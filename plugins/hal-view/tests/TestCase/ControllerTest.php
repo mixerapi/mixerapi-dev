@@ -24,7 +24,7 @@ class ControllerTest extends TestCase
         static::setAppNamespace('MixerApi\HalView\Test\App');
     }
 
-    public function testIndex()
+    public function test_index(): void
     {
         $this->get('/actors.haljson');
         $body = (string)$this->_response->getBody();

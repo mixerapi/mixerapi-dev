@@ -6,23 +6,11 @@ namespace MixerApi\ExceptionRender;
 class ErrorDecorator
 {
     /**
-     * @var array
-     */
-    private $viewVars;
-
-    /**
-     * @var array
-     */
-    private $serialize;
-
-    /**
      * @param array $viewVars viewVars
      * @param array $serialize serialize
      */
-    public function __construct(array $viewVars, array $serialize)
+    public function __construct(private array $viewVars, private array $serialize)
     {
-        $this->viewVars = $viewVars;
-        $this->serialize = $serialize;
     }
 
     /**

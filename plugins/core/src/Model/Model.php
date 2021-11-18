@@ -10,21 +10,6 @@ use Cake\ORM\Table;
 class Model
 {
     /**
-     * @var \Cake\Database\Schema\TableSchema
-     */
-    private $schema;
-
-    /**
-     * @var \Cake\ORM\Table
-     */
-    private $table;
-
-    /**
-     * @var \Cake\Datasource\EntityInterface
-     */
-    private $entity;
-
-    /**
      * @var \MixerApi\Core\Model\ModelProperty[]
      */
     private $properties = [];
@@ -35,13 +20,10 @@ class Model
      * @param \Cake\Datasource\EntityInterface $entity cake Entity instance
      */
     public function __construct(
-        TableSchema $schema,
-        Table $table,
-        EntityInterface $entity
+        private TableSchema $schema,
+        private Table $table,
+        private EntityInterface $entity
     ) {
-        $this->schema = $schema;
-        $this->table = $table;
-        $this->entity = $entity;
         $this->assignProperties();
     }
 

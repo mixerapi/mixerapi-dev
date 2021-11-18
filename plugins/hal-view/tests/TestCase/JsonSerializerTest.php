@@ -86,7 +86,7 @@ class JsonSerializerTest extends TestCase
             ->modify($this->request, new Response());
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
@@ -105,7 +105,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    public function test_item()
+    public function test_item(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->get(1, [
@@ -126,7 +126,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    public function test_get_data()
+    public function test_get_data(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();

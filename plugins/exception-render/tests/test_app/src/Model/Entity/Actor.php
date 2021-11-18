@@ -27,7 +27,7 @@ class Actor extends Entity
 
     /**
      * @param EntityInterface $entity
-     * @return array|\string[][]
+     * @return array
      */
     public function getHalLinks(EntityInterface $entity): array
     {

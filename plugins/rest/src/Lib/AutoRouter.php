@@ -10,8 +10,8 @@ use MixerApi\Rest\Lib\Route\ResourceScanner;
 class AutoRouter
 {
     /**
-     * @param \Cake\Routing\RouteBuilder $builder RouteBuilder
-     * @param string|null $namespace a namespace to build routes for (e.g. App\Controller)
+     * @param \Cake\Routing\RouteBuilder $builder CakePHP RouteBuilder
+     * @param string|null $namespace A namespace to build routes for (e.g. App\Controller)
      */
     public function __construct(
         private RouteBuilder $builder,

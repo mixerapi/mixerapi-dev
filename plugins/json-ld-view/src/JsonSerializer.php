@@ -21,38 +21,28 @@ use RuntimeException;
  */
 class JsonSerializer
 {
-    /**
-     * ServerRequest or null
-     *
-     * @var \Cake\Http\ServerRequest|null
-     */
-    private $request;
+    private ?ServerRequest $request;
 
-    /**
-     * PaginatorHelper or null
-     *
-     * @var \Cake\View\Helper\PaginatorHelper|null
-     */
-    private $paginator;
+    private ?PaginatorHelper $paginator;
 
     /**
      * JSON-LD data array
      *
-     * @var array
+     * @var array|null
      */
-    private $data;
+    private ?array $data;
 
     /**
      * JsonLd config
      *
-     * @var array
+     * @var array|null
      */
-    private $config;
+    private ?array $config;
 
     /**
      * @var string
      */
-    private $hydra = '';
+    private string $hydra = '';
 
     /**
      * If constructed without parameters collection meta data will not be added to JSON-LD $data
@@ -61,7 +51,7 @@ class JsonSerializer
      * @param \Cake\Http\ServerRequest|null $request optional ServerRequest
      * @param \Cake\View\Helper\PaginatorHelper|null $paginator optional PaginatorHelper
      */
-    public function __construct($serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
+    public function __construct(mixed $serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
     {
         $this->request = $request;
         $this->paginator = $paginator;
@@ -102,9 +92,9 @@ class JsonSerializer
     /**
      * Get JSON-LD data as an array
      *
-     * @return array
+     * @return array|null
      */
-    public function getData()
+    public function getData(): ?array
     {
         return $this->data;
     }
@@ -116,7 +106,7 @@ class JsonSerializer
      * @param mixed $mixed data to be serialized
      * @return array|\Cake\Datasource\EntityInterface|\Cake\ORM\ResultSet
      */
-    private function recursion(&$mixed)
+    private function recursion(mixed &$mixed): mixed
     {
         if ($mixed instanceof ResultSet || is_array($mixed)) {
             foreach ($mixed as $x => $item) {
@@ -141,7 +131,7 @@ class JsonSerializer
      * @param mixed $jsonLd the data to be converted into a JSON-LD array
      * @return array
      */
-    private function collection($jsonLd): array
+    private function collection(mixed $jsonLd): array
     {
         $return = [];
 
@@ -192,7 +182,7 @@ class JsonSerializer
      * @param mixed $jsonLd the data to be converted into a JSON-LD array
      * @return array
      */
-    private function item($jsonLd): array
+    private function item(mixed $jsonLd): array
     {
         $links = [];
 

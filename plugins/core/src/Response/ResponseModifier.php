@@ -11,41 +11,14 @@ use Cake\Http\ServerRequest;
 class ResponseModifier
 {
     /**
-     * Type Alias that will be used to modify the response
-     *
-     * @example `jsonld` or `hal+json`
-     * @var string
+     * @param string $type Type Alias that will be used to modify the response. Example: jsonld or hal+json
+     * @param array $mimeTypes MIME Type mapping array, these are the mime type's associated with the type alias.
+     * For example, jsonld has a mime type mapping of ['application/ld+json']. Some type aliases can be associated
+     * with multiple mime types, which are requested via the HTTP Header `accepts`. Example: ['application/ld+json']
+     * @param string $viewClass The View Class associated with $this->type alias. Example: MixerApi/JsonLdView.JsonLd
      */
-    private $type;
-
-    /**
-     * MIME Type mapping array, these are the mime type's associated with the type alias. For example, jsonld has a
-     * mime type mapping of ['application/ld+json']. Some type aliases can be associated with multiple mime types,
-     * which are requested via the HTTP Header `accepts`.
-     *
-     * @example `['application/ld+json']`
-     * @var string[]
-     */
-    private $mimeTypes;
-
-    /**
-     * The View Class associated with $this->type alias
-     *
-     * @example MixerApi/JsonLdView.JsonLd
-     * @var string
-     */
-    private $viewClass;
-
-    /**
-     * @param string $type mime type alias (extension)
-     * @param array $mimeTypes mime type mapping array
-     * @param string $viewClass view class
-     */
-    public function __construct(string $type, array $mimeTypes, string $viewClass)
+    public function __construct(private string $type, private array $mimeTypes, private string $viewClass)
     {
-        $this->type = $type;
-        $this->mimeTypes = $mimeTypes;
-        $this->viewClass = $viewClass;
     }
 
     /**

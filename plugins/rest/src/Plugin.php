@@ -5,7 +5,6 @@ namespace MixerApi\Rest;
 
 use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
-use Cake\Core\PluginApplicationInterface;
 use MixerApi\Rest\Command as Commands;
 
 /**
@@ -23,23 +22,32 @@ class Plugin extends BasePlugin
     protected $name = 'MixerApi/Rest';
 
     /**
+     * Do bootstrapping or not
+     *
      * @var bool
      */
-    protected $routes = false;
+    protected $bootstrapEnabled = false;
 
     /**
+     * Enable middleware
+     *
      * @var bool
      */
-    protected $middleware = false;
+    protected $middlewareEnabled = false;
 
     /**
-     * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
-     * @return void
+     * Register container services
+     *
+     * @var bool
      */
-    public function bootstrap(PluginApplicationInterface $app): void
-    {
-        parent::bootstrap($app);
-    }
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
 
     /**
      * @param \Cake\Console\CommandCollection $commands CommandCollection

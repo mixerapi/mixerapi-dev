@@ -70,7 +70,7 @@ class Address extends Entity implements JsonLdDataInterface
 
     /**
      * @param EntityInterface $entity
-     * @return array|\string[][]
+     * @return string
      */
     public function getJsonLdIdentifier(EntityInterface $entity): string
     {

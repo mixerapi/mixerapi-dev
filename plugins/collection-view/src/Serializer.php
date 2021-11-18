@@ -13,31 +13,21 @@ use RuntimeException;
 
 class Serializer
 {
-    /**
-     * ServerRequest or null
-     *
-     * @var \Cake\Http\ServerRequest|null
-     */
-    private $request;
+    private ?ServerRequest $request;
 
-    /**
-     * PaginatorHelper or null
-     *
-     * @var \Cake\View\Helper\PaginatorHelper|null
-     */
-    private $paginator;
+    private ?PaginatorHelper $paginator;
 
     /**
      * serialized data
      *
      * @var array
      */
-    private $data;
+    private mixed $data;
 
     /**
      * @var array
      */
-    private $config;
+    private array $config;
 
     /**
      * If constructed without parameters collection meta data will not be added to HAL $data
@@ -46,7 +36,7 @@ class Serializer
      * @param \Cake\Http\ServerRequest|null $request optional ServerRequest
      * @param \Cake\View\Helper\PaginatorHelper|null $paginator optional PaginatorHelper
      */
-    public function __construct($serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
+    public function __construct(mixed $serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
     {
         $this->request = $request;
         $this->paginator = $paginator;
@@ -91,9 +81,9 @@ class Serializer
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->data;
     }

@@ -7,17 +7,9 @@ use MixerApi\Core\Model\Model;
 
 class JsonLdEntityContext
 {
-    /**
-     * @var \MixerApi\Core\Model\Model
-     */
-    private $model;
+    private Model $model;
 
-    /**
-     * A key-value array where key is the property and value is the url
-     *
-     * @var array
-     */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @param \MixerApi\Core\Model\Model $model an instance of Model

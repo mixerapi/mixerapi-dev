@@ -18,14 +18,32 @@ class Plugin extends BasePlugin
     protected $name = 'MixerApi/JsonLdView';
 
     /**
+     * Console middleware
+     *
      * @var bool
      */
-    protected $routes = false;
+    protected $consoleEnabled = false;
 
     /**
+     * Enable middleware
+     *
      * @var bool
      */
-    protected $middleware = false;
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
 
     /**
      * @var string

@@ -19,14 +19,25 @@ class Plugin extends BasePlugin
     protected $name = 'MixerApi';
 
     /**
+     * Enable middleware
+     *
      * @var bool
      */
-    protected $routes = false;
+    protected $middlewareEnabled = false;
 
     /**
+     * Register container services
+     *
      * @var bool
      */
-    protected $middleware = false;
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
 
     /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
