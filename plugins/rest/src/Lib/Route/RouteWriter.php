@@ -14,11 +14,7 @@ use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 
 /**
- * Class RouteWriter
- *
- * Writes routes to `config/routes.php`
- *
- * @package MixerApi\Rest\Lib\Route
+ * RouteWriter adds routes to the applications `config/routes.php`.
  */
 class RouteWriter
 {

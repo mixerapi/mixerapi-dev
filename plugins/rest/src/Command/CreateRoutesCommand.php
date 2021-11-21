@@ -15,9 +15,7 @@ use MixerApi\Rest\Lib\Route\RouteDecoratorFactory;
 use MixerApi\Rest\Lib\Route\RouteWriter;
 
 /**
- * Class RouteCommand
- *
- * @package SwaggerBake\Command
+ * Write routes to your `config/routes.php` file.
  */
 class CreateRoutesCommand extends Command
 {
@@ -109,7 +107,7 @@ class CreateRoutesCommand extends Command
 
         $routeDecorators = [];
 
-        $factory = new RouteDecoratorFactory($namespace, $prefix, $args->getOption('plugin'));
+        $factory = new RouteDecoratorFactory($namespace, $args->getOption('plugin'));
         foreach ($decoratedControllers as $decorator) {
             $routeDecorators = array_merge(
                 $routeDecorators,

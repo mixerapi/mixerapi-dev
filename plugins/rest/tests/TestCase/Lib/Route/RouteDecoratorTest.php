@@ -18,7 +18,6 @@ class RouteDecoratorTest extends TestCase
         $decorator = new RouteDecorator(
             RouteFactory::create(
                 'MixerApi\Rest\Test\App\Controller',
-                '/',
                 new ReflectedControllerDecorator('MixerApi\Rest\Test\App\Controller\ActorsController'),
                 $action
             )

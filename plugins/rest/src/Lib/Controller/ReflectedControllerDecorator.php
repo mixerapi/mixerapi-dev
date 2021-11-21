@@ -12,11 +12,7 @@ use ReflectionException;
 use ReflectionMethod;
 
 /**
- * Class ReflectedControllerDecorator
- *
- * Decorates an instance of a CakePHP Controller as a ReflectedClass
- *
- * @package MixerApi\Rest\Lib\Controller
+ * Decorates an instance of a CakePHP Controller
  */
 class ReflectedControllerDecorator
 {

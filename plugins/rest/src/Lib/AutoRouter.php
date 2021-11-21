@@ -7,6 +7,9 @@ use Cake\Core\Configure;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\Route\ResourceScanner;
 
+/**
+ * Builds RESTful route resources
+ */
 class AutoRouter
 {
     /**
@@ -21,7 +24,7 @@ class AutoRouter
     }
 
     /**
-     * Builds RESTful route resources
+     * Scans Controllers in `$this->namespace` and builds CRUD routes as RESTful resources.
      *
      * @return void
      * @throws \ReflectionException

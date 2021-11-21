@@ -7,33 +7,48 @@ use Cake\Routing\Route\Route;
 use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 
 /**
- * Class RouteDecorator
- *
- * Decorates a Cake\Routing\Route\Route instance
- *
- * @package MixerApi\Rest\Lib
+ * RouteDecorator decorates the CakePHP Route class to provide meta-data on the route such as its Controller, action
+ * method, etc... in an object-oriented way. This is an improvement on the key-value Route::defaults that CakePHP uses.
  */
 class RouteDecorator
 {
+    /**
+     * @var \Cake\Routing\Route\Route The CakePHP Route that is being decorated.
+     */
     private Route $route;
 
+    /**
+     * @var string|null The Route name as given by CakePHP Route.
+     */
     private ?string $name;
 
+    /**
+     * @var string|null The Plugin a Route is associated with.
+     */
     private ?string $plugin;
 
+    /**
+     * @var string|null The Controller a Route is associated with.
+     */
     private ?string $controller;
 
+    /**
+     * @var string|null The Controller Action (method) the route calls.
+     */
     private ?string $action;
 
     /**
-     * @var string[]
+     * @var string[] An array of HTTP Methods (e.g. POST, PATCH, GET)
      */
     private array $methods = [];
 
+    /**
+     * @var string|null The Route template
+     */
     private ?string $template;
 
     /**
-     * @param \Cake\Routing\Route\Route $route CakePHP Route
+     * @param \Cake\Routing\Route\Route $route A CakePHP Route that will be decorated.
      */
     public function __construct(Route $route)
     {
