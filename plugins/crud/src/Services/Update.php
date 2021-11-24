@@ -8,10 +8,13 @@ use Cake\Datasource\EntityInterface;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Deserializer;
+use MixerApi\Crud\DeserializerInterface;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\UpdateInterface;
 
 /**
+ * Implements UpdateInterface and updates records.
+ *
  * @experimental
  */
 class Update implements UpdateInterface
@@ -19,29 +22,15 @@ class Update implements UpdateInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
-     */
-    private $locator;
-
-    /**
-     * @var \MixerApi\Crud\Services\Read
-     */
-    private $read;
-
-    /**
-     * @var \MixerApi\Crud\Deserializer
-     */
-    private $deserializer;
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     * @param \MixerApi\Crud\Services\Read|null $read read service
-     * @param \MixerApi\Crud\Deserializer|null $deserializer deserializer
+     * @param \Cake\ORM\Locator\LocatorInterface|null $locator LocatorInterface to locate the table.
+     * @param \MixerApi\Crud\Services\Read|null $read The Read service that will find the record to be updated.
+     * @param \MixerApi\Crud\DeserializerInterface|null $deserializer The DeserializerInterface used to deserialize
+     * the request body.
      */
     public function __construct(
-        ?LocatorInterface $locator = null,
-        ?Read $read = null,
-        ?Deserializer $deserializer = null
+        private ?LocatorInterface $locator = null,
+        private ?Read $read = null,
+        private ?DeserializerInterface $deserializer = null
     ) {
         $this->locator = $locator ?? TableRegistry::getTableLocator();
         $this->read = $read ?? new Read();

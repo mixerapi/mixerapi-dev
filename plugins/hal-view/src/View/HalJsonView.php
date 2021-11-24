@@ -10,9 +10,11 @@ use MixerApi\HalView\JsonSerializer;
 /**
  * A view class that is used for HAL+JSON responses.
  *
- * @see http://stateless.co/hal_specification.html
- * @see https://apigility.org/documentation/api-primer/halprimer
+ * @link http://stateless.co/hal_specification.html
+ * @link https://apigility.org/documentation/api-primer/halprimer
  * @SuppressWarnings(PHPMD)
+ * @uses \Cake\Core\Configure
+ * @uses \MixerApi\HalView\JsonSerializer
  */
 class HalJsonView extends JsonView
 {

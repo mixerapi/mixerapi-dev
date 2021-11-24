@@ -18,7 +18,10 @@ use RuntimeException;
 /**
  * Creates a HAL+JSON resource
  *
- * @see https://tools.ietf.org/html/draft-kelly-json-hal-06
+ * @link https://tools.ietf.org/html/draft-kelly-json-hal-06
+ * @uses \Cake\Utility\Inflector
+ * @uses \MixerApi\Core\View\SerializableAssociation
+ * @uses ReflectionClass
  */
 class JsonSerializer
 {

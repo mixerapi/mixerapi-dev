@@ -16,6 +16,13 @@ use MixerApi\Rest\Lib\Route\RouteWriter;
 
 /**
  * Write routes to your `config/routes.php` file.
+ *
+ * @uses \Cake\Core\Configure
+ * @uses \Cake\Utility\Inflector
+ * @uses \MixerApi\Rest\Lib\Controller\ControllerUtility
+ * @uses \MixerApi\Rest\Lib\Route\ResourceScanner
+ * @uses \MixerApi\Rest\Lib\Route\RouteDecoratorFactory
+ * @uses \MixerApi\Rest\Lib\Route\RouteWriter
  */
 class CreateRoutesCommand extends Command
 {
@@ -133,7 +140,7 @@ class CreateRoutesCommand extends Command
         if ($args->getOption('plugin')) {
             $plugins = Configure::read('App.paths.plugins');
 
-            return $configDir = reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
+            return reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
         }
 
         if (!defined('CONFIG')) {

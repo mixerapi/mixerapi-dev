@@ -15,20 +15,28 @@ use PhpParser\PrettyPrinter\Standard;
 
 /**
  * RouteWriter adds routes to the applications `config/routes.php`.
+ *
+ * @uses \MixerApi\Rest\Lib\Parser\RouteScopeFinder
+ * @uses \MixerApi\Rest\Lib\Parser\RouteScopeModifier
+ * @uses \PhpParser\Node
+ * @uses \PhpParser\NodeFinder
+ * @uses \PhpParser\NodeTraverser
+ * @uses \PhpParser\ParserFactory
+ * @uses \PhpParser\PrettyPrinter\Standard
  */
 class RouteWriter
 {
     /**
      * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[] $resources An array of
      * ReflectedControllerDecorator instances.
-     * @param string $baseNamespace A base namespace
+     * @param string $namespace A base namespace
      * @param string $configDir an absolute directory path to userland CakePHP config
      * @param string $prefix route prefix (e.g `/`)
      * @param string|null $plugin route prefix (e.g `/`)
      */
     public function __construct(
         private array $resources,
-        private string $baseNamespace,
+        private string $namespace,
         private string $configDir,
         private string $prefix,
         private ?string $plugin = null
@@ -94,9 +102,9 @@ class RouteWriter
     /**
      * @return string
      */
-    public function getBaseNamespace(): string
+    public function getNamespace(): string
     {
-        return $this->baseNamespace;
+        return $this->namespace;
     }
 
     /**

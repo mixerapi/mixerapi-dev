@@ -17,7 +17,10 @@ use MixerApi\Crud\Services\Search;
 use MixerApi\Crud\Services\Update;
 
 /**
+ * The CRUD Service Provider.
+ *
  * @experimental
+ * @link https://book.cakephp.org/4/en/development/dependency-injection.html
  */
 class CrudServiceProvider extends ServiceProvider
 {

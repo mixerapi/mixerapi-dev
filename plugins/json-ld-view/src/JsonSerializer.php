@@ -16,8 +16,9 @@ use RuntimeException;
 /**
  * Creates a JSON-LD resource
  *
- * @see https://json-ld.org/
- * @see https://lists.w3.org/Archives/Public/public-hydra/2015Oct/0163.html
+ * @uses \MixerApi\Core\View\SerializableAssociation
+ * @link https://json-ld.org/
+ * @link https://lists.w3.org/Archives/Public/public-hydra/2015Oct/0163.html
  */
 class JsonSerializer
 {

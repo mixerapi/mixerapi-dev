@@ -11,6 +11,9 @@ use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 
 /**
  * RouteFactory creates a CakePHP route from a Controller. This is used by AutoRouter to create routes at run-time.
+ *
+ * @uses \Cake\Utility\Inflector
+ * @uses \Cake\Utility\Text
  */
 class RouteFactory
 {

@@ -17,7 +17,18 @@ use MixerApi\JsonLdView\JsonLdDataInterface;
 use MixerApi\JsonLdView\JsonLdEntityContext;
 use MixerApi\JsonLdView\JsonLdSchema;
 use ReflectionClass;
+use RuntimeException;
 
+/**
+ * Builds JSON-LD vocab for entities in your API.
+ *
+ * @link https://json-ld.org/learn.html
+ * @uses \Cake\Collection\Collection
+ * @uses \MixerApi\Core\Model\ModelFactory
+ * @uses \MixerApi\Core\Utility\NamespaceUtility
+ * @uses \MixerApi\JsonLdView\JsonLdEntityContext
+ * @uses ReflectionClass
+ */
 class JsonLdVocabComponent extends Component
 {
     private ?array $data;
@@ -69,7 +80,7 @@ class JsonLdVocabComponent extends Component
         $connection = ConnectionManager::get('default');
 
         if (!$connection instanceof Connection) {
-            throw new \RuntimeException('Unable to get Database Connection instance');
+            throw new RuntimeException('Unable to get Database Connection instance');
         }
 
         $tables = NamespaceUtility::findClasses(Configure::read('App.namespace') . '\Model\Table');

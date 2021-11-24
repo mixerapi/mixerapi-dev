@@ -36,4 +36,12 @@ class ResourceScanner
             return $controller->hasCrud();
         }));
     }
+
+    /**
+     * @return string
+     */
+    public function getNamespace(): string
+    {
+        return $this->namespace;
+    }
 }

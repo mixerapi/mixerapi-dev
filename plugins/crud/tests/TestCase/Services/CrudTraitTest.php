@@ -17,10 +17,4 @@ class CrudTraitTest extends TestCase
     {
         $this->assertInstanceOf(Delete::class, (new Delete())->setAllowMethod('post'));
     }
-
-    public function test_set_allow_methods_invalid_arg_exception(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        (new Delete())->setAllowMethod(true);
-    }
 }

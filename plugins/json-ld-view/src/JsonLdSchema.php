@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace MixerApi\JsonLdView;
 
+use InvalidArgumentException;
+
+/**
+ * Describes JSON-LD Schema for a property.
+ */
 class JsonLdSchema
 {
     /**
@@ -52,7 +57,7 @@ class JsonLdSchema
     public function setSchemaUrl(string $schemaUrl)
     {
         if (!filter_var($schemaUrl, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException("schema url must be a valid url, but `$schemaUrl` is not");
+            throw new InvalidArgumentException("schema url must be a valid url, but `$schemaUrl` is not");
         }
 
         $this->schemaUrl = $schemaUrl;

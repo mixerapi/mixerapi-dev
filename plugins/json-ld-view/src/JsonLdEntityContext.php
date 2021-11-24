@@ -5,6 +5,12 @@ namespace MixerApi\JsonLdView;
 
 use MixerApi\Core\Model\Model;
 
+/**
+ * Provides context for a JSON-LD entity. This class will document schema.org values from the entities properties when
+ * possible.
+ *
+ * @uses SchemaMapper
+ */
 class JsonLdEntityContext
 {
     private Model $model;
@@ -20,7 +26,8 @@ class JsonLdEntityContext
     }
 
     /**
-     * Returns $this->data which is a key-value array containing a property and url.
+     * Returns $this->data which is a key-value array containing a property, schema.org url, and an optional
+     * description.
      *
      * @return array
      */

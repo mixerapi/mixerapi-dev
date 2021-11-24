@@ -3,52 +3,50 @@ declare(strict_types=1);
 
 namespace MixerApi\Rest\Lib;
 
-use Cake\Core\Configure;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\Route\ResourceScanner;
 
 /**
- * Builds RESTful route resources
+ * Builds RESTful CRUD route resources.
  */
 class AutoRouter
 {
     /**
      * @param \Cake\Routing\RouteBuilder $builder CakePHP RouteBuilder
-     * @param string|null $namespace A namespace to build routes for (e.g. App\Controller)
+     * @param \MixerApi\Rest\Lib\Route\ResourceScanner|null $scanner An instance of ResourceScanner, if none is
+     * supplied a scanner will be created.
      */
     public function __construct(
-        private RouteBuilder $builder,
-        private ?string $namespace = null
+        private ?RouteBuilder $builder,
+        private ?ResourceScanner $scanner = null,
     ) {
-        $this->namespace = $namespace ?? Configure::read('App.namespace') . '\Controller';
+        $this->scanner = $this->scanner ?? new ResourceScanner();
     }
 
     /**
-     * Scans Controllers in `$this->namespace` and builds CRUD routes as RESTful resources.
+     * Builds RESTful resources for controllers found by ResourceScanner.
      *
      * @return void
      * @throws \ReflectionException
      */
     public function buildResources(): void
     {
-        $resources = (new ResourceScanner($this->namespace))->getControllerDecorators();
-
-        foreach ($resources as $resource) {
-            $routeNames = $resource->findCrudRoutes();
+        foreach ($this->scanner->getControllerDecorators() as $decorator) {
+            $routeNames = $decorator->findCrudRoutes();
             if (empty($routeNames)) {
                 continue;
             }
 
-            $paths = $resource->getPaths($this->namespace);
+            $paths = $decorator->getPaths($this->scanner->getNamespace());
             if (empty($paths)) {
-                $this->builder->resources($resource->getResourceName(), [
+                $this->builder->resources($decorator->getResourceName(), [
                     'only' => $routeNames,
                 ]);
                 continue;
             }
 
-            $this->builder->resources($resource->getResourceName(), [
-                'path' => $resource->getPathTemplate($this->namespace),
+            $this->builder->resources($decorator->getResourceName(), [
+                'path' => $decorator->getPathTemplate($this->scanner->getNamespace()),
                 'prefix' => end($paths),
                 'only' => $routeNames,
             ]);

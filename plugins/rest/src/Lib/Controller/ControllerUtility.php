@@ -11,6 +11,10 @@ use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
 
 /**
  * Utilities for working with CakePHP controllers.
+ *
+ * @uses \Cake\Cache\Engine\NullEngine
+ * @uses \Cake\Core\Configure
+ * @uses \TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer
  */
 class ControllerUtility
 {
