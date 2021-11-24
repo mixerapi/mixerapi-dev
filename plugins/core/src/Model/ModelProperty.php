@@ -5,6 +5,10 @@ namespace MixerApi\Core\Model;
 
 use Cake\Validation\ValidationSet;
 
+/**
+ * This acts as a decorator of sorts for CakePHP model properties. It provides an object-oriented way to access data
+ * about an entities properties and validation rule sets applied to the specific database field.
+ */
 class ModelProperty
 {
     /**

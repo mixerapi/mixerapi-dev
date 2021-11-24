@@ -7,6 +7,11 @@ use Cake\Database\Schema\TableSchema;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+/**
+ * Builds ModelProperty
+ *
+ * @see ModelProperty
+ */
 class ModelPropertyFactory
 {
     /**

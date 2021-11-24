@@ -7,6 +7,10 @@ use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Table;
 
+/**
+ * This acts as a decorator of sorts for CakePHP models by providing an easy way to access a models Table,
+ * TableSchema, and Entity.
+ */
 class Model
 {
     /**

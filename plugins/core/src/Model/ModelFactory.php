@@ -6,6 +6,11 @@ namespace MixerApi\Core\Model;
 use Cake\Datasource\ConnectionInterface;
 use Cake\ORM\Table;
 
+/**
+ * Builds a Model
+ *
+ * @see Model
+ */
 class ModelFactory
 {
     /**

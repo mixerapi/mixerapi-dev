@@ -6,8 +6,8 @@ namespace MixerApi\Core\View;
 use Cake\Datasource\EntityInterface;
 
 /**
- * This class checks a Cake\ORM\Entity for properties that can be serialize and returns a key-value pair. The following
- * properties are ignored:
+ * This class checks a Cake\ORM\Entity for properties that can be serialized and returns a key-value pair. The
+ * following properties are ignored:
  *
  * - That begin with an underscore "_"
  * - Values that are not one of: array or EntityInterface
@@ -22,7 +22,7 @@ class SerializableAssociation
     private array $associations = [];
 
     /**
-     * @param \Cake\Datasource\EntityInterface $entity Cake\ORM\Entity or an EntityInterface
+     * @param \Cake\Datasource\EntityInterface $entity The Entity to be checked for properties that can be serialized
      */
     public function __construct(EntityInterface $entity)
     {

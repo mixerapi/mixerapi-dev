@@ -11,6 +11,13 @@ use Cake\Utility\Xml;
 use Cake\View\Helper\PaginatorHelper;
 use RuntimeException;
 
+/**
+ * Serializes the CollectionView into either JSON or XML.
+ *
+ * @uses \Adbar\Dot
+ * @uses \Cake\Core\Configure
+ * @uses \Cake\Utility\Xml
+ */
 class Serializer
 {
     private ?ServerRequest $request;
@@ -123,11 +130,11 @@ class Serializer
         }
 
         if ($this->paginator instanceof PaginatorHelper) {
-            $return[$collection][$next] = (string)$this->paginator->next();
-            $return[$collection][$prev] = (string)$this->paginator->prev();
-            $return[$collection][$first] = (string)$this->paginator->first();
-            $return[$collection][$last] = (string)$this->paginator->last();
-            $return[$collection][$pages] = intval($this->paginator->total());
+            $return[$collection][$next] = $this->paginator->next();
+            $return[$collection][$prev] = $this->paginator->prev();
+            $return[$collection][$first] = $this->paginator->first();
+            $return[$collection][$last] = $this->paginator->last();
+            $return[$collection][$pages] = $this->paginator->total();
             $return[$collection][$total] = intval($this->paginator->param('count'));
         }
 
