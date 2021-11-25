@@ -62,7 +62,7 @@ any CRUD methods, then the route will be skipped. AutoRouting works for plugins 
 
 ```php
 # in your plugins/{PluginName}/routes.php file
-(new AutoRouter($builder, 'MyPlugin\Controller'))->buildResources();
+(new AutoRouter($builder, new ResourceScanner('MyPlugin\Controller')))->buildResources();
 ```
 
 ## Create Routes

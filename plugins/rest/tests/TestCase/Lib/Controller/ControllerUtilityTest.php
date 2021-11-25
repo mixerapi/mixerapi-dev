@@ -8,7 +8,7 @@ use MixerApi\Rest\Lib\Exception\RunTimeException;
 
 class ControllerUtilityTest extends TestCase
 {
-    public function testGetControllersFqn()
+    public function test_get_controllers_fqn(): void
     {
         $this->assertIsArray(ControllerUtility::getControllersFqn('MixerApi\Rest\Test\App'));
     }

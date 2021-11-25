@@ -8,7 +8,7 @@ use MixerApi\Crud\Services\Delete;
 
 class DeleteTest extends TestCase
 {
-    public function test_respond()
+    public function test_respond(): void
     {
         $this->assertInstanceOf(Response::class, (new Delete())->respond(204, (new Response())));
     }

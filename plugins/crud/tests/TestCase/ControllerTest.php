@@ -26,7 +26,7 @@ class ControllerTest extends TestCase
         static::setAppNamespace('MixerApi\Crud\Test\App');
     }
 
-    public function test_index()
+    public function test_index(): void
     {
         $this->get('/actors.json');
         $this->assertResponseOk();
@@ -36,7 +36,7 @@ class ControllerTest extends TestCase
         $this->assertNotEmpty($array);
     }
 
-    public function test_view()
+    public function test_view(): void
     {
         $this->get('/actors/1.json');
         $this->assertResponseOk();
@@ -46,7 +46,7 @@ class ControllerTest extends TestCase
         $this->assertEquals(1, $object->id);
     }
 
-    public function test_add()
+    public function test_add(): void
     {
         $this->post('/actors.json', [
             'last_name' => 'ever',
@@ -59,7 +59,7 @@ class ControllerTest extends TestCase
         $this->assertEquals('ever', $object->last_name);
     }
 
-    public function test_add_fails()
+    public function test_add_fails(): void
     {
         $this->post('/actors.json', [
             'last_name' => '',
@@ -68,7 +68,7 @@ class ControllerTest extends TestCase
         $this->assertResponseCode(500);
     }
 
-    public function test_edit()
+    public function test_edit(): void
     {
         $this->patch('/actors/1.json', [
             'last_name' => 'ever',
@@ -81,7 +81,7 @@ class ControllerTest extends TestCase
         $this->assertEquals('ever', $object->last_name);
     }
 
-    public function test_edit_fails()
+    public function test_edit_fails(): void
     {
         $this->patch('/actors/1.json', [
             'last_name' => '',
@@ -90,7 +90,7 @@ class ControllerTest extends TestCase
         $this->assertResponseCode(500);
     }
 
-    public function test_delete()
+    public function test_delete(): void
     {
         $this->delete('/actors/1.json');
         $this->assertResponseCode(204);

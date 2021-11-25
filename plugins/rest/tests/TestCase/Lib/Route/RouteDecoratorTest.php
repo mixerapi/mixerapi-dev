@@ -11,14 +11,13 @@ use MixerApi\Rest\Lib\Route\RouteFactory;
 
 class RouteDecoratorTest extends TestCase
 {
-    public function testConstruct()
+    public function test_construct(): void
     {
         $action = 'index';
 
         $decorator = new RouteDecorator(
             RouteFactory::create(
                 'MixerApi\Rest\Test\App\Controller',
-                '/',
                 new ReflectedControllerDecorator('MixerApi\Rest\Test\App\Controller\ActorsController'),
                 $action
             )

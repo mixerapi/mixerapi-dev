@@ -8,7 +8,7 @@ use MixerApi\ExceptionRender\ValidationException;
 
 class MixerApiExceptionRenderTest extends TestCase
 {
-    public function test_get_error()
+    public function test_get_error(): void
     {
         $this->assertInstanceOf(
             ValidationException::class,

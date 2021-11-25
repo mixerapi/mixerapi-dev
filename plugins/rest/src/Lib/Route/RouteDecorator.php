@@ -7,51 +7,48 @@ use Cake\Routing\Route\Route;
 use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 
 /**
- * Class RouteDecorator
- *
- * Decorates a Cake\Routing\Route\Route instance
- *
- * @package MixerApi\Rest\Lib
+ * RouteDecorator decorates the CakePHP Route class to provide meta-data on the route such as its Controller, action
+ * method, etc... in an object-oriented way. This is an improvement on the key-value Route::defaults that CakePHP uses.
  */
 class RouteDecorator
 {
     /**
-     * @var \Cake\Routing\Route\Route
+     * @var \Cake\Routing\Route\Route The CakePHP Route that is being decorated.
      */
-    private $route;
+    private Route $route;
 
     /**
-     * @var string|null
+     * @var string|null The Route name as given by CakePHP Route.
      */
-    private $name;
+    private ?string $name;
 
     /**
-     * @var string|null
+     * @var string|null The Plugin a Route is associated with.
      */
-    private $plugin;
+    private ?string $plugin;
 
     /**
-     * @var string|null
+     * @var string|null The Controller a Route is associated with.
      */
-    private $controller;
+    private ?string $controller;
 
     /**
-     * @var string|null
+     * @var string|null The Controller Action (method) the route calls.
      */
-    private $action;
+    private ?string $action;
 
     /**
-     * @var array
+     * @var string[] An array of HTTP Methods (e.g. POST, PATCH, GET)
      */
-    private $methods = [];
+    private array $methods = [];
 
     /**
-     * @var string|null
+     * @var string|null The Route template
      */
-    private $template;
+    private ?string $template;
 
     /**
-     * @param \Cake\Routing\Route\Route $route CakePHP Route
+     * @param \Cake\Routing\Route\Route $route A CakePHP Route that will be decorated.
      */
     public function __construct(Route $route)
     {
@@ -174,7 +171,7 @@ class RouteDecorator
     }
 
     /**
-     * @return array
+     * @return string[] An array of HTTP methods (e.g. PUT, POST, PATCH, GET, DELETE)
      */
     public function getMethods(): array
     {
@@ -182,7 +179,7 @@ class RouteDecorator
     }
 
     /**
-     * @param array $methods HTTP methods (e.g PUT, POST, PATCH, GET, DELETE)
+     * @param string[] $methods HTTP methods (e.g. PUT, POST, PATCH, GET, DELETE)
      * @return $this
      */
     public function setMethods(array $methods)

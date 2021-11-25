@@ -5,32 +5,36 @@ namespace MixerApi\Core\Model;
 
 use Cake\Validation\ValidationSet;
 
+/**
+ * This acts as a decorator of sorts for CakePHP model properties. It provides an object-oriented way to access data
+ * about an entities properties and validation rule sets applied to the specific database field.
+ */
 class ModelProperty
 {
     /**
      * @var string
      */
-    private $name = '';
+    private string $name = '';
 
     /**
      * @var string
      */
-    private $type = '';
+    private string $type = '';
 
     /**
      * @var string
      */
-    private $default = '';
+    private string $default = '';
 
     /**
      * @var bool
      */
-    private $isPrimaryKey = false;
+    private bool $isPrimaryKey = false;
 
     /**
-     * @var \Cake\Validation\ValidationSet
+     * @var \Cake\Validation\ValidationSet|null
      */
-    private $validationSet;
+    private ?ValidationSet $validationSet;
 
     /**
      * @return string
@@ -109,9 +113,9 @@ class ModelProperty
     }
 
     /**
-     * @return \Cake\Validation\ValidationSet
+     * @return \Cake\Validation\ValidationSet|null
      */
-    public function getValidationSet(): ValidationSet
+    public function getValidationSet(): ?ValidationSet
     {
         return $this->validationSet;
     }

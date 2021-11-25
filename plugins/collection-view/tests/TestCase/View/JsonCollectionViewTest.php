@@ -28,7 +28,7 @@ class JsonCollectionViewTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $controller = (new ControllerFactory())->build();
 
@@ -56,7 +56,7 @@ class JsonCollectionViewTest extends TestCase
         $this->assertIsArray($actor->films);
     }
 
-    public function test_collection_with_no_json_options()
+    public function test_collection_with_no_json_options(): void
     {
         $controller = (new ControllerFactory())->build();
 

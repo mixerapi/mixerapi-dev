@@ -31,7 +31,7 @@ class ControllerTest extends TestCase
         ]);
     }
 
-    public function test_validation_exception()
+    public function test_validation_exception(): void
     {
         $this->post('/actors.json', [
             'first_name' => '',
@@ -62,7 +62,7 @@ class ControllerTest extends TestCase
         $this->assertEquals('This field cannot be left empty', $message->message);
     }
 
-    public function test_validation_exception_with_cakephp_debug_off()
+    public function test_validation_exception_with_cakephp_debug_off(): void
     {
         Configure::write('debug', false);
 

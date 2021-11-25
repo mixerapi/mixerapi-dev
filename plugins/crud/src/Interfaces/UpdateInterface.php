@@ -30,5 +30,5 @@ interface UpdateInterface
      * @param string|array $methods allowed http method(s)
      * @return $this
      */
-    public function setAllowMethod($methods);
+    public function setAllowMethod(string|array $methods);
 }

@@ -7,11 +7,7 @@ use Cake\Routing\Route\Route;
 use Cake\Routing\Router;
 
 /**
- * Class RouteScanner
- *
- * Scans for routes
- *
- * @package MixerApi\Rest\Lib
+ * RouteScanner finds existing CakePHP Routes in the application and then decorates them as RouteDecorator.
  */
 class RouteScanner
 {
@@ -24,16 +20,10 @@ class RouteScanner
     ];
 
     /**
-     * @var \Cake\Routing\Router
-     */
-    private $router;
-
-    /**
      * @param \Cake\Routing\Router $router CakePHP Router instance
      */
-    public function __construct(Router $router)
+    public function __construct(private Router $router)
     {
-        $this->router = $router;
     }
 
     /**

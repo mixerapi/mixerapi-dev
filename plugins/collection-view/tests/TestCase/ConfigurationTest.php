@@ -8,7 +8,7 @@ use MixerApi\CollectionView\Configuration;
 
 class ConfigurationTest extends TestCase
 {
-    public function test_views()
+    public function test_views(): void
     {
         $controller = new Controller();
         $controller->loadComponent('RequestHandler');
@@ -19,7 +19,7 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('MixerApi/CollectionView.XmlCollection', $map['xml']);
     }
 
-    public function test_views_with_no_request_handler()
+    public function test_views_with_no_request_handler(): void
     {
         $controller = (new Configuration())->views(new Controller());
         $this->assertTrue(!isset($controller->RequestHandler));

@@ -7,33 +7,20 @@ use Cake\Database\Schema\TableSchema;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+/**
+ * Builds ModelProperty
+ *
+ * @see ModelProperty
+ */
 class ModelPropertyFactory
 {
-    /**
-     * @var \Cake\Database\Schema\TableSchema
-     */
-    private $schema;
-
-    /**
-     * @var \Cake\ORM\Table
-     */
-    private $table;
-
-    /**
-     * @var string
-     */
-    private $columnName;
-
     /**
      * @param \Cake\Database\Schema\TableSchema $schema cake TableSchema instance
      * @param \Cake\ORM\Table $table cake Table instance
      * @param string $columnName the tables column name
      */
-    public function __construct(TableSchema $schema, Table $table, string $columnName)
+    public function __construct(private TableSchema $schema, private Table $table, private string $columnName)
     {
-        $this->schema = $schema;
-        $this->table = $table;
-        $this->columnName = $columnName;
     }
 
     /**

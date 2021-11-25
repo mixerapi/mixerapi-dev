@@ -3,27 +3,49 @@ declare(strict_types=1);
 
 namespace MixerApi\Bake;
 
-use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
-use Cake\Core\PluginApplicationInterface;
 
 class Plugin extends BasePlugin
 {
     /**
-     * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
-     * @return void
+     * Plugin name.
+     *
+     * @var string
      */
-    public function bootstrap(PluginApplicationInterface $app): void
-    {
-        parent::bootstrap($app);
-    }
+    protected $name = 'MixerApi/Bake';
 
     /**
-     * @param \Cake\Console\CommandCollection $commands CommandCollection
-     * @return \Cake\Console\CommandCollection
+     * Do bootstrapping or not
+     *
+     * @var bool
      */
-    public function console(CommandCollection $commands): CommandCollection
-    {
-        return $commands;
-    }
+    protected $bootstrapEnabled = false;
+
+    /**
+     * Console middleware
+     *
+     * @var bool
+     */
+    protected $consoleEnabled = false;
+
+    /**
+     * Enable middleware
+     *
+     * @var bool
+     */
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
 }

@@ -37,25 +37,14 @@ use RuntimeException;
 class TableScanner
 {
     /**
-     * @var \Cake\Database\Connection
-     */
-    protected $connection;
-
-    /**
-     * @var string[]
-     */
-    protected $ignore;
-
-    /**
      * Constructor
      *
      * @param \Cake\Database\Connection $connection The connection name in ConnectionManager
      * @param string[]|null $ignore List of tables or regex pattern to ignore. If null, the default ignore
      *   list will be used.
      */
-    public function __construct(Connection $connection, ?array $ignore = null)
+    public function __construct(private Connection $connection, private ?array $ignore = null)
     {
-        $this->connection = $connection;
         if ($ignore === null) {
             $ignore = ['i18n', 'cake_sessions', 'sessions', '/phinxlog/'];
         }

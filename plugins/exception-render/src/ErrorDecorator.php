@@ -6,23 +6,11 @@ namespace MixerApi\ExceptionRender;
 class ErrorDecorator
 {
     /**
-     * @var array
+     * @param array $viewVars The view variables set by the controller action.
+     * @param array $serialize The items set to be serialized by the controller action.
      */
-    private $viewVars;
-
-    /**
-     * @var array
-     */
-    private $serialize;
-
-    /**
-     * @param array $viewVars viewVars
-     * @param array $serialize serialize
-     */
-    public function __construct(array $viewVars, array $serialize)
+    public function __construct(private array $viewVars, private array $serialize)
     {
-        $this->viewVars = $viewVars;
-        $this->serialize = $serialize;
     }
 
     /**

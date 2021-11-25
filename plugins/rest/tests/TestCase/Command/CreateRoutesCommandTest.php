@@ -41,7 +41,7 @@ class CreateRoutesCommandTest extends TestCase
         copy($pluginConfig . self::ROUTE_BASE, $pluginConfig . self::ROUTE_FILE);
     }
 
-    public function testSuccess()
+    public function test_success(): void
     {
         $file = self::ROUTE_FILE;
         $configPath = self::REST_PLUGIN . DS . 'tests' . DS . 'test_app' . DS . 'config' . DS;
@@ -51,7 +51,7 @@ class CreateRoutesCommandTest extends TestCase
         $this->assertExitSuccess();
     }
 
-    public function testPluginSuccess()
+    public function test_plugin_success(): void
     {
         $file = self::ROUTE_FILE;
         $ns = 'MixerApi\Rest\Test\MyPlugin\Controller';
@@ -65,7 +65,7 @@ class CreateRoutesCommandTest extends TestCase
         $this->assertExitSuccess();
     }
 
-    public function testDisplaySuccess()
+    public function test_display_success(): void
     {
         $this->exec("mixerapi:rest route create --display");
         $this->assertOutputContains('actors:index', 'route name');
@@ -75,14 +75,14 @@ class CreateRoutesCommandTest extends TestCase
         $this->assertExitSuccess();
     }
 
-    public function testAbort()
+    public function test_abort(): void
     {
         $file = self::ROUTE_FILE;
         $this->exec("mixerapi:rest route create --routesFile $file", ['N']);
         $this->assertExitError();
     }
 
-    public function testNoControllersExitError()
+    public function test_no_controllers_exit_error(): void
     {
         $file = self::ROUTE_FILE;
         $this->exec("mixerapi:rest route create --routesFile $file --plugin Nope", ['Y']);
