@@ -11,7 +11,7 @@ use ReflectionFunction;
 
 class ResponseModifierTest extends TestCase
 {
-    public function test_modify_by_extension_jsonld()
+    public function test_modify_by_extension_jsonld(): void
     {
         $ext = 'jsonld';
         $mimeType = 'application/ld+json';
@@ -22,7 +22,7 @@ class ResponseModifierTest extends TestCase
         $this->assertEquals($mimeTypes, $response->getMimeType($ext));
     }
 
-    public function test_modify_by_http_header_accept_jsonld()
+    public function test_modify_by_http_header_accept_jsonld(): void
     {
         $ext = 'jsonld';
         $mimeType = 'application/ld+json';
@@ -33,7 +33,7 @@ class ResponseModifierTest extends TestCase
         $this->assertEquals($mimeTypes, $response->getMimeType($ext));
     }
 
-    public function test_modify_by_extension_csv()
+    public function test_modify_by_extension_csv(): void
     {
         $mimeType = 'text/csv';
         $mimeTypes = [$mimeType];
@@ -43,7 +43,7 @@ class ResponseModifierTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    public function test_event_listener()
+    public function test_event_listener(): void
     {
         $ext = 'jsonld';
         $mimeType = 'application/ld+json';

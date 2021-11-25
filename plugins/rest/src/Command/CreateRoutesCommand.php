@@ -15,9 +15,14 @@ use MixerApi\Rest\Lib\Route\RouteDecoratorFactory;
 use MixerApi\Rest\Lib\Route\RouteWriter;
 
 /**
- * Class RouteCommand
+ * Write routes to your `config/routes.php` file.
  *
- * @package SwaggerBake\Command
+ * @uses \Cake\Core\Configure
+ * @uses \Cake\Utility\Inflector
+ * @uses \MixerApi\Rest\Lib\Controller\ControllerUtility
+ * @uses \MixerApi\Rest\Lib\Route\ResourceScanner
+ * @uses \MixerApi\Rest\Lib\Route\RouteDecoratorFactory
+ * @uses \MixerApi\Rest\Lib\Route\RouteWriter
  */
 class CreateRoutesCommand extends Command
 {
@@ -109,7 +114,7 @@ class CreateRoutesCommand extends Command
 
         $routeDecorators = [];
 
-        $factory = new RouteDecoratorFactory($namespace, $prefix, $args->getOption('plugin'));
+        $factory = new RouteDecoratorFactory($namespace, $args->getOption('plugin'));
         foreach ($decoratedControllers as $decorator) {
             $routeDecorators = array_merge(
                 $routeDecorators,
@@ -135,7 +140,7 @@ class CreateRoutesCommand extends Command
         if ($args->getOption('plugin')) {
             $plugins = Configure::read('App.paths.plugins');
 
-            return $configDir = reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
+            return reset($plugins) . $args->getOption('plugin') . DS . 'config' . DS;
         }
 
         if (!defined('CONFIG')) {

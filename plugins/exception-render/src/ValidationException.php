@@ -14,22 +14,15 @@ class ValidationException extends HttpException
     protected $_defaultCode = 422;
 
     /**
-     * @var \Cake\Datasource\EntityInterface|null
+     * @param \Cake\Datasource\EntityInterface $entity The Entity that failed validation rules.
+     * @param string|null $message a custom message, otherwise `Error saving resource` is used.
      */
-    private $entity;
-
-    /**
-     * @param \Cake\Datasource\EntityInterface $entity EntityInterface
-     * @param string|null $message a custom message, otherwise `Error saving resource` is used
-     */
-    public function __construct(?EntityInterface $entity = null, ?string $message = null)
+    public function __construct(private ?EntityInterface $entity = null, ?string $message = null)
     {
         parent::__construct(
             $message ?? 'Error saving resource',
             $this->_defaultCode
         );
-
-        $this->entity = $entity;
     }
 
     /**

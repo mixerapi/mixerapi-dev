@@ -22,7 +22,7 @@ class SearchControllerTest extends TestCase
         static::setAppNamespace('MixerApi\Crud\Test\App');
     }
 
-    public function test_index()
+    public function test_index(): void
     {
         $this->get('/films.json');
         $this->assertResponseOk();

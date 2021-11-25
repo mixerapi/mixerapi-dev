@@ -6,7 +6,7 @@ namespace MixerApi\JsonLdView;
 use Cake\Datasource\EntityInterface;
 
 /**
- * This interface must be implemented on Cake\ORM\Entity classes for them to be converted into JSON-LD
+ * This interface must be implemented on Cake\ORM\Entity classes for them to be converted into JSON-LD.
  */
 interface JsonLdDataInterface
 {

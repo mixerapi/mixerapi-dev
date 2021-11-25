@@ -7,17 +7,19 @@ use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use MixerApi\Rest\Lib\AutoRouter;
+use MixerApi\Rest\Lib\Route\ResourceScanner;
 use ReflectionClass;
 
 class AutoRouterTest extends TestCase
 {
-    public function testBuildResources()
+    public function test_build_resources(): void
     {
+        $scanner = new ResourceScanner('MixerApi\Rest\Test\App\Controller');
         $routes = new RouteBuilder(Router::getRouteCollection(),'/');
         $routes->setRouteClass(DashedRoute::class);
-        $routes->scope('/', function (RouteBuilder $builder) {
+        $routes->scope('/', function (RouteBuilder $builder) use ($scanner) {
             $builder->fallbacks();
-            (new AutoRouter($builder, 'MixerApi\Rest\Test\App\Controller'))->buildResources();
+            (new AutoRouter($builder, $scanner))->buildResources();
         });
 
         $collection = Router::getRouteCollection();

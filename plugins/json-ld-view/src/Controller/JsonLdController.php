@@ -27,6 +27,9 @@ class JsonLdController extends AppController
     }
 
     /**
+     * Displays JSON-LD context for the given entity.
+     *
+     * @link https://json-ld.org/learn.html
      * @param string|null $entity Entity name
      * @return \Cake\Http\Response
      */
@@ -41,6 +44,9 @@ class JsonLdController extends AppController
     }
 
     /**
+     * Displays JSON-LD vocab for entities in your API.
+     *
+     * @link https://json-ld.org/learn.html
      * @return \Cake\Http\Response
      * @throws \ReflectionException
      */

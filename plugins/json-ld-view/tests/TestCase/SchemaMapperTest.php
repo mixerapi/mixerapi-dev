@@ -9,7 +9,7 @@ use MixerApi\JsonLdView\SchemaMapper;
 
 class SchemaMapperTest extends TestCase
 {
-    public function test_schema_mapper()
+    public function test_schema_mapper(): void
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),

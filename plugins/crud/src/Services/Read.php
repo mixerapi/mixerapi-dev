@@ -10,6 +10,8 @@ use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\ReadInterface;
 
 /**
+ * Implements ReadInterface and provides basic read functionality.
+ *
  * @experimental
  */
 class Read implements ReadInterface
@@ -17,14 +19,9 @@ class Read implements ReadInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
+     * @param \Cake\ORM\Locator\LocatorInterface|null $locator LocatorInterface to locate the table.
      */
-    private $locator;
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     */
-    public function __construct(?LocatorInterface $locator = null)
+    public function __construct(private ?LocatorInterface $locator = null)
     {
         $this->locator = $locator ?? TableRegistry::getTableLocator();
     }

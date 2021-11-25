@@ -21,7 +21,7 @@ class ListRoutesCommandTest extends TestCase
         $this->useCommandRunner();
     }
 
-    public function test_execute()
+    public function test_execute(): void
     {
         $this->exec('mixerapi:rest route list');
         $this->assertOutputContains('actors:index', 'route name');
@@ -30,7 +30,7 @@ class ListRoutesCommandTest extends TestCase
         $this->assertOutputContains('Actors', 'controller');
     }
 
-    public function test_execute_plugin()
+    public function test_execute_plugin(): void
     {
         $this->exec('mixerapi:rest route list --plugin App');
         $this->assertOutputContains('actors:index', 'route name');
@@ -39,7 +39,7 @@ class ListRoutesCommandTest extends TestCase
         $this->assertOutputContains('Actors', 'controller');
     }
 
-    public function test_execute_routes_not_found()
+    public function test_execute_routes_not_found(): void
     {
         $this->exec('mixerapi:rest route list --reloadRoutes');
         $this->assertOutputContains(ListRoutesCommand::NO_ROUTES_FOUND);

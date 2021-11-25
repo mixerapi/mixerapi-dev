@@ -57,7 +57,7 @@ class Film extends Entity implements JsonLdDataInterface
     }
     /**
      * @param EntityInterface $entity
-     * @return array|\string[][]
+     * @return string
      */
     public function getJsonLdIdentifier(EntityInterface $entity): string
     {
@@ -70,11 +70,11 @@ class Film extends Entity implements JsonLdDataInterface
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())->setProperty('title')->setSchemaUrl('https://schema.org/name'),
-            (new JsonLdSchema())->setProperty('description')->setSchemaUrl('https://schema.org/about'),
-            (new JsonLdSchema())->setProperty('length')->setSchemaUrl('https://schema.org/duration'),
-            (new JsonLdSchema())->setProperty('rating')->setSchemaUrl('https://schema.org/contentRating'),
-            (new JsonLdSchema())->setProperty('release_year')->setSchemaUrl('https://schema.org/copyrightYear'),
+            new JsonLdSchema('title', 'https://schema.org/name'),
+            new JsonLdSchema('description', 'https://schema.org/about'),
+            new JsonLdSchema('length', 'https://schema.org/duration'),
+            new JsonLdSchema('rating', 'https://schema.org/contentRating'),
+            new JsonLdSchema('release_year', 'https://schema.org/copyrightYear'),
         ];
     }
 }

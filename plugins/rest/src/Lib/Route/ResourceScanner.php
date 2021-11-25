@@ -6,34 +6,42 @@ namespace MixerApi\Rest\Lib\Route;
 use Cake\Core\Configure;
 use MixerApi\Rest\Lib\Controller\ControllerUtility;
 
+/**
+ * ResourceScanner is used to get an array of ReflectedControllerDecorator by scanning a namespace for all controllers
+ * within it.
+ */
 class ResourceScanner
 {
     /**
-     * @var string|null $baseNamespace
+     * @param string|null $namespace A namespace (e.g. App or App\Controller\Sub) that will be scanned for
+     * CakePHP Controllers. If none is defined then the `App.namespace` setting from your `config/app.php` is used.
      */
-    private $baseNamespace;
-
-    /**
-     * @param string|null $baseNamespace a base name space (e.g. App or App\Controller\Sub)
-     */
-    public function __construct(?string $baseNamespace = null)
+    public function __construct(private ?string $namespace = null)
     {
-        $this->baseNamespace = $baseNamespace ?? Configure::read('App.namespace') . '\Controller';
+        $this->namespace = $namespace ?? Configure::read('App.namespace') . '\Controller';
     }
 
     /**
-     * Returns an array of ReflectedControllerDecorator that can be RESTful resources
+     * Returns an array of ReflectedControllerDecorator by scanning `$this->namespace`.
      *
      * @return \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[]
      * @throws \ReflectionException
      */
     public function getControllerDecorators(): array
     {
-        $controllers = ControllerUtility::getControllersFqn($this->baseNamespace);
+        $controllers = ControllerUtility::getControllersFqn($this->namespace);
         $controllerDecorators = ControllerUtility::getReflectedControllerDecorators($controllers);
 
         return array_values(array_filter($controllerDecorators, function ($controller) {
             return $controller->hasCrud();
         }));
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace(): string
+    {
+        return $this->namespace;
     }
 }

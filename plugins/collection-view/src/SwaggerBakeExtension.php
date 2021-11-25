@@ -8,6 +8,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
+use SwaggerBake\Lib\OpenApi\SchemaProperty;
 
 /**
  * Adds CollectionView as an OpenAPI schema to SwaggerBake
@@ -40,7 +41,7 @@ class SwaggerBakeExtension
      * @param \Cake\Event\Event $event Cake event instance
      * @return mixed
      */
-    private function addSchema(Event $event)
+    private function addSchema(Event $event): mixed
     {
         if (!class_exists(\SwaggerBake\Lib\OpenApi\Schema::class)) {
             return $event->getSubject();
@@ -114,10 +115,14 @@ class SwaggerBakeExtension
      * @param string $type property type
      * @param mixed $example optional example
      * @param string|null $format optional format
-     * @return mixed
+     * @return \SwaggerBake\Lib\OpenApi\SchemaProperty|null
      */
-    private function buildProperty(string $key, string $type, $example = null, ?string $format = null)
-    {
+    private function buildProperty(
+        string $key,
+        string $type,
+        mixed $example = null,
+        ?string $format = null
+    ): ?SchemaProperty {
         if (!class_exists(\SwaggerBake\Lib\OpenApi\SchemaProperty::class)) {
             return null;
         }

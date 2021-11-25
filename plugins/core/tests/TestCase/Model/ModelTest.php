@@ -21,7 +21,7 @@ class ModelTest extends TestCase
         'plugin.MixerApi/Core.Actors',
     ];
 
-    public function test_model()
+    public function test_model(): void
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),
@@ -36,7 +36,7 @@ class ModelTest extends TestCase
         $this->assertInstanceOf(ModelProperty::class, $model->getProperty('first_name'));
     }
 
-    public function test_model_property()
+    public function test_model_property(): void
     {
         $model = (new ModelFactory(
             ConnectionManager::get('default'),
