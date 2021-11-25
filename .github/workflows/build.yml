@@ -80,6 +80,7 @@ jobs:
 
       - name: CakePHP ${{matrix.version}} Compatability
         run: |
+          cp config/.env.example config/.env
           composer self-update
           rm -rf composer.lock
           composer require cakephp/cakephp:${{matrix.version}} --no-update
