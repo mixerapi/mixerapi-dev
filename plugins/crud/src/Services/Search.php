@@ -6,9 +6,7 @@ namespace MixerApi\Crud\Services;
 use Cake\Controller\Controller;
 use Cake\Core\Plugin;
 use Cake\Datasource\ResultSetInterface;
-use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\Query;
-use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\SearchInterface;
 
 /**
@@ -31,12 +29,11 @@ class Search implements SearchInterface
     private string $collectionName = 'default';
 
     /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator LocatorInterface to locate the table.
      * @param \Cake\Core\Plugin|null $plugin CakePHP Plugin class to help find if the Search plugin is loaded.
      */
-    public function __construct(private ?LocatorInterface $locator = null, ?Plugin $plugin = null)
-    {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
+    public function __construct(
+        ?Plugin $plugin = null
+    ) {
         $this->hasSearch = ($plugin ?? new Plugin())::isLoaded('Search');
     }
 
@@ -57,7 +54,7 @@ class Search implements SearchInterface
      */
     public function query(Controller $controller): Query
     {
-        $table = $this->locator->get($this->whichTable($controller));
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
 
         if (!$this->hasSearch || !$table->hasBehavior('Search')) {
             return $table->find('all');
