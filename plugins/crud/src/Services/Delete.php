@@ -5,8 +5,6 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Http\Response;
-use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\DeleteInterface;
 use MixerApi\Crud\Interfaces\ReadInterface;
@@ -21,12 +19,11 @@ class Delete implements DeleteInterface
     use CrudTrait;
 
     /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator LocatorInterface to locate the table.
      * @param \MixerApi\Crud\Interfaces\ReadInterface|null $read ReadInterface used to find the record to be deleted.
      */
-    public function __construct(private ?LocatorInterface $locator = null, private ?ReadInterface $read = null)
-    {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
+    public function __construct(
+        private ?ReadInterface $read = null
+    ) {
         $this->read = $read ?? new Read();
     }
 
@@ -36,11 +33,12 @@ class Delete implements DeleteInterface
     public function delete(Controller $controller, $id = null)
     {
         $this->allowMethods($controller);
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
 
         $id = $this->whichId($controller, $id);
         $entity = $this->read->read($controller, $id);
 
-        if (!$this->locator->get($this->whichTable($controller))->delete($entity)) {
+        if (!$table->delete($entity)) {
             throw new ResourceWriteException($entity, "Unable to save $this->tableName resource.");
         }
 
