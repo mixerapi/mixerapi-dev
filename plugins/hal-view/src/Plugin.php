@@ -50,11 +50,6 @@ class Plugin extends BasePlugin
     private const EXT = 'haljson';
 
     /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/hal+json','application/vnd.hal+json'];
-
-    /**
      * @var string
      */
     private const VIEW_CLASS = 'MixerApi/HalView.HalJson';
@@ -66,6 +61,6 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
-        (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))->listen();
+        (new ResponseModifier(self::EXT, self::VIEW_CLASS))->listen();
     }
 }
