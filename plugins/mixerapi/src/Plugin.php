@@ -46,6 +46,7 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         $app->addPlugin('MixerApi/CollectionView');
+        $app->addPlugin('MixerApi/Crud');
         $app->addPlugin('MixerApi/ExceptionRender');
         $app->addPlugin('MixerApi/HalView');
         $app->addPlugin('MixerApi/JsonLdView');

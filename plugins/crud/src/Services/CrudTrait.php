@@ -68,7 +68,7 @@ trait CrudTrait
      * @param mixed $id the resource identifier
      * @return mixed
      */
-    private function whichId(Controller $controller, $id)
+    private function whichId(Controller $controller, mixed $id): mixed
     {
         return $id ?? $controller->getRequest()->getParam('id');
     }
