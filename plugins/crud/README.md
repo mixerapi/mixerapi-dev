@@ -90,6 +90,13 @@ public function view(ReadInteface $read)
 }
 ```
 
+Return a CakePHP `Query` object instead:
+
+```php
+$query = $read->query($this)
+```
+
+
 ### Update
 
 ```php
@@ -123,13 +130,19 @@ public function index(SearchInterface $search)
 ```
 
 To use [CakePHP Search](https://github.com/FriendsOfCake/search) initialize the component as normal in your controllers
-`initialize()` method.  For custom CakePHP Search collections call the `setCollection($name)` method:
+`initialize()` method.
+
+```php
+$this->set('data', $search->search($this));
+```
+
+For custom CakePHP Search collections call the `setCollection($name)` method:
 
 ```php
 $this->set('data', $search->setCollection('collection_name')->search($this));
 ```
 
-Return a CakePHP Query object instead:
+Return a CakePHP `Query` object instead:
 
 ```php
 $query = $search->query($this);
@@ -155,11 +168,11 @@ modifying the defaults.
 
 | Action | HTTP method(s) |
 | ------------- | ------------- |
-| index | get |
-| view | get |
-| add | post |
-| edit | post, put, and patch |
-| delete | delete |
+| index() | GET |
+| view() | GET |
+| add() | POST |
+| edit() | POST, PUT, and PATCH |
+| delete() | DELETE |
 
 You may also call `setAllowMethods($methods)` on any service to overwrite the default behavior. This accepts a string
 or any array as an argument just like the native `$request->allowedMethods()`.

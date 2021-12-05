@@ -30,7 +30,7 @@ class Delete implements DeleteInterface
     /**
      * @inheritDoc
      */
-    public function delete(Controller $controller, $id = null)
+    public function delete(Controller $controller, mixed $id = null)
     {
         $this->allowMethods($controller);
         $table = $controller->getTableLocator()->get($this->whichTable($controller));
