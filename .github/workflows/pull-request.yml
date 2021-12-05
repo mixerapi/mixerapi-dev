@@ -39,21 +39,28 @@ jobs:
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
 
-      - name: Unit Test (PHP > 8.0)
-        if: ${{ matrix.php-versions != '8.0' }}
+      - name: Unit Test (PHP 8.0)
+        if: ${{ matrix.php-versions = '8.0' }}
         run: |
           composer test
 
-      - name: Static Analysis + Unit Tests + Coveralls (PHP 8.0)
-        if: ${{ matrix.php-versions == '8.0' }}
+      - name: Test Suite + Static Analysis (PHP 8.1)
+        if: ${{ matrix.php-versions == '8.1' }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           composer analyze
           echo ${{ matrix.php-versions }}
-          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
+
+      - name: Upload coverage results to Coveralls (PHP 8.1)
+        if: ${{ matrix.php-versions == '8.1' }}
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           composer global require php-coveralls/php-coveralls
+          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           php-coveralls --coverage_clover=clover.xml -v
+
 
   #
   # CakePHP version compatability
