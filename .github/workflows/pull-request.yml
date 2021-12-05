@@ -40,7 +40,7 @@ jobs:
           cp config/app_local.example.php config/app_local.php
 
       - name: Unit Test (PHP 8.0)
-        if: ${{ matrix.php-versions = '8.0' }}
+        if: ${{ matrix.php-versions == '8.0' }}
         run: |
           composer test
 
