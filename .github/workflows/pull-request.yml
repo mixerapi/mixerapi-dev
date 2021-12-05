@@ -44,19 +44,19 @@ jobs:
         run: |
           composer test
 
-      - name: Test Suite + Static Analysis (PHP 8.1)
-        if: ${{ matrix.php-versions == '8.1' }}
-        run: |
-          composer analyze
-
-      - name: Upload coverage results to Coveralls (PHP 8.1)
-        if: ${{ matrix.php-versions == '8.1' }}
+      - name: Upload coverage results to Coveralls (PHP 8.0)
+        if: ${{ matrix.php-versions == '8.0' }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           composer global require php-coveralls/php-coveralls
           export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           php-coveralls --coverage_clover=clover.xml -v
+
+      - name: Test Suite + Static Analysis (PHP 8.1)
+        if: ${{ matrix.php-versions == '8.1' }}
+        run: |
+          composer analyze
 
   #
   # CakePHP version compatability
