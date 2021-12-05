@@ -13,10 +13,7 @@ class ResponseModifierTest extends TestCase
 {
     public function test_event_listener(): void
     {
-        $ext = 'jsonld';
-        $mimeType = 'application/ld+json';
-        $mimeTypes = [$mimeType];
-        $modifier = new ResponseModifier($ext, 'MixerApi/JsonLdView.JsonLd');
+        $modifier = new ResponseModifier('jsonld', 'MixerApi/JsonLdView.JsonLd');
         $modifier->listen();
         $eventManager = EventManager::instance();
         $listeners = $eventManager->matchingListeners('Controller.initialize');
