@@ -39,10 +39,10 @@ jobs:
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
 
-      - name: Unit Test (PHP 8.0)
+      - name: Test Suite + Static Analysis (PHP 8.0)
         if: ${{ matrix.php-versions == '8.0' }}
         run: |
-          composer test
+          composer analyze
 
       - name: Upload coverage results to Coveralls (PHP 8.0)
         if: ${{ matrix.php-versions == '8.0' }}
@@ -53,10 +53,10 @@ jobs:
           export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           php-coveralls --coverage_clover=clover.xml -v
 
-      - name: Test Suite + Static Analysis (PHP 8.1)
+      - name: Test Suite (PHP 8.1)
         if: ${{ matrix.php-versions == '8.1' }}
         run: |
-          composer analyze
+          composer test
 
   #
   # CakePHP version compatability
