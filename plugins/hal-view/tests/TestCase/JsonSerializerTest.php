@@ -5,12 +5,10 @@ namespace MixerApi\HalView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
-use Cake\ORM\ResultSet;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
 use MixerApi\HalView\JsonSerializer;
-use MixerApi\Core\Response\ResponseModifier;
 use MixerApi\HalView\View\HalJsonView;
 
 class JsonSerializerTest extends TestCase
@@ -19,11 +17,6 @@ class JsonSerializerTest extends TestCase
      * @var string
      */
     private const EXT = 'haljson';
-
-    /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/hal+json','application/vnd.hal+json'];
 
     /**
      * @var string
@@ -82,8 +75,7 @@ class JsonSerializerTest extends TestCase
         Router::connect('/:controller/:action/*');
         Router::connect('/:plugin/:controller/:action/*');
         Router::setRequest($this->request);
-        $this->response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($this->request, new Response());
+        $this->response = new Response();
     }
 
     public function test_collection(): void
