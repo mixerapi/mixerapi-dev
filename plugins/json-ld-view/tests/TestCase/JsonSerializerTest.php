@@ -9,7 +9,6 @@ use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
 use MixerApi\JsonLdView\JsonSerializer;
-use MixerApi\Core\Response\ResponseModifier;
 use MixerApi\JsonLdView\View\JsonLdView;
 
 class JsonSerializerTest extends TestCase
@@ -80,8 +79,7 @@ class JsonSerializerTest extends TestCase
         Router::connect('/:controller/:action/*');
         Router::connect('/:plugin/:controller/:action/*');
         Router::setRequest($request);
-        $this->response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($this->request, new Response());
+        $this->response = new Response();
     }
 
     /**

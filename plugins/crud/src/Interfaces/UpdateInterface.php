@@ -15,10 +15,10 @@ interface UpdateInterface
      * Saves the resource
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
-     * @param string|int|null $id an optional identifier, if null the id parameter is used from the request
+     * @param mixed $id an optional identifier, if null the id parameter is used from the request
      * @return \Cake\Datasource\EntityInterface
      */
-    public function save(Controller $controller, $id = null): EntityInterface;
+    public function save(Controller $controller, mixed $id = null): EntityInterface;
 
     /**
      * @param string $table the table

@@ -8,10 +8,10 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
 
-This plugin gets your API project up and going quickly by creating routes for you. It can either:
+This plugin gets your API project up and going quickly by creating routes for you.
 
-- Build your `routes.php` file from a single command, or
-- Automatically expose RESTful CRUD routes with a handy AutoRouter.
+- Build your `routes.php` file from a single command or automatically expose RESTful CRUD routes with a handy AutoRouter.
+- Set default HTTP status codes for CRUD operations
 
 This plugin assumes you have already created models and controllers. For help with the latter check out
 [MixerApi/Bake](https://github.com/mixerapi/bake). Check the official
@@ -98,7 +98,7 @@ bin/cake mixerapi:rest route create --display
 For non-CRUD routes, sub-resources, and advanced routing please reference the CakePHP
 [RESTful routing](https://book.cakephp.org/4/en/development/routing.html#restful-routing) documentation
 
-#### List Routes
+### List Routes
 
 This works similar to `bin/cake routes` but shows only RESTful routes and improves some formatting of information.
 
@@ -115,3 +115,39 @@ bin/cake mixerapi:rest route list --plugin MyPlugin
 #limit to main application:
 bin/cake mixerapi:rest route list --plugin App
 ```
+
+### CRUD HTTP Status Codes
+
+The default status codes are:
+
+| Action      | Status Code |
+| ----------- | ----------- |
+| index       | 200         |
+| view        | 200         |
+| add         | 201         |
+| edit        | 200         |
+| delete      | 204         |
+
+To change these load a `MixerApi.Rest.crud.statusCodes` configuration:
+
+```php
+return [
+    'MixerApi' => [
+        'Rest' => [
+            'crud' => [
+                'statusCodes' => [
+                    'index' => 200,
+                    'view' => 200,
+                    'add' => 201,
+                    'edit' => 200,
+                    'delete' => 204
+                ]
+            ]
+        ]
+    ]
+];
+```
+
+See the CakePHP documentation on
+[loading configuration files](https://book.cakephp.org/4/en/development/configuration.html#loading-additional-configuration-files)
+

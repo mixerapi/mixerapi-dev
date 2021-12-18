@@ -51,11 +51,6 @@ class Plugin extends BasePlugin
     private const EXT = 'jsonld';
 
     /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/ld+json'];
-
-    /**
      * @var string
      */
     private const VIEW_CLASS = 'MixerApi/JsonLdView.JsonLd';
@@ -84,6 +79,6 @@ class Plugin extends BasePlugin
             ]);
         }
 
-        (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))->listen();
+        (new ResponseModifier(self::EXT, self::VIEW_CLASS))->listen();
     }
 }

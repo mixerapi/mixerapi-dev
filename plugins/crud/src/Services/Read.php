@@ -5,6 +5,7 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
+use Cake\ORM\Query;
 use MixerApi\Crud\Interfaces\ReadInterface;
 
 /**
@@ -19,7 +20,7 @@ class Read implements ReadInterface
     /**
      * @inheritDoc
      */
-    public function read(Controller $controller, $id = null): EntityInterface
+    public function read(Controller $controller, mixed $id = null): EntityInterface
     {
         $this->allowMethods($controller);
         $id = $this->whichId($controller, $id);
@@ -28,5 +29,13 @@ class Read implements ReadInterface
         return $table->get($id, [
             'contain' => [],
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function query(Controller $controller): Query
+    {
+        return $controller->getTableLocator()->get($this->whichTable($controller))->query();
     }
 }
