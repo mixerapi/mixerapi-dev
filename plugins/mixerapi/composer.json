@@ -8,13 +8,13 @@
         "php": "^8.0",
         "cakephp/cakephp": "^4.2",
         "cnizzardini/cakephp-swagger-bake": "^2.0",
-        "mixerapi/bake": "~0.2",
-        "mixerapi/collection-view": "~0.2",
-        "mixerapi/core": "~0.2",
-        "mixerapi/exception-render": "~0.2",
-        "mixerapi/hal-view": "~0.2",
-        "mixerapi/json-ld-view": "~0.2",
-        "mixerapi/rest": "~0.2"
+        "mixerapi/bake": "^1.0",
+        "mixerapi/collection-view": "^1.0",
+        "mixerapi/core": "^1.0",
+        "mixerapi/exception-render": "^1.0",
+        "mixerapi/hal-view": "^1.0",
+        "mixerapi/json-ld-view": "^1.0",
+        "mixerapi/rest": "^1.0"
     },
     "autoload": {
         "psr-4": {
