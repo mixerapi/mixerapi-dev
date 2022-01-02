@@ -8,6 +8,9 @@
         "php": "^8.0",
         "cakephp/cakephp": "^4.2"
     },
+    "require-dev": {
+        "cnizzardini/cakephp-swagger-bake": "^2.1"
+    },
     "autoload": {
         "psr-4": {
             "MixerApi\\ExceptionRender\\": "src/"
