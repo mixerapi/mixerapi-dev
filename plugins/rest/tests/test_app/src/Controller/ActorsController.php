@@ -58,9 +58,17 @@ class ActorsController extends AppController
         $this->request->allowMethod('post');
         $actor = $this->Actors->newEmptyEntity();
         $actor = $this->Actors->patchEntity($actor, $this->request->getData());
-        if ($this->Actors->save($actor)) {
-            $this->viewBuilder()->setOption('serialize', 'actor');
-            return;
+        try {
+            if ($this->Actors->save($actor)) {
+                $this->viewBuilder()->setOption('serialize', 'actor');
+                return;
+            }
+        } catch(\Exception $e) {
+            echo '<pre>' . __FILE__ . ':' . __LINE__;
+            print_r($e);
+            echo '</pre>';
+            die();
+
         }
         throw new \Exception("Record not created");
     }

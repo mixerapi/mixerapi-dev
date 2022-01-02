@@ -2,9 +2,6 @@
 
 namespace MixerApi\Crud\Test\TestCase;
 
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventManager;
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 

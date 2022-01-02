@@ -22,7 +22,7 @@ class RouteWriterTest extends TestCase
     /**
      * @var string path to plugin config directory
      */
-    private $pluginConfig;
+    private string $pluginConfig;
 
     public function setUp(): void
     {
