@@ -3,3 +3,5 @@ parameters:
 	checkGenericClassInNonGenericObjectType: false
 	checkMissingIterableValueType: false
 	treatPhpDocTypesAsCertain: false
+	excludePaths:
+		- plugins/exception-render/src/OpenApiExceptionSchema.php
