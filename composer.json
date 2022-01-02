@@ -85,7 +85,7 @@
             "@phpstan",
             "@phpmd"
         ],
-        "test": "phpunit --colors=always",
+        "test": "vendor/bin/phpunit",
         "phpcs": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
         "phpcbf": "phpcbf --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP plugins/*/src",
         "phpstan": "phpstan analyse plugins/*/src",

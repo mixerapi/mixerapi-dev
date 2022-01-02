@@ -24,7 +24,8 @@ class ResponseStatusCodeModifier
                 /** @var \Cake\Controller\Controller $controller */
                 $controller = $event->getSubject();
                 $action = $controller->getRequest()->getParam('action');
-                if (array_key_exists($action, $statusCodes)) {
+                $currentStatusCode = $controller->getResponse()->getStatusCode();
+                if (array_key_exists($action, $statusCodes) && in_array($currentStatusCode, range(200, 299))) {
                     $controller->setResponse($controller->getResponse()->withStatus($statusCodes[$action]));
                 }
             });
