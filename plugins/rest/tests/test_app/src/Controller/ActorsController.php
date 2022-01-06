@@ -39,7 +39,7 @@ class ActorsController extends AppController
         $this->request->allowMethod('get');
 
         $actor = $this->Actors->get($id, [
-            'contain' => ['FilmActors'],
+            'contain' => [],
         ]);
 
         $this->set('actor', $actor);
@@ -84,7 +84,7 @@ class ActorsController extends AppController
      */
     public function edit($id = null)
     {
-        $this->request->allowMethod(['patch', 'post', 'put']);
+        $this->request->allowMethod(['patch']);
         $actor = $this->Actors->get($id, [
             'contain' => [],
         ]);
