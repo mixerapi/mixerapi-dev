@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MixerApi\Bake;
 
-use Cake\Core\Plugin as CakePlugin;
 use Cake\Core\BasePlugin;
+use Cake\Core\Plugin as CakePlugin;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
