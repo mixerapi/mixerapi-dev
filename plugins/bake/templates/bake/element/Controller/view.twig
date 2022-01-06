@@ -10,19 +10,28 @@
     /**
      * View method
      *
+{% if "MixerApi/Crud" not in plugins %}
      * @param string|null $id {{ singularHumanName }} id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+{%  endif %}
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+{% if "MixerApi/Crud" in plugins %}
+    public function view(ReadInterface $read)
+{% else %}
     public function view($id = null)
+{%  endif %}
     {
+{% if "MixerApi/Crud" in plugins %}
+        $this->set('data', $read->read($this));
+{% else %}
         $this->request->allowMethod('get');
-
         ${{ singularName }} = $this->{{ currentModelName }}->get($id, [
             'contain' => [{{ Bake.stringifyList(allAssociations, {'indent': false})|raw }}],
         ]);
 
         $this->set('{{ singularName }}', ${{ singularName }});
         $this->viewBuilder()->setOption('serialize', '{{ singularName }}');
+{%  endif %}
     }

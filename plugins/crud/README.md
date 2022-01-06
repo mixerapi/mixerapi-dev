@@ -17,7 +17,6 @@ This experimental plugin provides CRUD (Create/Read/Update/Delete) services to y
 using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html).
 
 - Perform most crud operations with a single line of code.
-- Includes a bake theme for quick scaffolding.
 - Automatically serializes data into JSON, XML, etc.
 - Automatically enforces allowed requests `$this-request->allowMethod()`
 - Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search and may be installed on its own too.
@@ -109,7 +108,7 @@ public function edit(UpdateInterface $update)
 ### Delete
 
 ```php
-public function edit(DeleteInterface $delete)
+public function delete(DeleteInterface $delete)
 {
     return $delete->delete($this)->respond(); // calling respond() is optional
 }
@@ -146,14 +145,6 @@ Return a CakePHP `Query` object instead:
 
 ```php
 $query = $search->query($this);
-```
-
-## Bake Theme
-
-Crud comes with its own bake template for scaffolding your controllers, just add `--theme MixerApi/Crud`, example:
-
-```console
-bin/cake bake controller all --theme MixerApi/Crud
 ```
 
 ## Serialization
