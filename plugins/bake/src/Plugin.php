@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace MixerApi\Bake;
 
+use Cake\Core\Plugin as CakePlugin;
 use Cake\Core\BasePlugin;
+use Cake\Core\PluginApplicationInterface;
+use Cake\Event\EventInterface;
+use Cake\Event\EventManager;
 
 class Plugin extends BasePlugin
 {
@@ -13,13 +17,6 @@ class Plugin extends BasePlugin
      * @var string
      */
     protected $name = 'MixerApi/Bake';
-
-    /**
-     * Do bootstrapping or not
-     *
-     * @var bool
-     */
-    protected $bootstrapEnabled = false;
 
     /**
      * Console middleware
@@ -48,4 +45,18 @@ class Plugin extends BasePlugin
      * @var bool
      */
     protected $routesEnabled = false;
+
+    /**
+     * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
+     * @return void
+     */
+    public function bootstrap(PluginApplicationInterface $app): void
+    {
+        parent::bootstrap($app);
+
+        EventManager::instance()->on('Bake.beforeRender', function (EventInterface $event) {
+            $view = $event->getSubject();
+            $view->set('plugins', CakePlugin::loaded());
+        });
+    }
 }

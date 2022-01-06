@@ -36,20 +36,16 @@ class BakeTest extends TestCase
         parent::setUp();
         $this->setAppNamespace('MixerApi\Bake\Test\App');
         $this->useCommandRunner();
-        if (file_exists(self::CONTROLLER_PATH . self::CONTROLLER_FILE)) {
-            unlink(self::CONTROLLER_PATH . self::CONTROLLER_FILE);
-        }
+        $this->removeBakedController();
     }
 
     public function tearDown(): void
     {
         parent::tearDown();
-        if (file_exists(self::CONTROLLER_PATH . self::CONTROLLER_FILE)) {
-            unlink(self::CONTROLLER_PATH . self::CONTROLLER_FILE);
-        }
+        $this->removeBakedController();
     }
 
-    public function testBake()
+    public function test_with_no_plugins(): void
     {
         $this->exec('bake controller Departments --no-test --force --theme MixerApi/Bake');
 
@@ -63,5 +59,12 @@ class BakeTest extends TestCase
             $assets . self::CONTROLLER_FILE,
             self::CONTROLLER_PATH . self::CONTROLLER_FILE
         );
+    }
+
+    private function removeBakedController(): void
+    {
+        if (file_exists(self::CONTROLLER_PATH . self::CONTROLLER_FILE)) {
+            unlink(self::CONTROLLER_PATH . self::CONTROLLER_FILE);
+        }
     }
 }

@@ -1,6 +1,6 @@
 # MixerApi specific files #
 ############################
-/tests/test_app/App/Controller/DepartmentsController.php
+/tests/test_app/src/Controller/DepartmentsController.php
 /coverage-reports/
 
 # CakePHP specific files #
