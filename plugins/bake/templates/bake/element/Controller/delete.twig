@@ -6,18 +6,28 @@
     /**
      * Delete method
      *
+{% if "MixerApi/Crud" not in plugins %}
      * @param string|null $id {{ singularHumanName }} id.
-     * @return \Cake\Http\Response|null|void HTTP 204 on success
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+{%  endif %}
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
+{% if "MixerApi/Crud" in plugins %}
+    public function delete(DeleteInterface $delete)
+{% else %}
     public function delete($id = null)
+{%  endif %}
     {
+{% if "MixerApi/Crud" in plugins %}
+        return $delete->delete($this)->respond();
+{% else %}
         $this->request->allowMethod(['delete']);
         ${{ singularName }} = $this->{{ currentModelName }}->get($id);
         if ($this->{{ currentModelName }}->delete(${{ singularName }})) {
             return $this->response->withStatus(204);
         }
         throw new \Exception("Record not deleted");
+{% endif %}
     }

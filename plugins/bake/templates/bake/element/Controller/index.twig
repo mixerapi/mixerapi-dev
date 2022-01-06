@@ -6,11 +6,21 @@
     /**
      * Index method
      *
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+{% if "SwaggerBake" in plugins %}
+    #[OpenApiPaginator]
+{%  endif %}
+{% if "MixerApi/Crud" in plugins %}
+    public function index(SearchInterface $search)
+{% else %}
     public function index()
+{%  endif %}
     {
+{% if "MixerApi/Crud" in plugins %}
+        $this->set('data', $search->search($this));
+{% else %}
         $this->request->allowMethod('get');
 {% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
 {% if belongsTo %}
@@ -22,4 +32,5 @@
 
         $this->set(compact('{{ pluralName }}'));
         $this->viewBuilder()->setOption('serialize', '{{ pluralName }}');
+{%  endif %}
     }

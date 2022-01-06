@@ -9,15 +9,28 @@
     /**
      * Edit method
      *
+{% if "MixerApi/Crud" not in plugins %}
      * @param string|null $id {{ singularHumanName }} id.
-     * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+{%  endif %}
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
+{% if "MixerApi/ExceptionRender" in plugins and "SwaggerBake" in plugins %}
+     * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
+{% elseif "MixerApi/ExceptionRender" in plugins %}
      * @throws \MixerApi\ExceptionRender\ValidationException
+{% endif %}
      * @throws \Exception
      */
+{% if "MixerApi/Crud" in plugins %}
+    public function edit(UpdateInterface $update)
+{% else %}
     public function edit($id = null)
+{%  endif %}
     {
+{% if "MixerApi/Crud" in plugins %}
+        $this->set('data', $update->save($this));
+{% else %}
         $this->request->allowMethod(['patch', 'post', 'put']);
         ${{ singularName }} = $this->{{ currentModelName }}->get($id, [
             'contain' => [{{ Bake.stringifyList(belongsToMany, {'indent': false})|raw }}],
@@ -30,4 +43,5 @@
             return;
         }
         throw new \Exception("Record not saved");
+{%  endif %}
     }

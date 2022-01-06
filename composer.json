@@ -58,7 +58,7 @@
             "App\\Test\\": "tests/",
             "Cake\\Test\\": "vendor/cakephp/cakephp/tests/",
             "MixerApi\\Bake\\Test\\": "plugins/bake/tests/",
-            "MixerApi\\Bake\\Test\\App\\": "plugins/bake/tests/test_app/App/",
+            "MixerApi\\Bake\\Test\\App\\": "plugins/bake/tests/test_app/src/",
             "MixerApi\\CollectionView\\Test\\": "plugins/collection-view/tests/",
             "MixerApi\\CollectionView\\Test\\App\\": "plugins/collection-view/tests/test_app/src/",
             "MixerApi\\Core\\Test\\": "plugins/core/tests/",
