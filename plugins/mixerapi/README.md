@@ -60,6 +60,8 @@ public function bootstrap(): void
 }
 ```
 
+Next run the automated install or complete the installation manually.
+
 ### Automated Install
 
 The automated install will overwrite your `config/app.php` and `config/routes.php`, and create a welcome page at your
