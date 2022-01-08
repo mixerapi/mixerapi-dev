@@ -34,6 +34,7 @@ public function bootstrap(): void
 ## Usage
 
 MixerApi/Bake will automatically detect the following plugins and adjust the bake output accordingly:
+
 - MixerApi/Crud
 - MixerApi/ExceptionRender
 - SwaggerBake
