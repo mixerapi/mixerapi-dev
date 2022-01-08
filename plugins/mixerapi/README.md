@@ -75,7 +75,7 @@ You should now be able to browse to your index page and see the welcome page.
 
 ### Manual Install
 
-Manually installing can be a bit cumbersome which is why the automated installer is recommended. If you ar integrating
+Manually installing can be a bit cumbersome which is why the automated installer is recommended. If you are integrating
 MixerApi into an existing project or prefer to do things yourself follow along below:
 
 - Follow installation steps in [SwaggerBake](https://github.com/cnizzardini/cakephp-swagger-bake)
