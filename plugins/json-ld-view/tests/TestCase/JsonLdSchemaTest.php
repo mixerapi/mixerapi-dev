@@ -9,10 +9,19 @@ class JsonLdSchemaTest extends TestCase
 {
     public function test_jsonld_schema(): void
     {
-        $property = 'test';
-        $url = 'http://schema.org/test';
-        $desc = 'hi';
-        $jsonLdSchema = new JsonLdSchema($property, $url, $desc);
+        $jsonLdSchema = new JsonLdSchema(
+            $property = 'test',
+            $url = 'https://schema.org/person',
+            $desc = 'hi'
+        );
+        $this->assertEquals($property, $jsonLdSchema->getProperty());
+        $this->assertEquals($url, $jsonLdSchema->getSchemaUrl());
+        $this->assertEquals($desc, $jsonLdSchema->getDescription());
+
+        $jsonLdSchema
+            ->setProperty($property = 'updated')
+            ->setSchemaUrl($url = "https://schema.org/place")
+            ->setDescription($desc = "updated desc");
         $this->assertEquals($property, $jsonLdSchema->getProperty());
         $this->assertEquals($url, $jsonLdSchema->getSchemaUrl());
         $this->assertEquals($desc, $jsonLdSchema->getDescription());
