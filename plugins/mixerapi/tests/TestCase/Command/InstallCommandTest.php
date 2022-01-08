@@ -66,30 +66,28 @@ class InstallCommandTest extends TestCase
 
     private function filesExist(): void
     {
+        $this->assertFileExists(self::ASSETS_DIR . 'swagger.yml');
         $this->assertFileExists(self::CONFIG_DIR . 'swagger.yml');
         $this->assertFileEquals(
             self::ASSETS_DIR . 'swagger.yml',
             self::CONFIG_DIR . 'swagger.yml'
         );
 
-        $this->assertFileExists(self::CONFIG_DIR . 'swagger_bake.php');
-        $this->assertFileEquals(
-            self::ASSETS_DIR . 'swagger_bake.php',
-            self::CONFIG_DIR . 'swagger_bake.php'
-        );
-
+        $this->assertFileExists(self::ASSETS_DIR . 'routes.php');
         $this->assertFileExists(self::CONFIG_DIR . 'routes.php');
         $this->assertFileEquals(
             self::ASSETS_DIR . 'routes.php',
             self::CONFIG_DIR . 'routes.php'
         );
 
+        $this->assertFileExists(self::ASSETS_DIR . 'app.php');
         $this->assertFileExists(self::CONFIG_DIR . 'app.php');
         $this->assertFileEquals(
             self::ASSETS_DIR . 'app.php',
             self::CONFIG_DIR . 'app.php'
         );
 
+        $this->assertFileExists(self::ASSETS_DIR . DS . 'WelcomeController.php');
         $this->assertFileExists(self::SRC_DIR . 'Controller' . DS . 'WelcomeController.php');
         $this->assertFileEquals(
             self::ASSETS_DIR . 'WelcomeController.php',

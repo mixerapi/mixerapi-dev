@@ -46,11 +46,6 @@ class InstallCommand extends Command
             $io->out('| MixerApi Install');
             $io->hr();
 
-            $io->info('MixerAPI can automatically setup an application skeleton with the following:');
-            $io->hr(1);
-            $this->printFiles($io);
-            $io->hr(1);
-
             if (strtoupper($io->ask('Continue?', 'Y')) !== 'Y') {
                 $io->abort('Install aborted');
             }
@@ -67,32 +62,64 @@ class InstallCommand extends Command
         }
 
         $assets = __DIR__ . DS . '..' . DS . '..' . DS . 'assets' . DS;
+        // @phpstan-ignore-next-line ignore Constant ROOT not found.
+        $swaggerBake = ROOT . DS . 'vendor' . DS . 'cnizzardini' . DS . 'cakephp-swagger-bake';
 
-        copy($assets . 'swagger.yml', $configDir . 'swagger.yml');
-        copy($assets . 'swagger_bake.php', $configDir . 'swagger_bake.php');
-        copy($assets . 'routes.php', $configDir . 'routes.php');
-        copy($assets . 'app.php', $configDir . 'app.php');
-        copy($assets . 'WelcomeController.php', $srcDir . 'Controller' . DS . 'WelcomeController.php');
+        $files = [
+            [
+                'name' => 'OpenAPI YAML file',
+                'source' => $assets . 'swagger.yml',
+                'destination' => $configDir . 'swagger.yml',
+            ],
+            [
+                'name' => 'SwaggerBake config file',
+                'source' => $swaggerBake . DS . 'assets' . DS . 'swagger_bake.php',
+                'destination' => $configDir . 'swagger_bake.php',
+            ],
+            [
+                'name' => 'CakePHP routes file',
+                'source' => $assets . 'routes.php',
+                'destination' => $configDir . 'routes.php',
+            ],
+            [
+                'name' => 'CakePHP config file',
+                'source' => $assets . 'app.php',
+                'destination' => $configDir . 'app.php',
+            ],
+            [
+                'name' => 'A WelcomeController file',
+                'source' => $assets . 'WelcomeController.php',
+                'destination' => $srcDir . 'Controller' . DS . 'WelcomeController.php',
+            ],
+        ];
+
+        foreach ($files as $file) {
+            if (!file_exists($file['source'])) {
+                $io->warning(sprintf(
+                    'Unable to locate %s, your install might fail. Please report a bug.',
+                    $file['source']
+                ));
+                continue;
+            }
+            if (file_exists($file['destination'])) {
+                $question = sprintf(
+                    'A %s already exists at %s. Do you want to overwrite it?',
+                    $file['name'],
+                    $file['destination']
+                );
+                if ($io->ask($question, 'Y') !== 'Y') {
+                    continue;
+                }
+            }
+            if (!copy($file['source'], $file['destination'])) {
+                $io->warning(sprintf(
+                    'Unable to copy %s to destination %s.',
+                    $file['source'],
+                    $file['destination'],
+                ));
+            }
+        }
 
         $io->success('MixerApi Installation Complete!');
-
-        if ($args->getOption('auto') === 'Y') {
-            $this->printFiles($io);
-        }
-    }
-
-    /**
-     * @param \Cake\Console\ConsoleIo $io ConsoleIo
-     * @return void
-     */
-    private function printFiles(ConsoleIo $io): void
-    {
-        $overwrite = '<warning> overwrite </warning>';
-
-        $io->out('- config/swagger.yml                        ' . $overwrite);
-        $io->out('- config/swagger_bake.php                   ' . $overwrite);
-        $io->out('- config/routes.php                         ' . $overwrite);
-        $io->out('- config/app.php                            ' . $overwrite);
-        $io->out('- src/Controller/WelcomeController.php      ' . $overwrite);
     }
 }
