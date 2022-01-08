@@ -44,25 +44,36 @@ This is a read-only repository. Please submit issues and PRs to
 
 ## Installation
 
+The installation will load all plugins, overwrite your `config/app.php` and `config/routes.php`, and create a welcome
+page at your applications index route.
+
 ```console
 composer require mixerapi/mixerapi
 bin/cake plugin load MixerApi
+```
+
+### Automated Install
+
+Run the installer:
+
+```console
 bin/cake mixerapi install
 ```
 
-## Setup
+You should now be able to browse to your index page and see the welcome page.
 
-To load all MixerApi plugins run `bin/cake plugin load MixerApi`. Alternatively, you can modify your Applications
-bootstrap method yourself:
+### Manual Install
 
-```php
-# src/Application.php
-public function bootstrap(): void
-{
-    // other logic...
-    $this->addPlugin('MixerApi');
-}
-```
+Manually installing can be a bit cumbersome which is why the automated installer is recommended. If you ar integrating
+MixerApi into an existing project or prefer to do things yourself follow along below:
+
+- Follow installation steps in [SwaggerBake](https://github.com/cnizzardini/cakephp-swagger-bake)
+- Follow installation steps in [MixerApi/ExceptionRender](https://github.com/mixerapi/exception-render)
+- Copy `assets/WelcomeController.php` to your `src/Controller` directory.
+- Copy routes from `assets/routes.php` to your `config/routes.php`
+- Copy welcome schemas from `assets/swagger.yml` to your `config/swagger.yml`
+
+## Loading Plugins as-needed
 
 You can also load plugins individually. For instance, if your project only requires HalView and SwaggerBake your
 `Application->bootstrap()` would resemble this:
