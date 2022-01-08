@@ -44,17 +44,26 @@ This is a read-only repository. Please submit issues and PRs to
 
 ## Installation
 
-The installation will load all plugins, overwrite your `config/app.php` and `config/routes.php`, and create a welcome
-page at your applications index route.
-
 ```console
 composer require mixerapi/mixerapi
 bin/cake plugin load MixerApi
 ```
 
+Alternatively after composer installing you can manually load the plugin in your Application:
+
+```php
+# src/Application.php
+public function bootstrap(): void
+{
+    // other logic...
+    $this->addPlugin('MixerApi');
+}
+```
+
 ### Automated Install
 
-Run the installer:
+The automated install will overwrite your `config/app.php` and `config/routes.php`, and create a welcome page at your
+applications index route.
 
 ```console
 bin/cake mixerapi install
