@@ -15,6 +15,8 @@ use MixerApi\Service\InstallerService;
  */
 class InstallCommand extends Command
 {
+    public const DONE = 'MixerApi Installation Complete!';
+
     /**
      * @param \MixerApi\Service\InstallerService $installerService The MixerAPI installer service
      */
@@ -59,6 +61,6 @@ class InstallCommand extends Command
             }
         }
 
-        $io->success('MixerApi Installation Complete!');
+        $io->success(self::DONE);
     }
 }

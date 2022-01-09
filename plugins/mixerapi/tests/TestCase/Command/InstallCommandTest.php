@@ -4,6 +4,8 @@ namespace MixerApi\Test\TestCase\Command;
 
 use Cake\TestSuite\ConsoleIntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use MixerApi\Command\InstallCommand;
+use MixerApi\Exception\InstallException;
 use MixerApi\Service\InstallerService;
 
 class InstallCommandTest extends TestCase
@@ -27,12 +29,12 @@ class InstallCommandTest extends TestCase
 
     public function test_auto_install(): void
     {
-        $mixerapi = SELF::MIXERAPI;
-        $this->mockService(InstallerService::class, function () use ($mixerapi) {
-            return new InstallerService(
-                $mixerapi . 'assets' . DS,
-                $mixerapi . 'tests' . DS . 'installer_output' . DS,
-            );
+        $installer =  new InstallerService(
+            self::MIXERAPI . 'assets' . DS,
+            self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
+        );
+        $this->mockService(InstallerService::class, function () use ($installer) {
+            return $installer;
         });
 
         $this->exec('mixerapi install --auto Y');
@@ -40,43 +42,53 @@ class InstallCommandTest extends TestCase
         $this->assertFilesExist();
     }
 
-    /*
-    public function test_interactive_install(): void
+/*    public function test_auto_install_with_continuable_exception(): void
     {
-        $this->exec(
-            'mixerapi install' .
-            ' --test_config_dir ' . self::CONFIG_DIR .
-            ' --test_src_dir ' . self::SRC_DIR,
-            ['Y']
-        );
+        $mockInstaller = $this->getMockBuilder(InstallerService::class)
+            ->setConstructorArgs([
+                self::MIXERAPI . 'assets' . DS,
+                self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
+            ])
+            ->onlyMethods([
+                'copyFile'
+            ])
+            ->getMock();
 
-        $this->filesExist();
+        $mockInstaller->method('copyFile')
+            ->withAnyParameters()
+            ->willThrowException((new InstallException())->setCanContinue(true));
+
+        $this->mockService(InstallerService::class, function () use ($mockInstaller) {
+            return $mockInstaller;
+        });
+
+        $this->exec('mixerapi install');
+    }*/
+
+    public function test_auto_install_with_exception(): void
+    {
+        $mockInstaller = $this->getMockBuilder(InstallerService::class)
+            ->setConstructorArgs([
+                self::MIXERAPI . 'assets' . DS,
+                self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
+            ])
+            ->onlyMethods([
+                'copyFile'
+            ])
+            ->getMock();
+
+        $mockInstaller->method('copyFile')
+            ->withAnyParameters()
+            ->willThrowException((new InstallException()));
+
+        $this->mockService(InstallerService::class, function () use ($mockInstaller) {
+            return $mockInstaller;
+        });
+
+        $this->exec('mixerapi install');
+        $this->assertExitCode(1);
     }
 
-    public function test_auto_install(): void
-    {
-        $this->exec(
-            'mixerapi install' .
-            ' --test_config_dir ' . self::CONFIG_DIR .
-            ' --test_src_dir ' . self::SRC_DIR .
-            ' --auto Y'
-        );
-
-        $this->filesExist();
-    }
-
-    public function test_abort_interactive_install(): void
-    {
-        $this->exec(
-            'mixerapi install' .
-            ' --test_config_dir ' . self::CONFIG_DIR .
-            ' --test_src_dir ' . self::SRC_DIR,
-            ['N']
-        );
-
-        $this->assertExitError();
-    }
-    */
     private function assertFilesExist(): void
     {
         $assetsDir = self::MIXERAPI . 'assets' . DS;
