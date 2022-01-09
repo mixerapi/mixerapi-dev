@@ -11,6 +11,7 @@ class InstallException extends CakeException
     public const DESTINATION_FILE_EXISTS = '%s already exists at %s. Do you want to overwrite it?';
     public const COPY_FAILED = 'Unable to copy %s to destination %s.';
     private bool $canContinue = false;
+    private bool $canCopy = false;
 
     /**
      * @param bool $canContinue Should the CLI prompt the user to continue past this exception?
@@ -29,5 +30,24 @@ class InstallException extends CakeException
     public function canContinue(): bool
     {
         return $this->canContinue;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canCopy(): bool
+    {
+        return $this->canCopy;
+    }
+
+    /**
+     * @param bool $canCopy Can the file still be copied after this exception?
+     * @return $this
+     */
+    public function setCanCopy(bool $canCopy)
+    {
+        $this->canCopy = $canCopy;
+
+        return $this;
     }
 }

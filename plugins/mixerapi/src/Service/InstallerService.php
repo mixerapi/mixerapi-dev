@@ -58,12 +58,11 @@ class InstallerService
     /**
      * Copy files.
      *
-     * @param array $file An item in InstallerService::files.
-     * @param bool $overwrite Overwrite even if the destination file exists.
+     * @param array $file An item from InstallerService::files.
      * @return void
      * @throws \MixerApi\Exception\InstallException
      */
-    public function copyFile(array $file, bool $overwrite = false): void
+    public function copyFile(array $file): void
     {
         if (!file_exists($file['source'])) {
             throw new InstallException(
@@ -73,14 +72,14 @@ class InstallerService
                 )
             );
         }
-        if (file_exists($file['destination']) && !$overwrite) {
+        if (file_exists($file['destination'])) {
             throw (new InstallException(
                 sprintf(
                     InstallException::DESTINATION_FILE_EXISTS,
                     $file['name'],
                     $file['destination']
                 )
-            ))->setCanContinue(true);
+            ))->setCanContinue(true)->setCanCopy(true);
         }
         if (!copy($file['source'], $file['destination'])) {
             throw new InstallException(
@@ -91,6 +90,27 @@ class InstallerService
                 )
             );
         }
+    }
+
+    /**
+     * Copy the file without checking if the destination already exists.
+     *
+     * @param array $file An item from InstallerService::files.
+     * @return bool
+     */
+    public function alwaysCopy(array $file): bool
+    {
+        if (!copy($file['source'], $file['destination'])) {
+            throw new InstallException(
+                sprintf(
+                    InstallException::COPY_FAILED,
+                    $file['source'],
+                    $file['destination'],
+                )
+            );
+        }
+
+        return true;
     }
 
     /**

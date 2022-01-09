@@ -7,6 +7,7 @@ use Cake\TestSuite\TestCase;
 use MixerApi\Command\InstallCommand;
 use MixerApi\Exception\InstallException;
 use MixerApi\Service\InstallerService;
+use phpDocumentor\Reflection\Types\Void_;
 
 class InstallCommandTest extends TestCase
 {
@@ -40,6 +41,52 @@ class InstallCommandTest extends TestCase
         $this->exec('mixerapi install --auto Y');
 
         $this->assertFilesExist();
+        $this->assertOutputContains(InstallCommand::DONE);
+    }
+
+    public function test_auto_install_with_continuable_exception(): void
+    {
+        $mockInstaller = $this->getMockBuilder(InstallerService::class)
+            ->setConstructorArgs([
+                self::MIXERAPI . 'assets' . DS,
+                self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
+            ])
+            ->onlyMethods([
+                'copyFile',
+                'getFiles',
+                'alwaysCopy'
+            ])
+            ->getMock();
+
+        $file = [
+            'name' => 'Test',
+            'source' => __FILE__,
+            'destination' => '/tmp/' . md5((string) microtime(true)),
+        ];
+
+        $mockInstaller->method('copyFile')
+            ->withAnyParameters()
+            ->willThrowException((new InstallException())->setCanContinue(true)->setCanCopy(true));
+
+        $mockInstaller->method('alwaysCopy')
+            ->withAnyParameters()
+            ->willReturn(true);
+
+        $mockInstaller->method('getFiles')
+            ->withAnyParameters()
+            ->willReturn([
+                'test' => [
+                    'name' => 'Test',
+                    'source' => __FILE__,
+                    'destination' => '/tmp/' . md5((string) microtime(true)),
+                ]
+            ]);
+
+        $this->mockService(InstallerService::class, function () use ($mockInstaller) {
+            return $mockInstaller;
+        });
+
+        $this->exec('mixerapi install', ['Y']);
         $this->assertOutputContains(InstallCommand::DONE);
     }
 

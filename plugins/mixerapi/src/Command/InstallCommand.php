@@ -57,12 +57,13 @@ class InstallCommand extends Command
                 $this->installerService->copyFile($file);
                 $this->copied($io, $file);
             } catch (InstallException $e) {
-                if ($e->canContinue() && ($isAuto || $io->ask($e->getMessage(), 'Y') == 'Y')) {
-                    $this->installerService->copyFile($file, true);
+                if ($e->canCopy() && ($isAuto || $io->ask($e->getMessage(), 'Y') == 'Y')) {
+                    $this->installerService->alwaysCopy($file);
                     $this->copied($io, $file);
                     continue;
+                } elseif (!$e->canContinue()) {
+                    $io->abort($e->getMessage());
                 }
-                $io->abort($e->getMessage());
             }
         }
 
