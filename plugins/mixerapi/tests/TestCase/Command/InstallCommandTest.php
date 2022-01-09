@@ -54,21 +54,15 @@ class InstallCommandTest extends TestCase
             ->onlyMethods([
                 'copyFile',
                 'getFiles',
-                'alwaysCopy'
+                'copy'
             ])
             ->getMock();
-
-        $file = [
-            'name' => 'Test',
-            'source' => __FILE__,
-            'destination' => '/tmp/' . md5((string) microtime(true)),
-        ];
 
         $mockInstaller->method('copyFile')
             ->withAnyParameters()
             ->willThrowException((new InstallException())->setCanContinue(true)->setCanCopy(true));
 
-        $mockInstaller->method('alwaysCopy')
+        $mockInstaller->method('copy')
             ->withAnyParameters()
             ->willReturn(true);
 

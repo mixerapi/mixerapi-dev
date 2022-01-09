@@ -81,24 +81,16 @@ class InstallerService
                 )
             ))->setCanContinue(true)->setCanCopy(true);
         }
-        if (!copy($file['source'], $file['destination'])) {
-            throw new InstallException(
-                sprintf(
-                    InstallException::COPY_FAILED,
-                    $file['source'],
-                    $file['destination'],
-                )
-            );
-        }
+        $this->copy($file);
     }
 
     /**
-     * Copy the file without checking if the destination already exists.
+     * Copy the file.
      *
      * @param array $file An item from InstallerService::files.
      * @return bool
      */
-    public function alwaysCopy(array $file): bool
+    public function copy(array $file): bool
     {
         if (!copy($file['source'], $file['destination'])) {
             throw new InstallException(
