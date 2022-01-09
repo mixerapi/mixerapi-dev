@@ -40,9 +40,10 @@ class InstallCommandTest extends TestCase
         $this->exec('mixerapi install --auto Y');
 
         $this->assertFilesExist();
+        $this->assertOutputContains(InstallCommand::DONE);
     }
 
-/*    public function test_auto_install_with_continuable_exception(): void
+    public function test_auto_install_with_continuable_exception(): void
     {
         $mockInstaller = $this->getMockBuilder(InstallerService::class)
             ->setConstructorArgs([
@@ -50,7 +51,8 @@ class InstallCommandTest extends TestCase
                 self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
             ])
             ->onlyMethods([
-                'copyFile'
+                'copyFile',
+                'getFiles'
             ])
             ->getMock();
 
@@ -62,8 +64,9 @@ class InstallCommandTest extends TestCase
             return $mockInstaller;
         });
 
-        $this->exec('mixerapi install');
-    }*/
+        $this->exec('mixerapi install', ['Y','Y','Y','Y','Y']);
+        $this->assertOutputContains(InstallCommand::DONE);
+    }
 
     public function test_auto_install_with_exception(): void
     {
