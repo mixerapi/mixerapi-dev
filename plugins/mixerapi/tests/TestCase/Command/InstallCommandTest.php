@@ -43,31 +43,6 @@ class InstallCommandTest extends TestCase
         $this->assertOutputContains(InstallCommand::DONE);
     }
 
-    public function test_auto_install_with_continuable_exception(): void
-    {
-        $mockInstaller = $this->getMockBuilder(InstallerService::class)
-            ->setConstructorArgs([
-                self::MIXERAPI . 'assets' . DS,
-                self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
-            ])
-            ->onlyMethods([
-                'copyFile',
-                'getFiles'
-            ])
-            ->getMock();
-
-        $mockInstaller->method('copyFile')
-            ->withAnyParameters()
-            ->willThrowException((new InstallException())->setCanContinue(true));
-
-        $this->mockService(InstallerService::class, function () use ($mockInstaller) {
-            return $mockInstaller;
-        });
-
-        $this->exec('mixerapi install', ['Y','Y','Y','Y','Y']);
-        $this->assertOutputContains(InstallCommand::DONE);
-    }
-
     public function test_auto_install_with_exception(): void
     {
         $mockInstaller = $this->getMockBuilder(InstallerService::class)
