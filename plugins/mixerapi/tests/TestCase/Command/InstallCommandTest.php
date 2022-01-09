@@ -40,7 +40,25 @@ class InstallCommandTest extends TestCase
 
         $this->exec('mixerapi install --auto Y');
 
-        $this->assertFilesExist();
+        $assetsDir = self::MIXERAPI . 'assets' . DS;
+        $configDir = self::MIXERAPI . 'tests' . DS . 'installer_output' . DS . 'config' . DS;
+
+        $this->assertFileExists($configDir . 'swagger.yml');
+        $this->assertFileEquals($assetsDir . 'swagger.yml', $configDir . 'swagger.yml');
+
+        $this->assertFileExists($configDir . 'routes.php');
+        $this->assertFileEquals($assetsDir . 'routes.php',$configDir . 'routes.php');
+
+        $this->assertFileExists($configDir . 'app.php');
+        $this->assertFileEquals($assetsDir . 'app.php',$configDir . 'app.php');
+
+        $srcDir = self::MIXERAPI . 'tests' . DS . 'installer_output' . DS . 'src' . DS;
+
+        $this->assertFileExists($srcDir . 'Controller' . DS . 'WelcomeController.php');
+        $this->assertFileEquals(
+            $assetsDir . 'WelcomeController.php',
+            $srcDir . 'Controller' . DS . 'WelcomeController.php'
+        );
         $this->assertOutputContains(InstallCommand::DONE);
     }
 
@@ -117,32 +135,5 @@ class InstallCommandTest extends TestCase
 
         $this->exec('mixerapi install');
         $this->assertExitCode(1);
-    }
-
-    private function assertFilesExist(): void
-    {
-        $assetsDir = self::MIXERAPI . 'assets' . DS;
-        $configDir = self::MIXERAPI . 'tests' . DS . 'installer_output' . DS . 'config' . DS;
-
-        $this->assertFileExists($assetsDir . 'swagger.yml');
-        $this->assertFileExists($configDir . 'swagger.yml');
-        $this->assertFileEquals($assetsDir . 'swagger.yml', $configDir . 'swagger.yml');
-
-        $this->assertFileExists($assetsDir . 'routes.php');
-        $this->assertFileExists($configDir . 'routes.php');
-        $this->assertFileEquals($assetsDir . 'routes.php',$configDir . 'routes.php');
-
-        $this->assertFileExists($assetsDir . 'app.php');
-        $this->assertFileExists($configDir . 'app.php');
-        $this->assertFileEquals($assetsDir . 'app.php',$configDir . 'app.php');
-
-        $srcDir = self::MIXERAPI . 'tests' . DS . 'installer_output' . DS . 'src' . DS;
-
-        $this->assertFileExists($assetsDir . DS . 'WelcomeController.php');
-        $this->assertFileExists($srcDir . 'Controller' . DS . 'WelcomeController.php');
-        $this->assertFileEquals(
-            $assetsDir . 'WelcomeController.php',
-            $srcDir . 'Controller' . DS . 'WelcomeController.php'
-        );
     }
 }
