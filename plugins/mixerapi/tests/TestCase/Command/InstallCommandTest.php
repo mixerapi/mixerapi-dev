@@ -51,13 +51,24 @@ class InstallCommandTest extends TestCase
                 self::MIXERAPI . 'tests' . DS . 'installer_output' . DS,
             ])
             ->onlyMethods([
-                'copyFile'
+                'copyFile',
+                'getFiles',
             ])
             ->getMock();
 
         $mockInstaller->method('copyFile')
             ->withAnyParameters()
             ->willThrowException((new InstallException()));
+
+        $mockInstaller->method('getFiles')
+            ->withAnyParameters()
+            ->willReturn([
+                'test' => [
+                    'name' => 'Test',
+                    'source' => __FILE__,
+                    'destination' => __FILE__,
+                ]
+            ]);
 
         $this->mockService(InstallerService::class, function () use ($mockInstaller) {
             return $mockInstaller;

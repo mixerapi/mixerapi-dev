@@ -13,18 +13,18 @@ class InstallerService
     private array $files;
 
     /**
-     * @param null $assetsDir The application root directory with a trailing slash
-     * @param null $rootDirectory The assets directory
+     * @param string|null $assetsDir Where the assets to be copied are located. If null the path will be determined
+     * automatically.
+     * @param string|null $rootDir The project's root directory. If null then the ROOT constant will be used.
      */
     public function __construct(
         private ?string $assetsDir = null,
-        private ?string $rootDirectory = null,
+        private ?string $rootDir = null,
     ) {
+        $this->assetsDir = $this->assetsDir ?? __DIR__ . DS . '..' . DS . '..' . DS . 'assets' . DS;
         // @phpstan-ignore-next-line ignore Constant ROOT not found.
-        $this->assetsDir = $this->assetsDir ?? ROOT . 'plugins' . DS . 'mixerapi' . DS . 'assets';
-        // @phpstan-ignore-next-line ignore Constant ROOT not found.
-        $this->rootDirectory = $this->rootDirectory ?? ROOT;
-        $config = $this->rootDirectory . 'config' . DS;
+        $this->rootDir = $this->rootDir ?? ROOT . DS;
+        $config = $this->rootDir . 'config' . DS;
 
         $this->files = [
             'swaggerbake' => [
@@ -50,7 +50,7 @@ class InstallerService
             'welcome' => [
                 'name' => 'WelcomeController',
                 'source' => $this->assetsDir . 'WelcomeController.php',
-                'destination' => $this->rootDirectory . 'src' . DS . 'Controller' . DS . 'WelcomeController.php',
+                'destination' => $this->rootDir . 'src' . DS . 'Controller' . DS . 'WelcomeController.php',
             ],
         ];
     }
@@ -58,11 +58,12 @@ class InstallerService
     /**
      * Copy files.
      *
-     * @param array $file an item in InstallerService::files.
+     * @param array $file An item in InstallerService::files.
+     * @param bool $overwrite Overwrite even if the destination file exists.
      * @return void
      * @throws \MixerApi\Exception\InstallException
      */
-    public function copyFile(array $file): void
+    public function copyFile(array $file, bool $overwrite = false): void
     {
         if (!file_exists($file['source'])) {
             throw new InstallException(
@@ -72,7 +73,7 @@ class InstallerService
                 )
             );
         }
-        if (file_exists($file['destination'])) {
+        if (file_exists($file['destination']) && !$overwrite) {
             throw (new InstallException(
                 sprintf(
                     InstallException::DESTINATION_FILE_EXISTS,

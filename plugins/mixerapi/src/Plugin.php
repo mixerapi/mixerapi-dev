@@ -77,6 +77,9 @@ class Plugin extends BasePlugin
     {
         if (PHP_SAPI === 'cli') {
             $container
+                ->add(InstallerService::class);
+
+            $container
                 ->add(InstallCommand::class)
                 ->addArgument(InstallerService::class);
         }

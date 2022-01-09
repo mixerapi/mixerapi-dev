@@ -53,7 +53,7 @@ use Cake\Core\Configure;
  */
 return [
     'SwaggerBake' => [
-        'prefix' => '/your-relative-api-url',
+        'prefix' => '/',
         'yml' => '/config/swagger.yml',
         'json' => '/webroot/swagger.json',
         'webPath' => '/swagger.json',

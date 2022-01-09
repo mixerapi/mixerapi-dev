@@ -15,7 +15,7 @@ use MixerApi\Service\InstallerService;
  */
 class InstallCommand extends Command
 {
-    public const DONE = 'MixerApi Installation Complete!';
+    public const DONE = 'MixerAPI Installation Complete!';
 
     /**
      * @param \MixerApi\Service\InstallerService $installerService The MixerAPI installer service
@@ -32,7 +32,7 @@ class InstallCommand extends Command
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
-            ->setDescription('MixerApi Installer')
+            ->setDescription('MixerAPI Installer')
             ->addOption('auto', [
                 'help' => 'Non-interactive install, skips all prompts and uses defaults',
                 'default' => 'N',
@@ -48,13 +48,18 @@ class InstallCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io)
     {
+        $io->info('Installing MixerAPI');
+
         $isAuto = $args->getOption('auto') == 'Y';
 
         foreach ($this->installerService->getFiles() as $file) {
             try {
                 $this->installerService->copyFile($file);
+                $this->copied($io, $file);
             } catch (InstallException $e) {
-                if ($e->canContinue() && ($io->ask($e->getMessage(), 'Y') == 'Y' || $isAuto)) {
+                if ($e->canContinue() && ($isAuto || $io->ask($e->getMessage(), 'Y') == 'Y')) {
+                    $this->installerService->copyFile($file, true);
+                    $this->copied($io, $file);
                     continue;
                 }
                 $io->abort($e->getMessage());
@@ -62,5 +67,22 @@ class InstallCommand extends Command
         }
 
         $io->success(self::DONE);
+    }
+
+    /**
+     * Writes message to console on copy.
+     *
+     * @param \Cake\Console\ConsoleIo $io ConsoleIo
+     * @param array $file The file array
+     * @return void
+     */
+    private function copied(ConsoleIo $io, array $file): void
+    {
+        $io->out(sprintf(
+            'Copied %s to %s',
+            $file['name'],
+            $file['destination']
+        ));
+        $io->hr();
     }
 }
