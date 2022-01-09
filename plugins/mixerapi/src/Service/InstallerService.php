@@ -10,7 +10,7 @@ use MixerApi\Exception\InstallException;
  */
 class InstallerService
 {
-    private ?array $files;
+    private array $files;
 
     /**
      * @param null $assetsDir The application root directory with a trailing slash
