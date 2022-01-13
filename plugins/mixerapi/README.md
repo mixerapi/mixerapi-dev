@@ -1,4 +1,4 @@
-<p style="text-align: center">
+<p align="center">
   <a href="http://mixerapi.com/">
     <img alt="MixerAPI" src="mixerapi-transparent.png" width="33%" height="33%" />
   </a>
