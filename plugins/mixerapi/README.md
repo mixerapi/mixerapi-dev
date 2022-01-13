@@ -3,9 +3,9 @@
     <img alt="MixerAPI" src="mixerapi-transparent.png" width="33%" height="33%" />
   </a>
 </p>
-<h3 align="center">
-    CakePHP Plugin for RESTful API Development
-</h3>
+<p align="center">
+    A CakePHP Plugin for RESTful API Development
+</p>
 <p align="center">
     <a href="https://packagist.org/packages/mixerapi/mixerapi" target="_blank">
         <img alt="Packagist" src="https://img.shields.io/packagist/v/mixerapi/mixerapi.svg?style=flat-square">
