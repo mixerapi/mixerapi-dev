@@ -1,8 +1,10 @@
 ---
-title: MixerAPI - Streamline RESTful API Development
+title: MixerAPI
 ---
 
-# MixerAPI / Streamline API Development
+<p style="text-align: center">
+<img src="/images/mixerapi-transparent.png" height="50%" width="50%" />
+</p>
 
 Streamline development of modern RESTful APIs for your teams CakePHP project. Designed around a component-based
 architecture, MixerAPI enables developers to pick and choose the functionality they need for developing REST APIs.

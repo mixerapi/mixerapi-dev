@@ -1,13 +1,10 @@
-<h1 align="center">
-  MixerAPI
-</h1>
-<p align="center">
+<p style="text-align: center">
   <a href="http://mixerapi.com/">
-    <img alt="MixerAPI" src="https://mixerapi.com/assets/logo.png" />
+    <img alt="MixerAPI" src="mixerapi-transparent.png" width="33%" height="33%" />
   </a>
 </p>
 <h3 align="center">
-  Streamline development of API-first applications in CakePHP
+    CakePHP Plugin for RESTful API Development
 </h3>
 <p align="center">
     <a href="https://packagist.org/packages/mixerapi/mixerapi" target="_blank">
