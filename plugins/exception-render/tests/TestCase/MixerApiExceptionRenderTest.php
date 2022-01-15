@@ -39,7 +39,7 @@ class MixerApiExceptionRenderTest extends TestCase
         $request = $request->withHeader('Accept', 'application/json');
         $request = $request->withHeader('Content-Type', 'application/json');
         $exception = new HttpException();
-        $exception->responseHeader(['x-test' => 'testing']);
+        $exception->setHeaders(['x-test' => 'testing']);
 
         $response = (new MixerApiExceptionRenderer($exception, $request))->render();
 
