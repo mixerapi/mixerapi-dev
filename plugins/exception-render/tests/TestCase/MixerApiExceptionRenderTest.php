@@ -24,9 +24,13 @@ class MixerApiExceptionRenderTest extends TestCase
         $request = new ServerRequest();
         $request = $request->withHeader('Accept', 'application/json');
         $request = $request->withHeader('Content-Type', 'application/json');
+        $exception = new CakeException();
+        $exception->responseHeader(['x-test' => 'testing']);
 
-        $response = (new MixerApiExceptionRenderer(new CakeException(), $request))->render();
-        $this->assertNotEmpty($response->getHeaders());
+        $response = (new MixerApiExceptionRenderer($exception, $request))->render();
+
+        $this->assertEquals('application/json', $response->getHeaders()['Content-Type'][0]);
+        $this->assertEquals('testing', $response->getHeaders()['x-test'][0]);
     }
 
     public function test_render_http_exception_with_headers(): void
@@ -34,8 +38,12 @@ class MixerApiExceptionRenderTest extends TestCase
         $request = new ServerRequest();
         $request = $request->withHeader('Accept', 'application/json');
         $request = $request->withHeader('Content-Type', 'application/json');
+        $exception = new HttpException();
+        $exception->responseHeader(['x-test' => 'testing']);
 
-        $response = (new MixerApiExceptionRenderer(new HttpException(), $request))->render();
-        $this->assertNotEmpty($response->getHeaders());
+        $response = (new MixerApiExceptionRenderer($exception, $request))->render();
+
+        $this->assertEquals('application/json', $response->getHeaders()['Content-Type'][0]);
+        $this->assertEquals('testing', $response->getHeaders()['x-test'][0]);
     }
 }
