@@ -146,4 +146,10 @@ class JsonSerializerTest extends TestCase
 
         $this->assertIsArray($jsonSerializer->getData());
     }
+
+    public function test_as_json_throws_run_time_exception(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        (new JsonSerializer(NAN))->asJson(0);
+    }
 }

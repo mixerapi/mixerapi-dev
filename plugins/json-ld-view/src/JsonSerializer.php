@@ -29,9 +29,9 @@ class JsonSerializer
     /**
      * JSON-LD data array
      *
-     * @var array|null
+     * @var mixed
      */
-    private ?array $data;
+    private mixed $data;
 
     /**
      * JsonLd config
