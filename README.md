@@ -4,9 +4,6 @@
     Dev/Mono Repo for MixerAPI &mdash; A CakePHP Plugin for RESTful API Development
 </p>
 <p align="center">
-    <a href="LICENSE.txt" target="_blank">
-        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
-    </a>
     <a href="https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild" target="_blank">
         <img alt="Build Status" src="https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master">
     </a>
@@ -18,6 +15,9 @@
     </a>
     <a href="https://php.net/" target="_blank">
         <img alt="PHP ^8.0" src="https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php">
+    </a>
+    <a href="LICENSE.txt" target="_blank">
+        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
     </a>
 </p>
 

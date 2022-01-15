@@ -9,6 +9,7 @@ use Cake\Error\Debugger;
 use Cake\Error\ExceptionRenderer;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
+use Cake\Http\Exception\HttpException;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
 use Throwable;
@@ -46,7 +47,6 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     {
         $exception = $this->error;
         $code = $this->getHttpCode($exception);
-
         $method = $this->_method($exception);
         $template = $this->_template($exception, $method, $code);
         $this->clearOutput();
@@ -62,6 +62,11 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         if ($exception instanceof CakeException) {
             foreach ((array)$exception->responseHeader() as $key => $value) {
                 $response = $response->withHeader($key, $value);
+            }
+        }
+        if ($exception instanceof HttpException) {
+            foreach ($exception->getHeaders() as $name => $value) {
+                $response = $response->withHeader($name, $value);
             }
         }
         $response = $response->withStatus($code);
