@@ -11,7 +11,7 @@ architecture, MixerAPI enables developers to pick and choose the functionality t
     Check out the live demo and browse the demo source code for examples.
 
 [Live Demo](https://demo.mixerapi.com){: .md-button .md-button--primary }
-[Source code](https://github.com/mixerapi/demo){: .md-button }
+[Demo Code](https://github.com/mixerapi/demo){: .md-button }
 
 ## Features
 
