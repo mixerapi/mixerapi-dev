@@ -17,7 +17,7 @@ architecture, MixerAPI enables developers to pick and choose the functionality t
 
 - **Rapid Prototyping:** Scaffold your API in seconds with a custom Bake template geared towards modern REST architecture.
 - **OpenAPI:** Automatically generates [OpenAPI](https://www.openapis.org/) from your existing code into
-[Swagger](https://swagger.io/) and [Redoc](https://redoc.ly/). Annotations provided, but not required.
+[Swagger](https://swagger.io/) and [Redoc](https://redoc.ly/). Attributes provided, but not required.
 - **Error Handling:** Handles exception rendering in XML or JSON.
 - **Data Formats:** Formats responses in JSON, XML, HAL+JSON, or JSON-LD.
 - **Integrations:** Integrates well with other CakePHP 4 compatible plugins.

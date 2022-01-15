@@ -24,14 +24,25 @@
     </a>
 </p>
 
-MixerAPI is a plugin of plugins, that is to say, it combines many CakePHP libraries into a coherent package to
-streamline API development for CakePHP applications. It eases following a [REST](https://restfulapi.net)
-architecture style and [HATEOS](https://restfulapi.net/hateoas/). In other words, it makes developing APIs a piece
-of cake.
+Streamline development of modern RESTful APIs for your teams CakePHP project. Designed around a component-based
+architecture, MixerAPI enables developers to pick and choose the functionality they need for developing REST APIs.
 
 [Documentation](https://mixerapi.com) |
 [Demo Application](https://demo.mixerapi.com) |
 [Demo Source Code](https://github.com/mixerapi/demo)
+
+## Features
+
+- **Rapid Prototyping:** Scaffold your API in seconds with a custom Bake template geared towards modern REST architecture.
+- **OpenAPI:** Automatically generates [OpenAPI](https://www.openapis.org/) from your existing code into
+  [Swagger](https://swagger.io/) and [Redoc](https://redoc.ly/). Attributes provided, but not required.
+- **Error Handling:** Handles exception rendering in XML or JSON.
+- **Data Formats:** Formats responses in JSON, XML, HAL+JSON, or JSON-LD.
+- **Integrations:** Integrates well with other CakePHP 4 compatible plugins.
+- **Minimalist Configuration:** Built for developing, not writing YAML configurations. Most components require zero
+  configuration files.
+- **Non-opinionated:** Develop your way.
+
 
 This is a read-only repository. Please submit issues and PRs to
 [mixerapi/mixerapi-dev](https://github.com/mixerapi/mixerapi-dev)
