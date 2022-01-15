@@ -92,7 +92,7 @@ class InstallerService
      */
     public function copy(array $file): bool
     {
-        if (!copy($file['source'], $file['destination'])) {
+        if (!@copy($file['source'], $file['destination'])) { // phpcs:ignore
             throw new InstallException(
                 sprintf(
                     InstallException::COPY_FAILED,

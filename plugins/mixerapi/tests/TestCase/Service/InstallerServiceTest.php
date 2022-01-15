@@ -26,4 +26,10 @@ class InstallerServiceTest extends TestCase
         );
         (new InstallerService())->copyFile(['destination' => __FILE__, 'name' => 'Test Name', 'source' => __FILE__]);
     }
+
+    public function test_copy_throws_install_exception(): void
+    {
+        $this->expectException(InstallException::class);
+        (new InstallerService())->copy(['source' => __FILE__, 'destination' => 'dev/null']);
+    }
 }
