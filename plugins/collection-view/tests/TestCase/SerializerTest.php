@@ -132,4 +132,10 @@ class SerializerTest extends TestCase
         $this->assertEquals('/', $simpleXml->collection->url);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml->data);
     }
+
+    public function test_as_json_throws_run_time_exception(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        (new Serializer(NAN))->asJson(0);
+    }
 }
