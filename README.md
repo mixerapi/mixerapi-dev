@@ -1,12 +1,8 @@
-<h1 align="center">
-  MixerAPI
-</h1>
-<p align="center">
-  <a href="http://mixerapi.com/">
-    <img alt="MixerAPI" src="https://mixerapi.com/assets/logo.png" />
-  </a>
-</p>
+![Logo](./assets/mixerapi.svg#gh-light-mode-only)
 
+<p align="center">
+    Dev/Mono Repo for MixerAPI &mdash; A CakePHP Plugin for RESTful API Development
+</p>
 <p align="center">
     <a href="LICENSE.txt" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">

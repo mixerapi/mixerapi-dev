@@ -1,8 +1,5 @@
-<p align="center">
-  <a href="http://mixerapi.com/">
-    <img alt="MixerAPI" src="mixerapi-transparent.png" width="33%" height="33%" />
-  </a>
-</p>
+![Logo](./assets/mixerapi.svg#gh-light-mode-only)
+
 <p align="center">
     A CakePHP Plugin for RESTful API Development
 </p>
