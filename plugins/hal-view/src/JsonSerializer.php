@@ -29,7 +29,7 @@ class JsonSerializer
 
     private ?PaginatorHelper $paginator;
 
-    private ?array $data;
+    private mixed $data;
 
     /**
      * If constructed without parameters collection meta data will not be added to HAL $data
