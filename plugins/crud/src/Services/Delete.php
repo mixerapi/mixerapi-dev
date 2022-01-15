@@ -33,13 +33,12 @@ class Delete implements DeleteInterface
     public function delete(Controller $controller, mixed $id = null)
     {
         $this->allowMethods($controller);
-        $table = $controller->getTableLocator()->get($this->whichTable($controller));
-
         $id = $this->whichId($controller, $id);
         $entity = $this->read->read($controller, $id);
 
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
         if (!$table->delete($entity)) {
-            throw new ResourceWriteException($entity, "Unable to save $this->tableName resource.");
+            throw new ResourceWriteException($entity, "Unable to delete {$table->getAlias()} resource.");
         }
 
         return $this;

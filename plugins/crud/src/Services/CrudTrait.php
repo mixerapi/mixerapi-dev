@@ -49,7 +49,7 @@ trait CrudTrait
      */
     private function allowMethods(Controller $controller): void
     {
-        if (is_array($this->methods) && count($this->methods)) {
+        if (count($this->methods)) {
             $controller->getRequest()->allowMethod($this->methods);
         }
     }
