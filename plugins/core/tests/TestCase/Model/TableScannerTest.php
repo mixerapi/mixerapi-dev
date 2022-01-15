@@ -17,6 +17,8 @@
 
 namespace MixerApi\Core\Test\TestCase\Model;
 
+use Cake\Database\Connection;
+use Cake\Database\Schema\CollectionInterface as SchemaCollectionInterface;
 use Cake\TestSuite\TestCase;
 use MixerApi\Core\Model\TableScanner;
 use Cake\Datasource\ConnectionManager;
@@ -68,5 +70,26 @@ class TableScannerTest extends TestCase
         $result = $tableScanner->listUnskipped();
 
         $this->assertCount(0, $result);
+    }
+
+    public function test_list_all_throws_run_time_exception(): void
+    {
+        $mockSchemaCollection = $this->createPartialMock(SchemaCollectionInterface::class, [
+            'listTables','describe'
+        ]);
+        $mockSchemaCollection->expects($this->once())
+            ->method('listTables')
+            ->willReturn([]);
+        $mockSchemaCollection->expects($this->never())
+            ->method('describe')
+            ->willThrowException(new \Exception());
+
+        $mockConnection = $this->createPartialMock(Connection::class, ['getSchemaCollection']);
+        $mockConnection->expects($this->once())
+            ->method('getSchemaCollection')
+            ->willReturn($mockSchemaCollection);
+
+        $this->expectException(\RuntimeException::class);
+        (new TableScanner($mockConnection))->listAll();
     }
 }
