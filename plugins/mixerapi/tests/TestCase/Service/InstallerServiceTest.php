@@ -8,7 +8,7 @@ use MixerApi\Service\InstallerService;
 
 class InstallerServiceTest extends TestCase
 {
-    public function test_copy_file_with_source_exception(): void
+    public function test_copy_file_throws_install_exception_because_source_file_missing(): void
     {
         $file = '/tmp/' . md5((string)microtime(true));
         $this->expectException(InstallException::class);
@@ -18,7 +18,7 @@ class InstallerServiceTest extends TestCase
         (new InstallerService())->copyFile(['source' => $file]);
     }
 
-    public function test_copy_file_with_destination_exception(): void
+    public function test_copy_file_throws_install_exception_because_destination_file_exists_already(): void
     {
         $this->expectException(InstallException::class);
         $this->expectExceptionMessage(
