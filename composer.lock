@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f72a02b204010aae96d85fe5b749d0c",
+    "content-hash": "1784c6b1c48bc831ab57186a6ee94d71",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -844,48 +844,6 @@
                 }
             ],
             "time": "2021-11-16T10:29:06+00:00"
-        },
-        {
-            "name": "mixerapi/core",
-            "version": "1.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/core",
-                "reference": "589b9b77edea13ed8d1f5e08608fea76e970d8fa"
-            },
-            "require": {
-                "cakephp/cakephp": "^4.2",
-                "php": "^8.0",
-                "thecodingmachine/class-explorer": "^1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MixerApi\\Core\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "MixerApi",
-                    "role": "Organization"
-                }
-            ],
-            "description": "MixerAPI Core libraries",
-            "keywords": [
-                "cakephp",
-                "mixerapi"
-            ],
-            "support": {
-                "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
-                "source": "https://github.com/mixerapi/core"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "mobiledetect/mobiledetectlib",
