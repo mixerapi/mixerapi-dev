@@ -14,62 +14,36 @@ use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 
 /**
- * Class RouteWriter
+ * RouteWriter adds routes to the applications `config/routes.php`.
  *
- * Writes routes to `config/routes.php`
- *
- * @package MixerApi\Rest\Lib\Route
+ * @uses \MixerApi\Rest\Lib\Parser\RouteScopeFinder
+ * @uses \MixerApi\Rest\Lib\Parser\RouteScopeModifier
+ * @uses \PhpParser\Node
+ * @uses \PhpParser\NodeFinder
+ * @uses \PhpParser\NodeTraverser
+ * @uses \PhpParser\ParserFactory
+ * @uses \PhpParser\PrettyPrinter\Standard
  */
 class RouteWriter
 {
     /**
-     * @var \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[]
-     */
-    private $resources;
-
-    /**
-     * @var string
-     */
-    private $baseNamespace;
-
-    /**
-     * @var string
-     */
-    private $configDir;
-
-    /**
-     * @var string
-     */
-    private $prefix;
-
-    /**
-     * @var string
-     */
-    private $plugin;
-
-    /**
-     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[] $resources ReflectedControllerDecorator[]
-     * @param string $baseNamespace a base namespace
+     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator[] $resources An array of
+     * ReflectedControllerDecorator instances.
+     * @param string $namespace A base namespace
      * @param string $configDir an absolute directory path to userland CakePHP config
      * @param string $prefix route prefix (e.g `/`)
-     * @param string $plugin route prefix (e.g `/`)
+     * @param string|null $plugin route prefix (e.g `/`)
      */
     public function __construct(
-        array $resources,
-        string $baseNamespace,
-        string $configDir,
-        string $prefix,
-        ?string $plugin = null
+        private array $resources,
+        private string $namespace,
+        private string $configDir,
+        private string $prefix,
+        private ?string $plugin = null
     ) {
         if (!is_dir($configDir)) {
             throw new RunTimeException("Directory does not exist `$configDir`");
         }
-
-        $this->resources = $resources;
-        $this->baseNamespace = $baseNamespace;
-        $this->configDir = $configDir;
-        $this->prefix = $prefix;
-        $this->plugin = $plugin;
     }
 
     /**
@@ -128,9 +102,9 @@ class RouteWriter
     /**
      * @return string
      */
-    public function getBaseNamespace(): string
+    public function getNamespace(): string
     {
-        return $this->baseNamespace;
+        return $this->namespace;
     }
 
     /**

@@ -3,29 +3,25 @@ declare(strict_types=1);
 
 namespace MixerApi\JsonLdView;
 
+use InvalidArgumentException;
+
+/**
+ * Describes JSON-LD Schema for a property.
+ */
 class JsonLdSchema
 {
     /**
-     * The entity property name
-     *
-     * @var string
+     * @param string $property The entity property name
+     * @param string $schemaUrl A URL that describes the property (e.g. https://schema.org/Person)
+     * @param string|null $description A description of the property
      */
-    private $property;
-
-    /**
-     * A URL that describes the property
-     *
-     * @example https://schema.org/Person
-     * @var string
-     */
-    private $schemaUrl;
-
-    /**
-     * A description of the property
-     *
-     * @var string
-     */
-    private $description = '';
+    public function __construct(
+        private string $property,
+        private string $schemaUrl,
+        private ?string $description = null
+    ) {
+        $this->setSchemaUrl($this->schemaUrl);
+    }
 
     /**
      * @return string
@@ -61,7 +57,7 @@ class JsonLdSchema
     public function setSchemaUrl(string $schemaUrl)
     {
         if (!filter_var($schemaUrl, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException("schema url must be a valid url, but `$schemaUrl` is not");
+            throw new InvalidArgumentException("schema url must be a valid url, but `$schemaUrl` is not");
         }
 
         $this->schemaUrl = $schemaUrl;
@@ -70,9 +66,9 @@ class JsonLdSchema
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

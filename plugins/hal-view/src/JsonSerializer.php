@@ -18,30 +18,18 @@ use RuntimeException;
 /**
  * Creates a HAL+JSON resource
  *
- * @see https://tools.ietf.org/html/draft-kelly-json-hal-06
+ * @link https://tools.ietf.org/html/draft-kelly-json-hal-06
+ * @uses \Cake\Utility\Inflector
+ * @uses \MixerApi\Core\View\SerializableAssociation
+ * @uses ReflectionClass
  */
 class JsonSerializer
 {
-    /**
-     * ServerRequest or null
-     *
-     * @var \Cake\Http\ServerRequest|null
-     */
-    private $request;
+    private ?ServerRequest $request;
 
-    /**
-     * PaginatorHelper or null
-     *
-     * @var \Cake\View\Helper\PaginatorHelper|null
-     */
-    private $paginator;
+    private ?PaginatorHelper $paginator;
 
-    /**
-     * HAL data array
-     *
-     * @var array
-     */
-    private $data;
+    private mixed $data;
 
     /**
      * If constructed without parameters collection meta data will not be added to HAL $data
@@ -50,7 +38,7 @@ class JsonSerializer
      * @param \Cake\Http\ServerRequest|null $request optional ServerRequest
      * @param \Cake\View\Helper\PaginatorHelper|null $paginator optional PaginatorHelper
      */
-    public function __construct($serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
+    public function __construct(mixed $serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
     {
         $this->request = $request;
         $this->paginator = $paginator;
@@ -87,9 +75,9 @@ class JsonSerializer
     /**
      * Get HAL data as an array
      *
-     * @return array
+     * @return array|null
      */
-    public function getData()
+    public function getData(): ?array
     {
         return $this->data;
     }
@@ -101,7 +89,7 @@ class JsonSerializer
      * @param mixed $mixed data to be serialized
      * @return array|\Cake\Datasource\EntityInterface|\Cake\ORM\ResultSet
      */
-    private function recursion(&$mixed)
+    private function recursion(mixed &$mixed): mixed
     {
         if ($mixed instanceof ResultSet || is_array($mixed)) {
             foreach ($mixed as $x => $item) {
@@ -170,7 +158,7 @@ class JsonSerializer
      * @param mixed $hal the data to be converted into a HAL array
      * @return array
      */
-    private function item($hal): array
+    private function item(mixed $hal): array
     {
         $links = [];
 

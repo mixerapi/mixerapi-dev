@@ -12,6 +12,7 @@ use MixerApi\JsonLdView\JsonSerializer;
  *
  * @see https://json-ld.org/
  * @SuppressWarnings(PHPMD)
+ * @uses \MixerApi\JsonLdView\JsonSerializer
  */
 class JsonLdView extends JsonView
 {

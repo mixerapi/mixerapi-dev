@@ -14,10 +14,10 @@ interface DeleteInterface
      * Deletes the resource
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
-     * @param string|int|null $id an optional identifier, if null the id parameter is used from the request
+     * @param mixed $id an optional identifier, if null the id parameter is used from the request
      * @return $this
      */
-    public function delete(Controller $controller, $id = null);
+    public function delete(Controller $controller, mixed $id = null);
 
     /**
      * @param string $table the table
@@ -29,5 +29,5 @@ interface DeleteInterface
      * @param string|array $methods allowed http method(s)
      * @return $this
      */
-    public function setAllowMethod($methods);
+    public function setAllowMethod(string|array $methods);
 }

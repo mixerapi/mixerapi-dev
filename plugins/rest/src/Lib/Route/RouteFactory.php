@@ -9,6 +9,12 @@ use Cake\Utility\Text;
 use MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator;
 use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 
+/**
+ * RouteFactory creates a CakePHP route from a Controller. This is used by AutoRouter to create routes at run-time.
+ *
+ * @uses \Cake\Utility\Inflector
+ * @uses \Cake\Utility\Text
+ */
 class RouteFactory
 {
     private const ACTION_HTTP_METHODS = [
@@ -20,19 +26,17 @@ class RouteFactory
     ];
 
     /**
-     * Creates an instance of a CakePHP Route
-     *
-     * @param string $baseNamespace a base namespace (e.g. App\Controller)
-     * @param string $basePath a base path (e.g. `/`)
-     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator $controller ReflectedControllerDecorator
-     * @param string $action Action method
-     * @param string|null $plugin Plugin name
+     * @param string $namespace A base namespace (e.g. App\Controller) that the Controller exists in. This is used to
+     * set the Route::template and Route::defaults['prefix']
+     * @param \MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator $controller An instance of
+     * ReflectedControllerDecorator. This is used to set the Controller the Route will call.
+     * @param string $action The Controller Action (method) that the Route will call.
+     * @param string|null $plugin An optional Plugin that the route can exist in.
      * @return \Cake\Routing\Route\Route
      * @throws \MixerApi\Rest\Lib\Exception\RestfulRouteException
      */
     public static function create(
-        string $baseNamespace,
-        string $basePath,
+        string $namespace,
         ReflectedControllerDecorator $controller,
         string $action,
         ?string $plugin = null
@@ -40,8 +44,6 @@ class RouteFactory
         if (!isset(self::ACTION_HTTP_METHODS[$action])) {
             throw new RestfulRouteException("Action `$action` is unknown. This route will not be created");
         }
-
-        $basePath = $basePath . '@todo'; // @todo
 
         $template = Text::slug(strtolower($controller->getResourceName()));
 
@@ -52,7 +54,7 @@ class RouteFactory
             'plugin' => $plugin ?? null,
         ];
 
-        $nsPaths = $controller->getPaths($baseNamespace);
+        $nsPaths = $controller->getPaths($namespace);
 
         if (!empty($nsPaths)) {
             $paths = array_map(function ($path) {

@@ -1,16 +1,9 @@
-<h1 align="center">
-  MixerAPI
-</h1>
-<p align="center">
-  <a href="http://mixerapi.com/">
-    <img alt="MixerAPI" src="https://mixerapi.com/assets/logo.png" />
-  </a>
-</p>
+![Logo](./assets/mixerapi.svg#gh-light-mode-only)
 
 <p align="center">
-    <a href="LICENSE.txt" target="_blank">
-        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
-    </a>
+    Dev/Mono Repo for MixerAPI &mdash; A CakePHP Plugin for RESTful API Development
+</p>
+<p align="center">
     <a href="https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild" target="_blank">
         <img alt="Build Status" src="https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master">
     </a>
@@ -18,10 +11,13 @@
         <img alt="Coverage Status" src="https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master">
     </a>
     <a href="https://book.cakephp.org/4/en/index.html">
-        <img alt="CakePHP ^4.0" src="https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp">
+        <img alt="CakePHP ^4.2" src="https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp">
     </a>
     <a href="https://php.net/" target="_blank">
-        <img alt="PHP >= 7.2" src="https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php">
+        <img alt="PHP ^8.0" src="https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php">
+    </a>
+    <a href="LICENSE.txt" target="_blank">
+        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
     </a>
 </p>
 
@@ -115,4 +111,4 @@ To build:
 ```console
 composer mkdocs-build
 ```
- 
+

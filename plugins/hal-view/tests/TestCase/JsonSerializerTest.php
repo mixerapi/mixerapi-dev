@@ -5,12 +5,10 @@ namespace MixerApi\HalView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
-use Cake\ORM\ResultSet;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
 use MixerApi\HalView\JsonSerializer;
-use MixerApi\Core\Response\ResponseModifier;
 use MixerApi\HalView\View\HalJsonView;
 
 class JsonSerializerTest extends TestCase
@@ -19,11 +17,6 @@ class JsonSerializerTest extends TestCase
      * @var string
      */
     private const EXT = 'haljson';
-
-    /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/hal+json','application/vnd.hal+json'];
 
     /**
      * @var string
@@ -82,11 +75,10 @@ class JsonSerializerTest extends TestCase
         Router::connect('/:controller/:action/*');
         Router::connect('/:plugin/:controller/:action/*');
         Router::setRequest($this->request);
-        $this->response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($this->request, new Response());
+        $this->response = new Response();
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
@@ -105,7 +97,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    public function test_item()
+    public function test_item(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->get(1, [
@@ -126,7 +118,7 @@ class JsonSerializerTest extends TestCase
         $this->assertIsObject(json_decode($json));
     }
 
-    public function test_get_data()
+    public function test_get_data(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
@@ -140,5 +132,11 @@ class JsonSerializerTest extends TestCase
         $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
 
         $this->assertIsArray($jsonSerializer->getData());
+    }
+
+    public function test_as_json_throws_run_time_exception(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        (new JsonSerializer(NAN))->asJson(0);
     }
 }

@@ -7,13 +7,24 @@
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null|void HTTP 200 on successful add
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
+{% if "MixerApi/ExceptionRender" in plugins and "SwaggerBake" in plugins %}
+     * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
+{% elseif "MixerApi/ExceptionRender" in plugins %}
      * @throws \MixerApi\ExceptionRender\ValidationException
+{% endif %}
      * @throws \Exception
      */
+{% if "MixerApi/Crud" in plugins %}
+    public function add(CreateInterface $create)
+{% else %}
     public function add()
+{%  endif %}
     {
+{% if "MixerApi/Crud" in plugins %}
+        $this->set('data', $create->save($this));
+{% else %}
         $this->request->allowMethod('post');
         ${{ singularName }} = $this->{{ currentModelName }}->newEmptyEntity();
         ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $this->request->getData());
@@ -24,4 +35,5 @@
             return;
         }
         throw new \Exception("Record not created");
+{%  endif %}
     }

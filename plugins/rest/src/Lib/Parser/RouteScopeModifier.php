@@ -17,16 +17,10 @@ use PhpParser\NodeVisitorAbstract;
 class RouteScopeModifier extends NodeVisitorAbstract
 {
     /**
-     * @var \MixerApi\Rest\Lib\Route\RouteWriter
-     */
-    private $routeWriter;
-
-    /**
      * @param \MixerApi\Rest\Lib\Route\RouteWriter $routeWriter instance of RouteWriter
      */
-    public function __construct(RouteWriter $routeWriter)
+    public function __construct(private RouteWriter $routeWriter)
     {
-        $this->routeWriter = $routeWriter;
     }
 
     /**
@@ -131,10 +125,10 @@ class RouteScopeModifier extends NodeVisitorAbstract
             }
 
             $arguments = [new Node\Arg(new String_($resource->getResourceName()))];
-            $prefixes = $resource->getPaths($this->routeWriter->getBaseNamespace());
+            $prefixes = $resource->getPaths($this->routeWriter->getNamespace());
 
             if (!empty($prefixes)) {
-                $pathTemplate = $resource->getPathTemplate($this->routeWriter->getBaseNamespace());
+                $pathTemplate = $resource->getPathTemplate($this->routeWriter->getNamespace());
                 $arguments[] = new Node\Arg(new Array_([
                     new ArrayItem(
                         new String_($pathTemplate),

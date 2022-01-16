@@ -9,28 +9,22 @@ use Cake\Http\ServerRequest;
 use Cake\Utility\Xml;
 
 /**
+ * Deserializes a request body.
+ *
  * @experimental
  */
-class Deserializer
+class Deserializer implements DeserializerInterface
 {
     /**
-     * @var \Cake\Http\Response
+     * @param \Cake\Http\Response|null $response The CakePHP Response
      */
-    private $response;
-
-    /**
-     * @param \Cake\Http\Response|null $response the response
-     */
-    public function __construct(?Response $response = null)
+    public function __construct(private ?Response $response = null)
     {
         $this->response = $response ?? new Response();
     }
 
     /**
-     * Deserializes the request body
-     *
-     * @param \Cake\Http\ServerRequest $request the request
-     * @return array
+     * @inheritDoc
      */
     public function deserialize(ServerRequest $request): array
     {

@@ -1,7 +1,10 @@
-# Install
+# Installing MixerAPI
 
-!!! info ""
-Checkout the application skeleton https://github.com/mixerapi/app
+!!! tip ""
+Checkout the application skeleton [https://github.com/mixerapi/app](https://github.com/mixerapi/app) to install via
+docker-compose or locally.
+
+## Composer
 
 MixerAPI can be installed in your existing CakePHP project using
 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
@@ -11,7 +14,7 @@ composer require mixerapi/mixerapi
 bin/cake plugin load MixerApi
 ```
 
-Running `plugin load MixerApi` simply adds the plugin to your `Application::bootstrap()` like so:
+Alternatively after composer installing you can manually load the plugin in your Application:
 
 ```php
 # src/Application.php
@@ -22,17 +25,24 @@ public function bootstrap(): void
 }
 ```
 
-## Setup
+Next run the automated install or complete the installation manually.
 
-For new projects the installer is the easiest way to get started:
+### Automated Install
+
+The automated install will overwrite your `config/app.php` and `config/routes.php`, and create a welcome page at your
+applications index route.
 
 ```console
 bin/cake mixerapi install
 ```
 
-For existing projects the steps below are recommended.
+You should now be able to browse to your index page and see the welcome page.
 
-### OpenAPI (Swagger)
+### Manual Install
+
+If you are integrating MixerApi into an existing project or prefer to do things yourself follow along below.
+
+#### OpenAPI (Swagger)
 
 After install you will need to define a few configurations for SwaggerBake. If you are not splitting your API into
 plugins then the installer will handle this for you.
@@ -46,7 +56,7 @@ also a great time to learn about the amazing functionality it offers.
 
 [Learn More](/cakephp-swagger-bake){: .md-button }
 
-### Exception Rendering
+#### Exception Rendering
 
 This is optional, but provides some improvements on the default CakePHP exceptions. In your `config/app.php` file
 change the default `exceptionRenderer`:
@@ -54,7 +64,7 @@ change the default `exceptionRenderer`:
 ```php
 'Error' => [
     'errorLevel' => E_ALL,
-    'exceptionRenderer' => MixerApi\ExceptionRender\MixerApiExceptionRenderer::class,
+    'exceptionRenderer' => \MixerApi\ExceptionRender\MixerApiExceptionRenderer::class,
     'skipLog' => [],
     'log' => true,
     'trace' => true,
@@ -62,18 +72,6 @@ change the default `exceptionRenderer`:
 ```
 
 [Learn More](/plugins/exception-render){: .md-button }
-
-### Bake Your API Skeleton
-
-You can bake your entire application using the MixerApi/Bake theme. This time saver is of course optional.
-
-[Learn More](/plugins/bake){: .md-button }
-
-### RESTful Routes
-
-Skip building routes while you are learning MixerAPI with AutoRouter.
-
-[Learn More](/plugins/rest){: .md-button }
 
 ## What's Next?
 

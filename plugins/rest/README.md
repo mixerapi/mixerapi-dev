@@ -1,17 +1,16 @@
 # MixerApi REST
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/cakephp-rest.svg?style=flat-square)](https://packagist.org/packages/mixerapi/cakephp-rest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 [![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
-[![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
-This plugin gets your API project up and going quickly by creating routes for you. It can either:
+This plugin gets your API project up and going quickly by creating routes for you.
 
-- Build your `routes.php` file from a single command, or
-- Automatically expose RESTful CRUD routes with a handy AutoRouter.
+- Build your `routes.php` file from a single command or automatically expose RESTful CRUD routes with a handy AutoRouter.
+- Set default HTTP status codes for CRUD operations
 
 This plugin assumes you have already created models and controllers. For help with the latter check out
 [MixerApi/Bake](https://github.com/mixerapi/bake). Check the official
@@ -62,7 +61,7 @@ any CRUD methods, then the route will be skipped. AutoRouting works for plugins 
 
 ```php
 # in your plugins/{PluginName}/routes.php file
-(new AutoRouter($builder, 'MyPlugin\Controller'))->buildResources();
+(new AutoRouter($builder, new ResourceScanner('MyPlugin\Controller')))->buildResources();
 ```
 
 ## Create Routes
@@ -98,7 +97,7 @@ bin/cake mixerapi:rest route create --display
 For non-CRUD routes, sub-resources, and advanced routing please reference the CakePHP
 [RESTful routing](https://book.cakephp.org/4/en/development/routing.html#restful-routing) documentation
 
-#### List Routes
+### List Routes
 
 This works similar to `bin/cake routes` but shows only RESTful routes and improves some formatting of information.
 
@@ -115,3 +114,39 @@ bin/cake mixerapi:rest route list --plugin MyPlugin
 #limit to main application:
 bin/cake mixerapi:rest route list --plugin App
 ```
+
+### CRUD HTTP Status Codes
+
+The default status codes are:
+
+| Action      | Status Code |
+| ----------- | ----------- |
+| index       | 200         |
+| view        | 200         |
+| add         | 201         |
+| edit        | 200         |
+| delete      | 204         |
+
+To change these load a `MixerApi.Rest.crud.statusCodes` configuration:
+
+```php
+return [
+    'MixerApi' => [
+        'Rest' => [
+            'crud' => [
+                'statusCodes' => [
+                    'index' => 200,
+                    'view' => 200,
+                    'add' => 201,
+                    'edit' => 200,
+                    'delete' => 204
+                ]
+            ]
+        ]
+    ]
+];
+```
+
+See the CakePHP documentation on
+[loading configuration files](https://book.cakephp.org/4/en/development/configuration.html#loading-additional-configuration-files)
+

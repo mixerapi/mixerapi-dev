@@ -5,21 +5,21 @@ namespace MixerApi\Rest\Test\App;
 
 use Cake\Console\CommandCollection;
 use Cake\Http\BaseApplication;
+use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\MiddlewareQueue;
-use Bake\Command\EntryCommand;
+use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\RouteBuilder;
 
 class Application extends BaseApplication
 {
     public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        return $middleware;
+        return $middleware->add(new RoutingMiddleware($this))->add(new BodyParserMiddleware());
     }
 
     public function bootstrap(): void
     {
         $this->addPlugin('MixerApi/Rest');
-
     }
 
     /**

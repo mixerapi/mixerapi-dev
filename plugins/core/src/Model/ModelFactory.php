@@ -6,26 +6,19 @@ namespace MixerApi\Core\Model;
 use Cake\Datasource\ConnectionInterface;
 use Cake\ORM\Table;
 
+/**
+ * Builds a Model
+ *
+ * @see Model
+ */
 class ModelFactory
 {
-    /**
-     * @var \Cake\Datasource\ConnectionInterface
-     */
-    private $connection;
-
-    /**
-     * @var \Cake\ORM\Table
-     */
-    private $table;
-
     /**
      * @param \Cake\Datasource\ConnectionInterface $connection db connection instance
      * @param \Cake\ORM\Table $table Table instance
      */
-    public function __construct(ConnectionInterface $connection, Table $table)
+    public function __construct(private ConnectionInterface $connection, private Table $table)
     {
-        $this->connection = $connection;
-        $this->table = $table;
     }
 
     /**

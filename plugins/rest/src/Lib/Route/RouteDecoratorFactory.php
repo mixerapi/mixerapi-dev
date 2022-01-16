@@ -6,33 +6,19 @@ namespace MixerApi\Rest\Lib\Route;
 use MixerApi\Rest\Lib\Controller\ReflectedControllerDecorator;
 use MixerApi\Rest\Lib\Exception\RestfulRouteException;
 
+/**
+ * RouteDecoratorFactory is used to create many CakePHP Routes and then decorate them as RouteDecorator.
+ */
 class RouteDecoratorFactory
 {
     /**
-     * @var string
+     * @param string $namespace A namespace (e.g. App\Controller) that will be scanned for Routes.
+     * @param string|null $plugin An optional Plugin name
      */
-    private $baseNamespace;
-
-    /**
-     * @var string
-     */
-    private $prefix;
-
-    /**
-     * @var string
-     */
-    private $plugin;
-
-    /**
-     * @param string $baseNamespace a base namespace (e.g. App\Controller)
-     * @param string $prefix a path prefix (e.g. '/' or 'api')
-     * @param string|null $plugin Plugin name
-     */
-    public function __construct(string $baseNamespace, string $prefix, ?string $plugin = null)
-    {
-        $this->baseNamespace = $baseNamespace;
-        $this->prefix = $prefix;
-        $this->plugin = $plugin;
+    public function __construct(
+        private string $namespace,
+        private ?string $plugin = null
+    ) {
     }
 
     /**
@@ -52,8 +38,7 @@ class RouteDecoratorFactory
         foreach ($controller->getMethods() as $action) {
             try {
                 $route = RouteFactory::create(
-                    $this->baseNamespace,
-                    $this->prefix,
+                    $this->namespace,
                     $controller,
                     $action->getName(),
                     $this->plugin

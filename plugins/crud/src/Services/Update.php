@@ -5,13 +5,14 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Deserializer;
+use MixerApi\Crud\DeserializerInterface;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\UpdateInterface;
 
 /**
+ * Implements UpdateInterface and updates records.
+ *
  * @experimental
  */
 class Update implements UpdateInterface
@@ -19,31 +20,14 @@ class Update implements UpdateInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
-     */
-    private $locator;
-
-    /**
-     * @var \MixerApi\Crud\Services\Read
-     */
-    private $read;
-
-    /**
-     * @var \MixerApi\Crud\Deserializer
-     */
-    private $deserializer;
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     * @param \MixerApi\Crud\Services\Read|null $read read service
-     * @param \MixerApi\Crud\Deserializer|null $deserializer deserializer
+     * @param \MixerApi\Crud\Services\Read|null $read The Read service that will find the record to be updated.
+     * @param \MixerApi\Crud\DeserializerInterface|null $deserializer The DeserializerInterface used to deserialize
+     * the request body.
      */
     public function __construct(
-        ?LocatorInterface $locator = null,
-        ?Read $read = null,
-        ?Deserializer $deserializer = null
+        private ?Read $read = null,
+        private ?DeserializerInterface $deserializer = null
     ) {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
         $this->read = $read ?? new Read();
         $this->deserializer = $deserializer ?? new Deserializer();
     }
@@ -51,11 +35,11 @@ class Update implements UpdateInterface
     /**
      * @inheritDoc
      */
-    public function save(Controller $controller, $id = null): EntityInterface
+    public function save(Controller $controller, mixed $id = null): EntityInterface
     {
         $this->allowMethods($controller);
 
-        $table = $this->locator->get($this->whichTable($controller));
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
 
         $id = $this->whichId($controller, $id);
 
@@ -67,7 +51,7 @@ class Update implements UpdateInterface
         $entity = $table->save($entity);
 
         if (!$entity) {
-            throw new ResourceWriteException($entity, "Unable to save $this->tableName resource.");
+            throw new ResourceWriteException(null, "Unable to save $this->tableName resource.");
         }
 
         return $entity;

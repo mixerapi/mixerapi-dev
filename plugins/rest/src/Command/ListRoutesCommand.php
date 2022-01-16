@@ -11,9 +11,7 @@ use Cake\Routing\Router;
 use MixerApi\Rest\Lib\Route\RouteScanner;
 
 /**
- * Class RouteCommand
- *
- * @package SwaggerBake\Command
+ * List routes in an ASCII table.
  */
 class ListRoutesCommand extends Command
 {

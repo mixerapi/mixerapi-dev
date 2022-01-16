@@ -1,2 +1,7 @@
 parameters:
-	level: 2
+	level: 6
+	checkGenericClassInNonGenericObjectType: false
+	checkMissingIterableValueType: false
+	treatPhpDocTypesAsCertain: false
+	excludePaths:
+		- plugins/exception-render/src/OpenApiExceptionSchema.php

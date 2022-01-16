@@ -52,7 +52,7 @@ nav:
 - Exception Rendering: /plugins/exception-render
 - OpenAPI (Swagger):
   - Documentation: /plugins/cakephp-swagger-bake
-  - Annotations: /plugins/cakephp-swagger-bake/docs/annotations
+  - Attributes: /plugins/cakephp-swagger-bake/docs/attributes
   - Events: /plugins/cakephp-swagger-bake/docs/events
   - Extensions: /plugins/cakephp-swagger-bake/docs/extensions
 - Response Formats:

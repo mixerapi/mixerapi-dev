@@ -1,0 +1,88 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-20.04 ]
+        php-versions: ['8.0', '8.1']
+
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Matrix PHP Version
+        run: |
+          echo ${{ matrix.php-versions }}
+          php -v
+
+      - name: Composer Check
+        run: composer validate
+
+      - name: Install
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          cp config/.env.example config/.env
+          cp config/app_local.example.php config/app_local.php
+
+      - name: Test Suite + Static Analysis (PHP 8.0)
+        if: ${{ matrix.php-versions == '8.0' }}
+        run: |
+          composer analyze
+
+      - name: Upload coverage results to Coveralls (PHP 8.0)
+        if: ${{ matrix.php-versions == '8.0' }}
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
+          php-coveralls --coverage_clover=clover.xml -v
+
+      - name: Test Suite (PHP 8.1)
+        if: ${{ matrix.php-versions == '8.1' }}
+        run: |
+          composer test
+
+  #
+  # CakePHP version compatability
+  #
+  compatibility:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['~4.2.0', '~4.3.0']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+
+      - name: PHP Version
+        run: php -v
+
+      - name: CakePHP ${{matrix.version}} Compatability
+        run: |
+          cp config/.env.example config/.env
+          composer self-update
+          rm -rf composer.lock
+          composer require cakephp/cakephp:${{matrix.version}} --no-update
+          composer install --prefer-dist --no-progress
+          composer test

@@ -12,13 +12,20 @@ use Cake\Utility\Inflector;
 use MixerApi\Core\Model\ModelFactory;
 use MixerApi\Core\Utility\NamespaceUtility;
 use MixerApi\JsonLdView\JsonLdEntityContext;
+use RuntimeException;
 
+/**
+ * Builds JSON-LD context for the given entity.
+ *
+ * @link https://json-ld.org/learn.html
+ * @uses \Cake\Datasource\ConnectionManager
+ * @uses \MixerApi\Core\Model\ModelFactory
+ * @uses \MixerApi\Core\Utility\NamespaceUtility
+ * @uses \MixerApi\JsonLdView\JsonLdEntityContext
+ */
 class JsonLdContextComponent extends Component
 {
-    /**
-     * @var array
-     */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry
@@ -53,7 +60,7 @@ class JsonLdContextComponent extends Component
         $connection = ConnectionManager::get('default');
 
         if (!$connection instanceof Connection) {
-            throw new \RuntimeException('Unable to get Database Connection instance');
+            throw new RuntimeException('Unable to get Database Connection instance');
         }
 
         $model = (new ModelFactory($connection, new $table()))->create();

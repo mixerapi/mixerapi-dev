@@ -28,7 +28,7 @@ class XmlCollectionViewTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $controller = (new ControllerFactory())->build();
 
@@ -55,7 +55,7 @@ class XmlCollectionViewTest extends TestCase
         $this->assertInstanceOf(\SimpleXMLElement::class, $actor->films);
     }
 
-    public function test_collection_serialize_array_items_one()
+    public function test_collection_serialize_array_items_one(): void
     {
         $controller = (new ControllerFactory())->build();
 
@@ -82,7 +82,7 @@ class XmlCollectionViewTest extends TestCase
         $this->assertInstanceOf(\SimpleXMLElement::class, $actor->films);
     }
 
-    public function test_collection_serialize_array_items_two()
+    public function test_collection_serialize_array_items_two(): void
     {
         $controller = (new ControllerFactory())->build();
 
@@ -106,7 +106,7 @@ class XmlCollectionViewTest extends TestCase
         $this->assertTrue(isset($simpleXml->other_actors));
     }
 
-    public function test_collection_serialize_is_empty()
+    public function test_collection_serialize_is_empty(): void
     {
         $controller = (new ControllerFactory())->build();
 
