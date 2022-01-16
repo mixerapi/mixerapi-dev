@@ -18,8 +18,8 @@ using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/d
 - Perform most crud operations with a single line of code.
 - Automatically serializes data into JSON, XML, etc.
 - Automatically enforces allowed requests `$this-request->allowMethod()`
-- Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search and may be installed on its own too.
-- Uses Interfaces so you can swap out with your own implementation down the line.
+- Crud plays nicely with existing MixerApi plugins including Pagination and CakePHP Search.
+- Use of Interfaces allow you to use your own concrete implementations down the line.
 - Requires CakePHP ^4.2 compatible projects.
 
 You may also want to look at [CakePHP Crud](https://crud.readthedocs.io/en/latest/installation.html) which doesn't

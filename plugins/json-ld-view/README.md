@@ -102,10 +102,7 @@ Table class. For instance, fields with the `email` rule will be mapped to `https
 of default mappings refer to `MixerApi\JsonLdView\SchemaMapper`.
 
 You can further customize the schema mapping by implementing `MixerApi\JsonLdView\JsonLdDataInterface` on your
-applications Entities.
-
-<details><summary>See the doc block comments in the example for additional insight:</summary>
-  <p>
+applications Entities:
 
 ```php
 # App/Model/Entity/Film.php
@@ -163,8 +160,6 @@ class Film extends Entity implements JsonLdDataInterface
     }
 }
 ```
-</p>
-</details>
 
 ### Collections
 

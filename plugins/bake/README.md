@@ -35,9 +35,9 @@ public function bootstrap(): void
 
 MixerApi/Bake will automatically detect the following plugins and adjust the bake output accordingly:
 
-- MixerApi/Crud
-- MixerApi/ExceptionRender
-- SwaggerBake
+- [MixerApi/Crud](https://github.com/mixerapi/crud)
+- [MixerApi/ExceptionRender](https://github.com/mixerapi/exception-render)
+- [SwaggerBake](https://github.com/cnizzardini/cakephp-swagger-bake)
 
 Add `--theme MixerApi/Bake` to your bake commands.
 

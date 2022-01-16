@@ -40,8 +40,7 @@ You should now be able to browse to your index page and see the welcome page.
 
 ### Manual Install
 
-Manually installing can be a bit cumbersome which is why the automated installer is recommended. If you are integrating
-MixerApi into an existing project or prefer to do things yourself follow along below:
+If you are integrating MixerApi into an existing project or prefer to do things yourself follow along below.
 
 #### OpenAPI (Swagger)
 
@@ -65,7 +64,7 @@ change the default `exceptionRenderer`:
 ```php
 'Error' => [
     'errorLevel' => E_ALL,
-    'exceptionRenderer' => MixerApi\ExceptionRender\MixerApiExceptionRenderer::class,
+    'exceptionRenderer' => \MixerApi\ExceptionRender\MixerApiExceptionRenderer::class,
     'skipLog' => [],
     'log' => true,
     'trace' => true,
@@ -73,18 +72,6 @@ change the default `exceptionRenderer`:
 ```
 
 [Learn More](/plugins/exception-render){: .md-button }
-
-#### Bake Your API Skeleton
-
-You can bake your entire application using the MixerApi/Bake theme. This time saver is of course optional.
-
-[Learn More](/plugins/bake){: .md-button }
-
-#### RESTful Routes
-
-Skip building routes while you are learning MixerAPI with AutoRouter.
-
-[Learn More](/plugins/rest){: .md-button }
 
 ## What's Next?
 

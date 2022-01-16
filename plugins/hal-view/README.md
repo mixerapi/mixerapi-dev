@@ -56,10 +56,7 @@ public function initialize(): void
 
 For `_link.self.href` support you will need to implement `MixerApi\HalView\HalResourceInterface` on entities that you
 want to expose as HAL resources. This informs the plugin that the Entity should be treated as a HAL resource and
-provides the mapper with a `_link.self.href` URL.
-
-<details><summary>Example</summary>
-  <p>
+provides the mapper with a `_link.self.href` URL:
 
 ```php
 <?php
@@ -89,8 +86,6 @@ class Actor extends Entity implements HalResourceInterface
     }
 }
 ```
-</p>
-</details>
 
 Now an HTTP GET to the `/actors/149` endpoint will render HAL using the CakePHP native serialization process:
 

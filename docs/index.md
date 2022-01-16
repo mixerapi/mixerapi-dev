@@ -18,16 +18,18 @@ architecture, MixerAPI enables developers to pick and choose the functionality t
 - **Rapid Prototyping:** Scaffold your API in seconds with a custom Bake template geared towards modern REST architecture.
 - **OpenAPI:** Automatically generates [OpenAPI](https://www.openapis.org/) from your existing code into
 [Swagger](https://swagger.io/) and [Redoc](https://redoc.ly/). Attributes provided, but not required.
-- **Error Handling:** Handles exception rendering in XML or JSON.
-- **Data Formats:** Formats responses in JSON, XML, HAL+JSON, or JSON-LD.
-- **Integrations:** Integrates well with other CakePHP 4 compatible plugins.
+- **Error Handling:** Integrates with [Validator](https://book.cakephp.org/4/en/core-libraries/validation.html)
+and renders exceptions in XML or JSON.
+- **Data Formats:** Integrates with [Paginator](https://book.cakephp.org/4/en/controllers/components/pagination.html)
+and formats responses in JSON, XML, HAL+JSON, or JSON-LD.
+- **Integrations:** Integrates well with other CakePHP 4 compatible plugins such as Bake, Search, and more!
 - **Minimalist Configuration:** Built for developing, not writing YAML configurations. Most components require zero
 configuration files.
 - **Non-opinionated:** Develop your way.
 
 ## Install
 
-You can install MixerAPI with composer into a new or existing project or use the application skeleton.
+You can install MixerAPI with composer into a new or existing project or start fresh with the application skeleton.
 
 #### App Skeleton
 

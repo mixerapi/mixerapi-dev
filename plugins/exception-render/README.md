@@ -9,7 +9,8 @@
 
 This plugin handles rendering entity validation errors and other exceptions for your API.
 
-- Adds validation errors to the response for failed save operations (post, put, and patch)
+- Integrates with [Validator](https://book.cakephp.org/4/en/core-libraries/validation.html) on `add()` and `edit()`
+actions.
 - Adds the short name of the Exception thrown to the response
 
 Read more at [MixerAPI.com](https://mixerapi.com).
