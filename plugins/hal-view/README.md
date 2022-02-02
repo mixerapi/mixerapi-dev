@@ -1,11 +1,10 @@
 # MixerApi HAL View
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/hal-view.svg?style=flat-square)](https://packagist.org/packages/mixerapi/hal-view)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
-[![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
 A Hypertext Application Language ([HAL+JSON](http://stateless.co/hal_specification.html)) View for CakePHP. This plugin
 supports links, pagination, and embedded resources. Once setup any request with `application/hal+json` will be
@@ -57,10 +56,7 @@ public function initialize(): void
 
 For `_link.self.href` support you will need to implement `MixerApi\HalView\HalResourceInterface` on entities that you
 want to expose as HAL resources. This informs the plugin that the Entity should be treated as a HAL resource and
-provides the mapper with a `_link.self.href` URL.
-
-<details><summary>Example</summary>
-  <p>
+provides the mapper with a `_link.self.href` URL:
 
 ```php
 <?php
@@ -90,8 +86,6 @@ class Actor extends Entity implements HalResourceInterface
     }
 }
 ```
-</p>
-</details>
 
 Now an HTTP GET to the `/actors/149` endpoint will render HAL using the CakePHP native serialization process:
 

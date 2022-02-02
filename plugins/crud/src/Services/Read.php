@@ -5,11 +5,12 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\TableRegistry;
+use Cake\ORM\Query;
 use MixerApi\Crud\Interfaces\ReadInterface;
 
 /**
+ * Implements ReadInterface and provides basic read functionality.
+ *
  * @experimental
  */
 class Read implements ReadInterface
@@ -17,29 +18,24 @@ class Read implements ReadInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
+     * @inheritDoc
      */
-    private $locator;
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     */
-    public function __construct(?LocatorInterface $locator = null)
+    public function read(Controller $controller, mixed $id = null): EntityInterface
     {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
+        $this->allowMethods($controller);
+        $id = $this->whichId($controller, $id);
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
+
+        return $table->get($id, [
+            'contain' => [],
+        ]);
     }
 
     /**
      * @inheritDoc
      */
-    public function read(Controller $controller, $id = null): EntityInterface
+    public function query(Controller $controller): Query
     {
-        $this->allowMethods($controller);
-
-        $id = $this->whichId($controller, $id);
-
-        return $this->locator->get($this->whichTable($controller))->get($id, [
-            'contain' => [],
-        ]);
+        return $controller->getTableLocator()->get($this->whichTable($controller))->query();
     }
 }

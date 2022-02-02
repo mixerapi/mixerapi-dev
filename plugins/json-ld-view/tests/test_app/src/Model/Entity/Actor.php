@@ -44,7 +44,7 @@ class Actor extends Entity implements JsonLdDataInterface
 
     /**
      * @param EntityInterface $entity
-     * @return array|\string[][]
+     * @return string
      */
     public function getJsonLdIdentifier(EntityInterface $entity): string
     {
@@ -57,8 +57,8 @@ class Actor extends Entity implements JsonLdDataInterface
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())->setProperty('first_name')->setSchemaUrl('https://schema.org/givenName'),
-            (new JsonLdSchema())->setProperty('last_name')->setSchemaUrl('https://schema.org/familyName'),
+            new JsonLdSchema('first_name', 'https://schema.org/givenName'),
+            new JsonLdSchema('last_name', 'https://schema.org/familyName')
         ];
     }
 }

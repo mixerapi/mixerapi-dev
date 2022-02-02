@@ -7,8 +7,7 @@
 [![Coverage](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
 [ico-stability]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 
@@ -17,11 +16,10 @@ This experimental plugin provides CRUD (Create/Read/Update/Delete) services to y
 using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html).
 
 - Perform most crud operations with a single line of code.
-- Includes a bake theme for quick scaffolding.
 - Automatically serializes data into JSON, XML, etc.
 - Automatically enforces allowed requests `$this-request->allowMethod()`
-- Crud plays nicely with existing MixerApi plugins, Pagination, CakePHP Search and may be installed on its own too.
-- Uses Interfaces so you can swap out with your own implementation down the line.
+- Crud plays nicely with existing MixerApi plugins including Pagination and CakePHP Search.
+- Use of Interfaces allow you to use your own concrete implementations down the line.
 - Requires CakePHP ^4.2 compatible projects.
 
 You may also want to look at [CakePHP Crud](https://crud.readthedocs.io/en/latest/installation.html) which doesn't
@@ -90,6 +88,13 @@ public function view(ReadInteface $read)
 }
 ```
 
+Return a CakePHP `Query` object instead:
+
+```php
+$query = $read->query($this)
+```
+
+
 ### Update
 
 ```php
@@ -102,7 +107,7 @@ public function edit(UpdateInterface $update)
 ### Delete
 
 ```php
-public function edit(DeleteInterface $delete)
+public function delete(DeleteInterface $delete)
 {
     return $delete->delete($this)->respond(); // calling respond() is optional
 }
@@ -123,24 +128,22 @@ public function index(SearchInterface $search)
 ```
 
 To use [CakePHP Search](https://github.com/FriendsOfCake/search) initialize the component as normal in your controllers
-`initialize()` method.  For custom CakePHP Search collections call the `setCollection($name)` method:
+`initialize()` method.
+
+```php
+$this->set('data', $search->search($this));
+```
+
+For custom CakePHP Search collections call the `setCollection($name)` method:
 
 ```php
 $this->set('data', $search->setCollection('collection_name')->search($this));
 ```
 
-Return a CakePHP Query object instead:
+Return a CakePHP `Query` object instead:
 
 ```php
 $query = $search->query($this);
-```
-
-## Bake Theme
-
-Crud comes with its own bake template for scaffolding your controllers, just add `--theme MixerApi/Crud`, example:
-
-```console
-bin/cake bake controller all --theme MixerApi/Crud
 ```
 
 ## Serialization
@@ -155,11 +158,11 @@ modifying the defaults.
 
 | Action | HTTP method(s) |
 | ------------- | ------------- |
-| index | get |
-| view | get |
-| add | post |
-| edit | post, put, and patch |
-| delete | delete |
+| index() | GET |
+| view() | GET |
+| add() | POST |
+| edit() | POST, PUT, and PATCH |
+| delete() | DELETE |
 
 You may also call `setAllowMethods($methods)` on any service to overwrite the default behavior. This accepts a string
 or any array as an argument just like the native `$request->allowedMethods()`.

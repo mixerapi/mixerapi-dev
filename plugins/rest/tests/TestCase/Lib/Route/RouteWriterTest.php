@@ -22,7 +22,7 @@ class RouteWriterTest extends TestCase
     /**
      * @var string path to plugin config directory
      */
-    private $pluginConfig;
+    private string $pluginConfig;
 
     public function setUp(): void
     {
@@ -38,7 +38,7 @@ class RouteWriterTest extends TestCase
         copy($this->pluginConfig . self::ROUTE_BASE, $this->pluginConfig . self::ROUTE_FILE);
     }
 
-    public function testConstruct()
+    public function test_construct(): void
     {
         $resourceScanner = new ResourceScanner('MixerApi\Rest\Test\App\Controller');
         $resources = $resourceScanner->getControllerDecorators();
@@ -57,7 +57,7 @@ class RouteWriterTest extends TestCase
         $this->assertEquals('/', $routeWriter->getPrefix());
     }
 
-    public function testConstructException()
+    public function test_construct_exception(): void
     {
         $this->expectException(RunTimeException::class);
 
@@ -71,7 +71,7 @@ class RouteWriterTest extends TestCase
     /**
      * Test merge on regular App\Controller with sub controllers
      */
-    public function testMerge()
+    public function test_merge(): void
     {
         $namespace = 'MixerApi\Rest\Test\App\Controller';
 
@@ -98,7 +98,7 @@ class RouteWriterTest extends TestCase
     /**
      * Test merge on regular Plugin\Controller
      */
-    public function testPlugin()
+    public function test_plugin(): void
     {
         $namespace = 'MixerApi\Rest\Test\MyPlugin\Controller';
 
@@ -122,7 +122,7 @@ class RouteWriterTest extends TestCase
     /**
      * Undefined scope prefix throws exception
      */
-    public function testUndefinedScope()
+    public function test_undefined_scope(): void
     {
         $this->expectException(\MixerApi\Rest\Lib\Exception\RouteScopeNotFound::class);
         $namespace = 'MixerApi\Rest\Test\App\Controller';
@@ -141,7 +141,7 @@ class RouteWriterTest extends TestCase
     /**
      * Undefined plugin scope throws exception
      */
-    public function testUndefinedPluginScope()
+    public function test_undefined_plugin_scope(): void
     {
         $this->expectException(\MixerApi\Rest\Lib\Exception\RouteScopeNotFound::class);
         $namespace = 'MixerApi\Rest\Test\App\Controller';

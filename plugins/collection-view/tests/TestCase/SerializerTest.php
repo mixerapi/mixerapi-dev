@@ -28,7 +28,7 @@ class SerializerTest extends TestCase
         (new Configuration())->default();
     }
 
-    public function test_as_json()
+    public function test_as_json(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
@@ -81,7 +81,7 @@ class SerializerTest extends TestCase
         $this->assertCount(1, $obj->data);
     }
 
-    public function test_as_xml()
+    public function test_as_xml(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->limit(1)->all();
@@ -131,5 +131,11 @@ class SerializerTest extends TestCase
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml);
         $this->assertEquals('/', $simpleXml->collection->url);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml->data);
+    }
+
+    public function test_as_json_throws_run_time_exception(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        (new Serializer(NAN))->asJson(0);
     }
 }

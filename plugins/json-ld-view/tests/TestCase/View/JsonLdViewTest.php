@@ -10,25 +10,9 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
-use MixerApi\Core\Response\ResponseModifier;
 
 class JsonLdViewTest extends TestCase
 {
-    /**
-     * @var string
-     */
-    private const EXT = 'jsonld';
-
-    /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/ld+json'];
-
-    /**
-     * @var string
-     */
-    private const VIEW_CLASS = 'MixerApi/JsonLdView.JsonLd';
-
     /**
      * @var string[]
      */
@@ -48,7 +32,7 @@ class JsonLdViewTest extends TestCase
         Router::connect('/:plugin/:controller/:action/*');
     }
 
-    public function test_collection()
+    public function test_collection(): void
     {
         $request = new ServerRequest([
             'url' => 'actors',
@@ -61,8 +45,7 @@ class JsonLdViewTest extends TestCase
 
         $request = $request->withEnv('HTTP_ACCEPT', 'application/ld+json, text/plain, */*');
         Router::setRequest($request);
-        $response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($request, new Response());
+        $response = new Response();
 
         $controller = new Controller($request, $response, 'Actors');
         $controller->modelClass = 'Actors';
@@ -103,7 +86,7 @@ class JsonLdViewTest extends TestCase
         $this->assertEquals('/actors', $object->{'@id'});
     }
 
-    public function test_item()
+    public function test_item(): void
     {
         $controller = $this->getControllerForItem();
 
@@ -124,7 +107,7 @@ class JsonLdViewTest extends TestCase
         $this->assertIsArray($object->films);
     }
 
-    public function test_item_with_no_json_options()
+    public function test_item_with_no_json_options(): void
     {
         $controller = $this->getControllerForItem();
 
@@ -161,8 +144,7 @@ class JsonLdViewTest extends TestCase
         ]);
         $request = $request->withEnv('HTTP_ACCEPT', 'application/hal+json, text/plain, */*');
         Router::setRequest($request);
-        $response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($request, new Response());
+        $response = new Response();
 
         $controller = new Controller($request, $response, 'Actors');
         $controller->modelClass = 'Actors';

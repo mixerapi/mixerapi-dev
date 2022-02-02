@@ -10,15 +10,21 @@ use Mouf\Composer\ClassNameMapper;
 use RuntimeException;
 use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
 
+/**
+ * Namespace Utilities
+ *
+ * @uses \Mouf\Composer\ClassNameMapper
+ * @uses \TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer
+ */
 class NamespaceUtility
 {
     /**
      * Finds classes using the $namespace argument and returns an array of namespaces as strings
      *
-     * @param string|null $namespace a namespace such as `App\Controller`
+     * @param string|null $namespace A namespace such as `App\Controller`
      * @return string[]
      */
-    public static function findClasses(?string $namespace = null)
+    public static function findClasses(?string $namespace = null): array
     {
         $namespace = $namespace ?? Configure::read('App.namespace');
 
@@ -31,8 +37,8 @@ class NamespaceUtility
     /**
      * Performs a non-recursive search for the classes shortname in the given namespace
      *
-     * @param string $namespace the namespace to search in
-     * @param string $shortName the short name of the class
+     * @param string $namespace The namespace to search in
+     * @param string $shortName The short name of the class
      * @return string
      * @throws \RuntimeException
      */

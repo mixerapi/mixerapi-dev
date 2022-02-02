@@ -1,14 +1,14 @@
 # Search
 
-Paginateable search functionality is provided using [friendsofcake/search](https://github.com/FriendsOfCake/search). 
+Paginateable search functionality is provided using [friendsofcake/search](https://github.com/FriendsOfCake/search).
 Please visit the [documentation](https://github.com/FriendsOfCake/search/tree/master/docs) for details.
 
 !!! info ""
-    Search is easy to integrate with your API and works out of the box for HTTP GET requests. You can document your APIs 
-    search parameters in OpenAPI using the `@SwagSearch` annotation. Read more 
+    Search is easy to integrate with your API and works out of the box for HTTP GET requests. You can document your APIs
+    search parameters in OpenAPI using the `@SwagSearch` annotation. Read more
     [here](/cakephp-swagger-bake/docs/annotations/#swagsearch).
-    
-    
+
+
 ## Quick Example
 
 Create a Search Filter Collection in `App\Model\Filter`:
@@ -40,7 +40,7 @@ class ActorsCollection extends FilterCollection
 }
 ```
 
-Add the behavior to your Table classes initialize method: 
+Add the behavior to your Table classes initialize method:
 
 ```php
 public function initialize(array $config): void
@@ -49,9 +49,9 @@ public function initialize(array $config): void
     $this->addBehavior('Search.Search');
     // ...other code
 }
-``` 
+```
 
-Modify your controller action to initialize the Search component, use the Search behavior and optionally annotate with 
+Modify your controller action to initialize the Search component, use the Search behavior and optionally annotate with
 SwagSearch to inform OpenAPI about the search options:
 
 ```php
@@ -60,7 +60,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
+use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 class ActorsController extends AppController
 {
@@ -74,13 +74,7 @@ class ActorsController extends AppController
         // ... other code
     }
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
-     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
-     */
+    #[OpenApiSearch(tableClass: "\App\Model\Table\ActorsTable")]
     public function index()
     {
         $this->request->allowMethod('get');
@@ -90,11 +84,11 @@ class ActorsController extends AppController
                 'collection' => 'default'
             ]);
         $actors = $this->paginate($query);
-    
+
         $this->set(compact('actors'));
         $this->viewBuilder()->setOption('serialize', 'actors');
     }
 }
 ```
 
-Check out the demo for an example implementation.
+Check out the [demo](https://github.com/mixerapi/demo) for an example implementation.

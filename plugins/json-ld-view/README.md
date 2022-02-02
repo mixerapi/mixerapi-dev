@@ -1,12 +1,11 @@
 # MixerAPI JsonLdView
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/json-ld-view.svg?style=flat-square)](https://packagist.org/packages/mixerapi/json-ld-view)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
 [![Build](https://github.com/mixerapi/json-ld-view/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/mixerapi/json-ld-view/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/json-ld-view?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
-[![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
 A [JSON-LD](https://json-ld.org/) View for CakePHP. Read more at [MixerAPI.com](https://mixerapi.com).
 
@@ -103,10 +102,7 @@ Table class. For instance, fields with the `email` rule will be mapped to `https
 of default mappings refer to `MixerApi\JsonLdView\SchemaMapper`.
 
 You can further customize the schema mapping by implementing `MixerApi\JsonLdView\JsonLdDataInterface` on your
-applications Entities.
-
-<details><summary>See the doc block comments in the example for additional insight:</summary>
-  <p>
+applications Entities:
 
 ```php
 # App/Model/Entity/Film.php
@@ -155,17 +151,15 @@ class Film extends Entity implements JsonLdDataInterface
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())->setProperty('title')->setSchemaUrl('https://schema.org/name')->setDescription('optional'),
-            (new JsonLdSchema())->setProperty('description')->setSchemaUrl('https://schema.org/about'),
-            (new JsonLdSchema())->setProperty('length')->setSchemaUrl('https://schema.org/duration'),
-            (new JsonLdSchema())->setProperty('rating')->setSchemaUrl('https://schema.org/contentRating'),
-            (new JsonLdSchema())->setProperty('release_year')->setSchemaUrl('https://schema.org/copyrightYear'),
+            new JsonLdSchema('title','https://schema.org/name', 'optional description')
+            new JsonLdSchema('description','https://schema.org/about')
+            new JsonLdSchema('length','https://schema.org/duration')
+            new JsonLdSchema('rating','https://schema.org/contentRating')
+            new JsonLdSchema('release_year','https://schema.org/copyrightYear')
         ];
     }
 }
 ```
-</p>
-</details>
 
 ### Collections
 

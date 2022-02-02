@@ -10,11 +10,11 @@ use Mouf\Composer\ClassNameMapper;
 use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
 
 /**
- * Class ControllerUtility
+ * Utilities for working with CakePHP controllers.
  *
- * Utilities for working with CakePHP controllers
- *
- * @package MixerApi\Rest\Lib\Controller
+ * @uses \Cake\Cache\Engine\NullEngine
+ * @uses \Cake\Core\Configure
+ * @uses \TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer
  */
 class ControllerUtility
 {

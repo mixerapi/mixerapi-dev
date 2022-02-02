@@ -11,44 +11,9 @@ use ReflectionFunction;
 
 class ResponseModifierTest extends TestCase
 {
-    public function test_modify_by_extension_jsonld()
+    public function test_event_listener(): void
     {
-        $ext = 'jsonld';
-        $mimeType = 'application/ld+json';
-        $mimeTypes = [$mimeType];
-        $request = (new ServerRequest(['params' => ['_ext' => 'jsonld']]));
-        $modifier = new ResponseModifier($ext, $mimeTypes, 'MixerApi/JsonLdView.JsonLd');
-        $response = $modifier->modify($request, new Response());
-        $this->assertEquals($mimeTypes, $response->getMimeType($ext));
-    }
-
-    public function test_modify_by_http_header_accept_jsonld()
-    {
-        $ext = 'jsonld';
-        $mimeType = 'application/ld+json';
-        $mimeTypes = [$mimeType];
-        $request = (new ServerRequest())->withEnv('HTTP_ACCEPT', $mimeType . ', text/plain, */*');
-        $modifier = new ResponseModifier($ext, $mimeTypes, 'MixerApi/JsonLdView.JsonLd');
-        $response = $modifier->modify($request, new Response());
-        $this->assertEquals($mimeTypes, $response->getMimeType($ext));
-    }
-
-    public function test_modify_by_extension_csv()
-    {
-        $mimeType = 'text/csv';
-        $mimeTypes = [$mimeType];
-        $request = (new ServerRequest(['params' => ['_ext' => 'csv']]));
-        $modifier = new ResponseModifier('jsonld', $mimeTypes, 'MixerApi/JsonLdView.JsonLd');
-        $response = $modifier->modify($request, new Response());
-        $this->assertInstanceOf(Response::class, $response);
-    }
-
-    public function test_event_listener()
-    {
-        $ext = 'jsonld';
-        $mimeType = 'application/ld+json';
-        $mimeTypes = [$mimeType];
-        $modifier = new ResponseModifier($ext, $mimeTypes, 'MixerApi/JsonLdView.JsonLd');
+        $modifier = new ResponseModifier('jsonld', 'MixerApi/JsonLdView.JsonLd');
         $modifier->listen();
         $eventManager = EventManager::instance();
         $listeners = $eventManager->matchingListeners('Controller.initialize');

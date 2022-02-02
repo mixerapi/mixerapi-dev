@@ -10,14 +10,44 @@ use MixerApi\Core\Response\ResponseModifier;
 class Plugin extends BasePlugin
 {
     /**
+     * Plugin name.
+     *
+     * @var string
+     */
+    protected $name = 'MixerApi/HalView';
+
+    /**
+     * Console middleware
+     *
+     * @var bool
+     */
+    protected $consoleEnabled = false;
+
+    /**
+     * Enable middleware
+     *
+     * @var bool
+     */
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
+
+    /**
+     * Load routes or not
+     *
+     * @var bool
+     */
+    protected $routesEnabled = false;
+
+    /**
      * @var string
      */
     private const EXT = 'haljson';
-
-    /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/hal+json','application/vnd.hal+json'];
 
     /**
      * @var string
@@ -31,6 +61,6 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
-        (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))->listen();
+        (new ResponseModifier(self::EXT, self::VIEW_CLASS))->listen();
     }
 }

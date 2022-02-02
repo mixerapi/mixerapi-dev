@@ -1,16 +1,16 @@
 # MixerAPI ExceptionRender
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/exception-render.svg?style=flat-square)](https://packagist.org/packages/mixerapi/exception-render)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
 [![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
-[![CakePHP](https://img.shields.io/badge/cakephp-^4.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?logo=php)](https://php.net/)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
 This plugin handles rendering entity validation errors and other exceptions for your API.
 
-- Adds validation errors to the response for failed save operations (post, put, and patch)
+- Integrates with [Validator](https://book.cakephp.org/4/en/core-libraries/validation.html) on `add()` and `edit()`
+actions.
 - Adds the short name of the Exception thrown to the response
 
 Read more at [MixerAPI.com](https://mixerapi.com).

@@ -5,12 +5,13 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Http\Response;
-use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Exception\ResourceWriteException;
 use MixerApi\Crud\Interfaces\DeleteInterface;
+use MixerApi\Crud\Interfaces\ReadInterface;
 
 /**
+ * Implements DeleteInterface and provides delete functionality.
+ *
  * @experimental
  */
 class Delete implements DeleteInterface
@@ -18,37 +19,26 @@ class Delete implements DeleteInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
+     * @param \MixerApi\Crud\Interfaces\ReadInterface|null $read ReadInterface used to find the record to be deleted.
      */
-    private $locator;
-
-    /**
-     * @var \MixerApi\Crud\Services\Read
-     */
-    private $read;
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     * @param \MixerApi\Crud\Services\Read|null $read read service
-     */
-    public function __construct(?LocatorInterface $locator = null, ?Read $read = null)
-    {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
+    public function __construct(
+        private ?ReadInterface $read = null
+    ) {
         $this->read = $read ?? new Read();
     }
 
     /**
      * @inheritDoc
      */
-    public function delete(Controller $controller, $id = null)
+    public function delete(Controller $controller, mixed $id = null)
     {
         $this->allowMethods($controller);
-
         $id = $this->whichId($controller, $id);
         $entity = $this->read->read($controller, $id);
 
-        if (!$this->locator->get($this->whichTable($controller))->delete($entity)) {
-            throw new ResourceWriteException($entity, "Unable to save $this->tableName resource.");
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
+        if (!$table->delete($entity)) {
+            throw new ResourceWriteException($entity, "Unable to delete {$table->getAlias()} resource.");
         }
 
         return $this;

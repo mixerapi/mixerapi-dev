@@ -10,6 +10,13 @@ use Cake\Event\EventManager;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * Listens for Model.afterMarshal events. If errors are found on the marshalled entity then a ValidationException is
+ * thrown.
+ *
+ * @uses \Cake\Event\EventManager
+ * @uses ReflectionClass
+ */
 class EntityValidationListener
 {
     /**

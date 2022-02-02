@@ -7,11 +7,7 @@ use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 
 /**
- * Class RouteTable
- *
  * Write Ascii Table of Routes to console
- *
- * @package MixerApi\Rest\Command
  */
 class RouteTable
 {

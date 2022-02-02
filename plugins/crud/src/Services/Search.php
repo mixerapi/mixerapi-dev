@@ -6,12 +6,12 @@ namespace MixerApi\Crud\Services;
 use Cake\Controller\Controller;
 use Cake\Core\Plugin;
 use Cake\Datasource\ResultSetInterface;
-use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\Query;
-use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\SearchInterface;
 
 /**
+ * Implements SearchInterface and provides basic search functionality.
+ *
  * @experimental
  */
 class Search implements SearchInterface
@@ -19,31 +19,21 @@ class Search implements SearchInterface
     use CrudTrait;
 
     /**
-     * @var \Cake\ORM\Locator\LocatorInterface
+     * @var bool Does this application have https://github.com/FriendsOfCake/search
      */
-    private $locator;
+    private bool $hasSearch;
 
     /**
-     * Does this application have https://github.com/FriendsOfCake/search
-     *
-     * @var bool
+     * @var string The search collection name
      */
-    private $hasSearch;
+    private string $collectionName = 'default';
 
     /**
-     * The search collection name
-     *
-     * @var string
+     * @param \Cake\Core\Plugin|null $plugin CakePHP Plugin class to help find if the Search plugin is loaded.
      */
-    private $collectionName = 'default';
-
-    /**
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator locator
-     * @param \Cake\Core\Plugin|null $plugin plugin
-     */
-    public function __construct(?LocatorInterface $locator = null, ?Plugin $plugin = null)
-    {
-        $this->locator = $locator ?? TableRegistry::getTableLocator();
+    public function __construct(
+        ?Plugin $plugin = null
+    ) {
         $this->hasSearch = ($plugin ?? new Plugin())::isLoaded('Search');
     }
 
@@ -64,7 +54,7 @@ class Search implements SearchInterface
      */
     public function query(Controller $controller): Query
     {
-        $table = $this->locator->get($this->whichTable($controller));
+        $table = $controller->getTableLocator()->get($this->whichTable($controller));
 
         if (!$this->hasSearch || !$table->hasBehavior('Search')) {
             return $table->find('all');

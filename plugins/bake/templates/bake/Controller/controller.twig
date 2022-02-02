@@ -13,6 +13,16 @@ namespace {{ namespace }}\Controller{{ prefix }};
 {% if plugin or prefix %}
 use {{ baseNamespace }}\Controller\AppController;
 {% endif %}
+{% if "MixerApi/Crud" in plugins %}
+use MixerApi\Crud\Interfaces\CreateInterface;
+use MixerApi\Crud\Interfaces\DeleteInterface;
+use MixerApi\Crud\Interfaces\ReadInterface;
+use MixerApi\Crud\Interfaces\SearchInterface;
+use MixerApi\Crud\Interfaces\UpdateInterface;
+{%  endif %}
+{% if "SwaggerBake" in plugins %}
+use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+{%  endif %}
 
 /**
  * {{ name }} Controller

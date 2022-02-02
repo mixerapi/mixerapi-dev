@@ -8,7 +8,7 @@ use MixerApi\Crud\Exception\ResourceWriteException;
 
 class ResourceWriteExceptionTest extends TestCase
 {
-    public function test()
+    public function test(): void
     {
         $this->assertInstanceOf(Actor::class, (new ResourceWriteException(new Actor()))->getEntity());
     }

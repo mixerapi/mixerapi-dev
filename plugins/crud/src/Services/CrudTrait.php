@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
-use InvalidArgumentException;
 
 /**
  * @experimental
@@ -12,14 +11,14 @@ use InvalidArgumentException;
 trait CrudTrait
 {
     /**
-     * @var string
+     * @var string|null
      */
-    private $tableName;
+    private ?string $tableName;
 
     /**
      * @var array
      */
-    private $methods;
+    private array $methods = [];
 
     /**
      * @param string $table table name
@@ -37,12 +36,8 @@ trait CrudTrait
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function setAllowMethod($methods)
+    public function setAllowMethod(string|array $methods)
     {
-        if (!is_string($methods) && !is_array($methods)) {
-            throw new InvalidArgumentException('Argument must be a string or an array of strings');
-        }
-
         $this->methods = is_string($methods) ? [$methods] : $methods;
 
         return $this;
@@ -54,7 +49,7 @@ trait CrudTrait
      */
     private function allowMethods(Controller $controller): void
     {
-        if (is_array($this->methods)) {
+        if (count($this->methods)) {
             $controller->getRequest()->allowMethod($this->methods);
         }
     }
@@ -73,7 +68,7 @@ trait CrudTrait
      * @param mixed $id the resource identifier
      * @return mixed
      */
-    private function whichId(Controller $controller, $id)
+    private function whichId(Controller $controller, mixed $id): mixed
     {
         return $id ?? $controller->getRequest()->getParam('id');
     }

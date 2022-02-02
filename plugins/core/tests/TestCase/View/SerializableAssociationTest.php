@@ -9,7 +9,7 @@ use MixerApi\Core\View\SerializableAssociation;
 
 class SerializableAssociationTest extends TestCase
 {
-    public function testGetSerializableProperties()
+    public function test_get_serializable_properties(): void
     {
         $entity = new Entity([
             'id' => 1,
@@ -22,7 +22,7 @@ class SerializableAssociationTest extends TestCase
         $this->assertCount(2, (new SerializableAssociation($entity))->getAssociations());
     }
 
-    public function testGetSerializablePropertiesNoResults()
+    public function test_get_serializable_properties_no_results(): void
     {
         $entity = new Entity([
             'id' => 1,

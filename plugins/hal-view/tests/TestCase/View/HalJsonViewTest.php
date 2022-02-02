@@ -10,25 +10,9 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
-use MixerApi\Core\Response\ResponseModifier;
 
 class HalJsonViewTest extends TestCase
 {
-    /**
-     * @var string
-     */
-    private const EXT = 'haljson';
-
-    /**
-     * @var string[]
-     */
-    private const MIME_TYPES = ['application/hal+json','application/vnd.hal+json'];
-
-    /**
-     * @var string
-     */
-    private const VIEW_CLASS = 'MixerApi/HalView.HalJson';
-
     /**
      * @var string[]
      */
@@ -60,10 +44,8 @@ class HalJsonViewTest extends TestCase
         ]);
         $request = $request->withEnv('HTTP_ACCEPT', 'application/hal+json, text/plain, */*');
         Router::setRequest($request);
-        $response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($request, new Response());
 
-        $controller = new Controller($request, $response, 'Actors');
+        $controller = new Controller($request, new Response(), 'Actors');
         $controller->modelClass = 'Actors';
         $registry = new ComponentRegistry($controller);
 
@@ -161,10 +143,8 @@ class HalJsonViewTest extends TestCase
         ]);
         $request = $request->withEnv('HTTP_ACCEPT', 'application/hal+json, text/plain, */*');
         Router::setRequest($request);
-        $response = (new ResponseModifier(self::EXT, self::MIME_TYPES, self::VIEW_CLASS))
-            ->modify($request, new Response());
 
-        $controller = new Controller($request, $response, 'Actors');
+        $controller = new Controller($request, new Response(), 'Actors');
         $controller->modelClass = 'Actors';
 
         $actorTable = FactoryLocator::get('Table')->get('Actors');

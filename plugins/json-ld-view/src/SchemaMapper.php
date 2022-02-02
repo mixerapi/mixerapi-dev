@@ -6,6 +6,9 @@ namespace MixerApi\JsonLdView;
 use Cake\Validation\ValidationRule;
 use MixerApi\Core\Model\ModelProperty;
 
+/**
+ * Map CakePHP column types and validation types to schema.org schemas.
+ */
 class SchemaMapper
 {
     private const PRIMARY_KEY = 'https://schema.org/identifier';
@@ -59,9 +62,10 @@ class SchemaMapper
     ];
 
     /**
-     * Returns a schema.org url based on table validations. This will return the first one it finds or null.
+     * Returns a schema.org url based on table validations. This will return the first one it finds. If no schema is
+     * found then TEXT is returned.
      *
-     * @param \MixerApi\Core\Model\ModelProperty $property mixerapi ModelProperty
+     * @param \MixerApi\Core\Model\ModelProperty $property ModelProperty to find a schema for.
      * @return string
      */
     public static function findSchemaFromModelProperty(ModelProperty $property): string

@@ -25,7 +25,7 @@ class EventListenerLoaderTest extends TestCase
         static::setAppNamespace('MixerApi\Core\Test\App');
     }
 
-    public function testLoad()
+    public function test_load(): void
     {
         (new EventListenerLoader())->load('MixerApi\Core\Test\App\Event');
         $listeners = EventManager::instance()->listeners('Model.initialize');
