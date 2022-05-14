@@ -46,9 +46,9 @@ application.
 Configure::load('mixerapi_jwtauth');
 ```
 
-- `alg` is required and must be either HS256 or RS256.
-- `secret` is required when using HS256. The secret should not be committed to your version control system.
-- `keys` are required when using RS256. The keys should not be committed to your version control system.
+- `alg` is required and must be either HS256, HS512, RS256, or RS512.
+- `secret` is required when using HMAC. The secret should not be committed to your version control system.
+- `keys` are required when using RSA. The keys should not be committed to your version control system.
 
 Read the [example configuration file](mixerapi_jwtauth.php) for more detailed explanations.
 
@@ -115,7 +115,7 @@ class User extends Entity implements JwtEntityInterface
 
 ## JSON Web Keys
 
-Signing your tokens with RSA uses a public/private key pair. You can skip this section if you are using HS256 or HS512.
+Signing your tokens with RSA uses a public/private key pair. You can skip this section if you are using HMAC.
 
 ### Building Keys
 
