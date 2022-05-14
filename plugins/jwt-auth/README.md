@@ -30,9 +30,15 @@ The recommended way to install composer packages is:
 composer require mixerapi/jwt-auth
 ```
 
+And then load the plugin
+
+```console
+bin/cake plugin load MixerApi/JwtAuth
+```
+
 ### Configuration
 
-Next [create a config file](assets/mixerapi_jwtauth.php) (e.g. `config/mixerapi_jwtauth.php`) and load it into your
+Next [create a config file](plugins/jwt-auth/assets/mixerapi_jwtauth.php) (e.g. `config/mixerapi_jwtauth.php`) and load it into your
 application.
 
 ```php
@@ -44,7 +50,7 @@ Configure::load('mixerapi_jwtauth');
 - `secret` is required when using HS256. The secret should not be committed to your version control system.
 - `keys` are required when using RS256. The keys should not be committed to your version control system.
 
-Read the [example configuration file](assets/mixerapi_jwtauth.php) for more detailed explanations.
+Read the [example configuration file](plugins/jwt-auth/mixerapi_jwtauth.php) for more detailed explanations.
 
 ### Service Provider
 
@@ -63,7 +69,8 @@ public function services(ContainerInterface $container): void
 ### Authentication
 
 You will need to configure [CakePHP Authentication](https://book.cakephp.org/authentication/2/en/index.html) to
-use this library. There are several ways to do this documented in the quick start, [here is one example]().
+use this library. There are several ways to do this documented in the quick start. See the
+[mixerapi demo](https://github.com/mixerapi/demo) for an exampe.
 
 Be sure to load the
 [CakePHP Authentication.Component](https://book.cakephp.org/authentication/2/en/authentication-component.html)
@@ -71,7 +78,7 @@ Be sure to load the
 
 ## Defining your JWT
 
-On your User entity implement [JwtEntityInterface](). This will be used to generate the JWT, example:
+On your User entity implement `JwtEntityInterface`. This will be used to generate the JWT, example:
 
 ```php
 namespace App\Model\Entity;
