@@ -16,7 +16,6 @@ needs. It is the goal of this library to make both easy.
 - [Defining Your JWT](#defining-your-jwt)
 - [JSON Web Keys](#json-web-keys)
 - [Login Controller](#login-controller)
-- [Custom Implementation](#custom-implementations)
 
 For an alternative approach see [admad/cakephp-jwt-auth](https://github.com/ADmad/cakephp-jwt-auth).
 
