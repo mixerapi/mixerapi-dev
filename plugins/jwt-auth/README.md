@@ -1,0 +1,287 @@
+# MixerApi JwtAuth
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mixerapi/jwt-auth.svg?style=flat-square)](https://packagist.org/packages/mixerapi/jwt-auth)
+[![Build](https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master)](https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master)](https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master)
+[![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](https://mixerapi.com)
+[![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
+[![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
+
+A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) authentication library for CakePHP supporting both HS256 and
+RS256 with JSON Web Keys. Before starting you should determine which
+[signing algorithm](https://stackoverflow.com/questions/39239051/rs256-vs-hs256-whats-the-difference) best fits your
+needs. It is the goal of this library to make both easy.
+
+- [Installation](#installation)
+- [Defining Your JWT](#defining-your-jwt)
+- [JSON Web Keys](#json-web-keys)
+- [Login Controller](#login-controller)
+- [Custom Implementation](#custom-implementations)
+
+For an alternative approach see [admad/cakephp-jwt-auth](https://github.com/ADmad/cakephp-jwt-auth).
+
+## Installation
+
+You can install this plugin into your CakePHP application using [composer](https://getcomposer.org).
+
+The recommended way to install composer packages is:
+
+```console
+composer require mixerapi/jwt-auth
+```
+
+### Configuration
+
+Next [create a config file](assets/mixerapi_jwtauth.php) (e.g. `config/mixerapi_jwtauth.php`) and load it into your
+application.
+
+```php
+# in config/bootstrap.php
+Configure::load('mixerapi_jwtauth');
+```
+
+- `alg` is required and must be either HS256 or RS256.
+- `secret` is required when using HS256. The secret should not be committed to your version control system.
+- `keys` are required when using RS256. The keys should not be committed to your version control system.
+
+Read the [example configuration file](assets/mixerapi_jwtauth.php) for more detailed explanations.
+
+### Service Provider
+
+Using the `JwtAuthServiceProvider` is recommended to inject dependencies automatically.
+
+```php
+# in src/Application.php
+
+public function services(ContainerInterface $container): void
+{
+    /** @var \League\Container\Container $container */
+    $container->addServiceProvider(new \MixerApi\JwtAuth\JwtAuthServiceProvider());
+}
+```
+
+### Authentication
+
+You will need to configure [CakePHP Authentication](https://book.cakephp.org/authentication/2/en/index.html) to
+use this library. There are several ways to do this documented in the quick start, [here is one example]().
+
+Be sure to load the
+[CakePHP Authentication.Component](https://book.cakephp.org/authentication/2/en/authentication-component.html)
+(generally in your AppController).
+
+## Defining your JWT
+
+On your User entity implement [JwtEntityInterface](). This will be used to generate the JWT, example:
+
+```php
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+use MixerApi\JwtAuth\Jwt\Jwt;
+use MixerApi\JwtAuth\Jwt\JwtEntityInterface;
+use MixerApi\JwtAuth\Jwt\JwtInterface;
+
+class User extends Entity implements JwtEntityInterface
+{
+    /**
+     * @inheritDoc
+     */
+    public function getJwt(): JwtInterface
+    {
+        return new Jwt(
+            exp: time() + 60 * 60 * 24,
+            sub: $this->get('id'),
+            iss: 'mixerapi',
+            aud: 'api-client',
+            nbf: null,
+            iat: null,
+            jti: \Cake\Utility\Text::uuid(),
+            claims: [
+                'user' => [
+                    'email' => $this->get('email')
+                ]
+            ]
+        );
+    }
+}
+```
+
+## JSON Web Keys
+
+Signing your tokens with RSA uses a public/private key pair. You can skip this section if you are using HS256.
+
+### Building Keys
+
+We'll store the keys in `config/keys/1/` but you can store these anywhere. Keys should not be stored in version
+control, example:
+
+```console
+openssl genrsa -out config/keys/1/private.pem 4096
+openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout
+openssl req -key config/keys/1/private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out config/keys/1/cert.pem
+openssl pkcs12 -export -inkey config/keys/1/private.pem -in config/cert.pem -out config/keys/1/keys.pfx -name "my alias" -password pass:
+```
+
+Add the generated keys to your config:
+
+```php
+# in config/mixerapi_jwtauth.php
+
+return [
+    'MixerApi.JwtAuth' => [
+        'alg' => 'RS256',
+        'keys' => [
+            [
+                'kid' => '1',
+                'public' => file_get_contents($config . 'keys' . DS . '1' . DS . 'public.pem'),
+                'private' => file_get_contents($config . 'keys' . DS . '1' . DS . 'private.pem'),
+            ]
+        ]
+    ]
+];
+```
+
+### JWK Set Controller
+
+Read more about [JSON Web Keys here](https://datatracker.ietf.org/doc/html/rfc7517). Let's create an endpoint to
+expose your JWK Set.
+
+```php
+use Cake\Event\EventInterface;
+use MixerApi\JwtAuth\Jwk\JwkSetInterface;
+
+class JwksController extends AppController
+{
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->allowUnauthenticated(['index']);
+    }
+
+    public function index(JwkSetInterface $jwkSet)
+    {
+        $this->set('data', $jwkSet->getKeySet());
+        $this->viewBuilder()->setOption('serialize', 'data');
+    }
+}
+```
+
+Add a route to your controller in your `config/routes.php` file.
+
+Example response:
+
+```json
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "use": "sig",
+      "alg": "RS256",
+      "kid": "1",
+      "n": "wk865HbUKadJU-Mh-Iv2Z_30ZOMclkK1cbuiTVkINy_R9oHoAht2DS788q_Sll38dtTB4bzptd0u6k4cJd6Lj6nVQTe1uRyuAU47tqitiJmEXX_2SHIRv6aj4vygIfqr1FtQMHPlBW7r4q840H5mh_Z-E_a7d27QbtJ3eYNEiFow6LLvl17_7bdaenlwccY0j-PY1GzL7UwG8uHBZ78ZOcvu_GgaYC5suRrJrV_6_Qu6lySXObDaajr6Foz0m-z4Aj7KA8KmAiM_Rw_Yqm_KqPT3YBGj83TxeEiMPkrMYry123hFQYm09EO2Az9lGjr-PQc6SR08SDqZ3zbwe9iam55dzVZ-vQF3ASnZpBHyIDhCI7PFShceFI1Sv0RW7-Tl0uM2jQa1RyEpFle1xc0RxSFZium0aGMnFuE2W9JDERPw47wFZx2kSk1nB6PDK6XPLJLi_db0VrP5m5z2HDWeYVmsuAVFm6-l1PjiGH4G1TpuYfPKP2P8K-kveo1Ddm14IJSWfcACeAF_gx644Ua_IJ8wS98dQqE-R-jzfEv7aLBacP5_thCUbHfCRrAgtM5lBAM_1tfQ4XsOLnFWkl4arm3TzN2wCjjuqxipgwpUtY_SN6SXhJW4MW2qHVKtHtXl9haF5gEDBL7twDsFozYZCc5k0d85EgfJ5Jn7ZSAgwXk",
+      "e": "AQAB"
+    }
+  ]
+}
+```
+
+You may add/remove keys to your `MixerApi.JwtAuth.keys` config as part of your key rotation strategy.
+
+Note, if you are not using dependency injection:
+
+```php
+    public function index()
+    {
+        $this->set('data', (new JwkSet)->getKeySet());
+        $this->viewBuilder()->setOption('serialize', 'data');
+    }
+```
+
+## Login Controller
+
+In the example below we'll authenticate, create the JWT we defined earlier and return it to the requester.
+
+```php
+# your login controller, for example src/Controller/LoginController.php
+
+use MixerApi\JwtAuth\JwtAuthenticatorInterface;
+
+public function LoginController
+{
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->allowUnauthenticated(['login']);
+    }
+
+    public function login(JwtAuthenticatorInterface $jwtAuth)
+    {
+        try {
+            return $this->response->withStringBody($jwtAuth->authenticate($this->Authentication));
+        } catch (UnauthenticatedException $e) {
+            return $this->response->withStringBody($e->getMessage())->withStatus(401);
+        }
+    }
+}
+```
+
+Add a route to the controller in your `config/routes.php` file.
+
+This will build the JWT we defined earlier in the User Entity.
+
+```json
+{
+  "iss": "mixerapi",
+  "sub": "5e28e9ed-f3e1-4eb2-aa88-8d618f4021ee",
+  "aud": "api-client",
+  "exp": 1651972707,
+  "jti": "a1f6f5ec-748d-4a1c-9d0e-f8e19ec7f9b2",
+  "user": {
+    "email": "test@example.com"
+  }
+}
+```
+
+Note, if you're not using dependency injection:
+
+```php
+    public function login()
+    {
+        try {
+            return $this->response->withStringBody(
+                (new \MixerApi\JwtAuth\JwtAuthenticator)->authenticate($this->Authentication)
+            );
+        } catch (UnauthenticatedException $e) {
+            return $this->response->withStringBody($e->getMessage())->withStatus(401);
+        }
+    }
+```
+
+Or, if you prefer to handle the authentication yourself you may pass an instance of `JwtInterface` instead, example:
+
+```php
+    public function login(JwtAuthenticatorInterface $jwtAuth)
+    {
+        try {
+            $result = $this->Authentication->getResult();
+            if (!$result->isValid()) {
+                throw new UnauthenticatedException();
+            }
+            return $this->response->withStringBody($jwtAuth->authenticate($result->getData()->getJwt()));
+        } catch (UnauthenticatedException $e) {
+            return $this->response->withStringBody($e->getMessage())->withStatus(401);
+        }
+    }
+```
+
+### Custom Implementations
+
+You can build your own implementations if your organization has specific needs for its JWK, JWT, and/or authentication
+implementations. Interfaces exist for the following:
+
+- MixerApi\JwtAuth\JwtInterface
+- MixerApi\JwtAuth\JwtAuthenticatorInterface
+- MixerApi\JwtAuth\Jwk\JwkInterface
+- MixerApi\JwtAuth\Jwk\JwkSetInterface
+
+Here is [an example of an implementation]() of JwtInterface and JwkSetInterface.
