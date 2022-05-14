@@ -8,7 +8,7 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
 A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) authentication library for CakePHP supporting both HMAC
-(HS256 or HS5125) and RSA (RS256 or RS512) with JSON Web Keys. Before starting, you should determine which
+(HS256 or HS512) and RSA (RS256 or RS512) with JSON Web Keys. Before starting, you should determine which
 [signing algorithm](https://stackoverflow.com/questions/39239051/rs256-vs-hs256-whats-the-difference) best fits your
 needs. It is the goal of this library to make both easy.
 
