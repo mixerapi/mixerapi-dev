@@ -7,8 +7,8 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
-A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) authentication library for CakePHP supporting both HS256 and
-RS256 with JSON Web Keys. Before starting you should determine which
+A [JWT](https://datatracker.ietf.org/doc/html/rfc7519) authentication library for CakePHP supporting both HMAC
+(HS256 or HS5125) and RSA (RS256 or RS512) with JSON Web Keys. Before starting, you should determine which
 [signing algorithm](https://stackoverflow.com/questions/39239051/rs256-vs-hs256-whats-the-difference) best fits your
 needs. It is the goal of this library to make both easy.
 
@@ -108,7 +108,7 @@ class User extends Entity implements JwtEntityInterface
 
 ## JSON Web Keys
 
-Signing your tokens with RSA uses a public/private key pair. You can skip this section if you are using HS256.
+Signing your tokens with RSA uses a public/private key pair. You can skip this section if you are using HS256 or HS512.
 
 ### Building Keys
 
@@ -273,15 +273,3 @@ Or, if you prefer to handle the authentication yourself you may pass an instance
         }
     }
 ```
-
-### Custom Implementations
-
-You can build your own implementations if your organization has specific needs for its JWK, JWT, and/or authentication
-implementations. Interfaces exist for the following:
-
-- MixerApi\JwtAuth\JwtInterface
-- MixerApi\JwtAuth\JwtAuthenticatorInterface
-- MixerApi\JwtAuth\Jwk\JwkInterface
-- MixerApi\JwtAuth\Jwk\JwkSetInterface
-
-Here is [an example of an implementation]() of JwtInterface and JwkSetInterface.
