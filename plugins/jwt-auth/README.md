@@ -124,8 +124,6 @@ control, example:
 ```console
 openssl genrsa -out config/keys/1/private.pem 4096
 openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout
-openssl req -key config/keys/1/private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out config/keys/1/cert.pem
-openssl pkcs12 -export -inkey config/keys/1/private.pem -in config/cert.pem -out config/keys/1/keys.pfx -name "my alias" -password pass:
 ```
 
 Add the generated keys to your config:
@@ -139,8 +137,8 @@ return [
         'keys' => [
             [
                 'kid' => '1',
-                'public' => file_get_contents($config . 'keys' . DS . '1' . DS . 'public.pem'),
-                'private' => file_get_contents($config . 'keys' . DS . '1' . DS . 'private.pem'),
+                'public' => file_get_contents(CONFIG . 'keys' . DS . '1' . DS . 'public.pem'),
+                'private' => file_get_contents(CONFIG . 'keys' . DS . '1' . DS . 'private.pem'),
             ]
         ]
     ]
