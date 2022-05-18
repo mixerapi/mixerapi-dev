@@ -17,8 +17,8 @@ return [
         'secret' => null,
 
         /*
-         * An array of public/private key pairs. At least one set of keys is required if you're using RSA and they
-         * key length must be 2048 bits.
+         * An array of public/private key pairs. At least one set of keys is required if you're using RSA and a
+         * key length of at least 2048 bits.
          */
         'keys' => [
             [
