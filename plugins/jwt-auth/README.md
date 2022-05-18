@@ -16,6 +16,7 @@ needs. It is the goal of this library to make both easy.
 - [Defining Your JWT](#defining-your-jwt)
 - [JSON Web Keys](#json-web-keys)
 - [Login Controller](#login-controller)
+- [Security](#Security)
 
 For an alternative approach see [admad/cakephp-jwt-auth](https://github.com/ADmad/cakephp-jwt-auth).
 
@@ -97,10 +98,10 @@ class User extends Entity implements JwtEntityInterface
         return new Jwt(
             exp: time() + 60 * 60 * 24,
             sub: $this->get('id'),
-            iss: 'demo.mixerapi.com',
-            aud: null,
+            iss: 'mixerapi',
+            aud: 'mixerapi-client',
             nbf: null,
-            iat: null,
+            iat: time(),
             jti: \Cake\Utility\Text::uuid(),
             claims: [
                 'user' => [
@@ -277,3 +278,29 @@ Or, if you prefer to handle the authentication yourself you may pass an instance
         }
     }
 ```
+
+## Security
+
+Some security measures are baked into this library:
+
+#### Weak HMAC secrets
+
+JWT signed with HMAC can be brute forced with a tool like [JWT Tool](https://github.com/ticarpi/jwt_tool). Once cracked
+the JWT can be altered. This library mitigates this by requiring a minimum secret length of 32 characters though you
+may want to consider using 64 characters if security is more important than speed and token size. Generating a strong
+random secret and securing it is up to you.
+
+#### Weak RSA Keys
+
+Weak keys can be cracked as well. This library requires a minimum key length of 2048 bits. You may want to consider
+a key length of 4096 bits depending on your security requirements. Securing your keys is up to you.
+
+#### Alg None Bypass
+
+The alg=none signature-bypass vulnerability is mitigated by requiring a single valid algorithm. Additional protection
+exists within the [firebase/php-jwt](https://github.com/firebase/php-jwt) library which should be kept up to date.
+
+#### RS/HS256 public key mismatch vulnerability
+
+Mitigated by requiring a single valid algorithm. Additional protection exists within the
+[firebase/php-jwt](https://github.com/firebase/php-jwt) library which should be kept up to date.
