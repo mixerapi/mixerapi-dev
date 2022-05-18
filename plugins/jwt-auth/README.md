@@ -296,7 +296,7 @@ openssl rand -base64 32
 
 Or `gpg`:
 
-```
+```console
 gpg --gen-random 1 32 | base64
 ```
 
