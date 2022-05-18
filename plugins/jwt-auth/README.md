@@ -24,8 +24,6 @@ For an alternative approach see [admad/cakephp-jwt-auth](https://github.com/ADma
 
 You can install this plugin into your CakePHP application using [composer](https://getcomposer.org).
 
-The recommended way to install composer packages is:
-
 ```console
 composer require mixerapi/jwt-auth
 ```
