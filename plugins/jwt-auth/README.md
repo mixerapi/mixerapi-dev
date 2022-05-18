@@ -45,11 +45,11 @@ application.
 Configure::load('mixerapi_jwtauth');
 ```
 
-- `alg` is required and must be either HS256, HS512, RS256, or RS512.
-- `secret` is required when using HMAC. The secret should not be committed to your version control system.
-- `keys` are required when using RSA. The keys should not be committed to your version control system.
+- `alg` string is required and must be either HS256, HS512, RS256, or RS512.
+- `secret` 32 character string is required when using HMAC. The secret should not be committed to your VCS.
+- `keys` array is required when using RSA. The keys should not be committed to your VCS and be 2048 bits or longer.
 
-Read the [example configuration file](mixerapi_jwtauth.php) for more detailed explanations.
+Read the [example configuration file](assets/mixerapi_jwtauth.php) for more detailed explanations.
 
 ### Service Provider
 
@@ -97,8 +97,8 @@ class User extends Entity implements JwtEntityInterface
         return new Jwt(
             exp: time() + 60 * 60 * 24,
             sub: $this->get('id'),
-            iss: 'mixerapi',
-            aud: 'api-client',
+            iss: 'demo.mixerapi.com',
+            aud: null,
             nbf: null,
             iat: null,
             jti: \Cake\Utility\Text::uuid(),
@@ -122,7 +122,7 @@ We'll store the keys in `config/keys/1/` but you can store these anywhere. Keys 
 control, example:
 
 ```console
-openssl genrsa -out config/keys/1/private.pem 4096
+openssl genrsa -out config/keys/1/private.pem 2048
 openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout
 ```
 
@@ -151,10 +151,11 @@ Read more about [JSON Web Keys here](https://datatracker.ietf.org/doc/html/rfc75
 expose your JWK Set.
 
 ```php
+use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
 use MixerApi\JwtAuth\Jwk\JwkSetInterface;
 
-class JwksController extends AppController
+class JwksController extends Controller
 {
     public function beforeFilter(EventInterface $event)
     {
@@ -206,11 +207,10 @@ Note, if you are not using dependency injection:
 In the example below we'll authenticate, create the JWT we defined earlier and return it to the requester.
 
 ```php
-# your login controller, for example src/Controller/LoginController.php
-
+use Cake\Controller\Controller;
 use MixerApi\JwtAuth\JwtAuthenticatorInterface;
 
-public function LoginController
+public function LoginController extends Controller
 {
     public function beforeFilter(EventInterface $event)
     {

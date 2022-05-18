@@ -16,6 +16,16 @@ class Configuration
     public const ALG = ['RS256', 'RS512', 'HS256', 'HS512'];
 
     /**
+     * @var int Required size of HMAC secret
+     */
+    private const SECRET_LENGTH = 32;
+
+    /**
+     * @var int Required RSA key size
+     */
+    private const RSA_KEY_LENGTH = 2048;
+
+    /**
      * Signing algorithm
      *
      * @see Configuration::ALG
@@ -34,8 +44,6 @@ class Configuration
      * @var \MixerApi\JwtAuth\Configuration\KeyPair[]
      */
     private array $keyPairs = [];
-
-    private static ?Configuration $instance = null;
 
     /**
      * @param \Cake\Core\Configure|null $configure Cake Configure instance
@@ -61,19 +69,44 @@ class Configuration
         if (str_starts_with(haystack: $this->alg, needle: 'HS')) {
             if (empty($config['secret']) || !is_string($config['secret'])) {
                 throw new JwtAuthException(
-                    'Invalid configuration. `MixerApi.JwtAuth.secret` is a required string when using HS alg.'
+                    'Invalid configuration. `MixerApi.JwtAuth.secret` is a required string when using HMAC.'
+                );
+            }
+            if (strlen($config['secret']) < self::SECRET_LENGTH) {
+                throw new JwtAuthException(
+                    sprintf(
+                        'HMAC secret must be >= %s characters, but yours is %s ' .
+                        ' characters. Increase the length of your MixerApi.JwtAuth.secret',
+                        self::SECRET_LENGTH,
+                        strlen($config['secret'])
+                    )
                 );
             }
             $this->secret = $config['secret'];
         } elseif (str_starts_with(haystack: $this->alg, needle: 'RS')) {
             if (empty($config['keys']) || !is_array($config['keys'])) {
                 throw new JwtAuthException(
-                    'Invalid configuration. `MixerApi.JwtAuth.keys` must contain keys when using RS alg.'
+                    'Invalid configuration. `MixerApi.JwtAuth.keys` must contain keys when using RSA.'
                 );
             }
 
             foreach ($config['keys'] as $key) {
-                $this->keyPairs[] = new KeyPair(...$key);
+                $keyPair = new KeyPair(...$key);
+                $res = openssl_pkey_get_public($keyPair->public);
+                $detail = openssl_pkey_get_details($res);
+
+                if ($detail['bits'] < self::RSA_KEY_LENGTH) {
+                    throw new JwtAuthException(
+                        sprintf(
+                            'Invalid configuration. RSA keys must be at least %s bits, but yours is %s. ' .
+                            'Please generate stronger keys.',
+                            self::RSA_KEY_LENGTH,
+                            $detail['bits']
+                        )
+                    );
+                }
+
+                $this->keyPairs[] = $keyPair;
             }
         }
     }

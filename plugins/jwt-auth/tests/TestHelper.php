@@ -18,20 +18,35 @@ class TestHelper
             'keys' => $keys ?? [
                 [
                     'kid' => '1',
-                    'public' => file_get_contents(__DIR__ . '/keys/1/public.pem'),
-                    'private' => file_get_contents(__DIR__ . '/keys/1/private.pem'),
+                    'public' => file_get_contents(__DIR__ . '/keys/public-2048.pem'),
+                    'private' => file_get_contents(__DIR__ . '/keys/private-2048.pem'),
                 ],
                 [
                     'kid' => '2',
-                    'public' => file_get_contents(__DIR__ . '/keys/1/public.pem'),
-                    'private' => file_get_contents(__DIR__ . '/keys/1/private.pem'),
+                    'public' => file_get_contents(__DIR__ . '/keys/public-2048.pem'),
+                    'private' => file_get_contents(__DIR__ . '/keys/private-2048.pem'),
                 ],
                 [
                     'kid' => '3',
-                    'public' => file_get_contents(__DIR__ . '/keys/1/public.pem'),
-                    'private' => file_get_contents(__DIR__ . '/keys/1/private.pem'),
+                    'public' => file_get_contents(__DIR__ . '/keys/public-2048.pem'),
+                    'private' => file_get_contents(__DIR__ . '/keys/private-2048.pem'),
                 ],
             ],
+        ]);
+    }
+
+    public static function createRs256ConfigWithWeakKeys(?array $keys = null): void
+    {
+        Configure::delete('MixerApi.JwtAuth');
+        Configure::write('MixerApi.JwtAuth', [
+            'alg' => 'RS256',
+            'keys' => $keys ?? [
+                    [
+                        'kid' => '1',
+                        'public' => file_get_contents(__DIR__ . '/keys/public-1024.pem'),
+                        'private' => file_get_contents(__DIR__ . '/keys/private-1024.pem'),
+                    ]
+                ],
         ]);
     }
 
@@ -40,7 +55,7 @@ class TestHelper
         Configure::delete('MixerApi.JwtAuth');
         Configure::write('MixerApi.JwtAuth', [
             'alg' => 'HS256',
-            'secret' => Security::getSalt(),
+            'secret' => 'a-reasonable-long-secret-is-a-good-secret!',
         ]);
     }
 

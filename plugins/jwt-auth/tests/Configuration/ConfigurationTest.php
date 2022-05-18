@@ -35,13 +35,19 @@ class ConfigurationTest extends TestCase
 
     public function test_construct_should_throw_exception_when_secret_is_invalid(): void
     {
+        /*
+         * Should throw exception when secret is missing
+         */
         $this->expectException(JwtAuthException::class);
         Configure::write('MixerApi.JwtAuth', [
             'alg' => 'HS256',
         ]);
         new Configuration;
 
-        foreach ([null, ''] as $secret) {
+        /*
+         * Should throw exception when secret is null, empty, or less than 32 characters
+         */
+        foreach ([null, '', 'secret'] as $secret) {
             $this->expectException(JwtAuthException::class);
             Configure::write('MixerApi.JwtAuth', [
                 'alg' => 'HS256',
@@ -63,7 +69,7 @@ class ConfigurationTest extends TestCase
     public function test_getSecret(): void
     {
         TestHelper::createHs256Config();
-        $this->assertEquals(Security::getSalt(), (new Configuration)->getSecret());
+        $this->assertEquals('a-reasonable-long-secret-is-a-good-secret!', (new Configuration)->getSecret());
 
         TestHelper::createRs256Config();
         $this->assertNull((new Configuration)->getSecret());
@@ -71,37 +77,33 @@ class ConfigurationTest extends TestCase
 
     public function test_getKeyPairs(): void
     {
-        Configure::write('MixerApi.JwtAuth', [
-            'alg' => 'RS256',
-            'keys' => [
-                ['kid' => 'abc1', 'public' => 'pub', 'private' => 'pri'],
-                ['kid' => 'abc2', 'public' => 'pub', 'private' => 'pri'],
-                ['kid' => 'abc3', 'public' => 'pub', 'private' => 'pri'],
-            ],
-        ]);
+        TestHelper::createRs256Config();
         $this->assertCount(3, (new Configuration)->getKeyPairs());
     }
 
     public function test_getKeyPairs_throws_exception_when_config_is_invalid(): void
     {
+        /*
+         * Should throw exception when `keys` is missing
+         */
         $this->expectException(JwtAuthException::class);
         Configure::write('MixerApi.JwtAuth', [
             'alg' => 'RS256',
         ]);
-        (new Configuration)->getKeyPairs();
+        new Configuration;
+
+        /*
+         * Should throw exception when RSA keys are less than 2048 bits
+         */
+        $this->expectException(JwtAuthException::class);
+        TestHelper::createRs256ConfigWithWeakKeys();
+        new Configuration;
     }
 
     public function test_getKeyPairByKid(): void
     {
-        Configure::write('MixerApi.JwtAuth', [
-            'alg' => 'RS256',
-            'keys' => [
-                ['kid' => 'abc1', 'public' => 'pub', 'private' => 'pri'],
-                ['kid' => 'abc2', 'public' => 'pub', 'private' => 'pri'],
-                ['kid' => 'abc3', 'public' => 'pub', 'private' => 'pri'],
-            ],
-        ]);
-        $this->assertNotNull((new Configuration)->getKeyPairByKid('abc2'));
+        TestHelper::createRs256Config();
+        $this->assertNotNull((new Configuration)->getKeyPairByKid('1'));
         $this->assertNull((new Configuration)->getKeyPairByKid('nope'));
     }
 }
