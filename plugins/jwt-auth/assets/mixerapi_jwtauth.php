@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 return [
     'MixerApi.JwtAuth' => [
@@ -26,7 +25,7 @@ return [
                 /*
                  * The Key ID can be any unique identifier
                  */
-                'kid' => '2022-05-01',
+                'kid' => '1',
 
                 /*
                  * Contents of the public key file
