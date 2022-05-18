@@ -288,6 +288,18 @@ the JWT can be altered. This library mitigates this by requiring a minimum secre
 may want to consider using 64 characters if security is more important than speed and token size. Generating a strong
 random secret and securing it is up to you.
 
+You can generate a strong secret using a tool like `openssl`:
+
+```console
+openssl rand -base64 32
+```
+
+Or `gpg`:
+
+```
+gpg --gen-random 1 32 | base64
+```
+
 #### Weak RSA Keys
 
 Weak keys can be cracked as well. This library requires a minimum key length of 2048 bits. You may want to consider
