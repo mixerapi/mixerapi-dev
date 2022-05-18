@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MixerApi\JwtAuth\Jwk;
 
 use MixerApi\JwtAuth\Configuration\Configuration;
+use MixerApi\JwtAuth\Exception\JwtAuthException;
 
 /**
  * An implementation of the JWK RFC
@@ -25,6 +26,10 @@ class JwkSet implements JwkSetInterface
      */
     public function getKeySet(): array
     {
+        if (!str_starts_with(haystack: $this->config->getAlg(), needle: 'RS')) {
+            throw new JwtAuthException('Algorithm must be RSA not ' . $this->config->getAlg());
+        }
+
         $keyPairs = $this->config->getKeyPairs();
 
         $keys = [];
