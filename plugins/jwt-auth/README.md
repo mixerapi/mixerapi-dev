@@ -45,8 +45,8 @@ Configure::load('mixerapi_jwtauth');
 ```
 
 - `alg` string is required and must be either HS256, HS512, RS256, or RS512.
-- `secret` 32 character string is required when using HMAC. The secret should not be committed to your VCS.
-- `keys` array is required when using RSA. The keys should not be committed to your VCS and be 2048 bits or longer.
+- `secret` is required when using HMAC. The secret should not be committed to your VCS and be at least 32 characters.
+- `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits long.
 
 Read the [example configuration file](assets/mixerapi_jwtauth.php) for more detailed explanations.
 

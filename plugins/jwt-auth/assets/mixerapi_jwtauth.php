@@ -12,13 +12,13 @@ return [
 
         /*
          * This is only required if you are using HMAC, it can be left empty otherwise. The value must be at least
-         * 32 characters long.
+         * 32 characters long, secure, and not be committed to your VCS.
          */
         'secret' => null,
 
         /*
-         * An array of public/private key pairs. At least one set of keys is required if you're using RSA and a
-         * key length of at least 2048 bits.
+         * An array of public/private key pairs. At least one set of keys is required if you're using RSA. The
+         * key length must be at least 2048 bits, not be committed to your VCS, and stored securely.
          */
         'keys' => [
             [
