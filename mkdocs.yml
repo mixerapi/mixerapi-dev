@@ -22,6 +22,8 @@ plugins:
     - plugins/hal-view/tests/*
     - plugins/json-ld-view/webroot/*
     - plugins/json-ld-view/tests/*
+    - plugins/jwt-auth/webroot/*
+    - plugins/jwt-auth/tests/*
     - plugins/mixerapi/webroot/*
     - plugins/mixerapi/tests/*
     - plugins/rest/webroot/*
@@ -50,6 +52,7 @@ nav:
 - Crud Services: /plugins/crud
 - Event Listeners: /event-listeners
 - Exception Rendering: /plugins/exception-render
+- JWT Authentication: /plugins/jwt-auth
 - OpenAPI (Swagger):
   - Documentation: /plugins/cakephp-swagger-bake
   - Attributes: /plugins/cakephp-swagger-bake/docs/attributes

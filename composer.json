@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
+        "ext-openssl": "*",
         "ext-simplexml": "*",
         "ext-xml": "*",
         "adbario/php-dot-notation": "^2.2",
@@ -20,10 +21,12 @@
     "require-dev": {
         "ext-mysqli": "*",
         "ext-sqlite3": "*",
+        "cakephp/authentication": "^2.9",
         "cakephp/bake": "^2.0.3",
         "cakephp/cakephp-codesniffer": "^4.2",
         "cakephp/debug_kit": "^4.1",
         "dereuromark/cakephp-ide-helper": "^1.10",
+        "firebase/php-jwt": "^5.5",
         "josegonzalez/dotenv": "^3.2",
         "phpmd/phpmd": "^2.10",
         "phpro/grumphp": "^1.3",
@@ -50,6 +53,7 @@
             "MixerApi\\ExceptionRender\\": "plugins/exception-render/src/",
             "MixerApi\\HalView\\": "plugins/hal-view/src/",
             "MixerApi\\JsonLdView\\": "plugins/json-ld-view/src/",
+            "MixerApi\\JwtAuth\\": "plugins/jwt-auth/src/",
             "MixerApi\\Rest\\": "plugins/rest/src/"
         }
     },
@@ -69,6 +73,8 @@
             "MixerApi\\ExceptionRender\\Test\\App\\": "plugins/exception-render/tests/test_app/src/",
             "MixerApi\\HalView\\Test\\": "plugins/hal-view/tests/",
             "MixerApi\\HalView\\Test\\App\\": "plugins/hal-view/tests/test_app/src/",
+            "MixerApi\\JwtAuth\\Test\\": "plugins/jwt-auth/tests/",
+            "MixerApi\\JwtAuth\\Test\\App\\": "plugins/jwt-auth/tests/test_app/src/",
             "MixerApi\\JsonLdView\\Test\\": "plugins/json-ld-view/tests/",
             "MixerApi\\JsonLdView\\Test\\App\\": "plugins/json-ld-view/tests/test_app/src/",
             "MixerApi\\Test\\": "plugins/mixerapi/tests/",
@@ -114,7 +120,12 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "phpro/grumphp": true
+        }
     },
     "repositories": [
         {

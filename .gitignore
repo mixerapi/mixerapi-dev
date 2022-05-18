@@ -54,3 +54,5 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+/plugins/jwt-auth/tests/mixerapi_dev_test
+/plugins/jwt-auth/mixerapi_dev_test
