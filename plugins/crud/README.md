@@ -9,10 +9,7 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php)](https://php.net/)
 
-[ico-stability]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
-
-
-This experimental plugin provides CRUD (Create/Read/Update/Delete) services to your RESTful APIs controller actions
+This plugin provides CRUD (Create/Read/Update/Delete) services to your RESTful APIs controller actions
 using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/development/dependency-injection.html).
 
 - Perform most crud operations with a single line of code.
@@ -23,7 +20,7 @@ using [CakePHP's dependency injection container](https://book.cakephp.org/4/en/d
 - Requires CakePHP ^4.2 compatible projects.
 
 You may also want to look at [CakePHP Crud](https://crud.readthedocs.io/en/latest/installation.html) which doesn't
-rely on experimental code. If you're using this plugin without MixerApi/ExceptionRender or for a non-API projects
+rely on dependency injection. If you're using this plugin without MixerApi/ExceptionRender or for a non-API projects
 [read below](#other-usages).
 
 ## Installation
