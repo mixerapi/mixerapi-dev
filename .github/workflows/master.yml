@@ -25,12 +25,15 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      - name: Composer Check
+        run: composer validate
+
+      - name: Install
         run: |
-          composer self-update
-          composer validate
-          composer install --prefer-dist --no-progress
+          composer install --prefer-dist --no-interaction --no-progress
+          cp config/.env.example config/.env
+          cp config/app_local.example.php config/app_local.php
+
       - name: Coverage Report
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
