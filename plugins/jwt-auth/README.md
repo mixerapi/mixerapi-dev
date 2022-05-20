@@ -44,11 +44,32 @@ application.
 Configure::load('mixerapi_jwtauth');
 ```
 
-- `alg` string is required and must be either HS256, HS512, RS256, or RS512.
-- `secret` is required when using HMAC. The secret should not be committed to your VCS and be at least 32 characters.
-- `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits long.
+#### alg
 
-Read the [example configuration file](assets/mixerapi_jwtauth.php) for more detailed explanations.
+The `alg` string is required and must be either HS256, HS512, RS256, or RS512.
+
+#### secret
+
+The `secret` string is required when using HMAC. The secret should not be committed to your VCS and be at least 32
+characters long. You can generate a strong secret using a tool like openssl or gpg:
+
+```console
+openssl rand -base64 32
+```
+
+```console
+gpg --gen-random 1 32 | base64
+```
+
+#### keys
+
+The `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits
+long. You can generate a public/private keypair using openssl:
+
+```console
+openssl genrsa -out config/keys/1/private.pem 2048
+openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout
+```
 
 ### Service Provider
 
@@ -119,13 +140,6 @@ Signing your tokens with RSA uses a public/private key pair. You can skip this s
 
 We'll store the keys in `config/keys/1/` but you can store these anywhere. Keys should not be stored in version
 control, example:
-
-```console
-openssl genrsa -out config/keys/1/private.pem 2048
-openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout
-```
-
-Add the generated keys to your config:
 
 ```php
 # in config/mixerapi_jwtauth.php
@@ -287,18 +301,6 @@ JWT signed with HMAC can be brute forced with a tool like [JWT Tool](https://git
 the JWT can be altered. This library mitigates this by requiring a minimum secret length of 32 characters though you
 may want to consider using 64 characters if security is more important than speed and token size. Generating a strong
 random secret and securing it is up to you.
-
-You can generate a strong secret using a tool like `openssl`:
-
-```console
-openssl rand -base64 32
-```
-
-Or `gpg`:
-
-```console
-gpg --gen-random 1 32 | base64
-```
 
 #### Weak RSA Keys
 
