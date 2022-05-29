@@ -20,8 +20,7 @@ class Actor extends Entity
     protected $_accessible = [
         'first_name' => true,
         'last_name' => true,
-        'modified' => true,
-        'film_actors' => true,
+        '*' => false
     ];
 
     /**
