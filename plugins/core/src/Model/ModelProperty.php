@@ -12,24 +12,34 @@ use Cake\Validation\ValidationSet;
 class ModelProperty
 {
     /**
-     * @var string
+     * @var string Column (field) name from the database definition
      */
     private string $name = '';
 
     /**
-     * @var string
+     * @var string Data type from the database definition
      */
     private string $type = '';
 
     /**
-     * @var string
+     * @var string Default value from the database definition
      */
     private string $default = '';
 
     /**
-     * @var bool
+     * @var bool Is this column a primary key (using db definition)
      */
     private bool $isPrimaryKey = false;
+
+    /**
+     * @var bool Should this field be hidden from responses (using CakePHP Entity $_hidden)
+     */
+    private bool $isHidden = false;
+
+    /**
+     * @var bool The mass assignment of this field (using CakePHP Entity $_accessible)
+     */
+    private bool $isAccessible = false;
 
     /**
      * @var \Cake\Validation\ValidationSet|null
@@ -108,6 +118,44 @@ class ModelProperty
     public function setIsPrimaryKey(bool $isPrimaryKey)
     {
         $this->isPrimaryKey = $isPrimaryKey;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHidden(): bool
+    {
+        return $this->isHidden;
+    }
+
+    /**
+     * @param bool $isHidden Is this property readable in responses
+     * @return $this
+     */
+    public function setIsHidden(bool $isHidden)
+    {
+        $this->isHidden = $isHidden;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAccessible(): bool
+    {
+        return $this->isAccessible;
+    }
+
+    /**
+     * @param bool $isAccessible Is this property writable in requests
+     * @return $this
+     */
+    public function setIsAccessible(bool $isAccessible)
+    {
+        $this->isAccessible = $isAccessible;
 
         return $this;
     }

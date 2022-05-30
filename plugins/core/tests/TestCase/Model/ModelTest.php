@@ -45,6 +45,8 @@ class ModelTest extends TestCase
 
         $this->assertTrue($model->getProperty('id')->isPrimaryKey());
         $this->assertEmpty($model->getProperty('first_name')->getDefault());
+        $this->assertFalse($model->getProperty('first_name')->isHidden());
+        $this->assertTrue($model->getProperty('first_name')->isAccessible());
         $this->assertEquals('string', $model->getProperty('first_name')->getType());
         $this->assertEquals('first_name', $model->getProperty('first_name')->getName());
         $this->assertInstanceOf(ValidationSet::class, $model->getProperty('first_name')->getValidationSet());

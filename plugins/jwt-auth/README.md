@@ -54,11 +54,11 @@ The `secret` string is required when using HMAC. The secret should not be commit
 characters long. You can generate a strong secret using a tool like openssl or gpg:
 
 ```console
-openssl rand -base64 32
+openssl rand -base64 32 | cut -c1-32
 ```
 
 ```console
-gpg --gen-random 1 32 | base64
+gpg --gen-random 1 32 | base64 | cut -c1-32
 ```
 
 #### keys
