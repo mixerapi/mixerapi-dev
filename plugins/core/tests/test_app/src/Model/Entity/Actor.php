@@ -20,7 +20,12 @@ class Actor extends Entity
     protected $_accessible = [
         'first_name' => true,
         'last_name' => true,
+        'write' => true,
         '*' => false
+    ];
+
+    protected $_hidden = [
+        'hide', 'write'
     ];
 
     /**

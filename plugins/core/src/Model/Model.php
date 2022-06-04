@@ -50,16 +50,9 @@ class Model
      */
     private function assignProperties(): void
     {
-        $hiddenAttributes = $this->entity->getHidden();
-
-        $columns = array_filter($this->schema->columns(), function ($column) use ($hiddenAttributes) {
-            return !in_array($column, $hiddenAttributes) ? true : null;
-        });
-
-        foreach ($columns as $columnName) {
+        foreach ($this->schema->columns() as $columnName) {
             $modelProperty = (new ModelPropertyFactory($this->schema, $this->table, $columnName, $this->entity))
                 ->create();
-
             $this->properties[$columnName] = $modelProperty;
         }
     }
