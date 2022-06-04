@@ -57,7 +57,8 @@ class Model
         });
 
         foreach ($columns as $columnName) {
-            $modelProperty = (new ModelPropertyFactory($this->schema, $this->table, $columnName))->create();
+            $modelProperty = (new ModelPropertyFactory($this->schema, $this->table, $columnName, $this->entity))
+                ->create();
 
             $this->properties[$columnName] = $modelProperty;
         }
