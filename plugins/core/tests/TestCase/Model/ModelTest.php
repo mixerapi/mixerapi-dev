@@ -60,7 +60,7 @@ class ModelTest extends TestCase
         $this->assertFalse($model->getProperty('read')->isAccessible());
         $this->assertFalse($model->getProperty('read')->isHidden());
 
-        $this->assertTrue($model->getProperty('read')->isHidden());
+        $this->assertTrue($model->getProperty('hide')->isHidden());
 
         $this->expectException(\InvalidArgumentException::class);
         $model->getProperty('does_not_exist');
