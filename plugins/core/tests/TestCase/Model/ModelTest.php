@@ -44,12 +44,23 @@ class ModelTest extends TestCase
         ))->create();
 
         $this->assertTrue($model->getProperty('id')->isPrimaryKey());
+        $this->assertFalse($model->getProperty('id')->isAccessible());
+
         $this->assertEmpty($model->getProperty('first_name')->getDefault());
         $this->assertFalse($model->getProperty('first_name')->isHidden());
         $this->assertTrue($model->getProperty('first_name')->isAccessible());
+
         $this->assertEquals('string', $model->getProperty('first_name')->getType());
         $this->assertEquals('first_name', $model->getProperty('first_name')->getName());
         $this->assertInstanceOf(ValidationSet::class, $model->getProperty('first_name')->getValidationSet());
+
+        $this->assertTrue($model->getProperty('write')->isAccessible());
+        $this->assertTrue($model->getProperty('write')->isHidden());
+
+        $this->assertFalse($model->getProperty('read')->isAccessible());
+        $this->assertFalse($model->getProperty('read')->isHidden());
+
+        $this->assertTrue($model->getProperty('hide')->isHidden());
 
         $this->expectException(\InvalidArgumentException::class);
         $model->getProperty('does_not_exist');
