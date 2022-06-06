@@ -51,21 +51,34 @@ The `alg` string is required and must be either HS256, HS512, RS256, or RS512.
 #### secret
 
 The `secret` string is required when using HMAC. The secret should not be committed to your VCS and be at least 32
-characters long. You can generate a strong secret using a tool like openssl or gpg:
+characters long.
 
+Uses PHP Sodium's [sodium_crypto_generichash_keygen()](https://www.php.net/manual/en/function.sodium-crypto-generichash-keygen.php):
 ```console
-openssl rand -base64 32 | cut -c1-32
+bin/cake mixerapi:jwtauth keygen hmac
 ```
 
+Using openssl:
 ```console
-gpg --gen-random 1 32 | base64 | cut -c1-32
+openssl rand -base64 32
+```
+
+Using gpg:
+```console
+gpg --gen-random 1 32
 ```
 
 #### keys
 
 The `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits
-long. You can generate a public/private keypair using openssl:
+long.
 
+Using PHPs [openssl](https://www.php.net/manual/en/book.openssl.php) library:
+```console
+bin/cake mixerapi:jwtauth keygen rsa
+```
+
+Using openssl:
 ```console
 openssl genrsa -out config/keys/1/private.pem 2048
 openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout

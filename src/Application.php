@@ -116,6 +116,7 @@ class Application extends BaseApplication
 
         $this->addPlugin('Migrations');
         $this->addPlugin('IdeHelper');
+        $this->addPlugin('MixerApi/JwtAuth');
 
         // Load more plugins here
     }

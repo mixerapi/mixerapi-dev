@@ -2,12 +2,8 @@
 
 namespace MixerApi\Rest\Test\TestCase\Command;
 
-use Cake\Core\Configure;
-use Cake\Routing\Route\Route;
-use Cake\Routing\Router;
 use Cake\TestSuite\ConsoleIntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use MixerApi\Rest\Lib\Exception\RunTimeException;
 
 class CreateRoutesCommandTest extends TestCase
 {

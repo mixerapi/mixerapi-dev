@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace MixerApi\JwtAuth;
 
+use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
+use MixerApi\JwtAuth\Command\KeyGenCommand;
 
 /**
  * Plugin for JwtAuth
@@ -25,13 +27,6 @@ class Plugin extends BasePlugin
     protected $bootstrapEnabled = false;
 
     /**
-     * Console middleware
-     *
-     * @var bool
-     */
-    protected $consoleEnabled = false;
-
-    /**
      * Enable middleware
      *
      * @var bool
@@ -51,4 +46,14 @@ class Plugin extends BasePlugin
      * @var bool
      */
     protected $routesEnabled = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function console(CommandCollection $commands): CommandCollection
+    {
+        $commands->add('mixerapi:jwtauth keygen', KeyGenCommand::class);
+
+        return $commands;
+    }
 }

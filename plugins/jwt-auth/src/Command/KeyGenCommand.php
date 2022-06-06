@@ -7,15 +7,8 @@ use Cake\Console\Arguments;
 use Cake\Console\Command;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
-use Cake\Core\Configure;
-use Cake\Utility\Inflector;
-use MixerApi\Rest\Lib\Controller\ControllerUtility;
-use MixerApi\Rest\Lib\Route\ResourceScanner;
-use MixerApi\Rest\Lib\Route\RouteDecoratorFactory;
-use MixerApi\Rest\Lib\Route\RouteWriter;
 
-
-class KeysCommand extends Command
+class KeyGenCommand extends Command
 {
     /**
      * @param \Cake\Console\ConsoleOptionParser $parser ConsoleOptionParser
@@ -24,31 +17,32 @@ class KeysCommand extends Command
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
+            ->setDescription('Generate JWT keys')
             ->addArgument('type', [
                 'options' => ['hmac', 'rsa'],
-                'required' => true
+                'required' => true,
             ]);
 
         return $parser;
     }
 
     /**
-     * List Cake Routes that can be added to Swagger. Prints to console.
-     *
      * @param \Cake\Console\Arguments $args Arguments
      * @param \Cake\Console\ConsoleIo $io ConsoleIo
-     * @return int|void|null
-     * @throws \ReflectionException
+     * @return void
      */
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): void
     {
-        $type = (string) $args->getArgument('type');
+        $type = (string)$args->getArgument('type');
 
         if ($type === 'hmac') {
-            $io->out(sodium_crypto_generichash_keygen());
-        } else if ($type === 'rsa') {
+            $io->info('Generating base64 encoded hash: ');
+            $io->out(base64_encode(sodium_crypto_generichash_keygen()));
+        } elseif ($type === 'rsa') {
+            $io->info('Generating RSA keypair: ');
             $privateKey = openssl_pkey_new();
-            //$io->out(openssl_pkey_get_private($privateKey));
+            openssl_pkey_export($privateKey, $pkString);
+            $io->out($pkString);
             $io->out(openssl_pkey_get_details($privateKey)['key']);
         }
     }
