@@ -71,7 +71,7 @@ gpg --gen-random 1 32
 #### keys
 
 The `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits
-long. You can generate keys with the built in keygen command or directly with openssl: 
+long. You can generate keys with the built in keygen command or directly with openssl:
 
 Using PHPs [openssl](https://www.php.net/manual/en/book.openssl.php) library:
 ```console
