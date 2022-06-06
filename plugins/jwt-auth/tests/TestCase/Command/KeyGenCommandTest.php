@@ -21,14 +21,4 @@ class KeyGenCommandTest extends TestCase
         $this->assertOutputContains('Generating base64 encoded hash:');
         $this->assertEquals(44, strlen($this->_out->messages()[1]));
     }
-
-    public function test_rsa(): void
-    {
-        $this->exec('mixerapi:jwtauth keygen rsa');
-        $this->assertOutputContains('Generating RSA keypair:');
-        $this->assertOutputContains('-----BEGIN PRIVATE KEY-----');
-        $this->assertOutputContains('-----END PRIVATE KEY-----');
-        $this->assertOutputContains('-----BEGIN PUBLIC KEY-----');
-        $this->assertOutputContains('-----END PUBLIC KEY-----');
-    }
 }

@@ -71,14 +71,8 @@ gpg --gen-random 1 32
 #### keys
 
 The `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits
-long. You can generate keys with the built-in keygen command or directly with openssl:
+long. You can generate keys with openssl:
 
-JwtAuth ships with a command to generate keys using PHPs [openssl](https://www.php.net/manual/en/book.openssl.php) library:
-```console
-bin/cake mixerapi:jwtauth keygen rsa
-```
-
-Using openssl:
 ```console
 openssl genrsa -out config/keys/1/private.pem 2048
 openssl rsa -in config/keys/1/private.pem -out config/keys/1/public.pem -pubout

@@ -19,7 +19,7 @@ class KeyGenCommand extends Command
         $parser
             ->setDescription('Generate JWT keys')
             ->addArgument('type', [
-                'options' => ['hmac', 'rsa'],
+                'options' => ['hmac'],
                 'required' => true,
             ]);
 
@@ -38,12 +38,6 @@ class KeyGenCommand extends Command
         if ($type === 'hmac') {
             $io->info('Generating base64 encoded hash: ');
             $io->out(base64_encode(sodium_crypto_generichash_keygen()));
-        } elseif ($type === 'rsa') {
-            $io->info('Generating RSA keypair: ');
-            $privateKey = openssl_pkey_new();
-            openssl_pkey_export($privateKey, $pkString);
-            $io->out($pkString);
-            $io->out(openssl_pkey_get_details($privateKey)['key']);
         }
     }
 }
