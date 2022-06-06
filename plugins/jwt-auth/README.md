@@ -53,7 +53,7 @@ The `alg` string is required and must be either HS256, HS512, RS256, or RS512.
 The `secret` string is required when using HMAC. The secret should not be committed to your VCS and be at least 32
 characters long. There are a number of ways to generate a secure secret:
 
-Uses PHP Sodium's [sodium_crypto_generichash_keygen()](https://www.php.net/manual/en/function.sodium-crypto-generichash-keygen.php):
+JwtAuth ships with a command to generate keys using PHPs [sodium_crypto_generichash_keygen()](https://www.php.net/manual/en/function.sodium-crypto-generichash-keygen.php):
 ```console
 bin/cake mixerapi:jwtauth keygen hmac
 ```
@@ -71,9 +71,9 @@ gpg --gen-random 1 32
 #### keys
 
 The `keys` array is required when using RSA. The keys should not be committed to your VCS and be at least 2048 bits
-long. You can generate keys with the built in keygen command or directly with openssl:
+long. You can generate keys with the built-in keygen command or directly with openssl:
 
-Using PHPs [openssl](https://www.php.net/manual/en/book.openssl.php) library:
+JwtAuth ships with a command to generate keys using PHPs [openssl](https://www.php.net/manual/en/book.openssl.php) library:
 ```console
 bin/cake mixerapi:jwtauth keygen rsa
 ```
