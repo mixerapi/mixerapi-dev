@@ -75,8 +75,8 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
             'exception' => (new ReflectionClass($exception))->getShortName(),
             'message' => $message,
             'url' => h($url),
-            'error' => $exception,
             'code' => $code,
+            'error' => $exception,
         ];
 
         if ($this->error instanceof ValidationException) {
@@ -128,6 +128,8 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     private function debugViewVars($exception, array $viewVars): array
     {
         if (!Configure::read('debug')) {
+            unset($viewVars['error']);
+
             return $viewVars;
         }
 

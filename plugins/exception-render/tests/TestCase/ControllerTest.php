@@ -60,6 +60,9 @@ class ControllerTest extends TestCase
         $message = reset($violation->messages);
         $this->assertEquals('_empty', $message->rule);
         $this->assertEquals('This field cannot be left empty', $message->message);
+
+        $this->assertTrue(isset($object->trace));
+        $this->assertTrue(isset($object->error));
     }
 
     public function test_validation_exception_with_cakephp_debug_off(): void
@@ -77,5 +80,6 @@ class ControllerTest extends TestCase
         $object = json_decode($body);
 
         $this->assertFalse(isset($object->trace));
+        $this->assertFalse(isset($object->error));
     }
 }
