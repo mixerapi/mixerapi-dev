@@ -1,11 +1,3 @@
-# MIXERAPI               #
-##########################
-/mixerapi_dev_test
-/src/Controller/*
-/coverage-reports/
-/plugins/cakephp-swagger-bake
-/plugins/cakephp-swagger-bake/*
-
 # MKDOCS                 #
 ##########################
 site/*
@@ -54,5 +46,14 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+
+# MIXERAPI               #
+##########################
+/mixerapi_dev_test
+/src/Controller/*
+/coverage-reports/
+/plugins/cakephp-swagger-bake
+/plugins/cakephp-swagger-bake/*
 /plugins/jwt-auth/tests/mixerapi_dev_test
 /plugins/jwt-auth/mixerapi_dev_test
+/plugins/exception-render/tests/TestCase/mixerapi_dev_test

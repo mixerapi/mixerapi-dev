@@ -2,6 +2,8 @@
 
 namespace MixerApi\ExceptionRender\Test\TestCase;
 
+use Cake\Core\Configure;
+use Cake\Datasource\EntityInterface;
 use Cake\TestSuite\TestCase;
 use MixerApi\ExceptionRender\EntityValidationListener;
 use MixerApi\ExceptionRender\ValidationException;
@@ -47,5 +49,19 @@ class EntityValidationTest extends TestCase
             'first_name' => '',
             'last_name' => ''
         ]);
+    }
+
+    public function test_validation_exception_does_not_run_when_cli(): void
+    {
+        Configure::write('MixerApi.ExceptionRender.entity_validation', false);
+        new EntityValidationListener();
+
+        $actorsTable = new ActorsTable();
+        $entity = $actorsTable->patchEntity($actorsTable->newEmptyEntity(), [
+            'first_name' => '',
+            'last_name' => ''
+        ]);
+
+        $this->assertInstanceOf(EntityInterface::class, $entity);
     }
 }
