@@ -146,6 +146,20 @@ If for instance you have a custom exception that is thrown, such as `InventoryEx
 Providing an Exception name, in conjunction with the status code already provided by CakePHP, enables API clients
 to tailor their exception handling.
 
+### Disabling ValidationExceptions
+
+There may be times when you don't want ValidationExceptions to run. You can easily disable the event:
+
+```php
+Configure::write('MixerApi.ExceptionRender.entity_validation', false);
+```
+
+Another example is you may only want the event to run for non-CLI portions of your application:
+
+```php
+Configure::write('MixerApi.ExceptionRender.entity_validation', PHP_SAPI !== 'cli');
+```
+
 ### Changing Error Messages
 
 ExceptionRender dispatches a `MixerApi.ExceptionRender.beforeRender` event that you can listen for to alter `viewVars`
