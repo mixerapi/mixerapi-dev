@@ -5,9 +5,9 @@ namespace MixerApi\JsonLdView;
 
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
+use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
-use Cake\ORM\ResultSet;
 use Cake\View\Helper\PaginatorHelper;
 use MixerApi\Core\View\SerializableAssociation;
 use ReflectionException;
@@ -63,7 +63,7 @@ class JsonSerializer
             $this->hydra = 'hydra:';
         }
 
-        if ($jsonLd instanceof ResultSet) {
+        if ($jsonLd instanceof ResultSetInterface) {
             $this->data = $this->collection($jsonLd);
         } elseif (is_subclass_of($jsonLd, Entity::class)) {
             $this->data = $this->item($jsonLd);
@@ -105,12 +105,12 @@ class JsonSerializer
      * JSON-LD resources, but does not serialize the data.
      *
      * @param mixed $mixed data to be serialized
-     * @return array|\Cake\Datasource\EntityInterface|\Cake\ORM\ResultSet
+     * @return array|\Cake\Datasource\EntityInterface|\Cake\Datasource\ResultSetInterface
      */
     private function recursion(mixed &$mixed): mixed
     {
-        if ($mixed instanceof ResultSet || is_array($mixed)) {
-            foreach ($mixed as $x => $item) {
+        if ($mixed instanceof ResultSetInterface || is_array($mixed)) {
+            foreach ($mixed as $item) {
                 $this->recursion($item);
             }
         } elseif ($mixed instanceof EntityInterface) {
@@ -118,7 +118,7 @@ class JsonSerializer
 
             $mixed = $this->resource($mixed, $serializableAssocation);
 
-            foreach ($serializableAssocation->getAssociations() as $property => $value) {
+            foreach ($serializableAssocation->getAssociations() as $value) {
                 $this->recursion($value);
             }
         }
