@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace MixerApi\ExceptionRender\Test\App\Controller;
 
+use Cake\Http\Exception\InternalErrorException;
+
 class ActorsController extends AppController
 {
     /**
@@ -105,5 +107,10 @@ class ActorsController extends AppController
             return $this->response->withStatus(204);
         }
         throw new \Exception("Record not deleted");
+    }
+
+    public function exception()
+    {
+        throw new InternalErrorException('testing');
     }
 }
