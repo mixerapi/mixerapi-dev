@@ -51,6 +51,20 @@ class EntityValidationTest extends TestCase
         ]);
     }
 
+    public function test_validation_exception_get_entity(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        new EntityValidationListener();
+
+        $actorsTable = new ActorsTable();
+        $entity = $actorsTable->patchEntity($actorsTable->newEmptyEntity(), [
+            'first_name' => '',
+            'last_name' => ''
+        ]);
+        $this->assertInstanceOf(EntityInterface::class, $entity);
+    }
+
     public function test_validation_exception_does_not_run_when_cli(): void
     {
         Configure::write('MixerApi.ExceptionRender.entity_validation', false);

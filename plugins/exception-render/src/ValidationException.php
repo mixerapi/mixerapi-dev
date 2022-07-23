@@ -46,4 +46,12 @@ class ValidationException extends HttpException
 
         return $return;
     }
+
+    /**
+     * @return \Cake\Datasource\EntityInterface|null
+     */
+    public function getEntity(): ?EntityInterface
+    {
+        return $this->entity;
+    }
 }
