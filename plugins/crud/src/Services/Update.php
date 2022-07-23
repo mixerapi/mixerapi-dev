@@ -35,7 +35,7 @@ class Update implements UpdateInterface
     /**
      * @inheritDoc
      */
-    public function save(Controller $controller, mixed $id = null): EntityInterface
+    public function save(Controller $controller, mixed $id = null, $options = []): EntityInterface
     {
         $this->allowMethods($controller);
 
@@ -48,7 +48,7 @@ class Update implements UpdateInterface
             $this->deserializer->deserialize($controller->getRequest())
         );
 
-        $entity = $table->save($entity);
+        $entity = $table->save($entity, $options);
 
         if (!$entity) {
             throw new ResourceWriteException(null, "Unable to save $this->tableName resource.");

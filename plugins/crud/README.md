@@ -51,13 +51,13 @@ Once enabled, the following services may be injected into your controller action
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 ```
 
-| Interface | Injected Service | Use-cases |
-| ------------- | ------------- |  ------------- |
-| CreateInterface | MixerApi\Crud\Service\Create | `add()` actions |
-| ReadInterface | MixerApi\Crud\Service\Read | `view()` actions |
-| UpdateInterface | MixerApi\Crud\Service\Update | `edit()` actions |
+| Interface       | Injected Service             | Use-cases          |
+|-----------------|------------------------------|--------------------|
+| CreateInterface | MixerApi\Crud\Service\Create | `add()` actions    |
+| ReadInterface   | MixerApi\Crud\Service\Read   | `view()` actions   |
+| UpdateInterface | MixerApi\Crud\Service\Update | `edit()` actions   |
 | DeleteInterface | MixerApi\Crud\Service\Delete | `delete()` actions |
-| SearchInterface | MixerApi\Crud\Service\Search | `index()` actions |
+| SearchInterface | MixerApi\Crud\Service\Search | `index()` actions  |
 
 All Crud services infer the table name from the controller, you can change the table name by calling the
 `setTableName($name)` method.
@@ -76,6 +76,16 @@ public function add(CreateInterface $create)
 }
 ```
 
+Note, `save()` with `$options` is supported.
+
+```php
+return $create->save($this, [
+    'accessibleFields' => [
+        'password' => true,
+    ]
+]);
+```
+
 ### Read
 
 ```php
@@ -85,12 +95,17 @@ public function view(ReadInteface $read)
 }
 ```
 
+Note, `read()` with `$options` is supported.
+
+```php
+return $read->save($this, ['contains' => ['OtherTable']]);
+```
+
 Return a CakePHP `Query` object instead:
 
 ```php
 $query = $read->query($this)
 ```
-
 
 ### Update
 
@@ -101,6 +116,16 @@ public function edit(UpdateInterface $update)
 }
 ```
 
+Note, `update()` with `$options` is supported.
+
+```php
+return $update->save($this, [
+    'accessibleFields' => [
+        'password' => true,
+    ]
+]);
+```
+
 ### Delete
 
 ```php
@@ -108,6 +133,12 @@ public function delete(DeleteInterface $delete)
 {
     return $delete->delete($this)->respond(); // calling respond() is optional
 }
+```
+
+Note, `delete()` with `$options` is supported.
+
+```php
+return $delete->delete($this, ['atomic' => false]);
 ```
 
 ### Search
@@ -153,13 +184,13 @@ operations and will not run for non-crud operations. See [Options](#plugin-optio
 Allowed methods is handled by a `Controller.initialize` listener. See [Plugin Options](#plugin-options) for disabling or
 modifying the defaults.
 
-| Action | HTTP method(s) |
-| ------------- | ------------- |
-| index() | GET |
-| view() | GET |
-| add() | POST |
-| edit() | POST, PUT, and PATCH |
-| delete() | DELETE |
+| Action   | HTTP method(s)       |
+|----------|----------------------|
+| index()  | GET                  |
+| view()   | GET                  |
+| add()    | POST                 |
+| edit()   | POST, PUT, and PATCH |
+| delete() | DELETE               |
 
 You may also call `setAllowMethods($methods)` on any service to overwrite the default behavior. This accepts a string
 or any array as an argument just like the native `$request->allowedMethods()`.
