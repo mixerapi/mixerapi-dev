@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MixerApi\ExceptionRender;
 
 use ArrayObject;
+use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
@@ -24,12 +25,14 @@ class EntityValidationListener
      */
     public function __construct()
     {
-        EventManager::instance()->on(
-            'Model.afterMarshal',
-            function ($event, $entity, $options) {
-                $this->handler($event, $entity, $options);
-            }
-        );
+        if (Configure::read('MixerApi.ExceptionRender.entity_validation') !== false) {
+            EventManager::instance()->on(
+                'Model.afterMarshal',
+                function ($event, $entity, $options) {
+                    $this->handler($event, $entity, $options);
+                }
+            );
+        }
     }
 
     /**

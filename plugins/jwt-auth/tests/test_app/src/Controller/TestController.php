@@ -17,8 +17,8 @@ class TestController extends Controller
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->loadComponent('Authentication.Authentication');
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Authentication.Authentication');
         $this->Authentication->allowUnauthenticated(['login','jwks']);
     }
 

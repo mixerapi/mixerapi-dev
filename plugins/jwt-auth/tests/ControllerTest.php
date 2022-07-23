@@ -79,9 +79,9 @@ class ControllerTest extends TestCase
     public function test_auth_required(string $alg): void
     {
         $alg === 'RS' ? TestHelper::createRs256Config() : TestHelper::createHs256Config();
-        TestHelper::createHs256Config();
         $this->get('/test/index.json');
-        $this->assertResponseCode(401);
+        $this->assertResponseContains('Authentication is required to continue');
+
     }
 
     public function dataProviderForAlg(): array
