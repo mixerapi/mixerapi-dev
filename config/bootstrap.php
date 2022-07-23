@@ -35,8 +35,8 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Datasource\ConnectionManager;
-use Cake\Error\ErrorTrap;
-use Cake\Error\ExceptionTrap;
+use Cake\Error\ConsoleErrorHandler;
+use Cake\Error\ErrorHandler;
 use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Cake\Mailer\Mailer;
@@ -120,13 +120,17 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
 /*
  * Register application error and exception handlers.
  */
-(new ErrorTrap(Configure::read('Error')))->register();
-(new ExceptionTrap(Configure::read('Error')))->register();
+$isCli = PHP_SAPI === 'cli';
+if ($isCli) {
+    (new ConsoleErrorHandler(Configure::read('Error')))->register();
+} else {
+    (new ErrorHandler(Configure::read('Error')))->register();
+}
 
 /*
  * Include the CLI bootstrap overrides.
  */
-if (PHP_SAPI === 'cli') {
+if ($isCli) {
     require __DIR__ . '/bootstrap_cli.php';
 }
 
