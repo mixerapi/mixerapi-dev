@@ -17,9 +17,10 @@ interface ReadInterface
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
      * @param mixed $id an optional identifier, if null the id parameter is used from the request
+     * @param array<string, mixed> $options options accepted by `Table::find()`
      * @return \Cake\Datasource\EntityInterface
      */
-    public function read(Controller $controller, mixed $id = null): EntityInterface;
+    public function read(Controller $controller, mixed $id = null, $options = []): EntityInterface;
 
     /**
      * @param string $table the table

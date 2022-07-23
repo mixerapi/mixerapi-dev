@@ -15,9 +15,10 @@ interface DeleteInterface
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
      * @param mixed $id an optional identifier, if null the id parameter is used from the request
+     * @param \ArrayAccess|array $options The options for the delete.
      * @return $this
      */
-    public function delete(Controller $controller, mixed $id = null);
+    public function delete(Controller $controller, mixed $id, $options);
 
     /**
      * @param string $table the table

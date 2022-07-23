@@ -20,15 +20,13 @@ class Read implements ReadInterface
     /**
      * @inheritDoc
      */
-    public function read(Controller $controller, mixed $id = null): EntityInterface
+    public function read(Controller $controller, mixed $id = null, $options = []): EntityInterface
     {
         $this->allowMethods($controller);
         $id = $this->whichId($controller, $id);
         $table = $controller->getTableLocator()->get($this->whichTable($controller));
 
-        return $table->get($id, [
-            'contain' => [],
-        ]);
+        return $table->get($id, $options);
     }
 
     /**
