@@ -32,7 +32,7 @@ class Create implements CreateInterface
     /**
      * @inheritDoc
      */
-    public function save(Controller $controller): EntityInterface
+    public function save(Controller $controller, $options = []): EntityInterface
     {
         $this->allowMethods($controller);
         $table = $controller->getTableLocator()->get($this->whichTable($controller));
@@ -42,7 +42,7 @@ class Create implements CreateInterface
             $this->deserializer->deserialize($controller->getRequest())
         );
 
-        $entity = $table->save($entity);
+        $entity = $table->save($entity, $options);
 
         if (!$entity) {
             throw new ResourceWriteException(null, "Unable to save $this->tableName resource.");
