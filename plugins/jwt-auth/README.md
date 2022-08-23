@@ -89,11 +89,61 @@ public function services(ContainerInterface $container): void
 
 You will need to configure [CakePHP Authentication](https://book.cakephp.org/authentication/2/en/index.html) to
 use this library. There are several ways to do this documented in the quick start. See the
-[mixerapi demo](https://github.com/mixerapi/demo) for an exampe.
+[mixerapi demo](https://github.com/mixerapi/demo) for a complete example.
 
 Be sure to load the
 [CakePHP Authentication.Component](https://book.cakephp.org/authentication/2/en/authentication-component.html)
 (generally in your AppController).
+
+Here is an example that supports both HMAC and RSA with form and password based authentication. However way you
+implement authentication, **it is advised to use** `\MixerApi\JwtAuth\Configuration\Configuration` to pull values from
+your `MixerApi.JwtAuth` configuration file `config/mixerapi_jwtauth.php`. This will validate your configuration before
+applying it to your applications authentication.
+
+```php
+# in src/Application.php
+
+public function getAuthenticationService(ServerRequestInterface $request): \Authentication\AuthenticationServiceInterface
+{
+    $fields = [
+        \Authentication\Identifier\IdentifierInterface::CREDENTIAL_USERNAME => 'email',
+        \Authentication\Identifier\IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+    ];
+
+    $config = new \MixerApi\JwtAuth\Configuration\Configuration();
+    $service = new \Authentication\AuthenticationService();
+
+    $service->loadAuthenticator('Authentication.Form', [
+        'fields' => $fields,
+        'loginUrl' => '/admin/auth/login'
+    ]);
+
+    $service->loadIdentifier('Authentication.JwtSubject');
+
+    if (str_starts_with(haystack: $config->getAlg(), needle: 'HS')) {
+        $service->loadAuthenticator('Authentication.Jwt', [
+            'secretKey' => $config->getSecret(),
+            'algorithm' => $config->getAlg(),
+        ]);
+    } else if (str_starts_with(haystack: $config->getAlg(), needle: 'RS')) {
+        $jsonKeySet = \Cake\Cache\Cache::remember('jwkset', function() {
+            return json_encode((new \MixerApi\JwtAuth\Jwk\JwkSet)->getKeySet());
+        });
+
+        /*
+         * Caching is optional, you may also set the jwks key to the return value of (new JwkSet)->getKeySet()
+         */
+        $service->loadAuthenticator('Authentication.Jwt', [
+            'jwks' => json_decode($jsonKeySet, true),
+            'algorithm' => $config->getAlg(),
+        ]);
+    }
+
+    $service->loadIdentifier('Authentication.Password', ['fields' => $fields]);
+
+    return $service;
+}
+```
 
 ## Defining your JWT
 
