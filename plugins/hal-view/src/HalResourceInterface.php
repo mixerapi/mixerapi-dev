@@ -17,7 +17,7 @@ interface HalResourceInterface
      * Generates: {"_links": {"self": {"href": "/actors/123"}}}
      *
      * @param \Cake\Datasource\EntityInterface $entity an instance of the Entity
-     * @return string[]
+     * @return array
      */
     public function getHalLinks(EntityInterface $entity): array;
 
