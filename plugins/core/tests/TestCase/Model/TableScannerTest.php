@@ -1,24 +1,10 @@
 <?php
 
-
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         2.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
 namespace MixerApi\Core\Test\TestCase\Model;
 
 use Cake\Database\Connection;
 use Cake\Database\Schema\CollectionInterface as SchemaCollectionInterface;
+use Cake\Datasource\ConnectionInterface;
 use Cake\TestSuite\TestCase;
 use MixerApi\Core\Model\TableScanner;
 use Cake\Datasource\ConnectionManager;
@@ -32,10 +18,7 @@ class TableScannerTest extends TestCase
         'plugin.MixerApi/Core.Actors',
     ];
 
-    /**
-     * @var \Cake\Database\Connection
-     */
-    protected $connection;
+    protected ?ConnectionInterface $connection;
 
     public function setUp(): void
     {
@@ -48,12 +31,18 @@ class TableScannerTest extends TestCase
         parent::tearDown();
     }
 
+    /**
+     * When `listAll()` is called a list of tables available in the connection is returned.
+     */
     public function test_list_all(): void
     {
         $result = (new TableScanner($this->connection))->listAll();
         $this->assertArrayHasKey('actors', $result);
     }
 
+    /**
+     * When `listAll()` is called a list of tables that have not been marked as skipped in the connection is returned.
+     */
     public function test_list_unskipped(): void
     {
         $result = (new TableScanner($this->connection))->listUnskipped();
@@ -70,26 +59,5 @@ class TableScannerTest extends TestCase
         $result = $tableScanner->listUnskipped();
 
         $this->assertCount(0, $result);
-    }
-
-    public function test_list_all_throws_run_time_exception(): void
-    {
-        $mockSchemaCollection = $this->createPartialMock(SchemaCollectionInterface::class, [
-            'listTables','describe'
-        ]);
-        $mockSchemaCollection->expects($this->once())
-            ->method('listTables')
-            ->willReturn([]);
-        $mockSchemaCollection->expects($this->never())
-            ->method('describe')
-            ->willThrowException(new \Exception());
-
-        $mockConnection = $this->createPartialMock(Connection::class, ['getSchemaCollection']);
-        $mockConnection->expects($this->once())
-            ->method('getSchemaCollection')
-            ->willReturn($mockSchemaCollection);
-
-        $this->expectException(\RuntimeException::class);
-        (new TableScanner($mockConnection))->listAll();
     }
 }
