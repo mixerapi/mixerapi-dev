@@ -1,4 +1,4 @@
-site_name: MixerAPI
+site_name: CakePHP RESTful API plugin
 docs_dir: docs
 plugins:
 - simple:
