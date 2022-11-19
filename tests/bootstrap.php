@@ -35,6 +35,8 @@ define('IS_TEST', true);
 Configure::write('App.fullBaseUrl', 'http://localhost');
 putenv('DB=sqlite');
 
+ini_set('error_reporting', 'E_ALL ^ E_DEPRECATED');
+
 // Fixate sessionid early on, as php7.2+
 // does not allow the sessionid to be set after stdout
 // has been written to.
