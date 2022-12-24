@@ -53,11 +53,13 @@ class TableScannerTest extends TestCase
     {
         $tableScanner = new TableScanner(
             $this->connection,
-            ['i18n', 'cake_sessions', 'sessions', '/phinxlog/', 'actors','films','film_actors', 'departments']
+            [
+                'i18n', 'cake_sessions', 'sessions', '/phinxlog/', 'actors','films','film_actors', 'departments',
+                'addresses', 'department_employees', 'employee_salaries', 'employee_titles', 'employees', 'users'
+            ]
         );
 
         $result = $tableScanner->listUnskipped();
-
         $this->assertCount(0, $result);
     }
 }

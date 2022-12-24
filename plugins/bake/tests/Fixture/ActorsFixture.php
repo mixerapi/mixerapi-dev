@@ -11,9 +11,7 @@ use Cake\TestSuite\Fixture\TestFixture;
 class ActorsFixture  extends \App\Test\Fixture\ActorsFixture
 {
     /**
-     * Init method
-     *
-     * @return void
+     * @inheritdoc
      */
     public function init(): void
     {

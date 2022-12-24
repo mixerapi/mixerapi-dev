@@ -5,6 +5,7 @@ namespace MixerApi\CollectionView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
@@ -57,10 +58,12 @@ class SerializerTest extends TestCase
                 'end' => 3,
             ],
         ]);
-        Router::reload();
-        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
+            $builder->connect('/{controller}/{action}/*');
+            $builder->connect('/{plugin}/{controller}/{action}/*');
+        });
         Router::setRequest($request);
 
         $paginator = new PaginatorHelper(
@@ -110,10 +113,12 @@ class SerializerTest extends TestCase
                 'end' => 3,
             ],
         ]);
-        Router::reload();
-        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
+            $builder->connect('/{controller}/{action}/*');
+            $builder->connect('/{plugin}/{controller}/{action}/*');
+        });
         Router::setRequest($request);
 
         $paginator = new PaginatorHelper(

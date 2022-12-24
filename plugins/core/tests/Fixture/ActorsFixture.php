@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Test\Fixture;
 
+use Cake\TestSuite\Fixture\TestFixture;
+
 /**
  * ActorsFixture
  */
-class ActorsFixture extends \App\Test\Fixture\ActorsFixture
+class ActorsFixture extends TestFixture
 {
     /**
-     * Init method
-     *
-     * @return void
+     * @inheritdoc
      */
     public function init(): void
     {

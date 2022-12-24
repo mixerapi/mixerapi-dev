@@ -5,13 +5,16 @@ namespace MixerApi\CollectionView\Test\TestCase\View;
 use Cake\Controller\Component\PaginatorComponent;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
-use Cake\Datasource\FactoryLocator;
+use Cake\Datasource\Paging\NumericPaginator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\Routing\Router;
 
 class ControllerFactory
 {
+    use LocatorAwareTrait;
+
     /**
      * Builds a controller for actors/index requests
      *
@@ -31,16 +34,20 @@ class ControllerFactory
         Router::setRequest($request);
 
         $controller = new Controller($request, new Response(), 'Actors');
-        $controller->modelClass = 'Actors';
-        $registry = new ComponentRegistry($controller);
+        $controller->set('modelClass', 'Actors');
+        echo '<pre>' . __FILE__ . ':' . __LINE__;
+        print_r($controller);
+        echo '</pre>';
+        die();
 
-        $paginator = new PaginatorComponent($registry);
+        //$controller->modelClass = 'Actors';
+        //$registry = new ComponentRegistry($controller);
 
-        $actorTable = FactoryLocator::get('Table')->get('Actors');
-        $actors = $paginator->paginate($actorTable, [
-            'contain' => ['Films'],
-            'limit' => 2
-        ]);
+        //$paginator = new PaginatorComponent($registry);
+        $paginator = new NumericPaginator();
+
+        $query = $this->getTableLocator()->get('Actors')->find()->contain(['Films']);
+        $actors = $paginator->paginate($query);
 
         $controller->set([
             'actors' => $actors,
