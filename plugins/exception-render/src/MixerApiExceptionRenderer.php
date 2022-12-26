@@ -71,12 +71,20 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         }
         $response = $response->withStatus($code);
 
+        $exceptions = [$exception];
+        $previous = $exception->getPrevious();
+        while ($previous != null) {
+            $exceptions[] = $previous;
+            $previous = $previous->getPrevious();
+        }
+
         $viewVars = [
             'exception' => (new ReflectionClass($exception))->getShortName(),
             'message' => $message,
             'url' => h($url),
             'code' => $code,
             'error' => $exception,
+            'exceptions' => $exceptions,
         ];
 
         if ($this->error instanceof ValidationException) {
