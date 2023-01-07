@@ -93,6 +93,7 @@ class ControllerTest extends TestCase
         $this->post('/test/login.json', ['email' => 'test@example.com', 'password' => 'password']);
         $this->assertResponseCode(200);
         $body = (string)$this->_response->getBody();
+
         $this->configRequest([
             'headers' => ['Authorization' => 'Bearer ' . $body],
         ]);
@@ -119,7 +120,8 @@ class ControllerTest extends TestCase
     public function dataProviderForAlg(): array
     {
         return [
-            ['HS'],['RS']
+            ['HS'],
+            ['RS']
         ];
     }
 }

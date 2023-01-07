@@ -177,8 +177,8 @@ return [
      *   breathing room to complete logging or error handling.
      */
     'Error' => [
-        'errorLevel' => E_ALL & ~E_USER_DEPRECATED,
-        'exceptionRenderer' => ExceptionRenderer::class,
+        'errorLevel' => E_ALL,
+        //'exceptionRenderer' => ExceptionRenderer::class,
         'skipLog' => [],
         'log' => true,
         'trace' => true,

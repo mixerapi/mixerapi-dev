@@ -8,8 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        operating-system: [ ubuntu-20.04 ]
-        php-versions: ['8.0', '8.1']
+        php-versions: ['8.0', '8.1', '8.2']
 
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
@@ -72,7 +71,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
 
       - name: PHP Version

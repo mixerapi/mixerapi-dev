@@ -71,7 +71,7 @@ class Welcome
                 $errorMsg .= $attributes['message'] ?? '';
             }
 
-            return $errorMsg ?? 'unknown error / unable to connect';
+            return $errorMsg;
         }
 
         return self::DATABASE_CONNECTED_MSG;

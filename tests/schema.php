@@ -20,15 +20,15 @@ return [
     [
         'table' => 'addresses',
         'columns' => [
-            'id' => ['type' => 'integer', 'length' => null, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-            'address' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'address2' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'district' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'city_id' => ['type' => 'integer', 'length' => null, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-            'postal_code' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'phone' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'location' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
+            'id' => ['type' => 'integer', 'length' => null, 'unsigned' => true, 'autoIncrement' => true],
+            'address' => ['type' => 'string', 'length' => 50, 'null' => false, 'precision' => null],
+            'address2' => ['type' => 'string', 'length' => 50, 'null' => true, 'precision' => null],
+            'district' => ['type' => 'string', 'length' => 20, 'null' => false, 'precision' => null],
+            'city_id' => ['type' => 'integer', 'length' => null, 'unsigned' => true, 'autoIncrement' => null],
+            'postal_code' => ['type' => 'string', 'length' => 10, 'null' => true, 'precision' => null],
+            'phone' => ['type' => 'string', 'length' => 20, 'null' => false, 'precision' => null],
+            'location' => ['type' => 'string', 'length' => 255, 'precision' => null],
+            'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null],
         ],
         'constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
@@ -134,11 +134,11 @@ return [
     [
         'table' => 'users',
         'columns' => [
-            'id' => ['type' => 'string', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => false, 'precision' => null],
-            'email' => ['type' => 'string', 'length' => 128, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-            'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
-            'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => null, 'comment' => ''],
+            'id' => ['type' => 'string', 'length' => null, 'unsigned' => false, 'null' => false, 'autoIncrement' => false],
+            'email' => ['type' => 'string', 'length' => 128, 'null' => false, 'default' => null],
+            'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null],
+            'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false],
+            'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false],
         ],
         'constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],

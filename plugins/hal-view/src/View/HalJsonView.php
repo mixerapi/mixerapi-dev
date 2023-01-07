@@ -19,16 +19,12 @@ use MixerApi\HalView\JsonSerializer;
 class HalJsonView extends JsonView
 {
     /**
-     * HAL layouts are located in the 'haljson' sub directory of `Layouts/`
-     *
-     * @var string
+     * @inheritDoc
      */
     protected $layoutPath = 'haljson';
 
     /**
-     * HAL views are located in the 'haljson' sub directory for controllers' views.
-     *
-     * @var string
+     * @inheritDoc
      */
     protected $subDir = 'haljson';
 
@@ -40,17 +36,7 @@ class HalJsonView extends JsonView
     protected $_responseType = 'haljson';
 
     /**
-     * Default config options.
-     *
-     * Use ViewBuilder::setOption()/setOptions() in your controller to set these options.
-     *
-     * - `serialize`: Option to convert a set of view variables into a serialized response.
-     *   Its value can be a string for single variable name or array for multiple
-     *   names. If true all view variables will be serialized. If null or false
-     *   normal view template will be rendered.
-     * - `jsonOptions`: Options for json_encode(). For e.g. `JSON_HEX_TAG | JSON_HEX_APOS`.
-     *
-     * @var array
+     * @inheritDoc
      */
     protected $_defaultConfig = [
         'serialize' => null,
@@ -58,7 +44,7 @@ class HalJsonView extends JsonView
     ];
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initialize(): void
     {

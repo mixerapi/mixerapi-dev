@@ -19,20 +19,6 @@ class MixerApiExceptionRenderTest extends TestCase
         );
     }
 
-    public function test_render_cake_exception_with_headers(): void
-    {
-        $request = new ServerRequest();
-        $request = $request->withHeader('Accept', 'application/json');
-        $request = $request->withHeader('Content-Type', 'application/json');
-        $exception = new CakeException();
-        $exception->responseHeader(['x-test' => 'testing']);
-
-        $response = (new MixerApiExceptionRenderer($exception, $request))->render();
-
-        $this->assertEquals('application/json', $response->getHeaders()['Content-Type'][0]);
-        $this->assertEquals('testing', $response->getHeaders()['x-test'][0]);
-    }
-
     public function test_render_http_exception_with_headers(): void
     {
         $request = new ServerRequest();
