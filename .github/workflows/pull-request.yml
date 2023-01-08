@@ -105,8 +105,7 @@ jobs:
       - name: ${{plugin}} tests
         run: |
           cp config/.env.example config/.env
-          composer self-update
           rm -rf composer.lock
           cp plugins/${{plugin}}/composer.json .
           composer install
-          composer test
+          vendor/bin/phpunit plugins/${{plugin}}
