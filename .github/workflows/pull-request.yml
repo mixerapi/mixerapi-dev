@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
+        php-versions: ['8.1', '8.2']
 
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
@@ -37,24 +37,19 @@ jobs:
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
 
-      - name: Test Suite + Static Analysis (PHP 8.0)
-        if: ${{ matrix.php-versions == '8.0' }}
+      - name: Test Suite + Static Analysis
+        if: ${{ matrix.php-versions}}
         run: |
           composer analyze
 
-      - name: Upload coverage results to Coveralls (PHP 8.0)
-        if: ${{ matrix.php-versions == '8.0' }}
+      - name: Upload coverage results to Coveralls
+        if: ${{ matrix.php-versions == '8.1' }}
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           composer global require php-coveralls/php-coveralls
           export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
           php-coveralls --coverage_clover=clover.xml -v
-
-      - name: Test Suite (PHP 8.1)
-        if: ${{ matrix.php-versions == '8.1' }}
-        run: |
-          composer test
 
   #
   # CakePHP version compatability
@@ -63,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['~4.2.0', '~4.3.0', '^4.4']
+        version: ['^4.4']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
