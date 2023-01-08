@@ -18,6 +18,12 @@
             "MixerApi\\Bake\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\Bake\\Test\\": "plugins/bake/tests/",
+            "MixerApi\\Bake\\Test\\App\\": "plugins/bake/tests/test_app/src/"
+        }
+    },
     "support": {
         "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/bake"

@@ -76,12 +76,7 @@
             "MixerApi\\JwtAuth\\Test\\": "plugins/jwt-auth/tests/",
             "MixerApi\\JwtAuth\\Test\\App\\": "plugins/jwt-auth/tests/test_app/src/",
             "MixerApi\\JsonLdView\\Test\\": "plugins/json-ld-view/tests/",
-            "MixerApi\\JsonLdView\\Test\\App\\": "plugins/json-ld-view/tests/test_app/src/",
-            "MixerApi\\Test\\": "plugins/mixerapi/tests/",
-            "MixerApi\\Test\\App\\": "plugins/mixerapi/tests/test_app/src/",
-            "MixerApi\\Rest\\Test\\": "plugins/rest/tests/",
-            "MixerApi\\Rest\\Test\\App\\": "plugins/rest/tests/test_app/src/",
-            "MixerApi\\Rest\\Test\\MyPlugin\\": "plugins/rest/tests/plugins/MyPlugin/"
+            "MixerApi\\JsonLdView\\Test\\App\\": "plugins/json-ld-view/tests/test_app/src/"
         }
     },
     "scripts": {
