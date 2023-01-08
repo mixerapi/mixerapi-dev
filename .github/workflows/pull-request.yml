@@ -33,6 +33,7 @@ jobs:
       - name: Install
         run: |
           composer install --prefer-dist --no-interaction --no-progress
+          composer update
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
 
