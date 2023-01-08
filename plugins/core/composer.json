@@ -9,9 +9,20 @@
         "cakephp/cakephp": "^4.2",
         "thecodingmachine/class-explorer": "^1.1"
     },
+    "require-dev": {
+        "josegonzalez/dotenv": "^3.2",
+        "phpunit/phpunit": "^9.0"
+    },
     "autoload": {
         "psr-4": {
             "MixerApi\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\Core\\": "plugins/core/src/",
+            "MixerApi\\Core\\Test\\": "plugins/core/tests/",
+            "MixerApi\\Core\\Test\\App\\": "plugins/core/tests/test_app/src/"
         }
     },
     "support": {
@@ -23,5 +34,12 @@
             "name": "MixerApi",
             "role": "Organization"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "phpro/grumphp": true
+        }
+    }
 }
