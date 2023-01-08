@@ -4,7 +4,7 @@
     colors="true"
     processIsolation="false"
     stopOnFailure="false"
-    bootstrap="../../tests/bootstrap.php"
+    bootstrap="tests/bootstrap.php"
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
   <php>
     <ini name="memory_limit" value="-1"/>
