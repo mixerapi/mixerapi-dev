@@ -57,3 +57,4 @@ nbproject/*
 /plugins/jwt-auth/tests/mixerapi_dev_test
 /plugins/jwt-auth/mixerapi_dev_test
 /plugins/exception-render/tests/TestCase/mixerapi_dev_test
+/plugins/bake/mixerapi_dev_test

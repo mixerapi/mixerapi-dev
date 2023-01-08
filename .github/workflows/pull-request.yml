@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
+        php-versions: ['8.1', '8.2']
 
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['~4.2.0', '~4.3.0', '^4.4']
+        version: ['^4.4']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -85,3 +85,31 @@ jobs:
           composer require cakephp/cakephp:${{matrix.version}} --no-update
           composer install --prefer-dist --no-progress
           composer test
+
+  #
+  # Run each plugin individually to ensure composer.json is correct
+  #
+  plugins:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        plugin: ['bake']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+
+      - name: PHP Version
+        run: php -v
+
+      - name: Plugin Test ${{matrix.plugin}}
+        run: |
+          cp config/.env.example config/.env
+          cd plugins/${{matrix.plugin}}/tests
+          composer install
+          ../../vendor/bin/phpunit
