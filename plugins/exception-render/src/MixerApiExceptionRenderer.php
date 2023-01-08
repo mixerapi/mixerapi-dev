@@ -137,6 +137,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
     {
         if (!Configure::read('debug')) {
             unset($viewVars['error']);
+            unset($viewVars['exceptions']);
 
             return $viewVars;
         }

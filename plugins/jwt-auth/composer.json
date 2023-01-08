@@ -7,9 +7,9 @@
     "require": {
         "ext-openssl": "*",
         "php": "^8.0",
-        "cakephp/authentication": "^2.9",
+        "cakephp/authentication": "^2.10",
         "cakephp/cakephp": "^4.2",
-        "firebase/php-jwt": "^5.5"
+        "firebase/php-jwt": "^6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5 || ^9.3"
