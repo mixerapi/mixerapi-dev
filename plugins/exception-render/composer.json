@@ -9,11 +9,20 @@
         "cakephp/cakephp": "^4.2"
     },
     "require-dev": {
-        "cnizzardini/cakephp-swagger-bake": "^2.1"
+        "cnizzardini/cakephp-swagger-bake": "^2.1",
+        "josegonzalez/dotenv": "^3.2",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
             "MixerApi\\ExceptionRender\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\ExceptionRender\\": "plugins/exception-render/src/",
+            "MixerApi\\ExceptionRender\\Test\\": "plugins/exception-render/tests/",
+            "MixerApi\\ExceptionRender\\Test\\App\\": "plugins/exception-render/tests/test_app/src/"
         }
     },
     "support": {
@@ -25,5 +34,12 @@
             "name": "MixerApi",
             "role": "Organization"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "phpro/grumphp": true
+        }
+    }
 }

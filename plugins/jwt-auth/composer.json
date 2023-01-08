@@ -12,14 +12,23 @@
         "firebase/php-jwt": "^6.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5 || ^9.3"
+        "josegonzalez/dotenv": "^3.2",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
             "MixerApi\\JwtAuth\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\JwtAuth\\": "plugins/jwt-auth/src/",
+            "MixerApi\\JwtAuth\\Test\\": "plugins/jwt-auth/tests/",
+            "MixerApi\\JwtAuth\\Test\\App\\": "plugins/jwt-auth/tests/test_app/src/"
+        }
+    },
     "support": {
+        "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/jwt-auth"
     },
     "authors": [
@@ -28,6 +37,11 @@
             "role": "Organization"
         }
     ],
-    "prefer-stable": true,
-    "minimum-stability": "dev"
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "phpro/grumphp": true
+        }
+    }
 }
