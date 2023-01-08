@@ -108,3 +108,5 @@ jobs:
           composer self-update
           rm -rf composer.lock
           cp plugins/${{plugin}}/composer.json .
+          composer install
+          composer test
