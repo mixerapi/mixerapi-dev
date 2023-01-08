@@ -42,6 +42,43 @@ jobs:
           composer analyze
 
   #
+  # Run coverage report
+  #
+  coverage:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['8.1']
+
+    name: Coverage Report
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Composer Check
+        run: composer validate
+
+      - name: Install
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          cp config/.env.example config/.env
+          cp config/app_local.example.php config/app_local.php
+
+      - name: Coverage Report
+        run: |
+          composer global require php-coveralls/php-coveralls
+          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
+          php-coveralls --coverage_clover=clover.xml -v
+
+  #
   # CakePHP version compatability
   #
   cakephp:
@@ -105,40 +142,3 @@ jobs:
           rm -rf composer.lock
           composer install
           vendor/bin/phpunit plugins/${{matrix.plugin}}
-
-  #
-  # Run coverage report
-  #
-  coverage:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-versions: ['8.1']
-
-    name: Coverage Report
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
-          tools: composer:v2
-          coverage: xdebug
-
-      - name: Composer Check
-        run: composer validate
-
-      - name: Install
-        run: |
-          composer install --prefer-dist --no-interaction --no-progress
-          cp config/.env.example config/.env
-          cp config/app_local.example.php config/app_local.php
-
-      - name: Coverage Report
-        run: |
-          composer global require php-coveralls/php-coveralls
-          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
-          php-coveralls --coverage_clover=clover.xml -v
