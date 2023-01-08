@@ -81,5 +81,6 @@ class ControllerTest extends TestCase
 
         $this->assertFalse(isset($object->trace));
         $this->assertFalse(isset($object->error));
+        $this->assertFalse(isset($object->exceptions));
     }
 }
