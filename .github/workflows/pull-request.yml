@@ -81,4 +81,31 @@ jobs:
           composer install --prefer-dist --no-progress
           composer test
 
+  #
+  # Test plugins individually
+  #
+  plugins:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        plugin: ['bake']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+
+      - name: PHP Version
+        run: php -v
+
+      - name: ${{matrix.plugin}} tests
+        run: |
+          cp config/.env.example config/.env
+          cp plugins/${{matrix.plugin}}/composer.json .
+          rm -rf composer.lock
+          composer install
+          vendor/bin/phpunit plugins/${{matrix.plugin}}
