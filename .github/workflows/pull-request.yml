@@ -73,6 +73,8 @@ jobs:
           cp config/app_local.example.php config/app_local.php
 
       - name: Coverage Report
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           composer global require php-coveralls/php-coveralls
           export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
@@ -123,7 +125,7 @@ jobs:
           'json-ld-view',
           'jwt-auth'
         ]
-    name: Test mixerapi/${{ matrix.plugin }}
+    name: Test ${{ matrix.plugin }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
