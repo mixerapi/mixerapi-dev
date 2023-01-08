@@ -14,6 +14,13 @@
             "MixerApi\\Core\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\Core\\": "plugins/core/src/",
+            "MixerApi\\Core\\Test\\": "plugins/core/tests/",
+            "MixerApi\\Core\\Test\\App\\": "plugins/core/tests/test_app/src/"
+        }
+    },
     "support": {
         "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
         "source": "https://github.com/mixerapi/core"
@@ -23,5 +30,12 @@
             "name": "MixerApi",
             "role": "Organization"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "phpro/grumphp": true
+        }
+    }
 }
