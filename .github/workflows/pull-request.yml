@@ -10,7 +10,7 @@ jobs:
       matrix:
         php-versions: ['8.1', '8.2']
 
-    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    name: Test PHP ${{ matrix.php-versions }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -86,6 +86,7 @@ jobs:
     strategy:
       matrix:
         version: ['^4.4']
+    name: Test CakePHP ${{ matrix.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -122,6 +123,7 @@ jobs:
           'json-ld-view',
           'jwt-auth'
         ]
+    name: Test mixerapi/${{ matrix.plugin }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
