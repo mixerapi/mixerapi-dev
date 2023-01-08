@@ -111,5 +111,5 @@ jobs:
         run: |
           cp config/.env.example config/.env
           cd plugins/${{matrix.plugin}}/tests
-          composer install --working-dir plugins/${{matrix.plugin}}
+          composer install
           vendor/bin/phpunit

@@ -2,6 +2,7 @@
 ############################
 /tests/test_app/src/Controller/DepartmentsController.php
 /coverage-reports/
+/mixerapi_dev_test
 
 # CakePHP specific files #
 ##########################
@@ -47,3 +48,4 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 /composer.lock
+/vendor/
