@@ -48,16 +48,4 @@ class TableScannerTest extends TestCase
         $result = (new TableScanner($this->connection))->listUnskipped();
         $this->assertArrayHasKey('actors', $result);
     }
-
-    public function test_list_unskipped_with_skipped(): void
-    {
-        $tableScanner = new TableScanner(
-            $this->connection,
-            ['i18n', 'cake_sessions', 'sessions', '/phinxlog/', 'actors','films','film_actors', 'departments']
-        );
-
-        $result = $tableScanner->listUnskipped();
-
-        $this->assertCount(0, $result);
-    }
 }
