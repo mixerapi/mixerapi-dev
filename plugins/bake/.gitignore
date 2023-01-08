@@ -1,9 +1,3 @@
-# MixerApi specific files #
-############################
-/tests/test_app/src/Controller/DepartmentsController.php
-/coverage-reports/
-/mixerapi_dev_test
-
 # CakePHP specific files #
 ##########################
 /config/app_local.php
@@ -49,3 +43,7 @@ nbproject/*
 .sass-cache/
 /composer.lock
 /vendor/
+
+# MixerApi specific files #
+############################
+/tests/test_app/src/Controller/DepartmentsController.php
