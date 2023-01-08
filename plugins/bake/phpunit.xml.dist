@@ -6,21 +6,13 @@
     stopOnFailure="false"
     bootstrap="../../tests/bootstrap.php"
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage>
-    <include>
-      <directory suffix=".php">plugins/*/src/</directory>
-    </include>
-    <exclude>
-      <file>src/Console/Installer.php</file>
-    </exclude>
-  </coverage>
   <php>
     <ini name="memory_limit" value="-1"/>
     <ini name="apc.enable_cli" value="1"/>
   </php>
   <!-- Add any additional test suites you want to run here -->
   <testsuites>
-    <testsuite name="mixerapi bake">
+    <testsuite name="bake">
       <directory>tests/</directory>
     </testsuite>
     <!-- Add plugin test suites here. -->
