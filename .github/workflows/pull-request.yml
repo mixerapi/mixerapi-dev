@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        plugin: ['bake','collection-view','core','crud','exception-render']
+        plugin: ['bake','collection-view','core','crud','exception-render','hal-view']
     steps:
       - name: Checkout
         uses: actions/checkout@v2

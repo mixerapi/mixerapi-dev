@@ -21,8 +21,8 @@
     "autoload-dev": {
         "psr-4": {
             "MixerApi\\CollectionView\\": "plugins/collection-view/src/",
-            "MixerApi\\CollectionView\\Test\\": "plugins/collection-view/tests/",
-            "MixerApi\\CollectionView\\Test\\App\\": "plugins/collection-view/tests/test_app/src/"
+            "MixerApi\\HalView\\Test\\": "plugins/hal-view/tests/",
+            "MixerApi\\HalView\\Test\\App\\": "plugins/hal-view/tests/test_app/src/"
         }
     },
     "support": {
