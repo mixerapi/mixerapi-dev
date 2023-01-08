@@ -80,3 +80,31 @@ jobs:
           composer require cakephp/cakephp:${{matrix.version}} --no-update
           composer install --prefer-dist --no-progress
           composer test
+
+  #
+  # CakePHP version compatability
+  #
+  plugins:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        plugin: ['bake']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+
+      - name: PHP Version
+        run: php -v
+
+      - name: ${{plugin}} tests
+        run: |
+          cp config/.env.example config/.env
+          composer self-update
+          rm -rf composer.lock
+          cp plugins/${{plugin}}/composer.json .
