@@ -110,6 +110,6 @@ jobs:
       - name: Plugin Test ${{matrix.plugin}}
         run: |
           cp config/.env.example config/.env
-          composer install --working-dir plugins/${{matrix.plugin}}
           cd plugins/${{matrix.plugin}}/tests
-          ../../vendor/bin/phpunit
+          composer install --working-dir plugins/${{matrix.plugin}}
+          vendor/bin/phpunit
