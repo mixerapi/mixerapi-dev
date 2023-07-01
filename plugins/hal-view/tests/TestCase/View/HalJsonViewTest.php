@@ -18,7 +18,7 @@ class HalJsonViewTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/HalView.Actors',
         'plugin.MixerApi/HalView.FilmActors',
         'plugin.MixerApi/HalView.Films',

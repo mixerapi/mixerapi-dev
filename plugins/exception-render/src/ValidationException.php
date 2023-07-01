@@ -11,7 +11,7 @@ class ValidationException extends HttpException
     /**
      * @inheritDoc
      */
-    protected $_defaultCode = 422;
+    protected int $_defaultCode = 422;
 
     /**
      * @param \Cake\Datasource\EntityInterface $entity The Entity that failed validation rules.

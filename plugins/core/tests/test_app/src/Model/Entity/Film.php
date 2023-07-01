@@ -17,7 +17,7 @@ class Film extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'title' => true,
         'description' => true,
         'release_year' => true,
@@ -36,7 +36,7 @@ class Film extends Entity
         'inventories' => true,
     ];
 
-    protected $_hidden = ['_joinData'];
+    protected array $_hidden = ['_joinData'];
 
     public function getHalLinks(EntityInterface $entity): array
     {

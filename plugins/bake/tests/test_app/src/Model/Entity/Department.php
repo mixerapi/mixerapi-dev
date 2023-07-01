@@ -24,7 +24,7 @@ class Department extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'name' => true,
         'department_employees' => true,
     ];

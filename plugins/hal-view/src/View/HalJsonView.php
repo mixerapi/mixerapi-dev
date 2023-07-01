@@ -21,24 +21,24 @@ class HalJsonView extends JsonView
     /**
      * @inheritDoc
      */
-    protected $layoutPath = 'haljson';
+    protected string $layoutPath = 'haljson';
 
     /**
      * @inheritDoc
      */
-    protected $subDir = 'haljson';
+    protected string $subDir = 'haljson';
 
     /**
      * Response type.
      *
      * @var string
      */
-    protected $_responseType = 'haljson';
+    protected string $_responseType = 'haljson';
 
     /**
      * @inheritDoc
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
     ];

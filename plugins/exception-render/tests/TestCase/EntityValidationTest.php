@@ -15,7 +15,7 @@ class EntityValidationTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/ExceptionRender.Actors',
     ];
 

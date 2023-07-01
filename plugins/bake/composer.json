@@ -6,12 +6,12 @@
     "keywords": ["cakephp","cakephp bake","cakephp scaffold"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "^4.4",
-        "cakephp/bake": "^2.1"
+        "cakephp/cakephp": "5.x-dev",
+        "cakephp/bake": "^3.x-dev"
     },
     "require-dev": {
         "josegonzalez/dotenv": "^3.2",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^10.0"
     },
     "autoload": {
         "psr-4": {

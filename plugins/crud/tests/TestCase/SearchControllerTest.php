@@ -12,7 +12,7 @@ class SearchControllerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/Crud.Films',
     ];
 

@@ -16,7 +16,7 @@ class FilmActor extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'actor_id' => true,
         'film_id' => true,
         'modified' => true,

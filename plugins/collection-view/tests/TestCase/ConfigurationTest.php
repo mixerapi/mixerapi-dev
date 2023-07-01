@@ -3,6 +3,7 @@
 namespace MixerApi\CollectionView\Test\TestCase;
 
 use Cake\Controller\Controller;
+use Cake\Http\ServerRequestFactory;
 use Cake\TestSuite\TestCase;
 use MixerApi\CollectionView\Configuration;
 
@@ -10,7 +11,7 @@ class ConfigurationTest extends TestCase
 {
     public function test_views(): void
     {
-        $controller = new Controller();
+        $controller = new Controller(ServerRequestFactory::fromGlobals());
         $controller->loadComponent('RequestHandler');
 
         $controller = (new Configuration())->views($controller);
@@ -21,7 +22,7 @@ class ConfigurationTest extends TestCase
 
     public function test_views_with_no_request_handler(): void
     {
-        $controller = (new Configuration())->views(new Controller());
+        $controller = new Controller(ServerRequestFactory::fromGlobals());
         $this->assertTrue(!isset($controller->RequestHandler));
     }
 }

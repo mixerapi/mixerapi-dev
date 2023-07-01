@@ -29,7 +29,7 @@ class User extends Entity implements JwtEntityInterface
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'email' => true,
         'password' => true,
         'created' => true,
@@ -41,7 +41,7 @@ class User extends Entity implements JwtEntityInterface
      *
      * @var array<string>
      */
-    protected $_hidden = [
+    protected array $_hidden = [
         'password',
     ];
 

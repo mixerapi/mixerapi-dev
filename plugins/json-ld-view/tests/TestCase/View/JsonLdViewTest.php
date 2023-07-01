@@ -17,7 +17,7 @@ class JsonLdViewTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/JsonLdView.Actors',
         'plugin.MixerApi/JsonLdView.FilmActors',
         'plugin.MixerApi/JsonLdView.Films',

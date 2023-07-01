@@ -37,7 +37,7 @@ class Address extends Entity implements JsonLdDataInterface
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'address' => true,
         'address2' => true,
         'district' => true,

@@ -5,6 +5,7 @@ namespace MixerApi\JsonLdView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Table;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
@@ -32,7 +33,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/JsonLdView.Actors',
         'plugin.MixerApi/JsonLdView.FilmActors',
         'plugin.MixerApi/JsonLdView.Films',
@@ -91,10 +92,14 @@ class JsonSerializerTest extends TestCase
      */
     public function test_item(): void
     {
-        $actor = FactoryLocator::get('Table')->get('Actors');
-        $result = $actor->get(1, [
-            'contain' => 'Films'
-        ]);
+        /** @var Table $actorsTable */
+        $actorsTable = FactoryLocator::get('Table')->get('Actors');
+        $result = $actorsTable->get(
+            primaryKey: 1,
+            args: [
+                'contain' => 'Films'
+            ]
+        );
 
         $paginator = new PaginatorHelper(
             new JsonLdView($this->request, $this->response),

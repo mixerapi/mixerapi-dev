@@ -55,21 +55,21 @@ class HalXmlView extends SerializedView
      *
      * @var string
      */
-    protected $layoutPath = 'halxml';
+    protected string $layoutPath = 'halxml';
 
     /**
      * XML views are located in the 'halxml' sub directory for controllers' views.
      *
      * @var string
      */
-    protected $subDir = 'halxml';
+    protected string $subDir = 'halxml';
 
     /**
      * Response type.
      *
      * @var string
      */
-    protected $_responseType = 'hal+xml';
+    protected string $_responseType = 'hal+xml';
 
     /**
      * Option to allow setting an array of custom options for Xml::fromArray()
@@ -96,7 +96,7 @@ class HalXmlView extends SerializedView
      * @var array
      * @psalm-var array{serialize:string|bool|null, xmlOptions: int|null, rootNode: string|null}
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'xmlOptions' => null,
         'rootNode' => null,

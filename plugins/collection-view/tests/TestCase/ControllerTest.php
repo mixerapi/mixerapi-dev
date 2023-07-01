@@ -12,7 +12,7 @@ class ControllerTest extends TestCase
     /**
      * @inheritdoc
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/CollectionView.Actors',
         'plugin.MixerApi/CollectionView.FilmActors',
         'plugin.MixerApi/CollectionView.Films',

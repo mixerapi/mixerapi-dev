@@ -11,31 +11,31 @@
         "ext-simplexml": "*",
         "ext-xml": "*",
         "adbario/php-dot-notation": "^2.3",
-        "cakephp/cakephp": "^4.4",
-        "cakephp/migrations": "^3.0",
+        "cakephp/cakephp": "5.x-dev",
+        "cakephp/migrations": "4.x-dev",
         "cakephp/plugin-installer": "^1.3",
-        "cnizzardini/cakephp-swagger-bake": "^2.1",
-        "friendsofcake/search": "^6.0",
+        "cnizzardini/cakephp-swagger-bake": "v3.0.0.x-dev",
         "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
         "ext-mysqli": "*",
         "ext-sqlite3": "*",
-        "cakephp/authentication": "^2.10",
-        "cakephp/bake": "^2.0.3",
+        "cakephp/authentication": "^3.x-dev",
+        "cakephp/bake": "^3.x-dev",
         "cakephp/cakephp-codesniffer": "^4.2",
-        "cakephp/debug_kit": "^4.1",
-        "dereuromark/cakephp-ide-helper": "^1.10",
+        "cakephp/debug_kit": "5.x-dev",
+        "dereuromark/cakephp-ide-helper": "dev-cake5",
         "firebase/php-jwt": "^6.2",
+        "friendsofcake/search": "dev-cake-5",
         "josegonzalez/dotenv": "^3.2",
         "phpmd/phpmd": "^2.10",
         "phpro/grumphp": "^1.3",
         "phpstan/phpstan": "^1.8.5",
-        "phpunit/phpunit": "^9.0",
+        "phpunit/phpunit": "^10.0",
         "psy/psysh": "@stable"
     },
     "replace": {
-        "mixerapi/core": "^1.0"
+        "mixerapi/core": "@dev"
     },
     "suggest": {
         "markstory/asset_compress": "An asset compression plugin which provides file concatenation and a flexible filter system for preprocessing and minification.",

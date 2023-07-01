@@ -12,24 +12,24 @@ class JsonCollectionView extends JsonView
     /**
      * @inheritDoc
      */
-    protected $layoutPath = 'json';
+    protected string $layoutPath = 'json';
 
     /**
      * @inheritDoc
      */
-    protected $subDir = 'json';
+    protected string $subDir = 'json';
 
     /**
      * Response type.
      *
      * @var string
      */
-    protected $_responseType = 'json';
+    protected string $_responseType = 'json';
 
     /**
      * @inheritDoc
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
     ];

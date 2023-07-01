@@ -15,7 +15,7 @@ class EventListenerLoaderTest extends TestCase
     /**
      * @var string[] fixtures
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/Core.Actors',
     ];
 

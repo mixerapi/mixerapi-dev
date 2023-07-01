@@ -19,7 +19,7 @@ class Actor extends Entity implements JsonLdDataInterface
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'first_name' => true,
         'last_name' => true,
         'modified' => true,

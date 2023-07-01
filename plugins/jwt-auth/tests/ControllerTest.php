@@ -18,7 +18,7 @@ class ControllerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/JwtAuth.Users',
     ];
 

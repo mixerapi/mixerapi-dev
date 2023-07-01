@@ -27,7 +27,7 @@ class CrudServiceProvider extends ServiceProvider
     /**
      * @inheritDoc
      */
-    protected $provides = [
+    protected array $provides = [
         CreateInterface::class,
         ReadInterface::class,
         UpdateInterface::class,

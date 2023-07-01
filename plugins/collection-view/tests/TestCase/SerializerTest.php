@@ -19,7 +19,7 @@ class SerializerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/CollectionView.Actors',
     ];
 

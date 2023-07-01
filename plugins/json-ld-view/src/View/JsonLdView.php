@@ -19,22 +19,22 @@ class JsonLdView extends JsonView
     /**
      * @inheritDoc
      */
-    protected $layoutPath = 'jsonld';
+    protected string $layoutPath = 'jsonld';
 
     /**
      * @inheritDoc
      */
-    protected $subDir = 'jsonld';
+    protected string $subDir = 'jsonld';
 
     /**
      * @inheritDoc
      */
-    protected $_responseType = 'jsonld';
+    protected string $_responseType = 'jsonld';
 
     /**
      * @inheritDoc
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
     ];

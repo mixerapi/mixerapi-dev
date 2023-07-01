@@ -15,40 +15,40 @@ class Plugin extends BasePlugin
      *
      * @var string
      */
-    protected $name = 'MixerApi/JwtAuth';
+    protected ?string $name = 'MixerApi/JwtAuth';
 
     /**
      * Do bootstrapping or not
      *
      * @var bool
      */
-    protected $bootstrapEnabled = false;
+    protected bool $bootstrapEnabled = false;
 
     /**
      * Console middleware
      *
      * @var bool
      */
-    protected $consoleEnabled = false;
+    protected bool $consoleEnabled = false;
 
     /**
      * Enable middleware
      *
      * @var bool
      */
-    protected $middlewareEnabled = false;
+    protected bool $middlewareEnabled = false;
 
     /**
      * Register container services
      *
      * @var bool
      */
-    protected $servicesEnabled = false;
+    protected bool $servicesEnabled = false;
 
     /**
      * Load routes or not
      *
      * @var bool
      */
-    protected $routesEnabled = false;
+    protected bool $routesEnabled = false;
 }

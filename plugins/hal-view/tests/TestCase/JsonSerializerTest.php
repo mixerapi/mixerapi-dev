@@ -5,6 +5,7 @@ namespace MixerApi\HalView\Test\TestCase;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Table;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
@@ -27,7 +28,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/HalView.Actors',
         'plugin.MixerApi/HalView.FilmActors',
         'plugin.MixerApi/HalView.Films',
@@ -103,10 +104,14 @@ class JsonSerializerTest extends TestCase
 
     public function test_item(): void
     {
-        $actor = FactoryLocator::get('Table')->get('Actors');
-        $result = $actor->get(1, [
-            'contain' => 'Films'
-        ]);
+        /** @var Table $actorsTable */
+        $actorsTable = FactoryLocator::get('Table')->get('Actors');
+        $result = $actorsTable->get(
+            primaryKey: 1,
+            args: [
+                'contain' => 'Films'
+            ]
+        );
 
         $paginator = new PaginatorHelper(
             new HalJsonView($this->request, $this->response),

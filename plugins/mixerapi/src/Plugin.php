@@ -18,21 +18,21 @@ class Plugin extends BasePlugin
      *
      * @var string
      */
-    protected $name = 'MixerApi';
+    protected ?string $name = 'MixerApi';
 
     /**
      * Enable middleware
      *
      * @var bool
      */
-    protected $middlewareEnabled = false;
+    protected bool $middlewareEnabled = false;
 
     /**
      * Load routes or not
      *
      * @var bool
      */
-    protected $routesEnabled = false;
+    protected bool $routesEnabled = false;
 
     /**
      * @inheritDoc
@@ -44,6 +44,7 @@ class Plugin extends BasePlugin
         $app->addPlugin('MixerApi/HalView');
         $app->addPlugin('MixerApi/JsonLdView');
         $app->addPlugin('SwaggerBake');
+        $app->addPlugin('Search');
 
         if (PHP_SAPI === 'cli') {
             try {

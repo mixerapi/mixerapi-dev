@@ -7,6 +7,7 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Database\Connection;
+use Cake\Database\Exception\MissingConnectionException;
 use Cake\Datasource\ConnectionManager;
 use Composer\InstalledVersions;
 use Exception;
@@ -20,8 +21,10 @@ class Welcome
      * @param string|null $phpVersion the php version, defaults to PHP_VERSION
      * @param \Cake\Database\Connection|null $connection CakePHP db connection
      */
-    public function __construct(private ?string $phpVersion = PHP_VERSION, private ?Connection $connection = null)
-    {
+    public function __construct(
+        private ?string $phpVersion = PHP_VERSION,
+        private ?Connection $connection = null
+    ) {
         $this->phpVersion = $this->phpVersion ?? PHP_VERSION;
 
         if ($this->connection == null && ConnectionManager::get('default') instanceof Connection) {
@@ -61,10 +64,8 @@ class Welcome
     private function database()
     {
         try {
-            if (!$this->connection->connect()) {
-                return 'unable to connect';
-            }
-        } catch (Exception $connectionError) {
+            $this->connection->getDriver()->connect();
+        } catch (MissingConnectionException $connectionError) {
             $errorMsg = $connectionError->getMessage();
             if (method_exists($connectionError, 'getAttributes')) {
                 $attributes = $connectionError->getAttributes();
