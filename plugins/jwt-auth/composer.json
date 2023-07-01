@@ -37,6 +37,8 @@
             "role": "Organization"
         }
     ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,

@@ -96,8 +96,8 @@ class JsonLdViewTest extends TestCase
         Router::setRequest($request);
         $response = new Response();
 
-        $controller = new Controller($request, $response, 'Actors');
-        $controller->modelClass = 'Actors';
+        $controller = new Controller($request, $response);
+        $controller->set('modelClass', 'Actors');
 
         $actorTable = FactoryLocator::get('Table')->get('Actors');
 
