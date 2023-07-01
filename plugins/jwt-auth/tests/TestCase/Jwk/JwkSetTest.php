@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\JwtAuth\Test\Jwk;
+namespace MixerApi\JwtAuth\Test\TestCase\Jwk;
 
 use Cake\TestSuite\TestCase;
 use MixerApi\JwtAuth\Configuration\Configuration;

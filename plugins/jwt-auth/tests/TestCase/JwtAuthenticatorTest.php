@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\JwtAuth\Test;
+namespace MixerApi\JwtAuth\Test\TestCase;
 
 use Authentication\Authenticator\Result;
 use Authentication\Authenticator\UnauthenticatedException;
@@ -13,6 +13,7 @@ use MixerApi\JwtAuth\Exception\JwtAuthException;
 use MixerApi\JwtAuth\JwtAuthenticator;
 use MixerApi\JwtAuth\Test\Classes\BadEntity;
 use MixerApi\JwtAuth\Test\Classes\JwtEntity;
+use MixerApi\JwtAuth\Test\TestHelper;
 
 class JwtAuthenticatorTest extends TestCase
 {
@@ -74,7 +75,7 @@ class JwtAuthenticatorTest extends TestCase
         (new JwtAuthenticator(new Configuration))->authenticate($mock);
     }
 
-    public function dataProviderForAlg(): array
+    public static function dataProviderForAlg(): array
     {
         return [
             ['RS256'],
@@ -82,7 +83,7 @@ class JwtAuthenticatorTest extends TestCase
         ];
     }
 
-    public function dataProviderForResultMessages(): array
+    public static function dataProviderForResultMessages(): array
     {
         return [
             [[]],

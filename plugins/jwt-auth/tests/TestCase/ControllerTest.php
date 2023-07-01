@@ -1,6 +1,6 @@
 <?php
 
-namespace MixerApi\JwtAuth\Test;
+namespace MixerApi\JwtAuth\Test\TestCase;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
@@ -10,6 +10,7 @@ use Firebase\JWT\JWK as FirebaseJWK;
 use MixerApi\JwtAuth\Configuration\Configuration;
 use MixerApi\JwtAuth\Exception\JwtAuthException;
 use MixerApi\JwtAuth\Jwk\JwkSet;
+use MixerApi\JwtAuth\Test\TestHelper;
 
 class ControllerTest extends TestCase
 {
@@ -57,7 +58,8 @@ class ControllerTest extends TestCase
         $body = (string)$this->_response->getBody();
 
         if ($alg === 'RS') {
-            $jwt = Jwt::decode($body, FirebaseJWK::parseKeySet((new JwkSet())->getKeySet()), ['RS256']);
+            $keyset = (new JwkSet())->getKeySet();
+            $jwt = Jwt::decode($body, FirebaseJWK::parseKeySet($keyset, 'RS256'));
         } else {
             $jwt = Jwt::decode($body, new Key((new Configuration)->getSecret(), 'HS256'));
         }
@@ -117,7 +119,7 @@ class ControllerTest extends TestCase
 
     }
 
-    public function dataProviderForAlg(): array
+    public static function dataProviderForAlg(): array
     {
         return [
             ['HS'],

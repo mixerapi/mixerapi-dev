@@ -6,6 +6,7 @@ use Authentication\Authenticator\UnauthenticatedException;
 use Authentication\Controller\Component\AuthenticationComponent;
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
+use Cake\View\JsonView;
 use MixerApi\JwtAuth\Jwk\JwkSetInterface;
 use MixerApi\JwtAuth\JwtAuthenticatorInterface;
 
@@ -14,10 +15,20 @@ use MixerApi\JwtAuth\JwtAuthenticatorInterface;
  */
 class TestController extends Controller
 {
+    /**
+     * @inheritDoc
+     */
+    public function viewClasses(): array
+    {
+        return [JsonView::class];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Authentication.Authentication');
         $this->Authentication->allowUnauthenticated(['login','jwks']);
     }
