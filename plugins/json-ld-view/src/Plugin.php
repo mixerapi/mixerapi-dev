@@ -6,7 +6,6 @@ namespace MixerApi\JsonLdView;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
-use MixerApi\Core\Response\ResponseModifier;
 
 class Plugin extends BasePlugin
 {
@@ -46,16 +45,6 @@ class Plugin extends BasePlugin
     protected bool $routesEnabled = false;
 
     /**
-     * @var string
-     */
-    private const EXT = 'jsonld';
-
-    /**
-     * @var string
-     */
-    private const VIEW_CLASS = 'MixerApi/JsonLdView.JsonLd';
-
-    /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
      * @return void
      */
@@ -78,7 +67,5 @@ class Plugin extends BasePlugin
                 'entrypointUrl' => '/',
             ]);
         }
-
-        (new ResponseModifier(self::EXT, self::VIEW_CLASS))->listen();
     }
 }

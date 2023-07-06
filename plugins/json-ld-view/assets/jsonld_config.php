@@ -18,6 +18,9 @@
  *
  * @var string $entrypointUrl: Describes API default entry point
  * default: `/`
+ *
+ * @var string $connectionName: The name of your cakephp database connection (typically in config/app.php)
+ * default: `default`
  */
 return [
     'JsonLdView' => [
@@ -26,6 +29,7 @@ return [
         'vocabUrl' => '/vocab',
         'title' => 'API Documentation',
         'description' => '',
-        'entrypointUrl' => '/'
+        'entrypointUrl' => '/',
+        'connectionName' => 'default'
     ]
 ];

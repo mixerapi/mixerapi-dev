@@ -29,11 +29,6 @@ class JsonLdView extends JsonView
     /**
      * @inheritDoc
      */
-    protected string $_responseType = 'jsonld';
-
-    /**
-     * @inheritDoc
-     */
     protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
@@ -48,6 +43,14 @@ class JsonLdView extends JsonView
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/JsonLdView.paginator-template',
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function contentType(): string
+    {
+        return 'application/ld+json';
     }
 
     /**

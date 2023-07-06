@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "495b28d5bd537c30cb5ce53efb6fce4d",
+    "content-hash": "c8e6e665664b092b27c96c4f3f20ae76",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -65,12 +65,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "131e3795849fed907d69d35eb2b5deca0069ca10"
+                "reference": "f7780dbf1a782f4bdc18a838b61a82d5240e87cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/131e3795849fed907d69d35eb2b5deca0069ca10",
-                "reference": "131e3795849fed907d69d35eb2b5deca0069ca10",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f7780dbf1a782f4bdc18a838b61a82d5240e87cf",
+                "reference": "f7780dbf1a782f4bdc18a838b61a82d5240e87cf",
                 "shasum": ""
             },
             "require": {
@@ -173,7 +173,7 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/cakephp"
             },
-            "time": "2023-06-27T02:20:12+00:00"
+            "time": "2023-07-05T19:03:09+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -181,12 +181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/chronos.git",
-                "reference": "097a6b759365f346de6530dfe3f03d5ae873f28c"
+                "reference": "97097947350e35063f0bcc2867079f693deecce2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/chronos/zipball/097a6b759365f346de6530dfe3f03d5ae873f28c",
-                "reference": "097a6b759365f346de6530dfe3f03d5ae873f28c",
+                "url": "https://api.github.com/repos/cakephp/chronos/zipball/97097947350e35063f0bcc2867079f693deecce2",
+                "reference": "97097947350e35063f0bcc2867079f693deecce2",
                 "shasum": ""
             },
             "require": {
@@ -228,7 +228,7 @@
                 "issues": "https://github.com/cakephp/chronos/issues",
                 "source": "https://github.com/cakephp/chronos"
             },
-            "time": "2023-06-03T08:58:35+00:00"
+            "time": "2023-07-02T16:06:31+00:00"
         },
         {
             "name": "cakephp/migrations",
@@ -236,12 +236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/migrations.git",
-                "reference": "e7810ad4836228c3f622edc9767914e48697bc9e"
+                "reference": "bb85007a2fc3055cf9869c4f8ca49f4c4395ca5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/migrations/zipball/e7810ad4836228c3f622edc9767914e48697bc9e",
-                "reference": "e7810ad4836228c3f622edc9767914e48697bc9e",
+                "url": "https://api.github.com/repos/cakephp/migrations/zipball/bb85007a2fc3055cf9869c4f8ca49f4c4395ca5b",
+                "reference": "bb85007a2fc3055cf9869c4f8ca49f4c4395ca5b",
                 "shasum": ""
             },
             "require": {
@@ -288,7 +288,7 @@
                 "issues": "https://github.com/cakephp/migrations/issues",
                 "source": "https://github.com/cakephp/migrations"
             },
-            "time": "2023-06-03T08:58:10+00:00"
+            "time": "2023-07-02T16:06:50+00:00"
         },
         {
             "name": "cakephp/plugin-installer",
@@ -529,6 +529,66 @@
                 "source": "https://github.com/doctrine/deprecations/tree/v1.1.1"
             },
             "time": "2023-06-03T09:27:29+00:00"
+        },
+        {
+            "name": "kcs/class-finder",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alekitto/class-finder.git",
+                "reference": "df454e41a617f3f1796033def991a848bd4d01fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alekitto/class-finder/zipball/df454e41a617f3f1796033def991a848bd4d01fa",
+                "reference": "df454e41a617f3f1796033def991a848bd4d01fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "thecodingmachine/safe": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.0",
+                "phpdocumentor/reflection": "^4.0 || ^5.0",
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-master",
+                "solido/php-coding-standards": "dev-master",
+                "symfony/error-handler": "^5.0 || ^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kcs\\ClassFinder\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Chitolina",
+                    "email": "alekitto@gmail.com"
+                }
+            ],
+            "description": "Utility classes to help discover other classes/namespaces",
+            "support": {
+                "issues": "https://github.com/alekitto/class-finder/issues",
+                "source": "https://github.com/alekitto/class-finder/tree/0.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/alekitto",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-29T09:17:49+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -990,16 +1050,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/65c39594fbd8c67abfc68bb323f86447bab79cc0",
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0",
                 "shasum": ""
             },
             "require": {
@@ -1031,9 +1091,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.1"
             },
-            "time": "2023-06-01T12:35:21+00:00"
+            "time": "2023-06-29T20:46:06+00:00"
         },
         {
             "name": "psr/container",
@@ -2418,6 +2478,145 @@
             "time": "2023-04-23T19:33:36+00:00"
         },
         {
+            "name": "thecodingmachine/safe",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thecodingmachine/safe.git",
+                "reference": "3115ecd6b4391662b4931daac4eba6b07a2ac1f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thecodingmachine/safe/zipball/3115ecd6b4391662b4931daac4eba6b07a2ac1f0",
+                "reference": "3115ecd6b4391662b4931daac4eba6b07a2ac1f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.5",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.2",
+                "thecodingmachine/phpstan-strict-rules": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "deprecated/apc.php",
+                    "deprecated/array.php",
+                    "deprecated/datetime.php",
+                    "deprecated/libevent.php",
+                    "deprecated/misc.php",
+                    "deprecated/password.php",
+                    "deprecated/mssql.php",
+                    "deprecated/stats.php",
+                    "deprecated/strings.php",
+                    "lib/special_cases.php",
+                    "deprecated/mysqli.php",
+                    "generated/apache.php",
+                    "generated/apcu.php",
+                    "generated/array.php",
+                    "generated/bzip2.php",
+                    "generated/calendar.php",
+                    "generated/classobj.php",
+                    "generated/com.php",
+                    "generated/cubrid.php",
+                    "generated/curl.php",
+                    "generated/datetime.php",
+                    "generated/dir.php",
+                    "generated/eio.php",
+                    "generated/errorfunc.php",
+                    "generated/exec.php",
+                    "generated/fileinfo.php",
+                    "generated/filesystem.php",
+                    "generated/filter.php",
+                    "generated/fpm.php",
+                    "generated/ftp.php",
+                    "generated/funchand.php",
+                    "generated/gettext.php",
+                    "generated/gmp.php",
+                    "generated/gnupg.php",
+                    "generated/hash.php",
+                    "generated/ibase.php",
+                    "generated/ibmDb2.php",
+                    "generated/iconv.php",
+                    "generated/image.php",
+                    "generated/imap.php",
+                    "generated/info.php",
+                    "generated/inotify.php",
+                    "generated/json.php",
+                    "generated/ldap.php",
+                    "generated/libxml.php",
+                    "generated/lzf.php",
+                    "generated/mailparse.php",
+                    "generated/mbstring.php",
+                    "generated/misc.php",
+                    "generated/mysql.php",
+                    "generated/network.php",
+                    "generated/oci8.php",
+                    "generated/opcache.php",
+                    "generated/openssl.php",
+                    "generated/outcontrol.php",
+                    "generated/pcntl.php",
+                    "generated/pcre.php",
+                    "generated/pgsql.php",
+                    "generated/posix.php",
+                    "generated/ps.php",
+                    "generated/pspell.php",
+                    "generated/readline.php",
+                    "generated/rpminfo.php",
+                    "generated/rrd.php",
+                    "generated/sem.php",
+                    "generated/session.php",
+                    "generated/shmop.php",
+                    "generated/sockets.php",
+                    "generated/sodium.php",
+                    "generated/solr.php",
+                    "generated/spl.php",
+                    "generated/sqlsrv.php",
+                    "generated/ssdeep.php",
+                    "generated/ssh2.php",
+                    "generated/stream.php",
+                    "generated/strings.php",
+                    "generated/swoole.php",
+                    "generated/uodbc.php",
+                    "generated/uopz.php",
+                    "generated/url.php",
+                    "generated/var.php",
+                    "generated/xdiff.php",
+                    "generated/xml.php",
+                    "generated/xmlrpc.php",
+                    "generated/yaml.php",
+                    "generated/yaz.php",
+                    "generated/zip.php",
+                    "generated/zlib.php"
+                ],
+                "classmap": [
+                    "lib/DateTime.php",
+                    "lib/DateTimeImmutable.php",
+                    "lib/Exceptions/",
+                    "deprecated/Exceptions/",
+                    "generated/Exceptions/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP core functions that throw exceptions instead of returning FALSE on error",
+            "support": {
+                "issues": "https://github.com/thecodingmachine/safe/issues",
+                "source": "https://github.com/thecodingmachine/safe/tree/v2.5.0"
+            },
+            "time": "2023-04-05T11:54:14+00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.11.0",
             "source": {
@@ -3083,12 +3282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/authentication.git",
-                "reference": "f273e127c42de675cd66fcd2f26c54ddd1be371f"
+                "reference": "8912a6bdf1fcddb0c42cc84b95c85a3c4aa93668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/authentication/zipball/f273e127c42de675cd66fcd2f26c54ddd1be371f",
-                "reference": "f273e127c42de675cd66fcd2f26c54ddd1be371f",
+                "url": "https://api.github.com/repos/cakephp/authentication/zipball/8912a6bdf1fcddb0c42cc84b95c85a3c4aa93668",
+                "reference": "8912a6bdf1fcddb0c42cc84b95c85a3c4aa93668",
                 "shasum": ""
             },
             "require": {
@@ -3143,7 +3342,7 @@
                 "issues": "https://github.com/cakephp/authentication/issues",
                 "source": "https://github.com/cakephp/authentication"
             },
-            "time": "2023-06-03T08:58:16+00:00"
+            "time": "2023-07-03T14:53:58+00:00"
         },
         {
             "name": "cakephp/bake",
@@ -3151,12 +3350,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "c27125bbb70de6eb4626f8837bb1856181d2c3e0"
+                "reference": "0c947992872c674230e2ee070c073ca301698bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/c27125bbb70de6eb4626f8837bb1856181d2c3e0",
-                "reference": "c27125bbb70de6eb4626f8837bb1856181d2c3e0",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/0c947992872c674230e2ee070c073ca301698bf8",
+                "reference": "0c947992872c674230e2ee070c073ca301698bf8",
                 "shasum": ""
             },
             "require": {
@@ -3199,7 +3398,7 @@
                 "issues": "https://github.com/cakephp/bake/issues",
                 "source": "https://github.com/cakephp/bake"
             },
-            "time": "2023-05-31T03:26:39+00:00"
+            "time": "2023-07-02T16:04:30+00:00"
         },
         {
             "name": "cakephp/cakephp-codesniffer",
@@ -3259,12 +3458,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "cb231b8dcd102dca806f4aa2c8386e77747c88a5"
+                "reference": "c721c9408556b44a12d896c860cfa082d07b1303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/cb231b8dcd102dca806f4aa2c8386e77747c88a5",
-                "reference": "cb231b8dcd102dca806f4aa2c8386e77747c88a5",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/c721c9408556b44a12d896c860cfa082d07b1303",
+                "reference": "c721c9408556b44a12d896c860cfa082d07b1303",
                 "shasum": ""
             },
             "require": {
@@ -3314,7 +3513,7 @@
                 "issues": "https://github.com/cakephp/debug_kit/issues",
                 "source": "https://github.com/cakephp/debug_kit"
             },
-            "time": "2023-06-16T13:15:47+00:00"
+            "time": "2023-07-03T00:38:47+00:00"
         },
         {
             "name": "cakephp/twig-view",
@@ -5401,16 +5600,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.22",
+            "version": "1.10.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287"
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
-                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/578f4e70d117f9a90699324c555922800ac38d8c",
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c",
                 "shasum": ""
             },
             "require": {
@@ -5459,7 +5658,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-30T20:04:11+00:00"
+            "time": "2023-07-06T12:11:37+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

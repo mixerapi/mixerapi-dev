@@ -29,9 +29,6 @@ class EventListenerLoaderTest extends TestCase
     {
         (new EventListenerLoader())->load('MixerApi\Core\Test\App\Event');
         $listeners = EventManager::instance()->listeners('Model.initialize');
-        $results = array_filter($listeners, function ($listener){
-            return $listener['callable'][1] == 'eventListenerLoaderTest';
-        });
-        $this->assertCount(1, $results);
+        $this->assertCount(1, $listeners);
     }
 }

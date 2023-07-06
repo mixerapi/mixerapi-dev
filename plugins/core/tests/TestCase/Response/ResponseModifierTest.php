@@ -1,6 +1,6 @@
 <?php
 
-namespace MixerApi\Core\Test\TestCase;
+namespace MixerApi\Core\Test\TestCase\Response;
 
 use Cake\Event\EventManager;
 use Cake\Http\Response;

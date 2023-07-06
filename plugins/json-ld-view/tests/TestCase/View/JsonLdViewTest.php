@@ -2,12 +2,11 @@
 
 namespace MixerApi\JsonLdView\Test\TestCase\View;
 
-use Cake\Controller\Component\PaginatorComponent;
-use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Datasource\FactoryLocator;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Table;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
@@ -54,6 +53,7 @@ class JsonLdViewTest extends TestCase
         $this->assertIsObject($object);
 
         $this->assertEquals('/actors/1', $object->{'@id'});
+        $this->assertObjectHasProperty('films', $object);
         $this->assertIsArray($object->films);
     }
 
@@ -78,6 +78,7 @@ class JsonLdViewTest extends TestCase
         $this->assertIsObject($object);
 
         $this->assertEquals('/actors/1', $object->{'@id'});
+        $this->assertObjectHasProperty('films', $object);
         $this->assertIsArray($object->films);
     }
 
@@ -99,11 +100,11 @@ class JsonLdViewTest extends TestCase
         $controller = new Controller($request, $response);
         $controller->set('modelClass', 'Actors');
 
+        /** @var Table $actorTable */
         $actorTable = FactoryLocator::get('Table')->get('Actors');
-
-        $actor = $actorTable->get(1, [
-            'contain' => ['Films'],
-        ]);
+        $actor = $actorTable->get(1,
+            contain: ['Films']
+        );
 
         $controller->set([
             'actor' => $actor,

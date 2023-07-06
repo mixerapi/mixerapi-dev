@@ -10,16 +10,22 @@ class NamespaceUtilityTest extends TestCase
     public function test_find_classes(): void
     {
         $this->assertNotEmpty(NamespaceUtility::findClasses('MixerApi\Core\Test\App'));
+        $this->assertNotEmpty(NamespaceUtility::findClasses('MixerApi\Core\Test\App\\'));
+        $this->assertNotEmpty(NamespaceUtility::findClasses('\MixerApi\Core\Test\App'));
     }
 
     public function test_find_class(): void
     {
         $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity', 'Actor'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity\\', 'Actor'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('\MixerApi\Core\Test\App\Model\Entity', 'Actor'));
     }
 
     public function test_find_class_with_exception(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity', 'Nope'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('MixerApi\Core\Test\App\Model\Entity\\', 'Nope'));
+        $this->assertNotEmpty(NamespaceUtility::findClass('\MixerApi\Core\Test\App\Model\Entity', 'Nope'));
     }
 }

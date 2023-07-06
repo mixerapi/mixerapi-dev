@@ -3,18 +3,14 @@ declare(strict_types=1);
 
 namespace MixerApi\JsonLdView\Controller;
 
+use MixerApi\JsonLdView\View\JsonLdView;
+
+/**
+ * @property \MixerApi\JsonLdView\Controller\Component\JsonLdContextComponent $JsonLdContext
+ * @property \MixerApi\JsonLdView\Controller\Component\JsonLdVocabComponent $JsonLdVocab
+ */
 class JsonLdController extends AppController
 {
-    /**
-     * @var \MixerApi\JsonLdView\Controller\Component\JsonLdContextComponent
-     */
-    protected $JsonLdContext;
-
-    /**
-     * @var \MixerApi\JsonLdView\Controller\Component\JsonLdVocabComponent
-     */
-    protected $JsonLdVocab;
-
     /**
      * @return void
      * @throws \Exception
@@ -26,6 +22,11 @@ class JsonLdController extends AppController
         $this->loadComponent('MixerApi/JsonLdView.JsonLdVocab');
     }
 
+    public function viewClasses(): array
+    {
+        return [JsonLdView::class];
+    }
+
     /**
      * Displays JSON-LD context for the given entity.
      *
@@ -33,12 +34,11 @@ class JsonLdController extends AppController
      * @param string|null $entity Entity name
      * @return \Cake\Http\Response
      */
-    public function contexts($entity = null)
+    public function contexts(?string $entity = null): \Cake\Http\Response
     {
         $context = $this->JsonLdContext->build($entity);
 
-        return $this
-                ->response
+        return $this->getResponse()
                 ->withType('application/ld+json')
                 ->withStringBody(json_encode($context, JSON_PRETTY_PRINT));
     }
@@ -50,13 +50,12 @@ class JsonLdController extends AppController
      * @return \Cake\Http\Response
      * @throws \ReflectionException
      */
-    public function vocab()
+    public function vocab(): \Cake\Http\Response
     {
-        $context = $this->JsonLdVocab->build();
+        $vocab = $this->JsonLdVocab->build();
 
-        return $this
-            ->response
+        return $this->getResponse()
             ->withType('application/ld+json')
-            ->withStringBody(json_encode($context, JSON_PRETTY_PRINT));
+            ->withStringBody(json_encode($vocab, JSON_PRETTY_PRINT));
     }
 }
