@@ -13,7 +13,7 @@ return [
         /*
          * This is only required if you are using HMAC, it can be left empty otherwise. The value must be at least
          * 32 characters long, secure, and not be committed to your VCS. You can generate a secure secret using
-         * something like `openssl rand -base64 32` or `gpg --gen-random 1 32 | base64`
+         * something like `openssl rand -base64 24` or `gpg --armor --gen-random 1 24`
          */
         'secret' => null, // file_get_contents(CONFIG . 'keys' . DS . 'hmac_secret.txt'),
 
