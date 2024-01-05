@@ -5,8 +5,8 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Core\Plugin;
-use Cake\Datasource\ResultSetInterface;
-use Cake\ORM\Query;
+use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Datasource\QueryInterface;
 use MixerApi\Crud\Interfaces\SearchInterface;
 
 /**
@@ -40,7 +40,7 @@ class Search implements SearchInterface
     /**
      * @inheritDoc
      */
-    public function search(Controller $controller): ResultSetInterface
+    public function search(Controller $controller): PaginatedResultSet
     {
         $this->allowMethods($controller);
 
@@ -52,7 +52,7 @@ class Search implements SearchInterface
     /**
      * @inheritDoc
      */
-    public function query(Controller $controller): Query
+    public function query(Controller $controller): QueryInterface
     {
         $table = $controller->getTableLocator()->get($this->whichTable($controller));
 

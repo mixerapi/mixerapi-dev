@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace MixerApi\Crud\Interfaces;
 
 use Cake\Controller\Controller;
-use Cake\Datasource\ResultSetInterface;
-use Cake\ORM\Query;
+use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Datasource\QueryInterface;
 
 /**
  * @experimental
@@ -18,15 +18,15 @@ interface SearchInterface
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
      * @return \Cake\Datasource\ResultSetInterface
      */
-    public function search(Controller $controller): ResultSetInterface;
+    public function search(Controller $controller): PaginatedResultSet;
 
     /**
      * Builds a Query object and returns it
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
-     * @return \Cake\ORM\Query
+     * @return \Cake\Datasource\QueryInterface
      */
-    public function query(Controller $controller): Query;
+    public function query(Controller $controller): QueryInterface;
 
     /**
      * @see https://github.com/FriendsOfCake/search

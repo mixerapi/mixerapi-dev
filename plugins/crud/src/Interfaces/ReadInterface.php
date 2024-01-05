@@ -5,7 +5,7 @@ namespace MixerApi\Crud\Interfaces;
 
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 
 /**
  * @experimental
@@ -38,7 +38,7 @@ interface ReadInterface
      * Builds a Query object and returns it
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
-     * @return \Cake\ORM\Query
+     * @return \Cake\ORM\Query\SelectQuery
      */
-    public function query(Controller $controller): Query;
+    public function query(Controller $controller): SelectQuery;
 }

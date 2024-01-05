@@ -8,7 +8,7 @@ use Cake\TestSuite\Fixture\TestFixture;
 /**
  * ActorsFixture
  */
-class ActorsFixture  extends \App\Test\Fixture\ActorsFixture
+class ActorsFixture  extends TestFixture
 {
     /**
      * @inheritdoc

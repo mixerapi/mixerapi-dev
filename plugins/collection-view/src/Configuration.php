@@ -5,6 +5,9 @@ namespace MixerApi\CollectionView;
 
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
+use Cake\View\XmlView;
+use MixerApi\CollectionView\View\JsonCollectionView;
+use MixerApi\CollectionView\View\XmlCollectionView;
 
 class Configuration
 {
@@ -37,17 +40,10 @@ class Configuration
      */
     public function views(Controller $controller): Controller
     {
-        if (!$controller->components()->has('RequestHandler')) {
-            return $controller;
-        }
-        $controller->RequestHandler->setConfig(
-            'viewClassMap.json',
-            'MixerApi/CollectionView.JsonCollection'
-        );
-        $controller->RequestHandler->setConfig(
-            'viewClassMap.xml',
-            'MixerApi/CollectionView.XmlCollection'
-        );
+        $controller->addViewClasses([
+                JsonCollectionView::class,
+                XmlCollectionView::class
+        ]);
 
         return $controller;
     }

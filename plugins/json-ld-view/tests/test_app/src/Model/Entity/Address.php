@@ -19,7 +19,7 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * @property string|null $postal_code
  * @property string $phone
  * @property string $location
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $modified
  */
 class Address extends Entity implements JsonLdDataInterface
 {

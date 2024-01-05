@@ -2,9 +2,9 @@
 
 namespace MixerApi\Core\Test\TestCase\View;
 
-use Cake\I18n\FrozenTime;
 use Cake\ORM\Entity;
 use Cake\TestSuite\TestCase;
+use Cake\I18n\DateTime;
 use MixerApi\Core\View\SerializableAssociation;
 
 class SerializableAssociationTest extends TestCase
@@ -27,7 +27,7 @@ class SerializableAssociationTest extends TestCase
         $entity = new Entity([
             'id' => 1,
             'name' => 'Andrew',
-            'created' => new FrozenTime(),
+            'created' => new DateTime(),
             '_joinData' => []
         ]);
 
