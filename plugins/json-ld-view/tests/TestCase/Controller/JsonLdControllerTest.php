@@ -66,8 +66,8 @@ class JsonLdControllerTest extends TestCase
         $this->assertResponseOk();
         $this->assertEquals('application/ld+json', $this->_response->getHeaderLine('content-type'));
         $this->assertCount(3, $object->{'supportedClass'});
-        $this->assertEquals('Actor', $object->{'supportedClass'}[0]->{'title'});
-        $this->assertEquals('Address', $object->{'supportedClass'}[1]->{'title'});
-        $this->assertEquals('Film', $object->{'supportedClass'}[2]->{'title'});
+        $this->assertEquals('Film', $object->{'supportedClass'}[0]->{'title'});
+        $this->assertEquals('Actor', $object->{'supportedClass'}[1]->{'title'});
+        $this->assertEquals('Address', $object->{'supportedClass'}[2]->{'title'});
     }
 }
