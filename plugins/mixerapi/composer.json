@@ -6,7 +6,7 @@
     "keywords": ["cakephp","api","rest"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "5.x-dev",
+        "cakephp/cakephp": "^5.0",
         "cnizzardini/cakephp-swagger-bake": "^3.0",
         "mixerapi/bake": "^2.0",
         "mixerapi/collection-view": "^2.0",
