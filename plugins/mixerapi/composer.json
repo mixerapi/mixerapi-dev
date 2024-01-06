@@ -10,7 +10,7 @@
         "cnizzardini/cakephp-swagger-bake": "^3.0",
         "mixerapi/bake": "^2.0",
         "mixerapi/collection-view": "^2.0",
-        "mixerapi/core": "^2.0",
+        "mixerapi/core": "dev-cakephp-5",
         "mixerapi/exception-render": "^2.0",
         "mixerapi/hal-view": "^2.0",
         "mixerapi/json-ld-view": "^2.0"
@@ -34,5 +34,11 @@
         "cnizzardini/cakephp-preloader": "An OpCache preloader for php >= 7.4 cakephp projects",
         "friendsofcake/search": "Search provides a simple interface to create paginate-able filters for your project",
         "mixerapi/jwt-auth": "For JWT Authentication"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:cnizzardini/core.git"
+        }
+    ]
 }

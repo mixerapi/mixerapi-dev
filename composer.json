@@ -47,7 +47,6 @@
             "MixerApi\\": "plugins/mixerapi/src/",
             "MixerApi\\Bake\\": "plugins/bake/src/",
             "MixerApi\\CollectionView\\": "plugins/collection-view/src/",
-            "MixerApi\\Core\\": "plugins/core/src/",
             "MixerApi\\Crud\\": "plugins/crud/src/",
             "MixerApi\\ExceptionRender\\": "plugins/exception-render/src/",
             "MixerApi\\HalView\\": "plugins/hal-view/src/",
@@ -63,8 +62,6 @@
             "MixerApi\\Bake\\Test\\App\\": "plugins/bake/tests/test_app/src/",
             "MixerApi\\CollectionView\\Test\\": "plugins/collection-view/tests/",
             "MixerApi\\CollectionView\\Test\\App\\": "plugins/collection-view/tests/test_app/src/",
-            "MixerApi\\Core\\Test\\": "plugins/core/tests/",
-            "MixerApi\\Core\\Test\\App\\": "plugins/core/tests/test_app/src/",
             "MixerApi\\Crud\\Test\\": "plugins/crud/tests/",
             "MixerApi\\Crud\\Test\\App\\": "plugins/crud/tests/test_app/src/",
             "MixerApi\\ExceptionRender\\Test\\": "plugins/exception-render/tests/",
@@ -118,17 +115,13 @@
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "cakephp/plugin-installer": true,
-            "phpro/grumphp": true
+            "cakephp/plugin-installer": true
         }
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "./plugins/core",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "git@github.com:cnizzardini/core.git"
         }
     ]
 }

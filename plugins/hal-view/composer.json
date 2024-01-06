@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.1",
         "cakephp/cakephp": "^5.0",
-        "mixerapi/core": "^2.0"
+        "mixerapi/core": "dev-cakephp-5"
     },
     "require-dev": {
         "josegonzalez/dotenv": "^3.2",
@@ -40,5 +40,11 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "cakephp/plugin-installer": true
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:cnizzardini/core.git"
+        }
+    ]
 }
