@@ -39,7 +39,7 @@ class DepartmentsController extends AppController
     {
         $this->request->allowMethod('get');
         $department = $this->Departments->get($id, [
-            'contain' => ['DepartmentEmployees'],
+            'contain' => [],
         ]);
 
         $this->set('department', $department);
