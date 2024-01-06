@@ -3,8 +3,10 @@
 namespace MixerApi\CollectionView\Test\TestCase;
 
 use Cake\Datasource\FactoryLocator;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\ResultSet;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
@@ -12,6 +14,7 @@ use Cake\View\Helper\PaginatorHelper;
 use MixerApi\CollectionView\Configuration;
 use MixerApi\CollectionView\View\JsonCollectionView;
 use MixerApi\CollectionView\Serializer;
+use MixerApi\CollectionView\View\XmlCollectionView;
 use SimpleXMLElement;
 
 class SerializerTest extends TestCase
@@ -43,21 +46,6 @@ class SerializerTest extends TestCase
             ],
         ]))->withEnv('HTTP_ACCEPT', 'application/json');
 
-        $request = $request->withAttribute('paging', [
-            'Actor' => [
-                'page' => 1,
-                'current' => 1,
-                'count' => 60,
-                'prevPage' => false,
-                'nextPage' => true,
-                'pageCount' => 1,
-                'sort' => null,
-                'direction' => null,
-                'limit' => null,
-                'start' => 1,
-                'end' => 3,
-            ],
-        ]);
         Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
             $builder->setExtensions(['json']);
             $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
@@ -66,13 +54,31 @@ class SerializerTest extends TestCase
         });
         Router::setRequest($request);
 
+        $paginatedResult = new PaginatedResultSet($result, [
+            'alias' => 'Actors',
+            'currentPage' => 1,
+            'count' => 9,
+            'totalCount' => 62,
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+            'pageCount' => 7,
+        ]);
+
         $paginator = new PaginatorHelper(
-            new JsonCollectionView($request, new Response()),
+            new JsonCollectionView(
+                $request,
+                null,
+                null,
+                [
+                    'viewVars' => [
+                        'actors' => $paginatedResult
+                    ]
+                ]
+            ),
             ['templates' => 'MixerApi/CollectionView.paginator-template']
         );
-        $paginator->defaultModel('Actor');
 
-        $jsonSerializer = new Serializer($result, $request, $paginator);
+        $jsonSerializer = new Serializer($paginatedResult, $request, $paginator);
 
         $json = $jsonSerializer->asJson(JSON_PRETTY_PRINT);
         $this->assertIsString($json);
@@ -98,21 +104,6 @@ class SerializerTest extends TestCase
             ],
         ]))->withEnv('HTTP_ACCEPT', 'application/xml');
 
-        $request = $request->withAttribute('paging', [
-            'Actor' => [
-                'page' => 1,
-                'current' => 1,
-                'count' => 60,
-                'prevPage' => false,
-                'nextPage' => true,
-                'pageCount' => 1,
-                'sort' => null,
-                'direction' => null,
-                'limit' => null,
-                'start' => 1,
-                'end' => 3,
-            ],
-        ]);
         Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
             $builder->setExtensions(['json']);
             $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
@@ -121,13 +112,31 @@ class SerializerTest extends TestCase
         });
         Router::setRequest($request);
 
+        $paginatedResult = new PaginatedResultSet($result, [
+            'alias' => 'Actors',
+            'currentPage' => 1,
+            'count' => 9,
+            'totalCount' => 62,
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+            'pageCount' => 7,
+        ]);
+
         $paginator = new PaginatorHelper(
-            new JsonCollectionView($request, new Response()),
+            new XmlCollectionView(
+                $request,
+                null,
+                null,
+                [
+                    'viewVars' => [
+                        'actors' => $paginatedResult
+                    ]
+                ]
+            ),
             ['templates' => 'MixerApi/CollectionView.paginator-template']
         );
-        $paginator->defaultModel('Actor');
 
-        $jsonSerializer = new Serializer($result, $request, $paginator);
+        $jsonSerializer = new Serializer($paginatedResult, $request, $paginator);
 
         $xml = $jsonSerializer->asXml(['pretty' => true]);
         $this->assertIsString($xml);

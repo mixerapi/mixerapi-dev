@@ -20,13 +20,6 @@ class JsonCollectionView extends JsonView
     protected string $subDir = 'json';
 
     /**
-     * Response type.
-     *
-     * @var string
-     */
-    protected string $_responseType = 'json';
-
-    /**
      * @inheritDoc
      */
     protected array $_defaultConfig = [

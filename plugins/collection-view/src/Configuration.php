@@ -37,18 +37,6 @@ class Configuration
      */
     public function views(Controller $controller): Controller
     {
-        if (!$controller->components()->has('RequestHandler')) {
-            return $controller;
-        }
-        $controller->RequestHandler->setConfig(
-            'viewClassMap.json',
-            'MixerApi/CollectionView.JsonCollection'
-        );
-        $controller->RequestHandler->setConfig(
-            'viewClassMap.xml',
-            'MixerApi/CollectionView.XmlCollection'
-        );
-
         return $controller;
     }
 }

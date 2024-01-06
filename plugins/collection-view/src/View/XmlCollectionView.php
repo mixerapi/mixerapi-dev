@@ -58,7 +58,7 @@ class XmlCollectionView extends SerializedView
     ];
 
     /**
-     * @return void
+     * @inheritdoc
      */
     public function initialize(): void
     {
@@ -66,6 +66,14 @@ class XmlCollectionView extends SerializedView
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/CollectionView.paginator-template',
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function contentType(): string
+    {
+        return 'application/xml';
     }
 
     /**

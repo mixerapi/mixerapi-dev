@@ -13,7 +13,7 @@ more at [MixerAPI.com](https://mixerapi.com).
 ## Installation
 
 !!! info ""
-    You can skip this step if MixerAPI is installed.
+    You can skip this step if MixerAPI is installed. However, you will still new to define your viewClasses (read below).
 
 ```console
 composer require mixerapi/collection-view
@@ -33,17 +33,20 @@ public function bootstrap(): void
 
 ## Setup
 
-Your controllers must be using the `RequestHandler` component. This is typically loaded in your `AppController`.
+Your controllers must define their
+[view classes for content negotiation](https://book.cakephp.org/5/en/views/json-and-xml-views.html#defining-view-classes-to-negotiate-with).
 
 ```php
-# src/Controller/AppController.php
-public function initialize(): void
+use MixerApi\CollectionView\View\JsonCollectionView;
+use MixerApi\CollectionView\View\XmlCollectionView;
+
+public function viewClasses(): array
 {
-    parent::initialize();
-    $this->loadComponent('RequestHandler');
-    // other logic...
+    return [JsonCollectionView::class, XmlCollectionView::class];
 }
 ```
+
+This can be done in your AppController to add them to all inheriting controllers or on a controller-by-controller basis.
 
 ## Usage
 

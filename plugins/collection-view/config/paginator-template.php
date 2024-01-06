@@ -2,7 +2,7 @@
 /**
  * Paginator Template
  *
- * @see https://book.cakephp.org/4/en/views/helpers/paginator.html#loading-templates-from-a-file
+ * @see https://book.cakephp.org/5/en/views/helpers/paginator.html#loading-templates-from-a-file
  */
 return [
     'nextActive' => '{{url}}',

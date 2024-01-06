@@ -55,14 +55,6 @@ class Plugin extends BasePlugin
             $configuration->default();
         }
 
-        EventManager::instance()
-            ->on('Controller.initialize', function (Event $event) use ($configuration) {
-
-                /** @var \Cake\Controller\Controller $controller */
-                $controller = $event->getSubject();
-                $configuration->views($controller);
-            });
-
         (new SwaggerBakeExtension())->listen();
     }
 }
