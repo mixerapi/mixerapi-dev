@@ -15,10 +15,10 @@ interface CreateInterface
      * Creates the resource
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
-     * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
+     * @param \ArrayAccess|array $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface
      */
-    public function save(Controller $controller, $options = []): EntityInterface;
+    public function save(Controller $controller, \ArrayAccess|array $options = []): EntityInterface;
 
     /**
      * @param string $table the table name

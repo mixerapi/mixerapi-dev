@@ -65,7 +65,7 @@ class MixerApiExceptionRenderer extends WebExceptionRenderer
                 $response = $response->withHeader($key, $value);
             }
         }
-      
+
         if ($exception instanceof HttpException) {
             foreach ($exception->getHeaders() as $name => $value) {
                 $response = $response->withHeader($name, $value);
@@ -83,7 +83,7 @@ class MixerApiExceptionRenderer extends WebExceptionRenderer
         $viewVars = [
             'exception' => (new ReflectionClass($exception))->getShortName(),
             'message' => $message,
-            'url' => h($url),
+            'url' => function_exists('h') ? h($url) : htmlspecialchars($url),
             'code' => $code,
             'error' => $exception,
             'exceptions' => $exceptions,

@@ -6,8 +6,6 @@ namespace MixerApi\CollectionView;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
-use Cake\Event\Event;
-use Cake\Event\EventManager;
 
 class Plugin extends BasePlugin
 {

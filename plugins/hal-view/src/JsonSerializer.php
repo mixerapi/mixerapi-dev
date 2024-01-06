@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace MixerApi\HalView;
 
 use Cake\Datasource\EntityInterface;
-use Cake\Datasource\ResultSetInterface;
 use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\Utility\Inflector;

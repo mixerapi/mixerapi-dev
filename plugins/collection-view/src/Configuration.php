@@ -41,7 +41,7 @@ class Configuration
     {
         $controller->addViewClasses([
                 JsonCollectionView::class,
-                XmlCollectionView::class
+                XmlCollectionView::class,
         ]);
 
         return $controller;

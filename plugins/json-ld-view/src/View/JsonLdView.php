@@ -11,7 +11,7 @@ use MixerApi\JsonLdView\JsonSerializer;
  * A view class that is used for JSON-LD responses.
  *
  * @see https://json-ld.org/
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\MixerApi\JsonLdView\View\PHPMD)
  * @uses \MixerApi\JsonLdView\JsonSerializer
  */
 class JsonLdView extends JsonView

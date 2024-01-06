@@ -10,7 +10,6 @@ use Cake\Database\Connection;
 use Cake\Database\Exception\MissingConnectionException;
 use Cake\Datasource\ConnectionManager;
 use Composer\InstalledVersions;
-use Exception;
 use RuntimeException;
 
 class Welcome

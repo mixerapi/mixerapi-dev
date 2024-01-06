@@ -58,7 +58,7 @@ class XmlCollectionView extends SerializedView
     ];
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function initialize(): void
     {
@@ -69,7 +69,7 @@ class XmlCollectionView extends SerializedView
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public static function contentType(): string
     {

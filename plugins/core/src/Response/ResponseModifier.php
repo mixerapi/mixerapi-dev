@@ -32,7 +32,7 @@ class ResponseModifier
                 /** @var \Cake\Controller\Controller $controller */
                 $controller = $event->getSubject();
                 $controller->addViewClasses([
-                    $this->type =>  $this->viewClass
+                    $this->type => $this->viewClass,
                 ]);
             });
     }

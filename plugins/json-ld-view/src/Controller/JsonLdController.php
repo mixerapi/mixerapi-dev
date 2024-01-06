@@ -22,6 +22,9 @@ class JsonLdController extends AppController
         $this->loadComponent('MixerApi/JsonLdView.JsonLdVocab');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function viewClasses(): array
     {
         return [JsonLdView::class];

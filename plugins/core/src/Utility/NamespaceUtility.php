@@ -23,7 +23,7 @@ class NamespaceUtility
             $namespace = substr($namespace, 1, strlen($namespace));
         }
         if (str_ends_with($namespace, '\\')) {
-            $namespace = substr($namespace, 0, strlen($namespace) -1);
+            $namespace = substr($namespace, 0, strlen($namespace) - 1);
         }
 
         $finder = (new ComposerFinder())->inNamespace($namespace);
@@ -33,6 +33,7 @@ class NamespaceUtility
             if (!str_starts_with($namespace, '\\')) {
                 return '\\' . $namespace;
             }
+
             return $namespace;
         }, $classes);
     }

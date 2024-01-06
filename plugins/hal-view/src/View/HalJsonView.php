@@ -12,7 +12,7 @@ use MixerApi\HalView\JsonSerializer;
  *
  * @link http://stateless.co/hal_specification.html
  * @link https://apigility.org/documentation/api-primer/halprimer
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\MixerApi\HalView\View\PHPMD)
  * @uses \Cake\Core\Configure
  * @uses \MixerApi\HalView\JsonSerializer
  */
@@ -54,6 +54,9 @@ class HalJsonView extends JsonView
         ]);
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function contentType(): string
     {
         return 'application/hal+json';

@@ -5,12 +5,8 @@ namespace MixerApi\JsonLdView\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Core\Configure;
-use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\TableRegistry;
-use Cake\Utility\Inflector;
 use MixerApi\Core\Model\ModelFactory;
-use MixerApi\Core\Utility\NamespaceUtility;
 use MixerApi\JsonLdView\JsonLdEntityContext;
 
 /**

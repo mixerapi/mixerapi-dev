@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Model;
 
-use Cake\Datasource\ConnectionInterface;
+use Cake\Database\Connection;
 use Cake\ORM\Table;
 
 /**
@@ -14,10 +14,10 @@ use Cake\ORM\Table;
 class ModelFactory
 {
     /**
-     * @param \Cake\Datasource\ConnectionInterface $connection db connection instance
+     * @param \Cake\Database\Connection $connection db connection instance
      * @param \Cake\ORM\Table $table Table instance
      */
-    public function __construct(private ConnectionInterface $connection, private Table $table)
+    public function __construct(private Connection $connection, private Table $table)
     {
     }
 
@@ -28,10 +28,9 @@ class ModelFactory
     {
         $entityFqn = $this->table->getEntityClass();
 
-        return new Model(
-            $this->connection->getSchemaCollection()->describe($this->table->getTable()),
-            $this->table,
-            new $entityFqn()
-        );
+        /** @var \Cake\Database\Schema\TableSchema $tableSchema */
+        $tableSchema = $this->connection->getSchemaCollection()->describe($this->table->getTable());
+
+        return new Model($tableSchema, $this->table, new $entityFqn());
     }
 }
