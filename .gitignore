@@ -39,6 +39,7 @@ nbproject/*
 .vscode
 .sass-cache/
 .phpunit.cache/
+/composer.lock
 
 # MIXERAPI               #
 ##########################
