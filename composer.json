@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "ext-json": "*",
         "ext-openssl": "*",
         "ext-simplexml": "*",
         "ext-xml": "*",
@@ -29,7 +28,7 @@
         "firebase/php-jwt": "^6.2",
         "friendsofcake/search": "^7.0",
         "josegonzalez/dotenv": "^3.2",
-        "phpmd/phpmd": "^2.10",
+        "phpmd/phpmd": "~2.10.0",
         "phpstan/phpstan": "^1.8.5",
         "phpunit/phpunit": "^10.0",
         "psy/psysh": "@stable"
