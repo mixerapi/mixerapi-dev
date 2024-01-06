@@ -38,8 +38,7 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "cakephp/plugin-installer": true,
-            "phpro/grumphp": true
+            "cakephp/plugin-installer": true
         }
     }
 }
