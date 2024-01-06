@@ -41,6 +41,8 @@
             "cakephp/plugin-installer": true
         }
     },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "repositories": [
         {
             "type": "vcs",
