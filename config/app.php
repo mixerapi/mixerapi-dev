@@ -3,7 +3,7 @@
 use Cake\Cache\Engine\FileEngine;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Sqlite;
-use Cake\Error\ExceptionRenderer;
+use Cake\Error\Renderer\WebExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
@@ -177,8 +177,8 @@ return [
      *   breathing room to complete logging or error handling.
      */
     'Error' => [
-        'errorLevel' => E_ALL,
-        //'exceptionRenderer' => ExceptionRenderer::class,
+        'errorLevel' =>  E_ALL & ~E_USER_DEPRECATED,
+        'exceptionRenderer' => WebExceptionRenderer::class,
         'skipLog' => [],
         'log' => true,
         'trace' => true,

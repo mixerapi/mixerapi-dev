@@ -68,6 +68,11 @@ class XmlCollectionView extends SerializedView
         ]);
     }
 
+    public static function contentType(): string
+    {
+        return 'application/xml';
+    }
+
     /**
      * @inheritdoc
      */

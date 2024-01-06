@@ -54,6 +54,11 @@ class HalJsonView extends JsonView
         ]);
     }
 
+    public static function contentType(): string
+    {
+        return 'application/hal+json';
+    }
+
     /**
      * @inheritDoc
      */

@@ -31,12 +31,9 @@ class ResponseModifier
 
                 /** @var \Cake\Controller\Controller $controller */
                 $controller = $event->getSubject();
-                if ($controller->components()->has('RequestHandler')) {
-                    $controller->RequestHandler->setConfig(
-                        'viewClassMap.' . $this->type,
-                        $this->viewClass
-                    );
-                }
+                $controller->addViewClasses([
+                    $this->type =>  $this->viewClass
+                ]);
             });
     }
 }

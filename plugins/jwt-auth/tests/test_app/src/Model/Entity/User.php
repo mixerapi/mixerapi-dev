@@ -15,8 +15,8 @@ use MixerApi\JwtAuth\Jwt\JwtInterface;
  * @property string $id
  * @property string $email
  * @property string $password
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  */
 class User extends Entity implements JwtEntityInterface
 {

@@ -96,14 +96,11 @@ class HalJsonViewTest extends TestCase
         $request = $request->withEnv('HTTP_ACCEPT', 'application/hal+json, text/plain, */*');
         Router::setRequest($request);
 
-        $controller = new Controller($request, new Response(), 'Actors');
-        $controller->modelClass = 'Actors';
+        $controller = new Controller($request, new Response());
 
         $actorTable = FactoryLocator::get('Table')->get('Actors');
 
-        $actor = $actorTable->get(1, [
-            'contain' => ['Films'],
-        ]);
+        $actor = $actorTable->get(1, contain :['Films']);
 
         $controller->set([
             'actor' => $actor,

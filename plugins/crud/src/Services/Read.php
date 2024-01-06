@@ -5,7 +5,7 @@ namespace MixerApi\Crud\Services;
 
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use MixerApi\Crud\Interfaces\ReadInterface;
 
 /**
@@ -32,7 +32,7 @@ class Read implements ReadInterface
     /**
      * @inheritDoc
      */
-    public function query(Controller $controller): Query
+    public function query(Controller $controller): SelectQuery
     {
         return $controller->getTableLocator()->get($this->whichTable($controller))->query();
     }

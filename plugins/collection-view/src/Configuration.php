@@ -5,6 +5,8 @@ namespace MixerApi\CollectionView;
 
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
+use MixerApi\CollectionView\View\JsonCollectionView;
+use MixerApi\CollectionView\View\XmlCollectionView;
 
 class Configuration
 {
@@ -37,6 +39,11 @@ class Configuration
      */
     public function views(Controller $controller): Controller
     {
+        $controller->addViewClasses([
+                JsonCollectionView::class,
+                XmlCollectionView::class
+        ]);
+
         return $controller;
     }
 }
