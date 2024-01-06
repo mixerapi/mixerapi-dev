@@ -45,7 +45,6 @@ class ControllerTest extends TestCase
 
     public function test_add(): void
     {
-        $this->disableErrorHandlerMiddleware();
         $this->post('/actors.json', [
             'last_name' => 'ever',
             'first_name' => 'greatest'
