@@ -5,12 +5,11 @@ on:
 
 jobs:
   build:
+    name: PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.1', '8.3']
-
-    name: Test PHP ${{ matrix.php-versions }}
+        php-versions: ['8.3']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,16 +41,12 @@ jobs:
         run: |
           composer analyze
 
-  #
-  # Run coverage report
-  #
   coverage:
+    name: PHP ${{ matrix.php-versions }} w/ Coverage Report
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php-versions: ['8.1']
-
-    name: Coverage Report
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -83,14 +78,10 @@ jobs:
           php-coveralls --coverage_clover=clover.xml -v
 
   #
-  # CakePHP version compatability
-  # RE-ADD WHEN CAKEPHP 5.1 is released
-
-
-  #
   # Test plugins individually
   #
   plugins:
+    name: ${{ matrix.plugin }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -105,7 +96,6 @@ jobs:
           'json-ld-view',
           'jwt-auth'
         ]
-    name: Test ${{ matrix.plugin }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
