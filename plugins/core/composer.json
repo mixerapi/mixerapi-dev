@@ -6,7 +6,7 @@
     "keywords": ["mixerapi","cakephp"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "5.x-dev",
+        "cakephp/cakephp": "^5.0",
         "kcs/class-finder": "^0.3"
     },
     "require-dev": {

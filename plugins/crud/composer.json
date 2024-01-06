@@ -5,10 +5,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "5.x-dev"
+        "cakephp/cakephp": "^5.0"
     },
     "require-dev": {
-        "friendsofcake/search": "dev-cake-5",
+        "friendsofcake/search": "^7.0",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "^10.0"
     },

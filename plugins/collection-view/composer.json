@@ -6,7 +6,7 @@
     "keywords": ["cakephp","cakephp json","cakephp view"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "5.x-dev",
+        "cakephp/cakephp": "^5.0",
         "adbario/php-dot-notation": "^2.3"
     },
     "require-dev": {
