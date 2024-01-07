@@ -16,7 +16,7 @@
         "cnizzardini/cakephp-swagger-bake": "v3.0.0.x-dev",
         "kcs/class-finder": "^0.3",
         "mobiledetect/mobiledetectlib": "^2.8",
-        "mixerapi/core": "dev-cakephp-5"
+        "mixerapi/core": "^2.0"
     },
     "require-dev": {
         "ext-mysqli": "*",
@@ -115,11 +115,5 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "cakephp/plugin-installer": true
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:cnizzardini/core.git"
-        }
-    ]
+    }
 }

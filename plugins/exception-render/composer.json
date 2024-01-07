@@ -9,7 +9,7 @@
         "cakephp/cakephp": "^5.0"
     },
     "require-dev": {
-        "mixerapi/core": "dev-cakephp-5",
+        "mixerapi/core": "^2.0",
         "cnizzardini/cakephp-swagger-bake": "v3.0.0.x-dev",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "^10.0"
@@ -43,11 +43,5 @@
         }
     },
     "prefer-stable": true,
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:cnizzardini/core.git"
-        }
-    ]
+    "minimum-stability": "dev"
 }
