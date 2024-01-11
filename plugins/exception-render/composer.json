@@ -10,7 +10,7 @@
     },
     "require-dev": {
         "mixerapi/core": "^2.0",
-        "cnizzardini/cakephp-swagger-bake": "v3.0.0.x-dev",
+        "cnizzardini/cakephp-swagger-bake": "^3.0",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "^10.0"
     },
