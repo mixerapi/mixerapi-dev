@@ -6,6 +6,8 @@ namespace MixerApi\Crud\Interfaces;
 use Cake\Controller\Controller;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query\SelectQuery;
+use Closure;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * @experimental
@@ -15,12 +17,22 @@ interface ReadInterface
     /**
      * Reads the resource
      *
-     * @param \Cake\Controller\Controller $controller the cakephp controller instance
+     * @param Controller $controller the cakephp controller instance
      * @param mixed $id an optional identifier, if null the id parameter is used from the request
-     * @param array<string, mixed> $options options accepted by `Table::find()`
-     * @return \Cake\Datasource\EntityInterface
+     * @param array|string $finder
+     * @param CacheInterface|string|null $cache
+     * @param Closure|string|null $cacheKey
+     * @param mixed ...$args
+     * @return EntityInterface
      */
-    public function read(Controller $controller, mixed $id = null, $options = []): EntityInterface;
+    public function read(
+        Controller $controller,
+        mixed $id = null,
+        array|string $finder = 'all',
+        CacheInterface|string|null $cache = null,
+        Closure|string|null $cacheKey = null,
+        mixed ...$args
+    ): EntityInterface;
 
     /**
      * @param string $table the table

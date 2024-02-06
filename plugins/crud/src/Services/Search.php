@@ -61,10 +61,10 @@ class Search implements SearchInterface
             return $table->find('all');
         }
 
-        return $table->find('search', [
-            'search' => $controller->getRequest()->getQueryParams(),
-            'collection' => $this->collectionName,
-        ]);
+        return $table->find('search',
+            search: $controller->getRequest()->getQueryParams(),
+            collection: $this->collectionName
+        );
     }
 
     /**
