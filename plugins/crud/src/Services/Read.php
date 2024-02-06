@@ -29,8 +29,7 @@ class Read implements ReadInterface
         CacheInterface|string|null $cache = null,
         Closure|string|null $cacheKey = null,
         mixed ...$args
-    ): EntityInterface
-    {
+    ): EntityInterface {
         $this->allowMethods($controller);
         $id = $this->whichId($controller, $id);
         $table = $controller->getTableLocator()->get($this->whichTable($controller));

@@ -17,13 +17,13 @@ interface ReadInterface
     /**
      * Reads the resource
      *
-     * @param Controller $controller the cakephp controller instance
+     * @param \Cake\Controller\Controller $controller the cakephp controller instance
      * @param mixed $id an optional identifier, if null the id parameter is used from the request
-     * @param array|string $finder
-     * @param CacheInterface|string|null $cache
-     * @param Closure|string|null $cacheKey
-     * @param mixed ...$args
-     * @return EntityInterface
+     * @param array|string $finder See CakePHP docs
+     * @param \Psr\SimpleCache\CacheInterface|string|null $cache See CakePHP docs
+     * @param \Closure|string|null $cacheKey See CakePHP docs
+     * @param mixed ...$args See CakePHP docs
+     * @return \Cake\Datasource\EntityInterface
      */
     public function read(
         Controller $controller,
