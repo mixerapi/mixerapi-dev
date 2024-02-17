@@ -76,7 +76,8 @@ class JsonLdVocabComponent extends Component
     {
         /** @var \Cake\Database\Connection $connection */
         $connection = ConnectionManager::get(Configure::read('JsonLdView.connectionName', 'default'));
-        $tables = NamespaceUtility::findClasses(Configure::read('App.namespace') . '\Model\Table');
+        $fqn = Configure::read('App.namespace') . '\Model\Table';
+        $tables = NamespaceUtility::findClasses($fqn);
 
         foreach ($tables as $table) {
             if (!class_exists($table)) {
