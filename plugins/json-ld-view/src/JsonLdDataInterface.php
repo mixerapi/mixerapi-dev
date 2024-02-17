@@ -19,8 +19,8 @@ interface JsonLdDataInterface
     public function getJsonLdIdentifier(EntityInterface $entity): string;
 
     /**
-     * Returns a context for the entity such as /contexts/Actor which would return as
-     * `"@context": "/contexts/Actor"`
+     * Returns a context for the entity such as /contexts/Actors which would return as
+     * `"@context": "/contexts/Actors"`. The context should be in plural form i.e. Actors instead of Actor.
      *
      * @return string
      */

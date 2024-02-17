@@ -19,25 +19,14 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * @property string|null $postal_code
  * @property string $phone
  * @property string $location
- * @property \Cake\I18n\FrozenTime $modified
- *
- * @property \App\Model\Entity\City $city
- * @property \App\Model\Entity\Customer[] $customers
- * @property \App\Model\Entity\Employee[] $employees
- * @property \App\Model\Entity\Store[] $stores
+ * @property \Cake\I18n\DateTime $modified
  */
 class Address extends Entity implements JsonLdDataInterface
 {
     /**
-     * Fields that can be mass assigned using newEntity() or patchEntity().
-     *
-     * Note that when '*' is set to true, this allows all unspecified fields to
-     * be mass assigned. For security purposes, it is advised to set '*' to false
-     * (or remove it), and explicitly make individual fields accessible as needed.
-     *
-     * @var array
+     * @inheritDoc
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'address' => true,
         'address2' => true,
         'district' => true,
@@ -57,7 +46,7 @@ class Address extends Entity implements JsonLdDataInterface
      */
     public function getJsonLdContext(): string
     {
-        return '/contexts/Address';
+        return '/contexts/Addresses';
     }
 
     /**

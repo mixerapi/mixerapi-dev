@@ -12,39 +12,29 @@ use Cake\Event\EventManager;
 class Plugin extends BasePlugin
 {
     /**
-     * Plugin name.
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected $name = 'MixerApi/Bake';
+    protected ?string $name = 'MixerApi/Bake';
 
     /**
-     * Console middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $consoleEnabled = false;
+    protected bool $consoleEnabled = false;
 
     /**
-     * Enable middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $middlewareEnabled = false;
+    protected bool $middlewareEnabled = false;
 
     /**
-     * Register container services
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $servicesEnabled = false;
+    protected bool $servicesEnabled = false;
 
     /**
-     * Load routes or not
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $routesEnabled = false;
+    protected bool $routesEnabled = false;
 
     /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface

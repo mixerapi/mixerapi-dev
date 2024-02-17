@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MixerApi\HalView;
 
-use Cake\Collection\CollectionInterface;
 use Cake\Datasource\EntityInterface;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
@@ -45,7 +45,7 @@ class JsonSerializer
 
         $hal = $this->recursion($serialize);
 
-        if ($hal instanceof ResultSetInterface) {
+        if ($hal instanceof ResultSetInterface || $hal instanceof PaginatedResultSet) {
             $this->data = $this->collection($hal);
         } elseif (is_subclass_of($hal, Entity::class)) {
             $this->data = $this->item($hal);
@@ -87,11 +87,11 @@ class JsonSerializer
      * HAL resources, but does not serialize the data.
      *
      * @param mixed $mixed data to be serialized
-     * @return array|\Cake\Datasource\EntityInterface|\Cake\Datasource\ResultSetInterface
+     * @return array|\Cake\Datasource\EntityInterface|\Cake\Datasource\ResultSetInterface|\Cake\Datasource\Paging\PaginatedResultSet
      */
     private function recursion(mixed &$mixed): mixed
     {
-        if ($mixed instanceof ResultSetInterface || is_array($mixed)) {
+        if ($mixed instanceof ResultSetInterface || $mixed instanceof PaginatedResultSet || is_array($mixed)) {
             foreach ($mixed as $item) {
                 $this->recursion($item);
             }
@@ -111,10 +111,10 @@ class JsonSerializer
     /**
      * HAL array for collection requests
      *
-     * @param \Cake\Collection\CollectionInterface $collection the data to be converted into a HAL array
+     * @param \Cake\Datasource\Paging\PaginatedResultSet|\Cake\Datasource\ResultSetInterface $collection the data to be converted into a HAL array
      * @return array
      */
-    private function collection(CollectionInterface $collection): array
+    private function collection(mixed $collection): array
     {
         try {
             $entity = $collection->first();

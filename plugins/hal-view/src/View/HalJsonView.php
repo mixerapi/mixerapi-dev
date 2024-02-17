@@ -12,53 +12,39 @@ use MixerApi\HalView\JsonSerializer;
  *
  * @link http://stateless.co/hal_specification.html
  * @link https://apigility.org/documentation/api-primer/halprimer
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\MixerApi\HalView\View\PHPMD)
  * @uses \Cake\Core\Configure
  * @uses \MixerApi\HalView\JsonSerializer
  */
 class HalJsonView extends JsonView
 {
     /**
-     * HAL layouts are located in the 'haljson' sub directory of `Layouts/`
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected $layoutPath = 'haljson';
+    protected string $layoutPath = 'haljson';
 
     /**
-     * HAL views are located in the 'haljson' sub directory for controllers' views.
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected $subDir = 'haljson';
+    protected string $subDir = 'haljson';
 
     /**
      * Response type.
      *
      * @var string
      */
-    protected $_responseType = 'haljson';
+    protected string $_responseType = 'haljson';
 
     /**
-     * Default config options.
-     *
-     * Use ViewBuilder::setOption()/setOptions() in your controller to set these options.
-     *
-     * - `serialize`: Option to convert a set of view variables into a serialized response.
-     *   Its value can be a string for single variable name or array for multiple
-     *   names. If true all view variables will be serialized. If null or false
-     *   normal view template will be rendered.
-     * - `jsonOptions`: Options for json_encode(). For e.g. `JSON_HEX_TAG | JSON_HEX_APOS`.
-     *
-     * @var array
+     * @inheritDoc
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
     ];
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initialize(): void
     {
@@ -66,6 +52,14 @@ class HalJsonView extends JsonView
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/HalView.paginator-template',
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function contentType(): string
+    {
+        return 'application/hal+json';
     }
 
     /**

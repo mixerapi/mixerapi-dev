@@ -19,7 +19,7 @@ class Film extends Entity implements HalResourceInterface
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'title' => true,
         'description' => true,
         'release_year' => true,
@@ -38,7 +38,7 @@ class Film extends Entity implements HalResourceInterface
         'inventories' => true,
     ];
 
-    protected $_hidden = ['_joinData'];
+    protected array $_hidden = ['_joinData'];
 
     public function getHalLinks(EntityInterface $entity): array
     {

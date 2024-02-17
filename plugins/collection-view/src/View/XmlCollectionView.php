@@ -12,19 +12,19 @@ class XmlCollectionView extends SerializedView
     /**
      * @var string
      */
-    protected $layoutPath = 'xml';
+    protected string $layoutPath = 'xml';
 
     /**
      * @var string
      */
-    protected $subDir = 'xml';
+    protected string $subDir = 'xml';
 
     /**
      * Response type.
      *
      * @var string
      */
-    protected $_responseType = 'xml';
+    protected string $_responseType = 'xml';
 
     /**
      * Option to allow setting an array of custom options for Xml::fromArray()
@@ -33,7 +33,7 @@ class XmlCollectionView extends SerializedView
      *
      * @var array|null
      */
-    protected $xmlOptions;
+    protected ?array $xmlOptions;
 
     /**
      * Default config options.
@@ -51,14 +51,14 @@ class XmlCollectionView extends SerializedView
      * @var array
      * @psalm-var array{serialize:string|bool|null, xmlOptions: int|null, rootNode: string|null}
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'xmlOptions' => null,
         'rootNode' => null,
     ];
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initialize(): void
     {
@@ -66,6 +66,14 @@ class XmlCollectionView extends SerializedView
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/CollectionView.paginator-template',
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function contentType(): string
+    {
+        return 'application/xml';
     }
 
     /**

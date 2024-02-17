@@ -4,8 +4,13 @@
     "type": "cakephp-plugin",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "cakephp/cakephp": "^4.2"
+        "php": "^8.1",
+        "cakephp/cakephp": "^5.0"
+    },
+    "require-dev": {
+        "friendsofcake/search": "^7.0",
+        "josegonzalez/dotenv": "^3.2",
+        "phpunit/phpunit": "^10.0"
     },
     "suggest": {
         "friendsofcake/search": "Integrates with mixerapi/crud for easy paginatable search filters"
@@ -13,6 +18,19 @@
     "autoload": {
         "psr-4": {
             "MixerApi\\Crud\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MixerApi\\Crud\\": "plugins/crud/src/",
+            "MixerApi\\Crud\\Test\\": "plugins/crud/tests/",
+            "MixerApi\\Crud\\Test\\App\\": "plugins/crud/tests/test_app/src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true
         }
     }
 }

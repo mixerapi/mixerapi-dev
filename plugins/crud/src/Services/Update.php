@@ -35,7 +35,7 @@ class Update implements UpdateInterface
     /**
      * @inheritDoc
      */
-    public function save(Controller $controller, mixed $id = null, $options = []): EntityInterface
+    public function save(Controller $controller, mixed $id = null, \ArrayAccess|array $options = []): EntityInterface
     {
         $this->allowMethods($controller);
 

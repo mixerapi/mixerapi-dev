@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace MixerApi\Crud\Test\App\Controller;
 
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 
 class ActorsController extends AppController
@@ -25,7 +25,7 @@ class ActorsController extends AppController
 
     public function view(ReadInterface $read)
     {
-        if (!$read->query($this) instanceof Query){
+        if (!$read->query($this) instanceof SelectQuery){
             throw new \Exception('invalid response'); // test Read::query()
         }
         $this->set('data', $read->read($this));

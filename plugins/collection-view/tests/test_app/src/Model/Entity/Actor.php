@@ -16,7 +16,7 @@ class Actor extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'first_name' => true,
         'last_name' => true,
         'modified' => true,

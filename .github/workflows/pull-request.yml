@@ -5,12 +5,11 @@ on:
 
 jobs:
   build:
+    name: PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
-
-    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+        php-versions: ['8.3']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,7 +20,6 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
           tools: composer:v2
-          coverage: xdebug
 
       - name: Matrix PHP Version
         run: |
@@ -34,36 +32,21 @@ jobs:
       - name: Install
         run: |
           composer install --prefer-dist --no-interaction --no-progress
+          composer update
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
 
-      - name: Test Suite + Static Analysis (PHP 8.0)
-        if: ${{ matrix.php-versions == '8.0' }}
+      - name: Test Suite + Static Analysis
+        if: ${{ matrix.php-versions}}
         run: |
           composer analyze
 
-      - name: Upload coverage results to Coveralls (PHP 8.0)
-        if: ${{ matrix.php-versions == '8.0' }}
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer global require php-coveralls/php-coveralls
-          export CODECOVERAGE=1 && vendor/bin/phpunit --verbose --coverage-clover=clover.xml
-          php-coveralls --coverage_clover=clover.xml -v
-
-      - name: Test Suite (PHP 8.1)
-        if: ${{ matrix.php-versions == '8.1' }}
-        run: |
-          composer test
-
-  #
-  # CakePHP version compatability
-  #
-  compatibility:
+  coverage:
+    name: PHP ${{ matrix.php-versions }} w/ Coverage Report
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['~4.2.0', '~4.3.0', '^4.4']
+        php-versions: ['8.1']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -71,17 +54,64 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Composer Check
+        run: composer validate
+
+      - name: Install
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          composer update
+          cp config/.env.example config/.env
+          cp config/app_local.example.php config/app_local.php
+
+      - name: Coverage Report
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=clover.xml
+          php-coveralls --coverage_clover=clover.xml -v
+
+  #
+  # Test plugins individually
+  #
+  plugins:
+    name: ${{ matrix.plugin }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: [
+          'bake',
+          'collection-view',
+          'crud',
+          'exception-render',
+          'hal-view',
+          'json-ld-view',
+          'jwt-auth'
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
           extensions: mbstring, intl, sqlite3, xml, simplexml, mysqli
 
       - name: PHP Version
         run: php -v
 
-      - name: CakePHP ${{matrix.version}} Compatability
+      - name: ${{matrix.plugin}} tests
         run: |
           cp config/.env.example config/.env
-          composer self-update
+          cp plugins/${{matrix.plugin}}/composer.json .
           rm -rf composer.lock
-          composer require cakephp/cakephp:${{matrix.version}} --no-update
-          composer install --prefer-dist --no-progress
-          composer test
+          composer install
+          vendor/bin/phpunit plugins/${{matrix.plugin}}

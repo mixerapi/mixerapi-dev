@@ -5,6 +5,7 @@ namespace MixerApi\CollectionView;
 
 use Adbar\Dot;
 use Cake\Core\Configure;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\Utility\Xml;
@@ -49,7 +50,7 @@ class Serializer
         $this->paginator = $paginator;
         $this->config = Configure::read('CollectionView');
 
-        if ($serialize instanceof ResultSetInterface) {
+        if ($serialize instanceof ResultSetInterface || $serialize instanceof PaginatedResultSet) {
             $this->data = $this->collection($serialize);
         } else {
             $this->data = $serialize;
@@ -96,10 +97,10 @@ class Serializer
     }
 
     /**
-     * @param \Cake\Datasource\ResultSetInterface $resultSet the data to be converted into a HAL array
+     * @param \Cake\Datasource\ResultSetInterface|\Cake\Datasource\Paging\PaginatedResultSet $resultSet the data to be converted into a HAL array
      * @return array
      */
-    private function collection(ResultSetInterface $resultSet): array
+    private function collection(mixed $resultSet): array
     {
         $dot = new Dot();
         foreach ($this->config as $key => $value) {

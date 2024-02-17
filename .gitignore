@@ -25,27 +25,21 @@ Thumbs.db
 
 # Tool specific files #
 #######################
-# PHPUnit
 .phpunit.result.cache
-# vim
 *~
 *.swp
 *.swo
-# sublime text & textmate
 *.sublime-*
 *.stTheme.cache
 *.tmlanguage.cache
 *.tmPreferences.cache
-# Eclipse
 .settings/*
-# JetBrains, aka PHPStorm, IntelliJ IDEA
 .idea/*
-# NetBeans
 nbproject/*
-# Visual Studio Code
 .vscode
-# Sass preprocessor
 .sass-cache/
+.phpunit.cache/
+/composer.lock
 
 # MIXERAPI               #
 ##########################

@@ -17,28 +17,28 @@ use Cake\Http\Exception\MethodNotAllowedException;
  */
 class Plugin extends BasePlugin
 {
-    protected $name = 'MixerApi/Crud';
+    protected ?string $name = 'MixerApi/Crud';
 
     /**
      * Console middleware
      *
      * @var bool
      */
-    protected $consoleEnabled = false;
+    protected bool $consoleEnabled = false;
 
     /**
      * Enable middleware
      *
      * @var bool
      */
-    protected $middlewareEnabled = false;
+    protected bool $middlewareEnabled = false;
 
     /**
      * Load routes or not
      *
      * @var bool
      */
-    protected $routesEnabled = false;
+    protected bool $routesEnabled = false;
 
     /**
      * Enforce request->allowMethod() for the follow action/http-method pair.
@@ -48,7 +48,7 @@ class Plugin extends BasePlugin
      *
      * @var array
      */
-    private $allowedMethods = [
+    private array $allowedMethods = [
         'add' => ['post'],
         'index' => ['get'],
         'view' => ['get'],
@@ -61,7 +61,7 @@ class Plugin extends BasePlugin
      *
      * @var bool
      */
-    private $doSerialize = true;
+    private bool $doSerialize = true;
 
     /**
      * See this class for allowed $options

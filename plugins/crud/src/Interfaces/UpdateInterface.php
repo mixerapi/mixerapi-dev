@@ -16,10 +16,10 @@ interface UpdateInterface
      *
      * @param \Cake\Controller\Controller $controller the cakephp controller instance
      * @param mixed $id an optional identifier, if null the id parameter is used from the request
-     * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
+     * @param \ArrayAccess|array $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface
      */
-    public function save(Controller $controller, mixed $id = null, $options = []): EntityInterface;
+    public function save(Controller $controller, mixed $id = null, \ArrayAccess|array $options = []): EntityInterface;
 
     /**
      * @param string $table the table

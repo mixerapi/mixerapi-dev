@@ -12,7 +12,7 @@ class ControllerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/Crud.Actors',
         'plugin.MixerApi/Crud.Films',
     ];
@@ -45,10 +45,13 @@ class ControllerTest extends TestCase
 
     public function test_add(): void
     {
-        $this->post('/actors.json', [
+        $this->configRequest([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+        $this->post('/actors.json', json_encode([
             'last_name' => 'ever',
             'first_name' => 'greatest'
-        ]);
+        ]));
         $this->assertResponseOk();
 
         $body = (string)$this->_response->getBody();
@@ -67,10 +70,13 @@ class ControllerTest extends TestCase
 
     public function test_edit(): void
     {
-        $this->patch('/actors/1.json', [
+        $this->configRequest([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+        $this->patch('/actors/1.json', json_encode([
             'last_name' => 'ever',
             'first_name' => 'greatest'
-        ]);
+        ]));
         $this->assertResponseOk();
 
         $body = (string)$this->_response->getBody();

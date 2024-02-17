@@ -10,42 +10,25 @@ use MixerApi\CollectionView\Serializer;
 class JsonCollectionView extends JsonView
 {
     /**
-     * @var string
+     * @inheritDoc
      */
-    protected $layoutPath = 'json';
+    protected string $layoutPath = 'json';
 
     /**
-     * @var string
+     * @inheritDoc
      */
-    protected $subDir = 'json';
+    protected string $subDir = 'json';
 
     /**
-     * Response type.
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected $_responseType = 'json';
-
-    /**
-     * Default config options.
-     *
-     * Use ViewBuilder::setOption()/setOptions() in your controller to set these options.
-     *
-     * - `serialize`: Option to convert a set of view variables into a serialized response.
-     *   Its value can be a string for single variable name or array for multiple
-     *   names. If true all view variables will be serialized. If null or false
-     *   normal view template will be rendered.
-     * - `jsonOptions`: Options for json_encode(). For e.g. `JSON_HEX_TAG | JSON_HEX_APOS`.
-     *
-     * @var array
-     */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'serialize' => null,
         'jsonOptions' => null,
     ];
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initialize(): void
     {

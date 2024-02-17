@@ -2,12 +2,16 @@
 
 namespace MixerApi\CollectionView\Test\TestCase;
 
+use Cake\Controller\ComponentRegistry;
 use Cake\Datasource\FactoryLocator;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
+use Cake\View\View;
 use MixerApi\CollectionView\Configuration;
 use MixerApi\CollectionView\View\JsonCollectionView;
 use MixerApi\CollectionView\Serializer;
@@ -18,7 +22,7 @@ class SerializerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/CollectionView.Actors',
     ];
 
@@ -31,7 +35,24 @@ class SerializerTest extends TestCase
     public function test_as_json(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
-        $result = $actor->find()->limit(1)->all();
+
+        $result = new PaginatedResultSet($actor->find()->limit(1)->all(), [
+            'sort' => null,
+            'direction' => null,
+            'perPage' => 20,
+            'requestedPage' => 1,
+            'alias' => 'Actors',
+            'scope' => null,
+            'limit' => null,
+            'count' => 20,
+            'totalCount' => 60,
+            'pageCount' => 1,
+            'currentPage' => 1,
+            'start' => 1,
+            'end' => 3,
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+        ]);
 
         $request = (new ServerRequest([
             'url' => '/',
@@ -42,32 +63,19 @@ class SerializerTest extends TestCase
             ],
         ]))->withEnv('HTTP_ACCEPT', 'application/json');
 
-        $request = $request->withAttribute('paging', [
-            'Actor' => [
-                'page' => 1,
-                'current' => 1,
-                'count' => 60,
-                'prevPage' => false,
-                'nextPage' => true,
-                'pageCount' => 1,
-                'sort' => null,
-                'direction' => null,
-                'limit' => null,
-                'start' => 1,
-                'end' => 3,
-            ],
-        ]);
-        Router::reload();
-        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
+            $builder->connect('/{controller}/{action}/*');
+            $builder->connect('/{plugin}/{controller}/{action}/*');
+        });
         Router::setRequest($request);
 
         $paginator = new PaginatorHelper(
             new JsonCollectionView($request, new Response()),
             ['templates' => 'MixerApi/CollectionView.paginator-template']
         );
-        $paginator->defaultModel('Actor');
+        $paginator->setPaginated($result);
 
         $jsonSerializer = new Serializer($result, $request, $paginator);
 
@@ -78,13 +86,30 @@ class SerializerTest extends TestCase
         $obj = json_decode($json);
         $this->assertIsObject($obj);
         $this->assertEquals('/', $obj->collection->url);
-        $this->assertCount(1, $obj->data);
+        $this->assertCount(1, (array) $obj->data);
     }
 
     public function test_as_xml(): void
     {
         $actor = FactoryLocator::get('Table')->get('Actors');
-        $result = $actor->find()->limit(1)->all();
+
+        $result = new PaginatedResultSet($actor->find()->limit(1)->all(), [
+            'sort' => null,
+            'direction' => null,
+            'perPage' => 20,
+            'requestedPage' => 1,
+            'alias' => 'Actors',
+            'scope' => null,
+            'limit' => null,
+            'count' => 20,
+            'totalCount' => 60,
+            'pageCount' => 1,
+            'currentPage' => 1,
+            'start' => 1,
+            'end' => 3,
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+        ]);
 
         $request = (new ServerRequest([
             'url' => '/',
@@ -95,32 +120,19 @@ class SerializerTest extends TestCase
             ],
         ]))->withEnv('HTTP_ACCEPT', 'application/xml');
 
-        $request = $request->withAttribute('paging', [
-            'Actor' => [
-                'page' => 1,
-                'current' => 1,
-                'count' => 60,
-                'prevPage' => false,
-                'nextPage' => true,
-                'pageCount' => 1,
-                'sort' => null,
-                'direction' => null,
-                'limit' => null,
-                'start' => 1,
-                'end' => 3,
-            ],
-        ]);
-        Router::reload();
-        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
+            $builder->connect('/{controller}/{action}/*');
+            $builder->connect('/{plugin}/{controller}/{action}/*');
+        });
         Router::setRequest($request);
 
         $paginator = new PaginatorHelper(
             new JsonCollectionView($request, new Response()),
             ['templates' => 'MixerApi/CollectionView.paginator-template']
         );
-        $paginator->defaultModel('Actor');
+        $paginator->setPaginated($result);
 
         $jsonSerializer = new Serializer($result, $request, $paginator);
 

@@ -15,8 +15,8 @@ use MixerApi\JwtAuth\Jwt\JwtInterface;
  * @property string $id
  * @property string $email
  * @property string $password
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  */
 class User extends Entity implements JwtEntityInterface
 {
@@ -29,7 +29,7 @@ class User extends Entity implements JwtEntityInterface
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'email' => true,
         'password' => true,
         'created' => true,
@@ -41,7 +41,7 @@ class User extends Entity implements JwtEntityInterface
      *
      * @var array<string>
      */
-    protected $_hidden = [
+    protected array $_hidden = [
         'password',
     ];
 

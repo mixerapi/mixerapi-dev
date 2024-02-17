@@ -17,7 +17,7 @@ class JwtAuthServiceProvider extends ServiceProvider
     /**
      * @inheritDoc
      */
-    protected $provides = [
+    protected array $provides = [
         JwtAuthenticatorInterface::class,
         JwkSetInterface::class,
     ];

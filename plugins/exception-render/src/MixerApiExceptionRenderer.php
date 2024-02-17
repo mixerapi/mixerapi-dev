@@ -6,7 +6,7 @@ namespace MixerApi\ExceptionRender;
 use Cake\Core\Configure;
 use Cake\Core\Exception\CakeException;
 use Cake\Error\Debugger;
-use Cake\Error\ExceptionRenderer;
+use Cake\Error\Renderer\WebExceptionRenderer;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Http\Exception\HttpException;
@@ -36,7 +36,7 @@ use Throwable;
  * @uses \Cake\Event\Event
  * @uses \Cake\Event\EventManager
  */
-class MixerApiExceptionRenderer extends ExceptionRenderer
+class MixerApiExceptionRenderer extends WebExceptionRenderer
 {
     /**
      * Renders the response for the exception.
@@ -60,10 +60,12 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         $response = $this->controller->getResponse();
 
         if ($exception instanceof CakeException) {
-            foreach ((array)$exception->responseHeader() as $key => $value) {
+            $responseHeaders = $exception->getAttributes()['responseHeaders'] ?? [];
+            foreach ((array)$responseHeaders as $key => $value) {
                 $response = $response->withHeader($key, $value);
             }
         }
+
         if ($exception instanceof HttpException) {
             foreach ($exception->getHeaders() as $name => $value) {
                 $response = $response->withHeader($name, $value);
@@ -81,7 +83,7 @@ class MixerApiExceptionRenderer extends ExceptionRenderer
         $viewVars = [
             'exception' => (new ReflectionClass($exception))->getShortName(),
             'message' => $message,
-            'url' => h($url),
+            'url' => function_exists('h') ? h($url) : htmlspecialchars($url),
             'code' => $code,
             'error' => $exception,
             'exceptions' => $exceptions,

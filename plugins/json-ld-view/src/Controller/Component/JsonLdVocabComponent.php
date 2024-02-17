@@ -7,8 +7,9 @@ use Cake\Collection\Collection;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Core\Configure;
-use Cake\Database\Connection;
 use Cake\Datasource\ConnectionManager;
+use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\Table;
 use MixerApi\Core\Model\Model;
 use MixerApi\Core\Model\ModelFactory;
 use MixerApi\Core\Model\ModelProperty;
@@ -17,20 +18,16 @@ use MixerApi\JsonLdView\JsonLdDataInterface;
 use MixerApi\JsonLdView\JsonLdEntityContext;
 use MixerApi\JsonLdView\JsonLdSchema;
 use ReflectionClass;
-use RuntimeException;
 
 /**
  * Builds JSON-LD vocab for entities in your API.
  *
  * @link https://json-ld.org/learn.html
- * @uses \Cake\Collection\Collection
- * @uses \MixerApi\Core\Model\ModelFactory
- * @uses \MixerApi\Core\Utility\NamespaceUtility
- * @uses \MixerApi\JsonLdView\JsonLdEntityContext
- * @uses ReflectionClass
  */
 class JsonLdVocabComponent extends Component
 {
+    use LocatorAwareTrait;
+
     private ?array $data;
 
     private string $hydraPrefix = '';
@@ -77,16 +74,25 @@ class JsonLdVocabComponent extends Component
      */
     public function build(): array
     {
-        $connection = ConnectionManager::get('default');
-
-        if (!$connection instanceof Connection) {
-            throw new RuntimeException('Unable to get Database Connection instance');
-        }
-
-        $tables = NamespaceUtility::findClasses(Configure::read('App.namespace') . '\Model\Table');
+        /** @var \Cake\Database\Connection $connection */
+        $connection = ConnectionManager::get(Configure::read('JsonLdView.connectionName', 'default'));
+        $fqn = Configure::read('App.namespace') . '\Model\Table';
+        $tables = NamespaceUtility::findClasses($fqn);
 
         foreach ($tables as $table) {
-            $model = (new ModelFactory($connection, new $table()))->create();
+            if (!class_exists($table)) {
+                continue;
+            }
+            $reflection = new \ReflectionClass($table);
+            if (!$reflection->isInstantiable() || !$reflection->isSubclassOf(Table::class)) {
+                continue;
+            }
+            $class = $reflection->getShortName();
+            if (str_ends_with($class, 'Table')) {
+                $class = substr($class, 0, strlen($class) - 5);
+            }
+            $tableInstance = $this->getTableLocator()->get($class);
+            $model = (new ModelFactory($connection, $tableInstance))->create();
             if ($model === null) {
                 continue;
             }
@@ -177,7 +183,7 @@ class JsonLdVocabComponent extends Component
      * @param \MixerApi\Core\Model\ModelProperty $property ModelProperty
      * @return bool
      */
-    private function isPropertyRequired(ModelProperty $property)
+    private function isPropertyRequired(ModelProperty $property): bool
     {
         $validationSet = $property->getValidationSet();
         if (is_bool($validationSet->isPresenceRequired())) {
@@ -194,7 +200,7 @@ class JsonLdVocabComponent extends Component
      * @param \MixerApi\Core\Model\ModelProperty $property ModelProperty
      * @return bool
      */
-    private function isPropertyWriteable(ModelProperty $property)
+    private function isPropertyWriteable(ModelProperty $property): bool
     {
         if ($property->isPrimaryKey()) {
             return false;

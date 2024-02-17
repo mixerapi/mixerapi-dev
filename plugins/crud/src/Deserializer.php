@@ -28,7 +28,19 @@ class Deserializer implements DeserializerInterface
      */
     public function deserialize(ServerRequest $request): array
     {
-        if ($this->response->mapType($request->contentType()) === 'xml') {
+        $contentType = $request->contentType() ?? '';
+
+        $mappedType = $this->response->mapType($contentType);
+        if (empty($mappedType)) {
+            return $request->getData();
+        }
+
+        $mappedTypes = [];
+        if (is_string($mappedType)) {
+            $mappedTypes = [$mappedType];
+        }
+
+        if (in_array('xml', $mappedTypes)) {
             $array = Xml::toArray(Xml::build((string)$request->getBody()));
 
             if (empty($array)) {

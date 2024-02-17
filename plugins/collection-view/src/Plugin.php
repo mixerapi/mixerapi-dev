@@ -6,45 +6,33 @@ namespace MixerApi\CollectionView;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
-use Cake\Event\Event;
-use Cake\Event\EventManager;
 
 class Plugin extends BasePlugin
 {
     /**
-     * Plugin name.
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected $name = 'MixerApi/CollectionView';
+    protected ?string $name = 'MixerApi/CollectionView';
 
     /**
-     * Console middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $consoleEnabled = true;
+    protected bool $consoleEnabled = true;
 
     /**
-     * Enable middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $middlewareEnabled = true;
+    protected bool $middlewareEnabled = true;
 
     /**
-     * Register container services
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $servicesEnabled = true;
+    protected bool $servicesEnabled = true;
 
     /**
-     * Load routes or not
-     *
-     * @var bool
+     * @inheritDoc
      */
-    protected $routesEnabled = true;
+    protected bool $routesEnabled = true;
 
     /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
@@ -64,14 +52,6 @@ class Plugin extends BasePlugin
         if (Configure::read('CollectionView') === null) {
             $configuration->default();
         }
-
-        EventManager::instance()
-            ->on('Controller.initialize', function (Event $event) use ($configuration) {
-
-                /** @var \Cake\Controller\Controller $controller */
-                $controller = $event->getSubject();
-                $configuration->views($controller);
-            });
 
         (new SwaggerBakeExtension())->listen();
     }

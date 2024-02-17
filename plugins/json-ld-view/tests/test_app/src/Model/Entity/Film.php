@@ -11,15 +11,9 @@ use MixerApi\JsonLdView\JsonLdSchema;
 class Film extends Entity implements JsonLdDataInterface
 {
     /**
-     * Fields that can be mass assigned using newEntity() or patchEntity().
-     *
-     * Note that when '*' is set to true, this allows all unspecified fields to
-     * be mass assigned. For security purposes, it is advised to set '*' to false
-     * (or remove it), and explicitly make individual fields accessible as needed.
-     *
-     * @var array
+     * @inheritDoc
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'title' => true,
         'description' => true,
         'release_year' => true,
@@ -38,14 +32,14 @@ class Film extends Entity implements JsonLdDataInterface
         'inventories' => true,
     ];
 
-    protected $_hidden = ['_joinData'];
+    protected array $_hidden = ['_joinData'];
 
     /**
      * @return string
      */
     public function getJsonLdContext(): string
     {
-        return '/contexts/Film';
+        return '/contexts/Films';
     }
 
     /**

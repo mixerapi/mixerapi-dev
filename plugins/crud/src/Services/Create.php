@@ -32,7 +32,7 @@ class Create implements CreateInterface
     /**
      * @inheritDoc
      */
-    public function save(Controller $controller, $options = []): EntityInterface
+    public function save(Controller $controller, \ArrayAccess|array $options = []): EntityInterface
     {
         $this->allowMethods($controller);
         $table = $controller->getTableLocator()->get($this->whichTable($controller));

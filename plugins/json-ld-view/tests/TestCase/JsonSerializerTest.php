@@ -3,11 +3,15 @@
 namespace MixerApi\JsonLdView\Test\TestCase;
 
 use Cake\Datasource\FactoryLocator;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Table;
+use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
+use Cake\View\View;
 use MixerApi\JsonLdView\JsonSerializer;
 use MixerApi\JsonLdView\View\JsonLdView;
 
@@ -31,21 +35,15 @@ class JsonSerializerTest extends TestCase
     /**
      * @var string[]
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/JsonLdView.Actors',
         'plugin.MixerApi/JsonLdView.FilmActors',
         'plugin.MixerApi/JsonLdView.Films',
     ];
 
-    /**
-     * @var ServerRequest
-     */
-    private $request;
+    private ServerRequest $request;
 
-    /**
-     * @var Response
-     */
-    private $response;
+    private Response $response;
 
     public function setUp(): void
     {
@@ -53,9 +51,12 @@ class JsonSerializerTest extends TestCase
         static::setAppNamespace('MixerApi\JsonLdView\Test\App');
         $this->request = $this->createRequest();
         Router::reload();
-        Router::connect('/', ['controller' => 'Actors', 'action' => 'index']);
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::createRouteBuilder('/')->scope('/', function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/', ['controller' => 'Actors', 'action' => 'index']);
+            $builder->connect('/{controller}/{action}/*');
+            $builder->connect('/{plugin}/{controller}/{action}/*');
+        });
         Router::setRequest($this->request);
         $this->response = new Response();
     }
@@ -65,14 +66,25 @@ class JsonSerializerTest extends TestCase
      */
     public function test_collection(): void
     {
+        /** @var Table $actor */
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
 
+        $request = $this->createRequest(['url' => '/actors',]);
+        $resultSet = new PaginatedResultSet($result, [
+            'alias' => 'Actors',
+            'currentPage' => 1,
+            'count' => $result->count(),
+            'totalCount' => $result->count(),
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+            'pageCount' => 1,
+            'end' => 1,
+            'start' => 1
+        ]);
         $paginator = new PaginatorHelper(
-            new JsonLdView($this->request, $this->response),
-            ['templates' => 'MixerApi/JsonLdView.paginator-template']
+            new View($request, null, null, ['viewVars' => ['actors' => $resultSet]])
         );
-        $paginator->defaultModel('Actor');
 
         $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
 
@@ -87,18 +99,16 @@ class JsonSerializerTest extends TestCase
      */
     public function test_item(): void
     {
-        $actor = FactoryLocator::get('Table')->get('Actors');
-        $result = $actor->get(1, [
-            'contain' => 'Films'
-        ]);
-
-        $paginator = new PaginatorHelper(
-            new JsonLdView($this->request, $this->response),
-            ['templates' => 'MixerApi/JsonLdView.paginator-template']
+        /** @var Table $actorsTable */
+        $actorsTable = FactoryLocator::get('Table')->get('Actors');
+        $result = $actorsTable->get(
+            primaryKey: 1,
+            args: [
+                'contain' => 'Films'
+            ]
         );
-        $paginator->defaultModel('Actor');
 
-        $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
+        $jsonSerializer = new JsonSerializer($result, $this->request, null);
 
         $json = $jsonSerializer->asJson(JSON_PRETTY_PRINT);
 
@@ -111,14 +121,24 @@ class JsonSerializerTest extends TestCase
      */
     public function test_get_data(): void
     {
+        /** @var Table $actor */
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
-
+        $request = $this->createRequest(['url' => '/actors']);
+        $resultSet = new PaginatedResultSet($result, [
+            'alias' => 'Actors',
+            'currentPage' => 1,
+            'count' => $result->count(),
+            'totalCount' => $result->count(),
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+            'pageCount' => 1,
+            'end' => 1,
+            'start' => 1
+        ]);
         $paginator = new PaginatorHelper(
-            new JsonLdView($this->request, $this->response),
-            ['templates' => 'MixerApi/JsonLdView.paginator-template']
+            new View($request, null, null, ['viewVars' => ['actors' => $resultSet]])
         );
-        $paginator->defaultModel('Actor');
 
         $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
 
@@ -127,6 +147,7 @@ class JsonSerializerTest extends TestCase
 
     public function test_get_data_with_query_param(): void
     {
+        /** @var Table $actor */
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
         $request = $this->createRequest([
@@ -134,11 +155,20 @@ class JsonSerializerTest extends TestCase
             'query' => ['test' => 'test', 'hello' => 'world']
         ]);
 
+        $resultSet = new PaginatedResultSet($result, [
+            'alias' => 'Actors',
+            'currentPage' => 1,
+            'count' => $result->count(),
+            'totalCount' => $result->count(),
+            'hasPrevPage' => false,
+            'hasNextPage' => true,
+            'pageCount' => 1,
+            'end' => 1,
+            'start' => 1
+        ]);
         $paginator = new PaginatorHelper(
-            new JsonLdView($request, $this->response),
-            ['templates' => 'MixerApi/JsonLdView.paginator-template']
+            new View($request, null, null, ['viewVars' => ['actors' => $resultSet]])
         );
-        $paginator->defaultModel('Actor');
 
         $jsonSerializer = new JsonSerializer($result, $request, $paginator);
         $this->assertEquals($url, $jsonSerializer->getData()['view']['@id']);

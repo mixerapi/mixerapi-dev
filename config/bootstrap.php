@@ -31,12 +31,12 @@ require __DIR__ . '/paths.php';
  */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
+require CAKE . 'functions.php';
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Datasource\ConnectionManager;
-use Cake\Error\ConsoleErrorHandler;
-use Cake\Error\ErrorHandler;
 use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Cake\Mailer\Mailer;
@@ -61,7 +61,7 @@ use Cake\Utility\Security;
 if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
     $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
     $dotenv->parse()
-        ->putenv()
+        ->putenv(true)
         ->toEnv()
         ->toServer();
 }
@@ -121,16 +121,8 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
  * Register application error and exception handlers.
  */
 $isCli = PHP_SAPI === 'cli';
-if (str_starts_with(Configure::version(), '4.4')) {
-    (new \Cake\Error\ErrorTrap(Configure::read('Error')))->register();
-    (new \Cake\Error\ExceptionTrap(Configure::read('Error')))->register();
-} else {
-    if ($isCli) {
-        (new ConsoleErrorHandler(Configure::read('Error')))->register();
-    } else {
-        (new ErrorHandler(Configure::read('Error')))->register();
-    }
-}
+(new \Cake\Error\ErrorTrap(Configure::read('Error')))->register();
+(new \Cake\Error\ExceptionTrap(Configure::read('Error')))->register();
 
 /*
  * Include the CLI bootstrap overrides.

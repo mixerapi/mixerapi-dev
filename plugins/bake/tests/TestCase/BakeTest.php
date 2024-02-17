@@ -2,7 +2,7 @@
 
 namespace MixerApi\Bake\Test\TestCase;
 
-use Cake\TestSuite\ConsoleIntegrationTestTrait;
+use Cake\Console\TestSuite\ConsoleIntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 class BakeTest extends TestCase
@@ -10,9 +10,9 @@ class BakeTest extends TestCase
     use ConsoleIntegrationTestTrait;
 
     /**
-     * @var string[] fixtures
+     * @inheritDoc
      */
-    public $fixtures = [
+    public array $fixtures = [
         'plugin.MixerApi/Bake.Departments',
     ];
 
@@ -35,7 +35,6 @@ class BakeTest extends TestCase
     {
         parent::setUp();
         $this->setAppNamespace('MixerApi\Bake\Test\App');
-        $this->useCommandRunner();
         $this->removeBakedController();
     }
 
