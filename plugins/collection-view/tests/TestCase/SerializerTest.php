@@ -85,6 +85,8 @@ class SerializerTest extends TestCase
 
         $obj = json_decode($json);
         $this->assertIsObject($obj);
+        $this->assertEquals(20, $obj->collection->count);
+        $this->assertEquals(60, $obj->collection->total);
         $this->assertEquals('/', $obj->collection->url);
         $this->assertCount(1, (array) $obj->data);
     }
