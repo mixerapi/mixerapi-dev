@@ -136,7 +136,7 @@ class Serializer
             $return[$collection][$first] = $this->paginator->first();
             $return[$collection][$last] = $this->paginator->last();
             $return[$collection][$pages] = $this->paginator->total();
-            $return[$collection][$total] = intval($this->paginator->param('count'));
+            $return[$collection][$total] = intval($this->paginator->param('totalCount'));
         }
 
         if (empty($return[$collection][$first]) && !empty($return[$collection][$url])) {
