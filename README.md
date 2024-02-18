@@ -11,10 +11,10 @@
         <img alt="Coverage Status" src="https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master">
     </a>
     <a href="https://book.cakephp.org/4/en/index.html">
-        <img alt="CakePHP ^4.2" src="https://img.shields.io/badge/cakephp-^4.2-red?logo=cakephp">
+        <img alt="CakePHP ^4.2" src="https://img.shields.io/badge/cakephp-^5.0-red?logo=cakephp">
     </a>
     <a href="https://php.net/" target="_blank">
-        <img alt="PHP ^8.0" src="https://img.shields.io/badge/php-^8.0-8892BF.svg?logo=php">
+        <img alt="PHP ^8.0" src="https://img.shields.io/badge/php-^8.1-8892BF.svg?logo=php">
     </a>
     <a href="LICENSE.txt" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
@@ -81,13 +81,6 @@ Runs static code analysis and unit tests.
 
 ```console
 composer analyze
-```
-
-Git pre-commit hooks run these analyzers via [grumphp](https://github.com/phpro/grumphp). To set up:
-
-```console
-vendor/bin/grumphp git:init
-vendor/bin/grumphp run
 ```
 
 ## Documentation
