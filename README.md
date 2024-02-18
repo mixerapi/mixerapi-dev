@@ -4,8 +4,8 @@
     Dev/Mono Repo for MixerAPI &mdash; A CakePHP Plugin for RESTful API Development
 </p>
 <p align="center">
-    <a href="https://github.com/mixerapi/mixerapi-dev/actions?query=workflow%3ABuild" target="_blank">
-        <img alt="Build Status" src="https://github.com/mixerapi/mixerapi-dev/workflows/Build/badge.svg?branch=master">
+    <a href="https://github.com/mixerapi/mixerapi-dev/actions/workflows/master.yml" target="_blank">
+        <img alt="Build Status" src="https://github.com/mixerapi/mixerapi-dev/actions/workflows/master.yml/badge.svg">
     </a>
     <a href="https://coveralls.io/github/mixerapi/mixerapi-dev?branch=master" target="_blank">
         <img alt="Coverage Status" src="https://coveralls.io/repos/github/mixerapi/mixerapi-dev/badge.svg?branch=master">
