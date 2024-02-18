@@ -5,6 +5,7 @@ namespace MixerApi\JsonLdView;
 
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
+use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
@@ -63,7 +64,7 @@ class JsonSerializer
             $this->hydra = 'hydra:';
         }
 
-        if ($jsonLd instanceof ResultSetInterface) {
+        if ($jsonLd instanceof ResultSetInterface || $jsonLd instanceof PaginatedResultSet) {
             $this->data = $this->collection($jsonLd);
         } elseif (is_subclass_of($jsonLd, Entity::class)) {
             $this->data = $this->item($jsonLd);
@@ -109,7 +110,7 @@ class JsonSerializer
      */
     private function recursion(mixed &$mixed): mixed
     {
-        if ($mixed instanceof ResultSetInterface || is_array($mixed)) {
+        if ($mixed instanceof ResultSetInterface || $mixed instanceof PaginatedResultSet || is_array($mixed)) {
             foreach ($mixed as $item) {
                 $this->recursion($item);
             }

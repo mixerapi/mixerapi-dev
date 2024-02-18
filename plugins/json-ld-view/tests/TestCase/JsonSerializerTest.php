@@ -62,9 +62,9 @@ class JsonSerializerTest extends TestCase
     }
 
     /**
-     * Test collection serialization and deserialization
+     * @dataProvider dataProviderForCollectionTypes
      */
-    public function test_collection(): void
+    public function test_collection(string $resultType): void
     {
         /** @var Table $actor */
         $actor = FactoryLocator::get('Table')->get('Actors');
@@ -86,12 +86,24 @@ class JsonSerializerTest extends TestCase
             new View($request, null, null, ['viewVars' => ['actors' => $resultSet]])
         );
 
-        $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
+        if ($resultType === 'PaginatedResultSet') {
+            $jsonSerializer = new JsonSerializer($resultSet, $this->request, $paginator);
+        } else {
+            $jsonSerializer = new JsonSerializer($result, $this->request, $paginator);
+        }
 
         $json = $jsonSerializer->asJson(JSON_PRETTY_PRINT);
 
         $this->assertIsString($json);
         $this->assertIsObject(json_decode($json));
+    }
+
+    public static function dataProviderForCollectionTypes(): array
+    {
+        return [
+            ['PaginatedResultSet'],
+            ['ResultSet'],
+        ];
     }
 
     /**
