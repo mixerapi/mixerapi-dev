@@ -10,7 +10,10 @@ class PagninatorHelper extends PaginatorHelper
     /**
      * Overwrite base method to never escape URLs.
      *
-     * @inheritdoc
+     * @param array<string, mixed> $options Pagination options.
+     * @param array $url URL.
+     * @param array<string, mixed> $urlOptions Array of options
+     * @return string By default, returns a full pagination URL string for use in non-standard contexts (i.e. JavaScript)
      */
     public function generateUrl(
         array $options = [],
