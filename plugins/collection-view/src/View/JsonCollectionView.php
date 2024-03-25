@@ -36,7 +36,7 @@ class JsonCollectionView extends JsonView
         parent::initialize();
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/CollectionView.paginator-template',
-            'className' => PagninatorHelper::class
+            'className' => PagninatorHelper::class,
         ]);
     }
 
