@@ -35,7 +35,7 @@ class ControllerTest extends TestCase
 
         $this->assertResponseOk();
         $this->assertTrue(isset($object->collection->url));
-        $this->assertStringNotContainsString( '&amp;', $object->collection->next);
+        $this->assertStringNotContainsString('&amp;', $object->collection->next);
         $this->assertNotEmpty($object->data);
     }
 
