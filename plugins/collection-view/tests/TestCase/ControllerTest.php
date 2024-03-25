@@ -29,12 +29,13 @@ class ControllerTest extends TestCase
 
     public function test_json(): void
     {
-        $this->get('/actors.json');
+        $this->get('/actors.json?limit=1');
         $body = (string)$this->_response->getBody();
         $object = json_decode($body);
 
         $this->assertResponseOk();
         $this->assertTrue(isset($object->collection->url));
+        $this->assertStringNotContainsString('&amp;', $object->collection->next);
         $this->assertNotEmpty($object->data);
     }
 

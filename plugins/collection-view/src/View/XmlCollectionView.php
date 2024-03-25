@@ -6,6 +6,7 @@ namespace MixerApi\CollectionView\View;
 use Cake\Core\Configure;
 use Cake\View\SerializedView;
 use MixerApi\CollectionView\Serializer;
+use MixerApi\CollectionView\View\Helper\PagninatorHelper;
 
 class XmlCollectionView extends SerializedView
 {
@@ -65,6 +66,7 @@ class XmlCollectionView extends SerializedView
         parent::initialize();
         $this->loadHelper('Paginator', [
             'templates' => 'MixerApi/CollectionView.paginator-template',
+            'className' => PagninatorHelper::class,
         ]);
     }
 
