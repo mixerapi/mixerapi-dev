@@ -138,7 +138,12 @@ class JsonSerializer
         $return = [];
 
         try {
-            $entity = $jsonLd->first();
+            if ($jsonLd instanceof PaginatedResultSet) {
+                $entity = $jsonLd->items()->first();
+            } else {
+                $entity = $jsonLd->first();
+            }
+
             if ($entity instanceof JsonLdDataInterface) {
                 $return['@context'] = $entity->getJsonLdContext();
             }
