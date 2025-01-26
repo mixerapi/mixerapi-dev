@@ -118,7 +118,7 @@ class JsonSerializer
     {
         try {
             if ($collection instanceof PaginatedResultSet) {
-                $entity = $collection->items()->first();
+                $entity = $collection->toArray()[0];
             } else {
                 $entity = $collection->first();
             }

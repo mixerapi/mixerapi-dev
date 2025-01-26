@@ -139,7 +139,7 @@ class JsonSerializer
 
         try {
             if ($jsonLd instanceof PaginatedResultSet) {
-                $entity = $jsonLd->items()->first();
+                $entity = $jsonLd->toArray()[0];
             } else {
                 $entity = $jsonLd->first();
             }
