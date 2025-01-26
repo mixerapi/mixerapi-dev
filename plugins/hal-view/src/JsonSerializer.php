@@ -117,7 +117,11 @@ class JsonSerializer
     private function collection(mixed $collection): array
     {
         try {
-            $entity = $collection->first();
+            if ($collection instanceof PaginatedResultSet) {
+                $entity = $collection->toArray()[0];
+            } else {
+                $entity = $collection->first();
+            }
             $tableName = Inflector::tableize((new ReflectionClass($entity))->getShortName());
         } catch (ReflectionException $e) {
             $tableName = 'data';
