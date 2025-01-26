@@ -157,3 +157,17 @@ return [
     ]
 ];
 ```
+
+## Events
+
+CollectionView dispatches two events:
+
+### MixerApi.CollectionView.beforeSerialize
+
+The event contains the Serializer as the subject and the `type` of data (i.e. "xml" or "json").
+
+### MixerApi.CollectionView.afterSerialize
+
+The event contains the Serializer as the subject, the `type` of data (i.e. "xml" or "json") and the serialized data
+as `data`.
+

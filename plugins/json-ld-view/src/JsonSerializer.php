@@ -7,6 +7,8 @@ use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\View\Helper\PaginatorHelper;
@@ -82,11 +84,17 @@ class JsonSerializer
      */
     public function asJson(int $jsonOptions = 0): string
     {
+        EventManager::instance()->dispatch(new Event('MixerApi.JsonLdView.beforeSerialize', $this));
+
         $json = json_encode($this->data, $jsonOptions);
 
         if ($json === false) {
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
+
+        EventManager::instance()->dispatch(new Event('MixerApi.JsonLdView.afterSerialize', $this, [
+            'data' => $json,
+        ]));
 
         return $json;
     }

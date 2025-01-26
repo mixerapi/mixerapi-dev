@@ -7,6 +7,8 @@ use Adbar\Dot;
 use Cake\Core\Configure;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\Http\ServerRequest;
 use Cake\Utility\Xml;
 use Cake\View\Helper\PaginatorHelper;
@@ -66,11 +68,20 @@ class Serializer
      */
     public function asJson(int $jsonOptions = 0): string
     {
+        EventManager::instance()->dispatch(new Event('MixerApi.CollectionView.beforeSerialize', $this, [
+            'type' => 'json',
+        ]));
+
         $json = json_encode($this->data, $jsonOptions);
 
         if ($json === false) {
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
+
+        EventManager::instance()->dispatch(new Event('MixerApi.CollectionView.afterSerialize', $this, [
+            'type' => 'json',
+            'data' => $json,
+        ]));
 
         return $json;
     }
@@ -85,7 +96,18 @@ class Serializer
      */
     public function asXml(array $options, string $rootNode = 'response'): string
     {
-        return Xml::fromArray([$rootNode => $this->data], $options)->saveXML();
+        EventManager::instance()->dispatch(new Event('MixerApi.CollectionView.beforeSerialize', $this, [
+            'type' => 'xml',
+        ]));
+
+        $xml = Xml::fromArray([$rootNode => $this->data], $options)->saveXML();
+
+        EventManager::instance()->dispatch(new Event('MixerApi.CollectionView.afterSerialize', $this, [
+            'type' => 'xml',
+            'data' => $xml,
+        ]));
+
+        return $xml;
     }
 
     /**

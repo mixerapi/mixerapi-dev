@@ -4,6 +4,8 @@ namespace MixerApi\JsonLdView\Test\TestCase;
 
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Event\EventList;
+use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Table;
@@ -66,6 +68,8 @@ class JsonSerializerTest extends TestCase
      */
     public function test_collection(string $resultType): void
     {
+        EventManager::instance()->trackEvents(true)->setEventList(new EventList());
+
         /** @var Table $actor */
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = $actor->find()->contain('Films')->limit(1)->all();
@@ -96,6 +100,8 @@ class JsonSerializerTest extends TestCase
 
         $this->assertIsString($json);
         $this->assertIsObject(json_decode($json));
+        $this->assertEventFired('MixerApi.JsonLdView.beforeSerialize');
+        $this->assertEventFired('MixerApi.JsonLdView.afterSerialize');
     }
 
     public static function dataProviderForCollectionTypes(): array

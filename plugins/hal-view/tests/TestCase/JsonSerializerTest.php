@@ -4,6 +4,8 @@ namespace MixerApi\HalView\Test\TestCase;
 
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Event\EventList;
+use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Table;
@@ -71,6 +73,8 @@ class JsonSerializerTest extends TestCase
 
     public function test_collection(): void
     {
+        EventManager::instance()->trackEvents(true)->setEventList(new EventList());
+
         $actor = FactoryLocator::get('Table')->get('Actors');
         $result = new PaginatedResultSet($actor->find()->applyOptions(['contain' => 'Films'])->limit(1)->all(), [
             'sort' => null,
@@ -101,6 +105,8 @@ class JsonSerializerTest extends TestCase
 
         $this->assertIsString($json);
         $this->assertIsObject(json_decode($json));
+        $this->assertEventFired('MixerApi.HalView.beforeSerialize');
+        $this->assertEventFired('MixerApi.HalView.afterSerialize');
     }
 
     public function test_item(): void

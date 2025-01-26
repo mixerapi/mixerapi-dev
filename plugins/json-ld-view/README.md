@@ -345,3 +345,16 @@ use Cake\Http\ServerRequest;
 use Cake\View\Helper\PaginatorHelper;
 $json = (new JsonSerializer($data, new ServerRequest(), new PaginatorHelper()))->asJson();
 ```
+
+## Events
+
+JsonLdView dispatches two events:
+
+### MixerApi.JsonLdView.beforeSerialize
+
+The event contains the Serializer as the subject.
+
+### MixerApi.JsonLdView.afterSerialize
+
+The event contains the Serializer as the subject and the serialized data as `data`.
+

@@ -245,3 +245,15 @@ use Cake\Http\ServerRequest;
 use Cake\View\Helper\PaginatorHelper;
 $json = (new JsonSerializer($data, new ServerRequest(), new PaginatorHelper()))->asJson();
 ```
+
+## Events
+
+HalView dispatches two events:
+
+### MixerApi.HalView.beforeSerialize
+
+The event contains the Serializer as the subject.
+
+### MixerApi.HalView.afterSerialize
+
+The event contains the Serializer as the subject and the serialized data as `data`.

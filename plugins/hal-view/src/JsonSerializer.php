@@ -6,10 +6,13 @@ namespace MixerApi\HalView;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\Utility\Inflector;
 use Cake\View\Helper\PaginatorHelper;
+use Cake\View\View;
 use MixerApi\Core\View\SerializableAssociation;
 use ReflectionClass;
 use ReflectionException;
@@ -63,11 +66,17 @@ class JsonSerializer
      */
     public function asJson(int $jsonOptions = 0): string
     {
+        EventManager::instance()->dispatch(new Event('MixerApi.HalView.beforeSerialize', $this));
+
         $json = json_encode($this->data, $jsonOptions);
 
         if ($json === false) {
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
+
+        EventManager::instance()->dispatch(new Event('MixerApi.HalView.afterSerialize', $this, [
+            'data' => $json,
+        ]));
 
         return $json;
     }
