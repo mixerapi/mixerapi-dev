@@ -12,7 +12,6 @@ use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\Utility\Inflector;
 use Cake\View\Helper\PaginatorHelper;
-use Cake\View\View;
 use MixerApi\Core\View\SerializableAssociation;
 use ReflectionClass;
 use ReflectionException;
