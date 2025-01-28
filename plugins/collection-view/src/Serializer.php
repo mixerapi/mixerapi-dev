@@ -45,8 +45,7 @@ class Serializer
         mixed $serialize,
         private ?ServerRequest $request = null,
         private ?PaginatorHelper $paginator = null
-    )
-    {
+    ) {
         $this->config = Configure::read('CollectionView');
 
         if ($serialize instanceof ResultSetInterface || $serialize instanceof PaginatedResultSet) {
@@ -115,6 +114,10 @@ class Serializer
         return $this->data;
     }
 
+    /**
+     * @param mixed $data The data to be serialized
+     * @return void
+     */
     public function setData(mixed $data): void
     {
         $this->data = $data;

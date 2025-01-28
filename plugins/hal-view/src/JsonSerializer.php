@@ -39,8 +39,7 @@ class JsonSerializer
         mixed $serialize,
         private ?ServerRequest $request = null,
         private ?PaginatorHelper $paginator = null
-    )
-    {
+    ) {
         $hal = $this->recursion($serialize);
 
         if ($hal instanceof ResultSetInterface || $hal instanceof PaginatedResultSet) {
@@ -86,6 +85,10 @@ class JsonSerializer
         return $this->data;
     }
 
+    /**
+     * @param mixed $data The data to be serialized
+     * @return void
+     */
     public function setData(mixed $data): void
     {
         $this->data = $data;

@@ -57,8 +57,7 @@ class JsonSerializer
         mixed $serialize,
         private ?ServerRequest $request = null,
         private ?PaginatorHelper $paginator = null
-    )
-    {
+    ) {
         $jsonLd = $this->recursion($serialize);
         $this->config = Configure::read('JsonLdView');
         if (isset($this->config['isHydra']) && $this->config['isHydra']) {
@@ -108,6 +107,10 @@ class JsonSerializer
         return $this->data;
     }
 
+    /**
+     * @param mixed $data The data to be serialized
+     * @return void
+     */
     public function setData(mixed $data): void
     {
         $this->data = $data;
