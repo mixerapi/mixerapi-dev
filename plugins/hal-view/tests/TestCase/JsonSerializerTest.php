@@ -105,8 +105,8 @@ class JsonSerializerTest extends TestCase
 
         $this->assertIsString($json);
         $this->assertIsObject(json_decode($json));
-        $this->assertEventFired('MixerApi.HalView.beforeSerialize');
-        $this->assertEventFired('MixerApi.HalView.afterSerialize');
+        $this->assertEventFired(JsonSerializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(JsonSerializer::AFTER_SERIALIZE_EVENT);
     }
 
     public function test_item(): void

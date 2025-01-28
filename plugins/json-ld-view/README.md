@@ -348,13 +348,33 @@ $json = (new JsonSerializer($data, new ServerRequest(), new PaginatorHelper()))-
 
 ## Events
 
-JsonLdView dispatches two events:
+JsonLdView dispatches two events. Read the CakePHP docs for how to
+[register listeners](https://book.cakephp.org/5/en/core-libraries/events.html#registering-listeners).
 
 ### MixerApi.JsonLdView.beforeSerialize
 
-The event contains the Serializer as the subject.
+The event contains the Serializer as the subject and is dispatched just before serialization.
+
+```php
+use \Cake\Event\Event;
+use \Cake\Event\EventManager;
+use \MixerApi\JsonLdView\JsonSerializer;
+
+EventManager::instance()->on(JsonSerializer::BEFORE_SERIALIZE_EVENT, function (Event $event) {
+    /** @var Serializer $serializer */
+    $serializer = $event->getSubject();
+    $data = $serializer->getData(); // modify if you want or other stuff
+    $serializer->setData($data);
+})
+```
 
 ### MixerApi.JsonLdView.afterSerialize
 
-The event contains the Serializer as the subject and the serialized data as `data`.
+The event contains the Serializer as the subject and the serialized data as `data`. This is dispatched just after
+serialization.
 
+```php
+EventManager::instance()->on(JsonSerializer::AFTER_SERIALIZE_EVENT, function (Event $event, string $data) {
+    // whatever you want to do here
+})
+```

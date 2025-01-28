@@ -2,7 +2,6 @@
 
 namespace MixerApi\CollectionView\Test\TestCase;
 
-use Cake\Controller\ComponentRegistry;
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Event\EventList;
@@ -13,7 +12,6 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
-use Cake\View\View;
 use MixerApi\CollectionView\Configuration;
 use MixerApi\CollectionView\View\JsonCollectionView;
 use MixerApi\CollectionView\Serializer;
@@ -149,8 +147,8 @@ class SerializerTest extends TestCase
         $this->assertIsString($xml);
 
         $simpleXml = simplexml_load_string($xml);
-        $this->assertEventFired('MixerApi.CollectionView.beforeSerialize');
-        $this->assertEventFired('MixerApi.CollectionView.afterSerialize');
+        $this->assertEventFired(Serializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(Serializer::AFTER_SERIALIZE_EVENT);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml);
         $this->assertEquals('/', $simpleXml->collection->url);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml->data);

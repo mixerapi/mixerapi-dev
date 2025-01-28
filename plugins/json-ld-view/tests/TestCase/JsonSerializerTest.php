@@ -15,7 +15,6 @@ use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
 use Cake\View\View;
 use MixerApi\JsonLdView\JsonSerializer;
-use MixerApi\JsonLdView\View\JsonLdView;
 
 class JsonSerializerTest extends TestCase
 {
@@ -100,8 +99,8 @@ class JsonSerializerTest extends TestCase
 
         $this->assertIsString($json);
         $this->assertIsObject(json_decode($json));
-        $this->assertEventFired('MixerApi.JsonLdView.beforeSerialize');
-        $this->assertEventFired('MixerApi.JsonLdView.afterSerialize');
+        $this->assertEventFired(JsonSerializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(JsonSerializer::AFTER_SERIALIZE_EVENT);
     }
 
     public static function dataProviderForCollectionTypes(): array

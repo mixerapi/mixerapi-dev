@@ -160,14 +160,34 @@ return [
 
 ## Events
 
-CollectionView dispatches two events:
+CollectionView dispatches two events. Read the CakePHP docs for how to
+[register listeners](https://book.cakephp.org/5/en/core-libraries/events.html#registering-listeners).
 
 ### MixerApi.CollectionView.beforeSerialize
 
-The event contains the Serializer as the subject and the `type` of data (i.e. "xml" or "json").
+The event contains the Serializer as the subject and the `type` of data (i.e. "xml" or "json") and is dispatched just
+before serialization.
+
+```php
+use \Cake\Event\Event;
+use \Cake\Event\EventManager;
+use \MixerApi\CollectionView\Serializer
+
+EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event $event, string $type) {
+    /** @var Serializer $serializer */
+    $serializer = $event->getSubject();
+    $data = $serializer->getData(); // modify if you want or other stuff
+    $serializer->setData($data);
+})
+```
 
 ### MixerApi.CollectionView.afterSerialize
 
 The event contains the Serializer as the subject, the `type` of data (i.e. "xml" or "json") and the serialized data
-as `data`.
+as `data`. This is dispatched just after serialization.
 
+```php
+EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event $event, string $type, string $data) {
+    // whatever you want to do here
+})
+```

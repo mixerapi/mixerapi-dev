@@ -21,16 +21,11 @@ use RuntimeException;
  * Creates a HAL+JSON resource
  *
  * @link https://tools.ietf.org/html/draft-kelly-json-hal-06
- * @uses \Cake\Utility\Inflector
- * @uses \MixerApi\Core\View\SerializableAssociation
- * @uses ReflectionClass
  */
 class JsonSerializer
 {
-    private ?ServerRequest $request;
-
-    private ?PaginatorHelper $paginator;
-
+    public const BEFORE_SERIALIZE_EVENT = 'MixerApi.HalView.beforeSerialize';
+    public const AFTER_SERIALIZE_EVENT = 'MixerApi.HalView.afterSerialize';
     private mixed $data;
 
     /**
@@ -40,11 +35,12 @@ class JsonSerializer
      * @param \Cake\Http\ServerRequest|null $request optional ServerRequest
      * @param \Cake\View\Helper\PaginatorHelper|null $paginator optional PaginatorHelper
      */
-    public function __construct(mixed $serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
+    public function __construct(
+        mixed $serialize,
+        private ?ServerRequest $request = null,
+        private ?PaginatorHelper $paginator = null
+    )
     {
-        $this->request = $request;
-        $this->paginator = $paginator;
-
         $hal = $this->recursion($serialize);
 
         if ($hal instanceof ResultSetInterface || $hal instanceof PaginatedResultSet) {
@@ -65,7 +61,7 @@ class JsonSerializer
      */
     public function asJson(int $jsonOptions = 0): string
     {
-        EventManager::instance()->dispatch(new Event('MixerApi.HalView.beforeSerialize', $this));
+        EventManager::instance()->dispatch(new Event(self::BEFORE_SERIALIZE_EVENT, $this));
 
         $json = json_encode($this->data, $jsonOptions);
 
@@ -73,7 +69,7 @@ class JsonSerializer
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
 
-        EventManager::instance()->dispatch(new Event('MixerApi.HalView.afterSerialize', $this, [
+        EventManager::instance()->dispatch(new Event(self::AFTER_SERIALIZE_EVENT, $this, [
             'data' => $json,
         ]));
 
@@ -83,11 +79,32 @@ class JsonSerializer
     /**
      * Get HAL data as an array
      *
-     * @return array|null
+     * @return mixed
      */
-    public function getData(): ?array
+    public function getData(): mixed
     {
         return $this->data;
+    }
+
+    public function setData(mixed $data): void
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return \Cake\Http\ServerRequest|null
+     */
+    public function getRequest(): ?ServerRequest
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return \Cake\View\Helper\PaginatorHelper|null
+     */
+    public function getPaginatorHelper(): ?PaginatorHelper
+    {
+        return $this->paginator;
     }
 
     /**
