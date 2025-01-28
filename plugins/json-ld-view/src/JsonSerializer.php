@@ -7,6 +7,8 @@ use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
+use Cake\Event\Event;
+use Cake\Event\EventManager;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\View\Helper\PaginatorHelper;
@@ -17,15 +19,13 @@ use RuntimeException;
 /**
  * Creates a JSON-LD resource
  *
- * @uses \MixerApi\Core\View\SerializableAssociation
  * @link https://json-ld.org/
  * @link https://lists.w3.org/Archives/Public/public-hydra/2015Oct/0163.html
  */
 class JsonSerializer
 {
-    private ?ServerRequest $request;
-
-    private ?PaginatorHelper $paginator;
+    public const BEFORE_SERIALIZE_EVENT = 'MixerApi.JsonLdView.beforeSerialize';
+    public const AFTER_SERIALIZE_EVENT = 'MixerApi.JsonLdView.afterSerialize';
 
     /**
      * JSON-LD data array
@@ -53,11 +53,11 @@ class JsonSerializer
      * @param \Cake\Http\ServerRequest|null $request optional ServerRequest
      * @param \Cake\View\Helper\PaginatorHelper|null $paginator optional PaginatorHelper
      */
-    public function __construct(mixed $serialize, ?ServerRequest $request = null, ?PaginatorHelper $paginator = null)
-    {
-        $this->request = $request;
-        $this->paginator = $paginator;
-
+    public function __construct(
+        mixed $serialize,
+        private ?ServerRequest $request = null,
+        private ?PaginatorHelper $paginator = null
+    ) {
         $jsonLd = $this->recursion($serialize);
         $this->config = Configure::read('JsonLdView');
         if (isset($this->config['isHydra']) && $this->config['isHydra']) {
@@ -82,11 +82,17 @@ class JsonSerializer
      */
     public function asJson(int $jsonOptions = 0): string
     {
+        EventManager::instance()->dispatch(new Event(self::BEFORE_SERIALIZE_EVENT, $this));
+
         $json = json_encode($this->data, $jsonOptions);
 
         if ($json === false) {
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
+
+        EventManager::instance()->dispatch(new Event(self::AFTER_SERIALIZE_EVENT, $this, [
+            'data' => $json,
+        ]));
 
         return $json;
     }
@@ -99,6 +105,31 @@ class JsonSerializer
     public function getData(): ?array
     {
         return $this->data;
+    }
+
+    /**
+     * @param mixed $data The data to be serialized
+     * @return void
+     */
+    public function setData(mixed $data): void
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return \Cake\Http\ServerRequest|null
+     */
+    public function getRequest(): ?ServerRequest
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return \Cake\View\Helper\PaginatorHelper|null
+     */
+    public function getPaginatorHelper(): ?PaginatorHelper
+    {
+        return $this->paginator;
     }
 
     /**
