@@ -165,7 +165,7 @@ CollectionView dispatches two events. Read the CakePHP docs for how to
 
 ### MixerApi.CollectionView.beforeSerialize
 
-The event contains the Serializer as the subject and the `type` of data (i.e. "xml" or "json") and is dispatched just
+The event contains the Serializer as the subject and the `$type` of data (i.e. "xml" or "json") and is dispatched just
 before serialization.
 
 ```php
@@ -183,8 +183,8 @@ EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event
 
 ### MixerApi.CollectionView.afterSerialize
 
-The event contains the Serializer as the subject, the `type` of data (i.e. "xml" or "json") and the serialized data
-as `data`. This is dispatched just after serialization.
+The event contains the Serializer as the subject, the `$type` of data (i.e. "xml" or "json") and the serialized data
+as `$data`. This is dispatched just after serialization.
 
 ```php
 EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event $event, string $type, string $data) {

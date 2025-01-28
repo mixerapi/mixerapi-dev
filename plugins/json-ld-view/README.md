@@ -370,7 +370,7 @@ EventManager::instance()->on(JsonSerializer::BEFORE_SERIALIZE_EVENT, function (E
 
 ### MixerApi.JsonLdView.afterSerialize
 
-The event contains the Serializer as the subject and the serialized data as `data`. This is dispatched just after
+The event contains the Serializer as the subject and the serialized data as `$data`. This is dispatched just after
 serialization.
 
 ```php
