@@ -87,8 +87,8 @@ class SerializerTest extends TestCase
 
         $obj = json_decode($json);
         $this->assertIsObject($obj);
-        $this->assertEventFired('MixerApi.CollectionView.beforeSerialize');
-        $this->assertEventFired('MixerApi.CollectionView.afterSerialize');
+        $this->assertEventFired(Serializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(Serializer::AFTER_SERIALIZE_EVENT);
         $this->assertEquals(20, $obj->collection->count);
         $this->assertEquals(60, $obj->collection->total);
         $this->assertEquals('/', $obj->collection->url);
