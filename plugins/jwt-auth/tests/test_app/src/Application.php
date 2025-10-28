@@ -98,43 +98,44 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
                 AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
             ],
-            'loginUrl' => '/test/login.json'
+            'loginUrl' => '/test/login.json',
+            'identifier' => [
+                'Authentication.Password' => [
+                    'fields' => [
+                        AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
+                        AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
+                    ],
+                    'resolver' => [
+                        'className' => 'Authentication.Orm',
+                        'userModel' => 'Users',
+                    ],
+                    'passwordHasher' => [
+                        'className' => 'Authentication.Fallback',
+                        'hashers' => [
+                            'Authentication.Default',
+                            [
+                                'className' => 'Authentication.Legacy',
+                                'hashType' => 'md5',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ]);
-
-        $service->loadIdentifier('Authentication.JwtSubject');
 
         if (str_starts_with(haystack: $config->getAlg(), needle: 'HS')) {
             $service->loadAuthenticator('Authentication.Jwt', [
                 'secretKey' => $config->getSecret(),
                 'algorithm' => $config->getAlg(),
+                'identifier' => 'Authentication.JwtSubject',
             ]);
         } else if (str_starts_with(haystack: $config->getAlg(), needle: 'RS')) {
             $service->loadAuthenticator('Authentication.Jwt', [
                 'jwks' => (new JwkSet)->getKeySet(),
                 'algorithm' => $config->getAlg(),
+                'identifier' => 'Authentication.JwtSubject',
             ]);
         }
-
-        $service->loadIdentifier('Authentication.Password', [
-            'fields' => [
-                AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
-                AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
-            ],
-            'resolver' => [
-                'className' => 'Authentication.Orm',
-                'userModel' => 'Users',
-            ],
-            'passwordHasher' => [
-                'className' => 'Authentication.Fallback',
-                'hashers' => [
-                    'Authentication.Default',
-                    [
-                        'className' => 'Authentication.Legacy',
-                        'hashType' => 'md5',
-                    ],
-                ],
-            ],
-        ]);
 
         return $service;
     }
