@@ -11,9 +11,9 @@ use Cake\Routing\RouteBuilder;
 
 class Application extends BaseApplication
 {
-    public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        return $middleware->add(new RoutingMiddleware($this))->add(new BodyParserMiddleware());
+        return $middlewareQueue->add(new RoutingMiddleware($this))->add(new BodyParserMiddleware());
     }
 
     public function bootstrap(): void

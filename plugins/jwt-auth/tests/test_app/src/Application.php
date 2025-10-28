@@ -35,18 +35,13 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     /**
      * @inheritDoc
      */
-    public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        $middleware->add(new ErrorHandlerMiddleware(Configure::read('Error')))
+        return $middlewareQueue->add(new ErrorHandlerMiddleware(Configure::read('Error')))
             // Other middleware that CakePHP provides.
             ->add(new RoutingMiddleware($this))
             ->add(new BodyParserMiddleware())
-
-            // Add the AuthenticationMiddleware. It should be
-            // after routing and body parser.
             ->add(new AuthenticationMiddleware($this));
-
-        return $middleware;
     }
 
     /**
