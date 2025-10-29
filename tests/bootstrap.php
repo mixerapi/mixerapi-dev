@@ -38,11 +38,14 @@ putenv('DB_DSN=sqlite:///:memory:');
 (new SchemaLoader())->loadInternalFile(__DIR__ . DS . 'schema.php');
 
 // @todo: Remove when support for CakePHP 5.0 is dropped
-Cache::setConfig([
-    '_cake_core_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_core_',
-        'serialize' => true,
-        'path' => CACHE,
-    ],
-]);
+if (!Cache::getConfig('_cake_core_')) {
+    Cache::setConfig([
+        '_cake_core_' => [
+            'engine' => 'File',
+            'prefix' => 'cake_core_',
+            'serialize' => true,
+            'path' => CACHE,
+        ],
+    ]);
+}
+
