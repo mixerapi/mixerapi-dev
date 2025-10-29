@@ -23,7 +23,7 @@
         "cakephp/authentication": "^3.0",
         "cakephp/bake": "^3.0",
         "cakephp/cakephp-codesniffer": "^4.2",
-        "cakephp/debug_kit": "5.x-dev",
+        "cakephp/debug_kit": "^5.0",
         "dereuromark/cakephp-ide-helper": "^2.0",
         "firebase/php-jwt": "^6.2",
         "friendsofcake/search": "^7.0",
