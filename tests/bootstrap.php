@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\TestSuite\Fixture\SchemaLoader;
 
@@ -35,3 +36,16 @@ session_id('cli');
  */
 putenv('DB_DSN=sqlite:///:memory:');
 (new SchemaLoader())->loadInternalFile(__DIR__ . DS . 'schema.php');
+
+// @todo: Remove when support for CakePHP 5.0 is dropped
+if (!Cache::getConfig('_cake_core_')) {
+    Cache::setConfig([
+        '_cake_core_' => [
+            'engine' => 'File',
+            'prefix' => 'cake_core_',
+            'serialize' => true,
+            'path' => CACHE,
+        ],
+    ]);
+}
+
