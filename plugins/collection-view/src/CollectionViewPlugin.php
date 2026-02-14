@@ -7,7 +7,7 @@ use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
-class Plugin extends BasePlugin
+class CollectionViewPlugin extends BasePlugin
 {
     /**
      * @inheritDoc

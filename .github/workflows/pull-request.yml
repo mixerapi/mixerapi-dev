@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.1', '8.4']
+        php-versions: ['8.1', '8.5']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['~5.0.0', '~5.2']
+        version: ['~5.0.0', '^5.0']
     steps:
       - name: Checkout
         uses: actions/checkout@v2

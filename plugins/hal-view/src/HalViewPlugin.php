@@ -1,38 +1,45 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\Bake;
+namespace MixerApi\HalView;
 
 use Cake\Core\BasePlugin;
-use Cake\Core\Plugin as CakePlugin;
 use Cake\Core\PluginApplicationInterface;
-use Cake\Event\EventInterface;
-use Cake\Event\EventManager;
 
-class Plugin extends BasePlugin
+class HalViewPlugin extends BasePlugin
 {
     /**
-     * @inheritDoc
+     * Plugin name.
+     *
+     * @var string|null
      */
-    protected ?string $name = 'MixerApi/Bake';
+    protected ?string $name = 'MixerApi/HalView';
 
     /**
-     * @inheritDoc
+     * Console middleware
+     *
+     * @var bool
      */
     protected bool $consoleEnabled = false;
 
     /**
-     * @inheritDoc
+     * Enable middleware
+     *
+     * @var bool
      */
     protected bool $middlewareEnabled = false;
 
     /**
-     * @inheritDoc
+     * Register container services
+     *
+     * @var bool
      */
     protected bool $servicesEnabled = false;
 
     /**
-     * @inheritDoc
+     * Load routes or not
+     *
+     * @var bool
      */
     protected bool $routesEnabled = false;
 
@@ -43,10 +50,5 @@ class Plugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
-
-        EventManager::instance()->on('Bake.beforeRender', function (EventInterface $event) {
-            $view = $event->getSubject();
-            $view->set('plugins', CakePlugin::loaded());
-        });
     }
 }

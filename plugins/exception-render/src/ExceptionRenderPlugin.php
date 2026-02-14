@@ -1,28 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\JwtAuth;
+namespace MixerApi\ExceptionRender;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\PluginApplicationInterface;
 
-/**
- * Plugin for JwtAuth
- */
-class Plugin extends BasePlugin
+class ExceptionRenderPlugin extends BasePlugin
 {
     /**
      * Plugin name.
      *
      * @var string
      */
-    protected ?string $name = 'MixerApi/JwtAuth';
-
-    /**
-     * Do bootstrapping or not
-     *
-     * @var bool
-     */
-    protected bool $bootstrapEnabled = false;
+    protected ?string $name = 'MixerApi/ExceptionRender';
 
     /**
      * Console middleware
@@ -51,4 +42,15 @@ class Plugin extends BasePlugin
      * @var bool
      */
     protected bool $routesEnabled = false;
+
+    /**
+     * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
+     * @return void
+     */
+    public function bootstrap(PluginApplicationInterface $app): void
+    {
+        new EntityValidationListener();
+
+        parent::bootstrap($app);
+    }
 }
