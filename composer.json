@@ -25,7 +25,7 @@
         "cakephp/cakephp-codesniffer": "^4.2",
         "cakephp/debug_kit": "^5.0",
         "dereuromark/cakephp-ide-helper": "^2.0",
-        "firebase/php-jwt": "^6.2",
+        "firebase/php-jwt": "^7.0",
         "friendsofcake/search": "^7.0",
         "josegonzalez/dotenv": "^3.2",
         "phpmd/phpmd": "~2.10.0",
