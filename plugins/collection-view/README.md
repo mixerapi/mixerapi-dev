@@ -187,7 +187,7 @@ The event contains the Serializer as the subject, the `$type` of data (i.e. "xml
 as `$data`. This is dispatched just after serialization.
 
 ```php
-EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event $event, string $type, string $data) {
+EventManager::instance()->on(Serializer::AFTER_SERIALIZE_EVENT, function (Event $event, string $type, string $data) {
     // whatever you want to do here
 })
 ```
