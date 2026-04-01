@@ -1,20 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\HalView;
+namespace MixerApi\ExceptionRender;
 
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
-use MixerApi\Core\Response\ResponseModifier;
 
-class Plugin extends BasePlugin
+class ExceptionRenderPlugin extends BasePlugin
 {
     /**
      * Plugin name.
      *
      * @var string
      */
-    protected ?string $name = 'MixerApi/HalView';
+    protected ?string $name = 'MixerApi/ExceptionRender';
 
     /**
      * Console middleware
@@ -45,22 +44,13 @@ class Plugin extends BasePlugin
     protected bool $routesEnabled = false;
 
     /**
-     * @var string
-     */
-    private const EXT = 'haljson';
-
-    /**
-     * @var string
-     */
-    private const VIEW_CLASS = 'MixerApi/HalView.HalJson';
-
-    /**
      * @param \Cake\Core\PluginApplicationInterface $app PluginApplicationInterface
      * @return void
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
+        new EntityValidationListener();
+
         parent::bootstrap($app);
-        (new ResponseModifier(self::EXT, self::VIEW_CLASS))->listen();
     }
 }

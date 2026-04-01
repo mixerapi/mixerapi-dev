@@ -15,7 +15,7 @@ use Cake\Http\Exception\MethodNotAllowedException;
  *
  * @experimental
  */
-class Plugin extends BasePlugin
+class CrudPlugin extends BasePlugin
 {
     protected ?string $name = 'MixerApi/Crud';
 

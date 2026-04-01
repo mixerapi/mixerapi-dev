@@ -1,45 +1,38 @@
 <?php
 declare(strict_types=1);
 
-namespace MixerApi\ExceptionRender;
+namespace MixerApi\Bake;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\Plugin as CakePlugin;
 use Cake\Core\PluginApplicationInterface;
+use Cake\Event\EventInterface;
+use Cake\Event\EventManager;
 
-class Plugin extends BasePlugin
+class BakePlugin extends BasePlugin
 {
     /**
-     * Plugin name.
-     *
-     * @var string
+     * @inheritDoc
      */
-    protected ?string $name = 'MixerApi/ExceptionRender';
+    protected ?string $name = 'MixerApi/Bake';
 
     /**
-     * Console middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
     protected bool $consoleEnabled = false;
 
     /**
-     * Enable middleware
-     *
-     * @var bool
+     * @inheritDoc
      */
     protected bool $middlewareEnabled = false;
 
     /**
-     * Register container services
-     *
-     * @var bool
+     * @inheritDoc
      */
     protected bool $servicesEnabled = false;
 
     /**
-     * Load routes or not
-     *
-     * @var bool
+     * @inheritDoc
      */
     protected bool $routesEnabled = false;
 
@@ -49,8 +42,11 @@ class Plugin extends BasePlugin
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
-        new EntityValidationListener();
-
         parent::bootstrap($app);
+
+        EventManager::instance()->on('Bake.beforeRender', function (EventInterface $event) {
+            $view = $event->getSubject();
+            $view->set('plugins', CakePlugin::loaded());
+        });
     }
 }

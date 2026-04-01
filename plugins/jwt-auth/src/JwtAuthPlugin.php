@@ -8,7 +8,7 @@ use Cake\Core\BasePlugin;
 /**
  * Plugin for JwtAuth
  */
-class Plugin extends BasePlugin
+class JwtAuthPlugin extends BasePlugin
 {
     /**
      * Plugin name.

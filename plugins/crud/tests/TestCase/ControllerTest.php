@@ -45,6 +45,7 @@ class ControllerTest extends TestCase
 
     public function test_add(): void
     {
+        $this->disableErrorHandlerMiddleware();
         $this->configRequest([
             'headers' => ['Content-Type' => 'application/json']
         ]);

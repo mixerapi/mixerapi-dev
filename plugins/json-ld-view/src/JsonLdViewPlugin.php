@@ -7,7 +7,7 @@ use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
-class Plugin extends BasePlugin
+class JsonLdViewPlugin extends BasePlugin
 {
     /**
      * Plugin name.
