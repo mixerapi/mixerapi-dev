@@ -171,7 +171,7 @@ before serialization.
 ```php
 use \Cake\Event\Event;
 use \Cake\Event\EventManager;
-use \MixerApi\CollectionView\Serializer
+use \MixerApi\CollectionView\Serializer;
 
 EventManager::instance()->on(Serializer::BEFORE_SERIALIZE_EVENT, function (Event $event, string $type) {
     /** @var Serializer $serializer */
