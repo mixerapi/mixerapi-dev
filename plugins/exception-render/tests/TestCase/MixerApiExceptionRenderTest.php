@@ -2,6 +2,7 @@
 
 namespace MixerApi\ExceptionRender\Test\TestCase;
 
+use Cake\Event\EventManager;
 use Cake\Http\Exception\HttpException;
 use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
@@ -37,6 +38,51 @@ class MixerApiExceptionRenderTest extends TestCase
         $this->assertEquals(111, $exceptions[1]['code']);
         $this->assertArrayHasKey('file', $exceptions[1]);
         $this->assertArrayHasKey('line', $exceptions[1]);
+    }
+
+    public function test_exception_chain_is_capped_at_max_depth(): void
+    {
+        $exception = new \RuntimeException('root');
+        for ($i = 0; $i < 11; $i++) {
+            $exception = new \RuntimeException("level $i", 0, $exception);
+        }
+
+        $request = new ServerRequest();
+        $request = $request->withHeader('Accept', 'application/json');
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        $response = (new MixerApiExceptionRenderer($exception, $request))->render();
+
+        $body = json_decode((string)$response->getBody(), true);
+        $this->assertCount(10, $body['exceptions']);
+    }
+
+    public function test_chained_exceptions_are_throwable_for_event_listeners(): void
+    {
+        $previous = new \RuntimeException('Connection refused', 111);
+        $exception = new HttpException('Service unavailable', 503, $previous);
+
+        $request = new ServerRequest();
+        $request = $request->withHeader('Accept', 'application/json');
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        $captured = null;
+        EventManager::instance()->on(
+            'MixerApi.ExceptionRender.beforeRender',
+            function ($event) use (&$captured) {
+                $captured = $event->getSubject()->getViewVars()['exceptions'];
+            }
+        );
+
+        (new MixerApiExceptionRenderer($exception, $request))->render();
+
+        $this->assertCount(2, $captured);
+        $this->assertInstanceOf(\Throwable::class, $captured[0]);
+        $this->assertInstanceOf(\Throwable::class, $captured[1]);
+        $this->assertEquals('Service unavailable', $captured[0]->getMessage());
+        $this->assertEquals('Connection refused', $captured[1]->getMessage());
+
+        EventManager::instance()->off('MixerApi.ExceptionRender.beforeRender');
     }
 
     public function test_get_error(): void

@@ -73,21 +73,11 @@ class MixerApiExceptionRenderer extends WebExceptionRenderer
         }
         $response = $response->withStatus($code);
 
+        $maxExceptions = 10;
         $exceptions = [];
         $current = $exception;
-        while ($current !== null) {
-            $exceptionData = [
-                'class' => (new ReflectionClass($current))->getShortName(),
-                'message' => $current->getMessage(),
-                'code' => $current->getCode(),
-            ];
-
-            if (Configure::read('debug')) {
-                $exceptionData['file'] = $current->getFile();
-                $exceptionData['line'] = $current->getLine();
-            }
-
-            $exceptions[] = $exceptionData;
+        while ($current !== null && count($exceptions) < $maxExceptions) {
+            $exceptions[] = new SerializableException($current);
             $current = $current->getPrevious();
         }
 
