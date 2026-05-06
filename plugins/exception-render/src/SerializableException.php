@@ -12,14 +12,20 @@ class SerializableException extends \Exception implements JsonSerializable
 {
     private Throwable $wrapped;
 
+    /**
+     * @param \Throwable $exception The exception to wrap
+     */
     public function __construct(Throwable $exception)
     {
         $this->wrapped = $exception;
-        parent::__construct($exception->getMessage(), (int) $exception->getCode());
+        parent::__construct($exception->getMessage(), (int)$exception->getCode());
         $this->file = $exception->getFile();
         $this->line = $exception->getLine();
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         $data = [

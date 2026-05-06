@@ -74,9 +74,11 @@ class MixerApiExceptionRenderer extends WebExceptionRenderer
         $response = $response->withStatus($code);
 
         $maxExceptions = 10;
+        $depth = 0;
         $exceptions = [];
         $current = $exception;
-        while ($current !== null && count($exceptions) < $maxExceptions) {
+        while ($current !== null && $depth < $maxExceptions) {
+            $depth++;
             $exceptions[] = new SerializableException($current);
             $current = $current->getPrevious();
         }
