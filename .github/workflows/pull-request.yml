@@ -142,6 +142,7 @@ jobs:
         run: |
           composer self-update
           rm -rf composer.lock
+          composer config --no-plugins policy.advisories.block false
           composer require cakephp/cakephp:${{matrix.version}} --no-update
           composer install --prefer-dist --no-progress
           composer test
