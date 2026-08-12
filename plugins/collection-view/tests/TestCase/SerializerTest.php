@@ -2,16 +2,16 @@
 
 namespace MixerApi\CollectionView\Test\TestCase;
 
-use Cake\Controller\ComponentRegistry;
 use Cake\Datasource\FactoryLocator;
 use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Event\EventList;
+use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\Helper\PaginatorHelper;
-use Cake\View\View;
 use MixerApi\CollectionView\Configuration;
 use MixerApi\CollectionView\View\JsonCollectionView;
 use MixerApi\CollectionView\Serializer;
@@ -20,7 +20,7 @@ use SimpleXMLElement;
 class SerializerTest extends TestCase
 {
     /**
-     * @var string[]
+     * @inheritdoc
      */
     public array $fixtures = [
         'plugin.MixerApi/CollectionView.Actors',
@@ -34,6 +34,8 @@ class SerializerTest extends TestCase
 
     public function test_as_json(): void
     {
+        EventManager::instance()->trackEvents(true)->setEventList(new EventList());
+
         $actor = FactoryLocator::get('Table')->get('Actors');
 
         $result = new PaginatedResultSet($actor->find()->limit(1)->all(), [
@@ -85,6 +87,8 @@ class SerializerTest extends TestCase
 
         $obj = json_decode($json);
         $this->assertIsObject($obj);
+        $this->assertEventFired(Serializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(Serializer::AFTER_SERIALIZE_EVENT);
         $this->assertEquals(20, $obj->collection->count);
         $this->assertEquals(60, $obj->collection->total);
         $this->assertEquals('/', $obj->collection->url);
@@ -93,6 +97,7 @@ class SerializerTest extends TestCase
 
     public function test_as_xml(): void
     {
+        EventManager::instance()->trackEvents(true)->setEventList(new EventList());
         $actor = FactoryLocator::get('Table')->get('Actors');
 
         $result = new PaginatedResultSet($actor->find()->limit(1)->all(), [
@@ -142,6 +147,8 @@ class SerializerTest extends TestCase
         $this->assertIsString($xml);
 
         $simpleXml = simplexml_load_string($xml);
+        $this->assertEventFired(Serializer::BEFORE_SERIALIZE_EVENT);
+        $this->assertEventFired(Serializer::AFTER_SERIALIZE_EVENT);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml);
         $this->assertEquals('/', $simpleXml->collection->url);
         $this->assertInstanceOf(SimpleXMLElement::class, $simpleXml->data);
