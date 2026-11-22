@@ -20,7 +20,7 @@
     "require-dev": {
         "ext-mysqli": "*",
         "ext-sqlite3": "*",
-        "cakephp/authentication": "^3.0",
+        "cakephp/authentication": "^3.0 || ^4.0",
         "cakephp/bake": "^3.0",
         "cakephp/cakephp-codesniffer": "^4.2",
         "cakephp/debug_kit": "^5.0",
