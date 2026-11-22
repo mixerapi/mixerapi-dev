@@ -6,7 +6,8 @@ namespace MixerApi\JwtAuth\Test\App;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
-use Authentication\Identifier\AbstractIdentifier;
+use Authentication\Identifier\PasswordIdentifier;
+use Authentication\Identifier\IdentifierFactory;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
@@ -90,32 +91,30 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $service = new AuthenticationService();
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
-                AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
-                AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
+                PasswordIdentifier::CREDENTIAL_USERNAME => 'email',
+                PasswordIdentifier::CREDENTIAL_PASSWORD => 'password',
             ],
             'loginUrl' => '/test/login.json',
-            'identifier' => [
-                'Authentication.Password' => [
-                    'fields' => [
-                        AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
-                        AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
-                    ],
-                    'resolver' => [
-                        'className' => 'Authentication.Orm',
-                        'userModel' => 'Users',
-                    ],
-                    'passwordHasher' => [
-                        'className' => 'Authentication.Fallback',
-                        'hashers' => [
-                            'Authentication.Default',
-                            [
-                                'className' => 'Authentication.Legacy',
-                                'hashType' => 'md5',
-                            ],
+            'identifier' => $this->identifierConfig('Authentication.Password', [
+                'fields' => [
+                    PasswordIdentifier::CREDENTIAL_USERNAME => 'email',
+                    PasswordIdentifier::CREDENTIAL_PASSWORD => 'password',
+                ],
+                'resolver' => [
+                    'className' => 'Authentication.Orm',
+                    'userModel' => 'Users',
+                ],
+                'passwordHasher' => [
+                    'className' => 'Authentication.Fallback',
+                    'hashers' => [
+                        'Authentication.Default',
+                        [
+                            'className' => 'Authentication.Legacy',
+                            'hashType' => 'md5',
                         ],
                     ],
                 ],
-            ],
+            ]),
         ]);
 
         if (str_starts_with(haystack: $config->getAlg(), needle: 'HS')) {
@@ -133,5 +132,21 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         }
 
         return $service;
+    }
+
+    /**
+     * Builds identifier config compatible with both cakephp/authentication 3.x (nested) and 4.x (flat).
+     *
+     * @param string $className Identifier class name
+     * @param array $config Identifier config
+     * @return array
+     */
+    private function identifierConfig(string $className, array $config): array
+    {
+        if (class_exists(IdentifierFactory::class)) {
+            return ['className' => $className] + $config;
+        }
+
+        return [$className => $config];
     }
 }
